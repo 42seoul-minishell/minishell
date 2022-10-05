@@ -15,21 +15,18 @@
 
 int	insert_node(t_doubly_list *lst, t_doubly_node *node)
 {
-	if (!lst)
+	if (!lst || !node)
 		return (FALSE);
 	if (lst->len)
 	{
-		node->prev = lst->header.prev;
 		node->next = lst->header.next;
-		lst->header.prev->next = node;
-		lst->header.next->prev = node;
+		node->prev = &(lst->header);
+		lst->header.next = node;
 	}
 	else
 	{
 		lst->header.next = node;
-		lst->header.prev = node;
-		node->next = node;
-		node->prev = node;
+		node->prev = &(lst->header);
 	}
 	return (TRUE);
 }
