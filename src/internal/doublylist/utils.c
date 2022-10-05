@@ -37,6 +37,7 @@ void	display_list(t_doubly_list *lst)
 	}
 }
 
+/* 구현이 완료된 함수인지 확인해 주세욥 */
 void	switch_type(t_type type)
 {
 	if (type == T_NULL)
