@@ -6,7 +6,7 @@
 #    By: mingkim <mingkim@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/05 11:35:24 by mingkim           #+#    #+#              #
-#    Updated: 2022/10/05 12:52:00 by mingkim          ###   ########.fr        #
+#    Updated: 2022/10/05 17:03:59 by mingkim          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ NAME = utils.a
 # Compiler Flag and Command
 CC = cc
 CFLAGS = -Wall -Wextra -Werror
-AR = ar rcs
+AR = ar rcsuv
 
 INC = ../../include
 

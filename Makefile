@@ -6,7 +6,7 @@
 #    By: mingkim <mingkim@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/05 11:13:33 by mingkim           #+#    #+#              #
-#    Updated: 2022/10/05 12:52:19 by mingkim          ###   ########.fr        #
+#    Updated: 2022/10/05 16:53:57 by mingkim          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -47,7 +47,7 @@ $(BUILDDIR):
 
 # Object rule
 $(BUILDDIR)%.o:$(CMD_DIR)%.c
-	$(CC) $(CFLAGS) -I$(INC) -I$(UTILS) _I$(INTERNAL) -o $@ -c $<
+	$(CC) $(CFLAGS) -I$(INC) -I$(UTILS) -I$(INTERNAL) -o $@ -c $<
 
 # Project file rule
 $(NAME) : $(BUILD_OBJS)
