@@ -5,35 +5,39 @@
 #                                                     +:+ +:+         +:+      #
 #    By: mingkim <mingkim@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2022/10/05 11:35:24 by mingkim           #+#    #+#              #
+#    Created: 2022/10/05 16:33:31 by mingkim           #+#    #+#              #
 #    Updated: 2022/10/05 17:03:59 by mingkim          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 # Project File
-NAME		= utils.a
+NAME			=	btree.a
 
 # Compiler Flag and Command
-CC			= cc
-CFLAGS		= -Wall -Wextra -Werror
-AR			= ar rcsuv
+CC				=	cc
+CFLAGS			=	-Wall -Wextra -Werror
+AR				=	ar rcsuv
 
-INC			= ../../include
+INC				=	../../../include
 
-FILES		= utils \
+FILES			=	create \
+					delete \
+					insert \
+					read \
+					utils
 
-SRCS_DIR	= ./
-SRCS		= $(addprefix $(SRCS_DIR), $(addsuffix .c, $(FILES)))
+SRCS_DIR		=	./
+SRCS			=	$(addprefix $(SRCS_DIR), $(addsuffix .c, $(FILES)))
 
-OBJS_DIR	= ./
-OBJS		= $(addprefix $(OBJS_DIR), $(addsuffix .o, $(FILES)))
+OBJS_DIR		=	./
+OBJS			=	$(addprefix $(OBJS_DIR), $(addsuffix .o, $(FILES)))
 
 %.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@
 
 # Main rule
 all: 
-	@echo "\033[92mBuild utils...\033[0m"
+	@echo "\033[92mBuild btree...\033[0m"
 	@make $(NAME)
 
 # Project file rule
@@ -42,17 +46,17 @@ $(NAME): $(OBJS)
 
 # Make clean
 clean:
-	@echo "\033[92mClean utils files...\033[0m"
+	@echo "\033[92mClean btree files...\033[0m"
 	rm -rf $(OBJS)
 
 # Make fclean
-fclean: 
-	@echo "\033[92mForce clean util files...\033[0m"
+fclean:
+	@echo "\033[92mForce clean btree files...\033[0m"
 	rm -rf $(OBJS)
 	rm -rf $(NAME)
 
 # Make re
-re: 
+re:
 	make fclean
 	make all
 
