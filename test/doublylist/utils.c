@@ -20,7 +20,6 @@ void	init_lst(t_doubly_list *lst)
 
 	init_token(&token, 0, "DUMMY");
 	init_node(&header, &token);
-
 	lst->header = header;
 	lst->len = 0;
 }

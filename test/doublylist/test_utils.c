@@ -1,6 +1,6 @@
 #include "test_doublylist.h"
 
-int test_is_list_empty(void)
+int	test_is_list_empty(void)
 {
 	t_doubly_list	lst;
 	int				tmp;
@@ -12,7 +12,7 @@ int test_is_list_empty(void)
 	return (TRUE);
 }
 
-int test_is_not_list_empty(void)
+int	test_is_not_list_empty(void)
 {
 	t_token			token;
 	t_doubly_node	node;
@@ -26,13 +26,14 @@ int test_is_not_list_empty(void)
 	init_node(&node, &token);
 	tmp_node->next = &node;
 	node.prev = tmp_node;
+	lst.len++;
 	tmp = is_list_empty(&lst);
 	if (tmp == FALSE)
 		return (TRUE);
 	return (FALSE);
 }
 
-int test_find_node_empty(char *str)
+int	test_find_node_empty(char *str)
 {
 	t_doubly_list	lst;
 	t_doubly_node	*tmp_node;

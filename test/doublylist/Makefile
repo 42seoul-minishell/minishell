@@ -6,7 +6,7 @@
 #    By: mingkim <mingkim@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/05 11:13:33 by mingkim           #+#    #+#              #
-#    Updated: 2022/10/05 16:53:57 by mingkim          ###   ########.fr        #
+#    Updated: 2022/10/07 12:49:05 by mingkim          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -61,6 +61,7 @@ clean:
 	@echo "\033[92mClean test files...\033[0m"
 	rm -rf $(OBJS)
 	make -C $(DOUBLY_DIR) clean
+	make -C $(LIBFT_DIR) clean
 
 # Make fclean
 fclean: 
@@ -68,6 +69,7 @@ fclean:
 	rm -rf $(OBJS)
 	rm -rf $(NAME)
 	make -C $(DOUBLY_DIR) fclean
+	make -C $(LIBFT_DIR) fclean
 
 # Make re
 re: 

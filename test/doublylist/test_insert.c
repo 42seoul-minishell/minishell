@@ -31,22 +31,25 @@ int test_insert_node(t_type type, char *value)
 	tmp_node = &(lst.header);
 	init_token(&token[0], 0, "TEST00");
 	init_node(&node[0], &token[0]);
-	tmp_node->next = &node[0];
-	node[0].prev = tmp_node;
-	tmp_node = tmp_node->next;
+	tmp = insert_node(&lst, &node[0]);
+	if (tmp == FALSE)
+		return (FALSE);
+	tmp_node = tmp_node->next; // node[0]
+
 	init_token(&token[1], 1, "TEST01");
 	init_node(&node[1], &token[1]);
-	tmp_node->next = &node[1];
-	node[2].prev = tmp_node;
-	tmp_node = tmp_node->next;
+	tmp = insert_node(&lst, &node[1]);
+	if (tmp == FALSE)
+		return (FALSE);
+	tmp_node = tmp_node->next; // node[1]
+
 	init_token(&token[2], type, value);
 	init_node(&node[2], &token[2]);
 	tmp = insert_node(&lst, &node[2]);
 	if (tmp == FALSE)
 		return (FALSE);
-
-	tmp_node = tmp_node->next;
-	if (tmp_node != node || \
+	tmp_node = tmp_node->next; // node[2]
+	if (tmp_node != &node[2] || \
 		lst.len != 3)
 		return (FALSE);
 	return (TRUE);
@@ -60,7 +63,7 @@ int	test_insert_node_lst_null(void)
 
 	init_token(&token, 0, "TEST");
 	init_node(&node, &token);
-	
+
 	tmp = insert_node(NULL, &node);
 	if (tmp == FALSE)
 		return (TRUE);
@@ -73,7 +76,7 @@ int	test_insert_node_node_null(void)
 	int				tmp;
 
 	init_lst(&lst);
-	
+
 	tmp = insert_node(&lst, NULL);
 	if (tmp == FALSE)
 		return (TRUE);
@@ -111,17 +114,19 @@ int test_insert_node_by_index(t_type type, char *value, size_t index)
 	tmp_node = &(lst.header);
 	init_token(&token[0], 0, "TEST00");
 	init_node(&node[0], &token[0]);
-	tmp_node->next = &node[0];
-	node[0].prev = tmp_node;
-	tmp_node = tmp_node->next;
+	tmp = insert_node_by_index(&lst, &node[0], 0);
+	if (tmp == FALSE)
+		return (FALSE);
+
 	init_token(&token[1], 1, "TEST01");
 	init_node(&node[1], &token[1]);
-	tmp_node->next = &node[1];
-	node[2].prev = tmp_node;
-	tmp_node = tmp_node->next;
+	tmp = insert_node_by_index(&lst, &node[1], 1);
+	if (tmp == FALSE)
+		return (FALSE);
+
 	init_token(&token[2], type, value);
 	init_node(&node[2], &token[2]);
-	tmp = insert_node_by_index(&lst, node, index);
+	tmp = insert_node_by_index(&lst, &node[2], 2);
 	if (tmp == FALSE)
 		return (FALSE);
 

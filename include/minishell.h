@@ -6,7 +6,7 @@
 /*   By: mingkim <mingkim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 11:08:00 by mingkim           #+#    #+#             */
-/*   Updated: 2022/10/05 17:02:46 by mingkim          ###   ########.fr       */
+/*   Updated: 2022/10/07 14:08:54 by mingkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@
 
 typedef enum e_type
 {
-	T_NULL,
+	T_NULL = 1,
 	T_WORD,
 	T_PIPE,
 	T_REDIRECT,
@@ -75,8 +75,8 @@ typedef struct s_btree
 /* in ../src/internal/doublylist/utils.c */
 int				is_list_empty(t_doubly_list *lst);
 void			display_list(t_doubly_list *lst);
-void			switch_type(t_type type);
-t_doubly_node   *find_node(t_doubly_list *lst, char *str);
+t_type			switch_type(t_type type);
+t_doubly_node	*find_node(t_doubly_list *lst, char *str);
 
 /* in ../src/internal/doublylist/delete.c */
 void			delete_one(t_doubly_node *node);
