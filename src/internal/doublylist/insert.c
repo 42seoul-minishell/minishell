@@ -6,7 +6,7 @@
 /*   By: mingkim <mingkim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 16:26:37 by mingkim           #+#    #+#             */
-/*   Updated: 2022/10/05 16:26:48 by mingkim          ###   ########.fr       */
+/*   Updated: 2022/10/07 13:43:42 by mingkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,15 +19,19 @@ int	insert_node(t_doubly_list *lst, t_doubly_node *node)
 		return (FALSE);
 	if (lst->len)
 	{
+		node->prev = lst->header.prev;
 		node->next = lst->header.next;
-		node->prev = &(lst->header);
-		lst->header.next = node;
+		lst->header.prev->next = node;
+		lst->header.next->prev = node;
 	}
 	else
 	{
 		lst->header.next = node;
-		node->prev = &(lst->header);
+		node->next = node;
+		node->prev = node;
 	}
+	lst->header.prev = node;
+	lst->len++;
 	return (TRUE);
 }
 
@@ -36,13 +40,16 @@ int	insert_node_by_index(t_doubly_list *lst, t_doubly_node *node, size_t index)
 	t_doubly_node	*buf;
 	size_t			count;
 
-	if (!lst || is_list_empty(lst))
+	if (!lst || lst->len < index)
 		return (FALSE);
+	if (is_list_empty(lst) || index == lst->len || !index)
+		return (insert_node(lst, node));
 	buf = &lst->header;
 	count = -1;
 	while (++count < index)
 		buf = buf->next;
 	node->prev = buf->prev;
 	node->next = buf;
+	lst->len++;
 	return (TRUE);
 }

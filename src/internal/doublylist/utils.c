@@ -6,7 +6,7 @@
 /*   By: mingkim <mingkim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 15:35:19 by mingkim           #+#    #+#             */
-/*   Updated: 2022/10/05 16:49:01 by mingkim          ###   ########.fr       */
+/*   Updated: 2022/10/07 14:09:10 by mingkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	display_list(t_doubly_list *lst)
 		return ;
 	count = -1;
 	node = lst->header.next;
-	while (++count < lst->len - 1)
+	while (++count < lst->len)
 	{
 		printf("doubly list node, index of %zd\n", count);
 		printf("token value = %s\n", node->token->value);
@@ -37,29 +37,30 @@ void	display_list(t_doubly_list *lst)
 	}
 }
 
-/* 구현이 완료된 함수인지 확인해 주세욥 */
-void	switch_type(t_type type)
+t_type	switch_type(t_type type)
 {
 	if (type == T_NULL)
-		printf("token type = T_NULL\n");
+		return (T_NULL);
 	else if (type == T_WORD)
-		printf("token type = T_WORD\n");
+		return (T_WORD);
 	else if (type == T_PIPE)
-		printf("token type = T_PIPE\n");
+		return (T_PIPE);
 	else if (type == T_REDIRECT)
-		printf("token type = T_REDIRECT\n");
+		return (T_REDIRECT);
 	else if (type == T_DOUBLE_QUOTES)
-		printf("token type = T_DOUBLE_QUOTES\n");
+		return (T_DOUBLE_QUOTES);
+	else
+		return (0);
 }
 
-t_doubly_node   *find_node(t_doubly_list *lst, char *str)
+t_doubly_node	*find_node(t_doubly_list *lst, char *str)
 {
-    t_doubly_node   *node;
+	t_doubly_node	*node;
 
 	node = lst->header.next;
-    while (node != NULL)
+	while (node != NULL)
 	{
-		if (ft_strncmp(node->token->value, str, ft_strlen(node->token->value)) == 0)
+		if (!ft_strncmp(node->token->value, str, ft_strlen(node->token->value)))
 			return (node);
 		node = node->next;
 	}

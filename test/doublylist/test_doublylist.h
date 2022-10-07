@@ -33,5 +33,4 @@ int		test_insert_node_by_index(t_type type, char *value, size_t index);
 
 /* in test_delete.c */
 
-
 #endif

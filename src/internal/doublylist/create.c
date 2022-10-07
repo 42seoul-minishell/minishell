@@ -6,7 +6,7 @@
 /*   By: mingkim <mingkim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 15:23:51 by mingkim           #+#    #+#             */
-/*   Updated: 2022/10/05 17:01:42 by mingkim          ###   ########.fr       */
+/*   Updated: 2022/10/07 14:10:25 by mingkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ t_token	*create_token(t_type type, char *value)
 
 	new = malloc(sizeof(t_token));
 	if (!new)
+		return (NULL);
+	if (switch_type(type) == FALSE)
 		return (NULL);
 	new->type = type;
 	new->value = value;
