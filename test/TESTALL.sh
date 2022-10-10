@@ -1,11 +1,13 @@
 make -C ./doublylist all
-make -C ./btree all
 
-./doublylist/testDoublylist
-sleep 1
+./doublylist/testDoublyList
+sleep 3
+
+make -C ./doublylist fclean
+
+make -C ./btree all
 
 ./btree/testBtree
 sleep 2
 
-make -C ./doublylist fclean
 make -C ./btree fclean
