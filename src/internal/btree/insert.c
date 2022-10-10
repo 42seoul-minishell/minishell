@@ -1,21 +1,25 @@
 #include "../../../include/minishell.h"
 
-int	insert_lc_node(t_btree_node *parent, t_token *token)
+int insert_lc_node(t_btree_node *parent, t_token *token)
 {
-	t_btree_node	*node;
+	t_btree_node *node;
 
-	node = create_node(token);
+	if (parent == NULL || token == NULL)
+		return (FALSE);
+	node = create_btree_node(token);
 	if (node == NULL)
 		return (FALSE);
 	parent->lc = node;
 	return (TRUE);
 }
 
-int	insert_rc_node(t_btree_node *parent, t_token *token)
+int insert_rc_node(t_btree_node *parent, t_token *token)
 {
-	t_btree_node	*node;
+	t_btree_node *node;
 
-	node = create_node(token);
+	if (parent == NULL || token == NULL)
+		return (FALSE);
+	node = create_btree_node(token);
 	if (node == NULL)
 		return (FALSE);
 	parent->rc = node;
