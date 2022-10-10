@@ -12,20 +12,20 @@
 
 #include "../../../include/minishell.h"
 
-int	is_list_empty(t_doubly_list *lst)
+int is_list_empty(t_doubly_list *lst)
 {
 	if (lst->len == 0)
 		return (TRUE);
 	return (FALSE);
 }
 
-void	display_list(t_doubly_list *lst)
+void display_list(t_doubly_list *lst)
 {
-	size_t			count;
-	t_doubly_node	*node;
+	size_t count;
+	t_doubly_node *node;
 
 	if (!lst || is_list_empty(lst))
-		return ;
+		return;
 	count = -1;
 	node = lst->header.next;
 	while (++count < lst->len)
@@ -37,7 +37,7 @@ void	display_list(t_doubly_list *lst)
 	}
 }
 
-t_type	switch_type(t_type type)
+t_type switch_type(t_type type)
 {
 	if (type == T_NULL)
 		return (T_NULL);
@@ -53,16 +53,24 @@ t_type	switch_type(t_type type)
 		return (0);
 }
 
-t_doubly_node	*find_node(t_doubly_list *lst, char *str)
+t_doubly_node *find_doubly_node(t_doubly_list *lst, char *str)
 {
-	t_doubly_node	*node;
+	t_doubly_node *node;
+	t_doubly_node *tmp;
 
 	node = lst->header.next;
-	while (node != NULL)
+	if (node != NULL)
 	{
 		if (!ft_strncmp(node->token->value, str, ft_strlen(node->token->value)))
 			return (node);
-		node = node->next;
+		tmp = node->next;
+		while (tmp != node)
+		{
+			printf("node: %p, tmp: %p\n", node, tmp);
+			if (!ft_strncmp(tmp->token->value, str, ft_strlen(tmp->token->value)))
+				return (tmp);
+			tmp = tmp->next;
+		}
 	}
 	return (NULL);
 }
