@@ -1,8 +1,8 @@
 #include "../../../include/minishell.h"
 
-t_btree	*create_btree()
+t_btree *create_btree(void)
 {
-	t_btree	*btree;
+	t_btree *btree;
 
 	btree = (t_btree *)malloc(sizeof(t_btree));
 	if (btree == NULL)
@@ -11,10 +11,12 @@ t_btree	*create_btree()
 	return (btree);
 }
 
-t_btree_node	*create_node(t_token *token)
+t_btree_node *create_btree_node(t_token *token)
 {
-	t_btree_node	*node;
+	t_btree_node *node;
 
+	if (token == NULL)
+		return (NULL);
 	node = (t_btree_node *)malloc(sizeof(t_btree_node));
 	if (node == NULL)
 		return (NULL);
