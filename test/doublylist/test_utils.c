@@ -56,19 +56,13 @@ int test_find_doubly_node(char *str)
 	tmp_node = &(lst.header);
 	init_token(&token[0], 1, "TEST00");
 	init_node(&node[0], &token[0]);
-	tmp_node->next = &node[0];
-	node[0].prev = tmp_node;
-	tmp_node = tmp_node->next;
+	insert_node(&lst, &node[0]);
 	init_token(&token[1], 2, "TEST01");
 	init_node(&node[1], &token[1]);
-	tmp_node->next = &node[1];
-	node[2].prev = tmp_node;
-	tmp_node = tmp_node->next;
+	insert_node(&lst, &node[1]);
 	init_token(&token[2], 3, "TEST02");
 	init_node(&node[2], &token[2]);
-	tmp_node->next = &node[2];
-	node[2].prev = tmp_node;
-	node[2].next = &node[0];
+	insert_node(&lst, &node[2]);
 
 	tmp_node = find_doubly_node(&lst, str);
 	if (tmp_node == NULL)

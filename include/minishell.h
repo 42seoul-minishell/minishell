@@ -6,7 +6,7 @@
 /*   By: mingkim <mingkim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 11:08:00 by mingkim           #+#    #+#             */
-/*   Updated: 2022/10/07 14:08:54 by mingkim          ###   ########.fr       */
+/*   Updated: 2022/10/12 12:55:40 by mingkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ t_type		switch_type(t_type type);
 t_doubly_node	*find_doubly_node(t_doubly_list *lst, char *str);
 
 /* in ../src/internal/doublylist/delete.c */
-void		delete_doubly_node(t_doubly_node *node);
+void		delete_doubly_node(t_doubly_list *lst, t_doubly_node *node);
 void		find_delete_doubly_node(t_doubly_list *lst, char *str);
 void		release_doubly_list(t_doubly_list *lst);
 

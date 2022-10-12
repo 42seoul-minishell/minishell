@@ -6,26 +6,26 @@
 /*   By: mingkim <mingkim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 15:35:19 by mingkim           #+#    #+#             */
-/*   Updated: 2022/10/07 14:09:10 by mingkim          ###   ########.fr       */
+/*   Updated: 2022/10/12 13:06:12 by mingkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../include/minishell.h"
 
-int is_list_empty(t_doubly_list *lst)
+int	is_list_empty(t_doubly_list *lst)
 {
 	if (lst->len == 0)
 		return (TRUE);
 	return (FALSE);
 }
 
-void display_list(t_doubly_list *lst)
+void	display_list(t_doubly_list *lst)
 {
-	size_t count;
-	t_doubly_node *node;
+	size_t			count;
+	t_doubly_node	*node;
 
 	if (!lst || is_list_empty(lst))
-		return;
+		return ;
 	count = -1;
 	node = lst->header.next;
 	while (++count < lst->len)
@@ -37,7 +37,7 @@ void display_list(t_doubly_list *lst)
 	}
 }
 
-t_type switch_type(t_type type)
+t_type	switch_type(t_type type)
 {
 	if (type == T_NULL)
 		return (T_NULL);
@@ -53,11 +53,13 @@ t_type switch_type(t_type type)
 		return (0);
 }
 
-t_doubly_node *find_doubly_node(t_doubly_list *lst, char *str)
+t_doubly_node	*find_doubly_node(t_doubly_list *lst, char *str)
 {
-	t_doubly_node *node;
-	t_doubly_node *tmp;
+	t_doubly_node	*node;
+	t_doubly_node	*tmp;
 
+	if (is_list_empty(lst))
+		return (NULL);
 	node = lst->header.next;
 	if (node != NULL)
 	{
@@ -66,8 +68,8 @@ t_doubly_node *find_doubly_node(t_doubly_list *lst, char *str)
 		tmp = node->next;
 		while (tmp != node)
 		{
-			printf("node: %p, tmp: %p\n", node, tmp);
-			if (!ft_strncmp(tmp->token->value, str, ft_strlen(tmp->token->value)))
+			if (!ft_strncmp(tmp->token->value, \
+			str, ft_strlen(tmp->token->value)))
 				return (tmp);
 			tmp = tmp->next;
 		}
