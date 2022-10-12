@@ -6,7 +6,7 @@
 /*   By: mingkim <mingkim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 16:26:37 by mingkim           #+#    #+#             */
-/*   Updated: 2022/10/07 13:43:42 by mingkim          ###   ########.fr       */
+/*   Updated: 2022/10/12 12:30:23 by mingkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,14 +42,23 @@ int	insert_node_by_index(t_doubly_list *lst, t_doubly_node *node, size_t index)
 
 	if (!lst || lst->len < index)
 		return (FALSE);
-	if (is_list_empty(lst) || index == lst->len || !index)
+	if (is_list_empty(lst) || index == lst->len)
 		return (insert_node(lst, node));
 	buf = &lst->header;
-	count = -1;
-	while (++count < index)
-		buf = buf->next;
-	node->prev = buf->prev;
-	node->next = buf;
+	if (index)
+	{
+		count = -1;
+		while (++count < index)
+			buf = buf->next;
+		node->prev = buf->prev;
+		node->next = buf;
+	}
+	else
+	{
+		node->next = buf->next;
+		node->prev = buf->prev;
+		buf->next = node;
+	}
 	lst->len++;
 	return (TRUE);
 }

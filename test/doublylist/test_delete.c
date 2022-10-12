@@ -12,7 +12,7 @@ int test_find_delete_and_release_list(char *str)
 	tmp_str = (char **)malloc(sizeof(char *) * 3);
 	for (int i = 0; i < 3; i++)
 	{
-		tmp_str[i] = (char *)malloc(sizeof(char *) * 10);
+		tmp_str[i] = (char *)malloc(sizeof(char) * 10);
 		if (!tmp_str[i])
 			return (FALSE);
 	}
@@ -49,16 +49,15 @@ int test_find_delete_and_release_list(char *str)
 	if (tmp == FALSE)
 		return (FALSE);
 
-	printf("3\n");
 	find_delete_doubly_node(lst, str);
-	printf("3\n");
 	tmp_node = find_doubly_node(lst, str);
-	printf("3\n");
 	if (tmp_node == NULL)
 	{
 		release_doubly_list(lst);
+		free(tmp_str);
 		return (TRUE);
 	}
 	release_doubly_list(lst);
+	free(tmp_str);
 	return (FALSE);
 }

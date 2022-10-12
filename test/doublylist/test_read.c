@@ -32,9 +32,6 @@ int test_get_node_by_index(size_t index)
 	if (tmp_node == NULL)
 		return (FALSE);
 
-	// printf("\nindex: %ld\n", index);
-	// printf("tmp_node: %p\n", tmp_node);
-	// printf("&node[%ld]: %p\n\n", index, &node[index]);
 	if ((index == 0 && tmp_node == &node[0]) ||
 		(index == 1 && tmp_node == &node[1]) ||
 		(index == 2 && tmp_node == &node[2]))

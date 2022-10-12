@@ -6,7 +6,7 @@
 /*   By: mingkim <mingkim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 16:16:11 by mingkim           #+#    #+#             */
-/*   Updated: 2022/10/05 16:20:50 by mingkim          ###   ########.fr       */
+/*   Updated: 2022/10/12 12:43:59 by mingkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ t_doubly_node	*get_node_by_index(t_doubly_list *lst, size_t idx)
 	if (!lst || is_list_empty(lst) || lst->len <= idx)
 		return (NULL);
 	count = -1;
-	node = &lst->header;
+	node = lst->header.next;
 	while (++count < idx)
 		node = node->next;
 	return (node);
