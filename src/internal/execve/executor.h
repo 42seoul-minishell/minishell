@@ -1,27 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   read.c                                             :+:      :+:    :+:   */
+/*   executor.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mingkim <mingkim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/05 16:16:11 by mingkim           #+#    #+#             */
-/*   Updated: 2022/10/14 15:34:52 by mingkim          ###   ########.fr       */
+/*   Created: 2022/10/14 15:27:24 by mingkim           #+#    #+#             */
+/*   Updated: 2022/10/14 15:29:04 by mingkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "doublylist.h"
+#ifndef EXECUTOR_H
+# define EXECUTOR_H
 
-t_doubly_node	*get_node_by_index(t_doubly_list *lst, size_t idx)
-{
-	size_t			count;
-	t_doubly_node	*node;
+# include "../../../include/minishell.h"
 
-	if (!lst || is_list_empty(lst) || lst->len <= idx)
-		return (NULL);
-	count = -1;
-	node = lst->header.next;
-	while (++count < idx)
-		node = node->next;
-	return (node);
-}
+#endif
