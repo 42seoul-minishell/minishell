@@ -6,11 +6,11 @@
 /*   By: mingkim <mingkim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 15:23:51 by mingkim           #+#    #+#             */
-/*   Updated: 2022/10/07 14:10:25 by mingkim          ###   ########.fr       */
+/*   Updated: 2022/10/14 15:34:15 by mingkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../include/minishell.h"
+#include "doublylist.h"
 
 t_token	*create_token(t_type type, char *value)
 {

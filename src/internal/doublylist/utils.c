@@ -6,11 +6,11 @@
 /*   By: mingkim <mingkim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 15:35:19 by mingkim           #+#    #+#             */
-/*   Updated: 2022/10/12 13:06:12 by mingkim          ###   ########.fr       */
+/*   Updated: 2022/10/14 15:34:49 by mingkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../include/minishell.h"
+#include "doublylist.h"
 
 int	is_list_empty(t_doubly_list *lst)
 {
