@@ -6,25 +6,28 @@
 #    By: mingkim <mingkim@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/05 16:33:31 by mingkim           #+#    #+#              #
-#    Updated: 2022/10/17 11:17:36 by mingkim          ###   ########.fr        #
+#    Updated: 2022/10/17 11:22:45 by mingkim          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 # Project File
-NAME		=	doubly.a
+NAME		=	builtin.a
 
 # Compiler Flag and Command
 CC			=	cc
 CFLAGS		=	-Wall -Wextra -Werror
 AR			=	ar rcsuv
 
-INC			=	doubly.h
+INC			=	builtin.h
 
-FILES		=	create \
-				delete \
-				insert \
-				read \
-				utils
+FILES		=	builtin \
+				cd \
+				echo \
+				env \
+				exit \
+				export \
+				pwd \
+				unset \
 
 SRCS_DIR	=	./
 SRCS		=	$(addprefix $(SRCS_DIR), $(addsuffix .c, $(FILES)))
@@ -37,7 +40,7 @@ OBJS		=	$(addprefix $(OBJS_DIR), $(addsuffix .o, $(FILES)))
 
 # Main rule
 all: 
-	@echo "\033[92mBuild doubly...\033[0m"
+	@echo "\033[92mBuild builtin...\033[0m"
 	@make $(NAME)
 
 # Project file rule
@@ -46,12 +49,12 @@ $(NAME): $(OBJS)
 
 # Make clean
 clean:
-	@echo "\033[92mClean doubly files...\033[0m"
+	@echo "\033[92mClean builtin files...\033[0m"
 	rm -rf $(OBJS)
 
 # Make fclean
 fclean:
-	@echo "\033[92mForce clean doubly files...\033[0m"
+	@echo "\033[92mForce clean builtin files...\033[0m"
 	rm -rf $(OBJS)
 	rm -rf $(NAME)
 
