@@ -6,11 +6,11 @@
 /*   By: mingkim <mingkim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/14 15:24:57 by mingkim           #+#    #+#             */
-/*   Updated: 2022/10/14 15:28:29 by mingkim          ###   ########.fr       */
+/*   Updated: 2022/10/17 11:23:07 by mingkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../include/minishell.h"
+#include "executor.h"
 
 void	run_executor(void)
 {

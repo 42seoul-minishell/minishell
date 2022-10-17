@@ -6,7 +6,7 @@
 /*   By: mingkim <mingkim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 11:08:00 by mingkim           #+#    #+#             */
-/*   Updated: 2022/10/14 15:33:08 by mingkim          ###   ########.fr       */
+/*   Updated: 2022/10/17 12:23:37 by mingkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,5 +115,8 @@ void			display_btree_by_preorder(t_btree *btree);
 
 /* in ../src/internal/btree/read.c */
 t_btree_node	*get_btree_node_by_id(t_btree_node *node, int id);
+
+/* in ../src/internal/builtin/cd.c */
+int				builtin_cd(char *directory);
 
 #endif

@@ -6,7 +6,7 @@
 #    By: mingkim <mingkim@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/05 16:33:31 by mingkim           #+#    #+#              #
-#    Updated: 2022/10/14 15:24:42 by mingkim          ###   ########.fr        #
+#    Updated: 2022/10/17 11:18:25 by mingkim          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ CC				=	cc
 CFLAGS			=	-Wall -Wextra -Werror
 AR				=	ar rcsuv
 
-INC				=	../../../include
+INC				=	executor.h
 
 FILES			=	executor \
 
