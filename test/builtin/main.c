@@ -6,7 +6,7 @@
 /*   By: mingkim <mingkim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 11:32:05 by mingkim           #+#    #+#             */
-/*   Updated: 2022/10/17 13:07:18 by mingkim          ###   ########.fr       */
+/*   Updated: 2022/10/18 12:58:54 by mingkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int	main(void)
 	char	*buf;
 	char	*answer;
 
-	// ===== TEST FOR SUCCESS CASE =====
+	// ===== TEST FOR CD SUCCESS CASE =====
 
 	// get current directory
 	path = getcwd(NULL, 9999);
@@ -61,7 +61,7 @@ int	main(void)
 	free(buf);
 	free(answer);
 
-	// ===== TEST FOR FAIL CASE =====
+	// ===== TEST FOR CD FAIL CASE =====
 
 	// get current directory
 	path = getcwd(NULL, 9999);
@@ -72,6 +72,17 @@ int	main(void)
 
 	// free pointers
 	free(path);
+
+	// ===== TEST FOR ECHO WITH NO NEW LINE OPTIONS =====
+	builtin_echo("test for echo\n", 1, 0);
+
+	// ===== TEST FOR ECHO WITH NEW LINE OPTION =====
+	builtin_echo("test for echo\n", 1, 1);
+
+	// ===== TEST FOR PWD =====
+	builtin_pwd();
+	
+	// ===== TEST FOR PWD WITH NULL ERROR =====
 
 	// LEAK CHECK
 	system("leaks testBuiltin | grep LEAK");
