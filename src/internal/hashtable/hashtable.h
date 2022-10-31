@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   internal.c                                         :+:      :+:    :+:   */
+/*   hashmap.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mingkim <mingkim@student.42.fr>            +#+  +:+       +#+        */
+/*   By: gimmingyu <gimmingyu@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/05 11:50:29 by mingkim           #+#    #+#             */
-/*   Updated: 2022/10/05 11:51:10 by mingkim          ###   ########.fr       */
+/*   Created: 2022/10/31 10:41:31 by gimmingyu         #+#    #+#             */
+/*   Updated: 2022/10/31 15:10:50 by gimmingyu        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/minishell.h"
+#ifndef HASHTABLE_H
+# define HASHTABLE_H
 
-void	print_hello(void)
-{
-	printf("hello world!\n");
-}
+# include "../../../include/minishell.h"
+
+#endif

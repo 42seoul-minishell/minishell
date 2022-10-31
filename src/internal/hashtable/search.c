@@ -1,22 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   search.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gimmingyu <gimmingyu@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/05 10:58:16 by mingkim           #+#    #+#             */
-/*   Updated: 2022/10/31 19:26:42 by gimmingyu        ###   ########.fr       */
+/*   Created: 2022/10/31 16:39:53 by gimmingyu         #+#    #+#             */
+/*   Updated: 2022/10/31 16:45:17 by gimmingyu        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/minishell.h"
+#include "hashtable.h"
 
-int	main(void)
+char	*search(t_hashtable *table, char *key)
 {
-	t_hashtable	*table;
+	size_t			idx;
+	t_ht_item		*item;
 
-	table = parse_env_to_hashtable(environ);
-	display_hashtable(table);
-	return (0);
+	idx = hash_index(key, table->size);
+	item = table->items[idx];
+	while (item)
+	{
+		if (ft_strncmp(item->key, key, ft_strlen(key) + 1) == 0)
+			return (item->value);
+		item = item->next;
+	}
+	return (NULL);
 }

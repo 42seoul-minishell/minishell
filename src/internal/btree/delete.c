@@ -1,9 +1,21 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   delete.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gimmingyu <gimmingyu@student.42.fr>        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/10/31 10:35:34 by gimmingyu         #+#    #+#             */
+/*   Updated: 2022/10/31 10:35:47 by gimmingyu        ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../../include/minishell.h"
 
-void delete_btree_node_child(t_btree_node *parent)
+void	delete_btree_node_child(t_btree_node *parent)
 {
 	if (parent == NULL)
-		return;
+		return ;
 	delete_btree_node_child(parent->lc);
 	delete_btree_node_child(parent->rc);
 	free(parent->token->value);
@@ -11,7 +23,7 @@ void delete_btree_node_child(t_btree_node *parent)
 	free(parent);
 }
 
-int delete_btree_node_lc(t_btree_node *parent)
+int	delete_btree_node_lc(t_btree_node *parent)
 {
 	if (parent == NULL)
 		return (FALSE);
@@ -22,7 +34,7 @@ int delete_btree_node_lc(t_btree_node *parent)
 	return (TRUE);
 }
 
-int delete_btree_node_rc(t_btree_node *parent)
+int	delete_btree_node_rc(t_btree_node *parent)
 {
 	if (parent == NULL)
 		return (FALSE);
