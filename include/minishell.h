@@ -6,7 +6,7 @@
 /*   By: gimmingyu <gimmingyu@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 11:08:00 by mingkim           #+#    #+#             */
-/*   Updated: 2022/10/31 15:12:12 by gimmingyu        ###   ########.fr       */
+/*   Updated: 2022/10/31 18:30:29 by gimmingyu        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@
 
 # define TRUE 1
 # define FALSE 0
+# define MAGIC_NUMBER 5381
 
 typedef enum e_type
 {
@@ -47,7 +48,6 @@ typedef struct s_token
 {
 	t_type	type;
 	char	*value;
-	char	*key;
 }	t_token;
 
 /* node of double linked list */
@@ -80,17 +80,16 @@ typedef struct s_btree
 	t_btree_node	*root;
 }	t_btree;
 
-typedef struct s_HashTableItem
+typedef struct s_ht_item
 {
 	char					*key;
 	char					*value;
-	struct s_HashTableItem	*next;
-	struct s_HashTableItem	*prev;
-}	t_HashTableItem;
+	struct s_ht_item		*next;
+}	t_ht_item;
 
 typedef struct s_hashtable
 {
-	t_HashTableItem	**dict;
+	t_ht_item		**items;
 	size_t			size;
 	size_t			count;
 }	t_hashtable;
@@ -153,10 +152,22 @@ int				builtin_pwd(void);
 void			builtin_env(t_doubly_list *lst);
 
 /* in ../src/internal/hashmap/insert.c */
-t_HashTableItem	*create_ht_item(char *key, char *value);
-void			insert(t_HashTableItem *dict, t_hashtable *table);
-
+t_ht_item		*create_ht_item(char *key, char *value);
 t_hashtable		*create_hashtable(size_t size);
+
+void			hash_insert(t_ht_item *new_item, t_hashtable *table);
+
 char			*get_key_from_env(char *str);
-char			*get_value_from_env(char **env);
+char			*get_value_from_env(char *env);
+void			display_hashtable(t_hashtable *table);
+void			prevent_collision(t_hashtable *table, size_t hash, \
+							t_ht_item *new_item);
+
+t_hashtable		*parse_env_to_hashtable(char **env);
+
+void			delete_item(t_ht_item *item);
+void			delete_table(t_hashtable *table);
+size_t			hash_index(char *key, size_t size);
+char			*search(t_hashtable *table, char *key);
+
 #endif

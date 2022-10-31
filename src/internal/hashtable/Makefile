@@ -6,7 +6,7 @@
 #    By: gimmingyu <gimmingyu@student.42.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/05 16:33:31 by mingkim           #+#    #+#              #
-#    Updated: 2022/10/31 15:29:54 by gimmingyu        ###   ########.fr        #
+#    Updated: 2022/10/31 16:59:23 by gimmingyu        ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,11 +20,12 @@ AR				=	ar rcsuv
 
 INC				=	hashtable.h
 
-FILES			=	insert \
-					create \
+FILES			=	create \
+					delete \
 					hashtable \
-					utils 
-
+					insert \
+					search \
+					utils \
 
 SRCS_DIR		=	./
 SRCS			=	$(addprefix $(SRCS_DIR), $(addsuffix .c, $(FILES)))

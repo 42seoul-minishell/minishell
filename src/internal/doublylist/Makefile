@@ -6,7 +6,7 @@
 #    By: gimmingyu <gimmingyu@student.42.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/05 16:33:31 by mingkim           #+#    #+#              #
-#    Updated: 2022/10/31 09:58:45 by gimmingyu        ###   ########.fr        #
+#    Updated: 2022/10/31 17:24:20 by gimmingyu        ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ CC			=	cc
 CFLAGS		=	-Wall -Wextra -Werror
 AR			=	ar rcsuv
 
-INC			=	doubly.h
+INC			=	../../../include/
 
 FILES		=	create \
 				delete \

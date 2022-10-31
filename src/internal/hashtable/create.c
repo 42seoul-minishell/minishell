@@ -6,7 +6,7 @@
 /*   By: gimmingyu <gimmingyu@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/31 15:06:11 by gimmingyu         #+#    #+#             */
-/*   Updated: 2022/10/31 15:28:24 by gimmingyu        ###   ########.fr       */
+/*   Updated: 2022/10/31 16:48:37 by gimmingyu        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,24 +15,24 @@
 t_hashtable	*create_hashtable(size_t size)
 {
 	t_hashtable		*table;
-	t_HashTableItem	**dict;
+	t_ht_item		**items;
 	size_t			idx;
 
-	table = ft_calloc(1, sizeof(t_HashTableItem));
-	dict = ft_calloc(size, sizeof(t_HashTableItem));
-	table->dict = dict;
+	table = ft_calloc(1, sizeof(t_ht_item));
+	items = ft_calloc(size, sizeof(t_ht_item));
+	table->items = items;
 	table->size = size;
 	idx = 0;
 	while (idx < size)
-		table->dict[idx++] = NULL;
+		table->items[idx++] = NULL;
 	return (table);
 }
 
-t_HashTableItem	*create_ht_item(char *key, char *value)
+t_ht_item	*create_ht_item(char *key, char *value)
 {
-	t_HashTableItem	*item;
+	t_ht_item	*item;
 
-	item = malloc(sizeof(t_HashTableItem));
+	item = malloc(sizeof(t_ht_item));
 	if (!item)
 		return (NULL);
 	item->key = malloc(ft_strlen(key) + 1);

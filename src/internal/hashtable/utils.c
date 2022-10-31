@@ -6,7 +6,7 @@
 /*   By: gimmingyu <gimmingyu@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/31 15:10:28 by gimmingyu         #+#    #+#             */
-/*   Updated: 2022/10/31 15:14:58 by gimmingyu        ###   ########.fr       */
+/*   Updated: 2022/10/31 17:01:52 by gimmingyu        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ char	*get_key_from_env(char *str)
 	return (key);
 }
 
-char	*get_value_from_env(char **env)
+char	*get_value_from_env(char *env)
 {
 	int		idx;
 	int		len_of_env;
@@ -38,4 +38,43 @@ char	*get_value_from_env(char **env)
 		len_of_env++;
 	value = ft_substr(env, idx + 1, len_of_env);
 	return (value);
+}
+
+void	prevent_collision(t_hashtable *table, size_t hash, \
+							t_ht_item *new_item)
+{
+	t_ht_item	*item;
+
+	item = table->items[hash];
+	while (item->next)
+		item = item->next;
+	item->next = new_item;
+	new_item->next = NULL;
+	table->count++;
+}
+
+void	display_hashtable(t_hashtable *table)
+{
+	size_t			idx;
+	t_ht_item		*item;
+	t_ht_item		*next;
+
+	idx = 0;
+	while (idx < table->size)
+	{
+		item = table->items[idx];
+		while (item != NULL)
+		{
+			next = item->next;
+			ft_putendl_fd("----------------------------", 1);
+			ft_putstr_fd("| ", 1);
+			ft_putstr_fd(item->key, 1);
+			ft_putstr_fd(" | = | ", 1);
+			ft_putstr_fd(item->value, 1);
+			ft_putendl_fd(" |", 1);
+			item = next;
+		}
+		idx++;
+	}
+	ft_putendl_fd("----------------------------", 1);
 }
