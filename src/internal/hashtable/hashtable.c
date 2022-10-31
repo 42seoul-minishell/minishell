@@ -6,7 +6,7 @@
 /*   By: gimmingyu <gimmingyu@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/31 10:20:57 by gimmingyu         #+#    #+#             */
-/*   Updated: 2022/10/31 18:30:44 by gimmingyu        ###   ########.fr       */
+/*   Updated: 2022/10/31 19:31:39 by gimmingyu        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,7 @@ size_t	hash_index(char *key, size_t size)
 	hash = MAGIC_NUMBER;
 	idx = -1;
 	while (key && key[++idx])
-	{
 		hash = ((hash << 5) + hash) + key[idx];
-		idx++;
-	}
 	return (hash % size);
 }
 

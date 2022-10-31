@@ -6,7 +6,7 @@
 /*   By: gimmingyu <gimmingyu@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/31 15:06:11 by gimmingyu         #+#    #+#             */
-/*   Updated: 2022/10/31 16:48:37 by gimmingyu        ###   ########.fr       */
+/*   Updated: 2022/10/31 19:28:58 by gimmingyu        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ t_hashtable	*create_hashtable(size_t size)
 	t_ht_item		**items;
 	size_t			idx;
 
-	table = ft_calloc(1, sizeof(t_ht_item));
+	table = ft_calloc(1, sizeof(t_hashtable));
 	items = ft_calloc(size, sizeof(t_ht_item));
 	table->items = items;
 	table->size = size;
