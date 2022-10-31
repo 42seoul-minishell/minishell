@@ -1,25 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   read.c                                             :+:      :+:    :+:   */
+/*   hashmap.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gimmingyu <gimmingyu@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/31 10:48:30 by gimmingyu         #+#    #+#             */
-/*   Updated: 2022/10/31 10:48:53 by gimmingyu        ###   ########.fr       */
+/*   Created: 2022/10/31 10:41:31 by gimmingyu         #+#    #+#             */
+/*   Updated: 2022/10/31 15:10:50 by gimmingyu        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../include/minishell.h"
+#ifndef HASHTABLE_H
+# define HASHTABLE_H
 
-t_btree_node	*get_btree_node_by_id(t_btree_node *node, int id)
-{
-	if (node == NULL)
-		return (NULL);
-	if (id == node->id)
-		return (node);
-	else if (id < node->id)
-		return (get_btree_node_by_id(node->lc, id));
-	else
-		return (get_btree_node_by_id(node->rc, id));
-}
+# include "../../../include/minishell.h"
+
+#endif

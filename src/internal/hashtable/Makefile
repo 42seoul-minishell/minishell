@@ -5,66 +5,58 @@
 #                                                     +:+ +:+         +:+      #
 #    By: gimmingyu <gimmingyu@student.42.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2022/10/05 11:35:24 by mingkim           #+#    #+#              #
-#    Updated: 2022/10/31 10:04:58 by gimmingyu        ###   ########.fr        #
+#    Created: 2022/10/05 16:33:31 by mingkim           #+#    #+#              #
+#    Updated: 2022/10/31 15:29:54 by gimmingyu        ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 # Project File
-NAME		= internal.a
+NAME			=	hashtable.a
 
 # Compiler Flag and Command
-CC			= cc
-CFLAGS		= -Wall -Wextra -Werror
-AR			= ar rcusv
+CC				=	cc
+CFLAGS			=	-Wall -Wextra -Werror
+AR				=	ar rcsuv
 
-INC			= ../../include
+INC				=	hashtable.h
 
-DOUBLYDIR	= ./doublylist/
-DOUBLY		= $(DOUBLYDIR)doubly.a
+FILES			=	insert \
+					create \
+					hashtable \
+					utils 
 
-BTREEDIR	= ./btree/
-BTREE		= $(BTREEDIR)btree.a
 
-FILES		= internal \
+SRCS_DIR		=	./
+SRCS			=	$(addprefix $(SRCS_DIR), $(addsuffix .c, $(FILES)))
 
-SRCS_DIR	= ./
-SRCS		= $(addprefix $(SRCS_DIR), $(addsuffix .c, $(FILES)))
-
-OBJS_DIR	= ./
-OBJS		= $(addprefix $(OBJS_DIR), $(addsuffix .o, $(FILES)))
+OBJS_DIR		=	./
+OBJS			=	$(addprefix $(OBJS_DIR), $(addsuffix .o, $(FILES)))
 
 %.o: %.c
-	$(CC) $(CFLAGS) -I$(DOUBLY) -I$(BTREE) -c $< -o $@
+	$(CC) $(CFLAGS) -c $< -o $@
 
 # Main rule
 all: 
-	@make all -C $(DOUBLYDIR)
-	@make all -C $(BTREEDIR)
-	@echo "\033[92mBuild internal...\033[0m"
+	@echo "\033[92mBuild hashtable...\033[0m"
 	@make $(NAME)
 
 # Project file rule
-$(NAME): $(OBJS) $(DOUBLY) $(BTREE)
+$(NAME): $(OBJS)
 	$(AR) $@ $?
 
 # Make clean
 clean:
-	@echo "\033[92mClean internal files...\033[0m"
+	@echo "\033[92mClean hashtable files...\033[0m"
 	rm -rf $(OBJS)
-	make -C $(DOUBLYDIR) clean
-	make -C $(BTREEDIR) clean
 
 # Make fclean
 fclean:
-	@echo "\033[92mForce clean internal files...\033[0m"
+	@echo "\033[92mForce clean hashtable files...\033[0m"
 	rm -rf $(OBJS)
 	rm -rf $(NAME)
-	make -C $(DOUBLYDIR) fclean
-	make -C $(BTREEDIR) fclean
 
 # Make re
-re: 
+re:
 	make fclean
 	make all
 

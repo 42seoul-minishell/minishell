@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mingkim <mingkim@student.42.fr>            +#+  +:+       +#+         #
+#    By: gimmingyu <gimmingyu@student.42.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/05 11:13:33 by mingkim           #+#    #+#              #
-#    Updated: 2022/10/05 16:53:57 by mingkim          ###   ########.fr        #
+#    Updated: 2022/10/31 10:24:16 by gimmingyu        ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -50,16 +50,16 @@ $(BUILDDIR):
 	$(CC) $(CFLAGS) -I$(INC) -I$(UTILS) -I$(INTERNAL) -o $@ -c $<
 
 # Project file rule
-$(NAME): $(BUILD_OBJS)
-	$(CC) $(CFLAGS) -o $(BUILDDIR)$(NAME) $(BUILD_OBJS) $(UTILS) $(INTERNAL)
+$(NAME): $(BUILD_OBJS) $(UTILS) $(INTERNAL)
+	$(CC) $(CFLAGS) -o $(BUILDDIR)$(NAME) $(BUILD_OBJS)
 
 # Utils rule
 $(UTILS): 
-	make all -C $(UTILS_DIR)/
+	make all -C $(UTILS_DIR)
 
 # Internal rule
 $(INTERNAL):
-	make all -C $(INTERNAL_DIR)/
+	make all -C $(INTERNAL_DIR)
 
 # Make clean
 clean:

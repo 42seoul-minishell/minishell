@@ -3,19 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mingkim <mingkim@student.42.fr>            +#+  +:+       +#+        */
+/*   By: gimmingyu <gimmingyu@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 10:58:16 by mingkim           #+#    #+#             */
-/*   Updated: 2022/10/05 12:45:25 by mingkim          ###   ########.fr       */
+/*   Updated: 2022/10/31 10:45:50 by gimmingyu        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-int	main(int ac, char **av, char **env)
+int	main(int ac, char **av)
 {
 	int	len;
-	int	len2;
 
 	len = 0;
 	while (len < ac)
@@ -23,9 +22,11 @@ int	main(int ac, char **av, char **env)
 		printf("av[%d] = %s\n", len, av[len]);
 		len++;
 	}
-	len2 = 0;
-	while (env[len2])
-		len2++;
 	len = 0;
+	while (environ[len])
+	{
+		printf("environ[%d] = %s\n", len, environ[len]);
+		len++;
+	}
 	return (0);
 }

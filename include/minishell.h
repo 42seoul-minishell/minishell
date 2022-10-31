@@ -3,14 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mingkim <mingkim@student.42.fr>            +#+  +:+       +#+        */
+/*   By: gimmingyu <gimmingyu@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 11:08:00 by mingkim           #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2022/10/18 13:09:27 by mingkim          ###   ########.fr       */
-=======
-/*   Updated: 2022/10/17 12:23:37 by mingkim          ###   ########.fr       */
->>>>>>> c59cc3c41ff4a0c3229222a4f7bcdbd7e329a3c9
+/*   Updated: 2022/10/31 15:12:12 by gimmingyu        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +47,7 @@ typedef struct s_token
 {
 	t_type	type;
 	char	*value;
+	char	*key;
 }	t_token;
 
 /* node of double linked list */
@@ -83,6 +80,23 @@ typedef struct s_btree
 	t_btree_node	*root;
 }	t_btree;
 
+typedef struct s_HashTableItem
+{
+	char					*key;
+	char					*value;
+	struct s_HashTableItem	*next;
+	struct s_HashTableItem	*prev;
+}	t_HashTableItem;
+
+typedef struct s_hashtable
+{
+	t_HashTableItem	**dict;
+	size_t			size;
+	size_t			count;
+}	t_hashtable;
+
+extern char	**environ;
+
 /* in ../src/internal/doublylist/utils.c */
 int				is_list_empty(t_doubly_list *lst);
 void			display_list(t_doubly_list *lst);
@@ -101,12 +115,8 @@ t_doubly_node	*create_doubly_node(t_token *token);
 
 /* in ../src/internal/doublylist/insert.c */
 int				insert_node(t_doubly_list *lst, t_doubly_node *node);
-int				insert_node_by_index(t_doubly_list *lst, \
-<<<<<<< HEAD
-t_doubly_node *node, size_t index);
-=======
+int				insert_node_by_index(t_doubly_list *lst,
 					t_doubly_node *node, size_t index);
->>>>>>> c59cc3c41ff4a0c3229222a4f7bcdbd7e329a3c9
 /* in ../src/internal/doublylist/read.c */
 t_doubly_node	*get_node_by_index(t_doubly_list *lst, size_t idx);
 
@@ -132,7 +142,6 @@ void			display_btree_by_preorder(t_btree *btree);
 t_btree_node	*get_btree_node_by_id(t_btree_node *node, int id);
 
 /* in ../src/internal/builtin/cd.c */
-<<<<<<< HEAD
 void			_invalid_err_cd(const char *str);
 int				builtin_cd(char *directory);
 /* in ../src/internal/builtin/echo.c */
@@ -142,8 +151,12 @@ int				builtin_pwd(void);
 
 /* in ../src/internal/builtin/env.c */
 void			builtin_env(t_doubly_list *lst);
-=======
-int				builtin_cd(char *directory);
 
->>>>>>> c59cc3c41ff4a0c3229222a4f7bcdbd7e329a3c9
+/* in ../src/internal/hashmap/insert.c */
+t_HashTableItem	*create_ht_item(char *key, char *value);
+void			insert(t_HashTableItem *dict, t_hashtable *table);
+
+t_hashtable		*create_hashtable(size_t size);
+char			*get_key_from_env(char *str);
+char			*get_value_from_env(char **env);
 #endif
