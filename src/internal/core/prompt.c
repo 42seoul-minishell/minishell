@@ -1,41 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   delete.c                                           :+:      :+:    :+:   */
+/*   prompt.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mingkim <mingkim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/31 16:03:25 by gimmingyu         #+#    #+#             */
-/*   Updated: 2022/11/01 12:40:53 by mingkim          ###   ########.fr       */
+/*   Created: 2022/11/01 12:14:59 by mingkim           #+#    #+#             */
+/*   Updated: 2022/11/01 12:24:45 by mingkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "hashtable.h"
+#include "core.h"
 
-void	delete_item(t_ht_item *item)
+static char	*get_pwd(void)
 {
-	free(item->key);
-	free(item->value);
-	free(item);
+	char	*buffer;
+
+	buffer = NULL;
+	return (getcwd(buffer, 0));
 }
 
-void	delete_table(t_hashtable *table)
+char	*create_prompt(void)
 {
-	size_t			idx;
-	t_ht_item		*item;
-	t_ht_item		*next;
+	char	*pwd;
 
-	idx = -1;
-	while (++idx < table->size)
-	{
-		item = table->items[idx];
-		while (item)
-		{
-			next = item->next;
-			delete_item(item);
-			item = next;
-		}
-	}
-	free(table->items);
-	free(table);
+	pwd = get_pwd();
+	return (pwd);
 }

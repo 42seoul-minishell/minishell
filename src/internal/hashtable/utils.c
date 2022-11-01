@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gimmingyu <gimmingyu@student.42.fr>        +#+  +:+       +#+        */
+/*   By: mingkim <mingkim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/31 15:10:28 by gimmingyu         #+#    #+#             */
-/*   Updated: 2022/10/31 19:34:41 by gimmingyu        ###   ########.fr       */
+/*   Updated: 2022/11/01 12:36:07 by mingkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,15 +41,24 @@ char	*get_value_from_env(char *env)
 }
 
 void	prevent_collision(t_hashtable *table, size_t hash, \
-							t_ht_item *new_item)
+							t_ht_item *new)
 {
 	t_ht_item	*item;
 
 	item = table->items[hash];
 	while (item->next)
+	{
+		if (ft_strncmp(item->key, new->key, ft_strlen(new->key) + 1) == 0)
+		{
+			free(item->value);
+			item->value = ft_strdup(new->value);
+			delete_item(new);
+			return ;
+		}
 		item = item->next;
-	item->next = new_item;
-	new_item->next = NULL;
+	}
+	item->next = new;
+	new->next = NULL;
 	table->count++;
 }
 

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: gimmingyu <gimmingyu@student.42.fr>        +#+  +:+       +#+         #
+#    By: mingkim <mingkim@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/05 11:13:33 by mingkim           #+#    #+#              #
-#    Updated: 2022/10/31 18:32:30 by gimmingyu        ###   ########.fr        #
+#    Updated: 2022/11/01 12:22:20 by mingkim          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,12 +20,14 @@ LIBFT_DIR		= ./include/libft
 DOUBLYDIR		= ./src/internal/doublylist/
 BTREEDIR		= ./src/internal/btree/
 HASHDIR			= ./src/internal/hashtable/
+COREDIR			= ./src/internal/core/
 
 UTILS			= ./src/utils/utils.a
 LIBFT			= ./include/libft/libft.a
 BTREE			= $(BTREEDIR)btree.a
 HASH			= $(HASHDIR)hashtable.a
 DOUBLY			= $(DOUBLYDIR)doubly.a
+CORE			= $(COREDIR)core.a
 
 BUILDDIR		= ./build/
 INC				= ./include/minishell.h
@@ -50,6 +52,7 @@ all:  $(BUILDDIR)
 	@make all -C $(HASHDIR)
 	@make all -C $(DOUBLYDIR)
 	@make all -C $(BTREEDIR)
+	@make all -C $(COREDIR)
 	@make all -C $(LIBFT_DIR)
 	@echo "\033[92mBuild minishell daemon...\033[0m"
 	make $(NAME)
@@ -68,9 +71,10 @@ $(NAME): $(OBJS)
 	@make all -C $(HASHDIR)
 	@make all -C $(DOUBLYDIR)
 	@make all -C $(BTREEDIR)
+	@make all -C $(COREDIR)
 	@make all -C $(LIBFT_DIR)
 	@echo "\033[92mBuild minishell daemon...\033[0m"
-	$(CC) $(CFLAGS) -o $(BUILDDIR)$(NAME) $(OBJS) $(UTILS) $(DOUBLY) $(BTREE) $(HASH) $(LIBFT) -I$(INC)
+	$(CC) $(CFLAGS) -o $(BUILDDIR)$(NAME) $(OBJS) $(UTILS) $(DOUBLY) $(BTREE) $(CORE) $(HASH) $(LIBFT) -I$(INC)
 
 # Make clean
 clean:
@@ -81,6 +85,7 @@ clean:
 	make -C $(HASHDIR) clean
 	make -C $(DOUBLYDIR) clean
 	make -C $(BTREEDIR) clean
+	make -C $(COREDIR) clean
 	make -C $(LIBFT_DIR) clean
 
 # Make fclean
@@ -93,6 +98,7 @@ fclean:
 	make -C $(HASHDIR) fclean
 	make -C $(DOUBLYDIR) fclean
 	make -C $(BTREEDIR) fclean
+	make -C $(COREDIR) fclean
 	make -C $(LIBFT_DIR) fclean
 
 # Make re

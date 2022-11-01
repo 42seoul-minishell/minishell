@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gimmingyu <gimmingyu@student.42.fr>        +#+  +:+       +#+        */
+/*   By: mingkim <mingkim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 11:08:00 by mingkim           #+#    #+#             */
-/*   Updated: 2022/10/31 18:30:29 by gimmingyu        ###   ########.fr       */
+/*   Updated: 2022/11/01 12:51:53 by mingkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@
 # include <sys/wait.h>
 # include <sys/stat.h>
 # include <sys/types.h>
+# include "readline/history.h"
+# include "readline/readline.h"
 # include <signal.h>
 # include <dirent.h>
 # include <fcntl.h>
@@ -36,12 +38,6 @@ typedef enum e_type
 	T_REDIRECT,
 	T_DOUBLE_QUOTES,
 }	t_type;
-
-typedef struct s_enviroment_list
-{
-	char	*env_token;
-	char	*path;
-}	t_env_list;
 
 /* token structure */
 typedef struct s_token
@@ -169,5 +165,8 @@ void			delete_item(t_ht_item *item);
 void			delete_table(t_hashtable *table);
 size_t			hash_index(char *key, size_t size);
 char			*search(t_hashtable *table, char *key);
+
+/* in ../src/internal/core/prompt.c */
+char			*create_prompt(void);
 
 #endif
