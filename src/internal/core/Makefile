@@ -6,7 +6,7 @@
 #    By: mingkim <mingkim@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/05 16:33:31 by mingkim           #+#    #+#              #
-#    Updated: 2022/11/01 12:21:19 by mingkim          ###   ########.fr        #
+#    Updated: 2022/11/02 14:48:31 by mingkim          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,11 +16,14 @@ NAME			=	core.a
 # Compiler Flag and Command
 CC				=	cc
 CFLAGS			=	-Wall -Wextra -Werror
+LINKING_FLAGS	=	-lreadline -L ${HOME}/.brew/opt/readline/lib
+COMPILE_FLAGS	=	-I${HOME}/.brew/opt/readline/include
 AR				=	ar rcsuv
 
 INC				=	../../../include
 
-FILES			=	prompt
+FILES			=	prompt \
+					signal
 
 SRCS_DIR		=	./
 SRCS			=	$(addprefix $(SRCS_DIR), $(addsuffix .c, $(FILES)))
@@ -29,7 +32,7 @@ OBJS_DIR		=	./
 OBJS			=	$(addprefix $(OBJS_DIR), $(addsuffix .o, $(FILES)))
 
 %.o: %.c
-	$(CC) $(CFLAGS) -c $< -o $@
+	$(CC) $(CFLAGS) $(COMPILE_FLAGS) -c $< -o $@
 
 # Main rule
 all: 

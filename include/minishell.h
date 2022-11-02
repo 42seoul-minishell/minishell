@@ -6,7 +6,7 @@
 /*   By: mingkim <mingkim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 11:08:00 by mingkim           #+#    #+#             */
-/*   Updated: 2022/11/01 12:51:53 by mingkim          ###   ########.fr       */
+/*   Updated: 2022/11/02 14:46:37 by mingkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,12 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
+# include <string.h>
 # include <sys/wait.h>
 # include <sys/stat.h>
 # include <sys/types.h>
-# include "readline/history.h"
-# include "readline/readline.h"
+# include <readline/readline.h>
+# include <readline/history.h>
 # include <signal.h>
 # include <dirent.h>
 # include <fcntl.h>
@@ -169,4 +170,6 @@ char			*search(t_hashtable *table, char *key);
 /* in ../src/internal/core/prompt.c */
 char			*create_prompt(void);
 
+void			sig_handler(int signal);
+void			setting_signal(void);
 #endif
