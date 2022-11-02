@@ -6,7 +6,7 @@
 /*   By: mingkim <mingkim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 10:58:16 by mingkim           #+#    #+#             */
-/*   Updated: 2022/11/01 12:53:13 by mingkim          ###   ########.fr       */
+/*   Updated: 2022/11/02 13:54:29 by mingkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,17 +35,16 @@ static void	run(void)
 	{
 		input = NULL;
 		sys_stdin(&input);
+		save_history(input);
+		free(input);
 	}
 }
 
 int	main(void)
 {
 	t_hashtable	*table;
-	char		*pwd;
 
 	table = parse_env_to_hashtable(environ);
-	display_hashtable(table);
-	delete_table(table);
 	run();
 	system("leaks minishell");
 	return (0);

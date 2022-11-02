@@ -6,7 +6,7 @@
 #    By: mingkim <mingkim@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/05 11:13:33 by mingkim           #+#    #+#              #
-#    Updated: 2022/11/01 12:22:20 by mingkim          ###   ########.fr        #
+#    Updated: 2022/11/02 13:27:20 by mingkim          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,7 +41,8 @@ OBJS		= $(SRCS:.c=.o)
 # Compiler Flag and Command
 CC				= cc
 CFLAGS			= -Wall -Wextra -Werror
-
+LINKING_FLAGS	=	-lreadline -L ${HOME}/.brew/opt/readline/lib
+COMPILE_FLAGS	=	-I${HOME}/.brew/opt/readline/include
 # Debugging Flag
 DEBUG			= -g
 
@@ -63,7 +64,7 @@ $(BUILDDIR):
 
 # Object rule
 %.o: %.c
-	$(CC) $(CFLAGS) -c $< -I$(INC)minishell.h -o $@
+	$(CC) $(CFLAGS) $(COMPILE_FLAGS) -c $< -I$(INC)minishell.h -o $@
 
 # Project file rule
 $(NAME): $(OBJS)
@@ -74,7 +75,7 @@ $(NAME): $(OBJS)
 	@make all -C $(COREDIR)
 	@make all -C $(LIBFT_DIR)
 	@echo "\033[92mBuild minishell daemon...\033[0m"
-	$(CC) $(CFLAGS) -o $(BUILDDIR)$(NAME) $(OBJS) $(UTILS) $(DOUBLY) $(BTREE) $(CORE) $(HASH) $(LIBFT) -I$(INC)
+	$(CC) $(CFLAGS) $(LINKING_FLAGS) -o $(BUILDDIR)$(NAME) $(OBJS) $(UTILS) $(DOUBLY) $(BTREE) $(CORE) $(HASH) $(LIBFT) -I$(INC)
 
 # Make clean
 clean:
