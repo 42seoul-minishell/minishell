@@ -1,41 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   delete.c                                           :+:      :+:    :+:   */
+/*   signal.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mingkim <mingkim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/31 16:03:25 by gimmingyu         #+#    #+#             */
-/*   Updated: 2022/11/01 12:40:53 by mingkim          ###   ########.fr       */
+/*   Created: 2022/11/02 14:42:47 by mingkim           #+#    #+#             */
+/*   Updated: 2022/11/02 15:08:31 by mingkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "hashtable.h"
+#include "core.h"
 
-void	delete_item(t_ht_item *item)
+void	sig_handler(int signal)
 {
-	free(item->key);
-	free(item->value);
-	free(item);
+	if (signal == SIGINT)
+		printf("MINISHELL : \n");
+	if (rl_on_new_line() == -1)
+		exit(1);
+	rl_replace_line("", 1);
+	rl_redisplay();
 }
 
-void	delete_table(t_hashtable *table)
+void	setting_signal(void)
 {
-	size_t			idx;
-	t_ht_item		*item;
-	t_ht_item		*next;
-
-	idx = -1;
-	while (++idx < table->size)
-	{
-		item = table->items[idx];
-		while (item)
-		{
-			next = item->next;
-			delete_item(item);
-			item = next;
-		}
-	}
-	free(table->items);
-	free(table);
+	signal(SIGINT, sig_handler);
+	signal(SIGQUIT, SIG_IGN);
 }

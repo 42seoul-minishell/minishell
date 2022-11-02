@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   insert.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gimmingyu <gimmingyu@student.42.fr>        +#+  +:+       +#+        */
+/*   By: mingkim <mingkim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/31 11:22:18 by gimmingyu         #+#    #+#             */
-/*   Updated: 2022/10/31 19:33:21 by gimmingyu        ###   ########.fr       */
+/*   Updated: 2022/11/01 12:31:34 by mingkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ void	hash_insert(t_ht_item *new_item, t_hashtable *table)
 	}
 	if (ft_strncmp(item->key, new_item->key, ft_strlen(new_item->key) + 1) == 0)
 	{
+		free(item->value);
 		item->value = ft_strdup(new_item->value);
 		delete_item(new_item);
 		return ;
