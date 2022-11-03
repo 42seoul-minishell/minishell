@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "token.h"
+#include "../../../include/minishell.h"
 
 int	is_have(char *str, char sep)
 {
@@ -39,6 +39,11 @@ void	tokenizing(t_doubly_list *lst, char *str)
 	// 문자열 앞에 공백 제거
 	while (*str == ' ')
 		str++;
+	// quotes("")가 존재하는 경우
+	if (is_have(str, '"'))
+	{
+		split(lst, str, '"');
+	}
 	// 파이프가 존재하는 경우
 	if (is_have(str, '|'))
 	{
@@ -54,7 +59,4 @@ void	tokenizing(t_doubly_list *lst, char *str)
 			*/
 		// }
 	}
-	// quotes가 존재하는 경우
-	if (is_have(str, '"'))
-		split(lst, str, '"');
 }

@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "builtin.h"
+#include "../../../include/minishell.h"
 
 int	builtin_pwd(void)
 {

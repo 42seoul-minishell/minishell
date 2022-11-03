@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "builtin.h"
+#include "../../../include/minishell.h"
 
 static int	_insert_env_node(t_doubly_list *lst, t_doubly_node *node)
 {

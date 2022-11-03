@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "core.h"
+#include "../../../include/minishell.h"
 
 static char	*get_pwd(void)
 {

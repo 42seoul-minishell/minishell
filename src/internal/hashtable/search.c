@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "hashtable.h"
+#include "../../../include/minishell.h"
 
 char	*search(t_hashtable *table, char *key)
 {

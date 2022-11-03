@@ -6,7 +6,7 @@ CC				=	cc
 CFLAGS			=	-Wall -Wextra -Werror
 AR				=	ar rcsuv
 
-INC				=	token.h
+INC				=	../../../include/minishell.h
 
 FILES			=	token \
 					split

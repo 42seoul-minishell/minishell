@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "core.h"
+#include "../../../include/minishell.h"
 
 void	sig_handler(int signal)
 {

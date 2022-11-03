@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "hashtable.h"
+#include "../../../include/minishell.h"
 
 char	*get_key_from_env(char *str)
 {

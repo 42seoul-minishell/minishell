@@ -15,7 +15,7 @@ NAME			= minishell
 
 # Project sources, includes, builds
 CMD_DIR			= ./src/cmd/
-UTILS_DIR		= ./src/utils/
+# UTILS_DIR		= ./src/utils/
 LIBFT_DIR		= ./include/libft
 DOUBLYDIR		= ./src/internal/doublylist/
 BTREEDIR		= ./src/internal/btree/
@@ -23,7 +23,7 @@ HASHDIR			= ./src/internal/hashtable/
 COREDIR			= ./src/internal/core/
 TOKENDIR		= ./src/internal/token/
 
-UTILS			= ./src/utils/utils.a
+# UTILS			= ./src/utils/utils.a
 LIBFT			= ./include/libft/libft.a
 BTREE			= $(BTREEDIR)btree.a
 HASH			= $(HASHDIR)hashtable.a
@@ -51,7 +51,7 @@ DEBUG			= -g
 
 # Main rule
 all:  $(BUILDDIR)
-	@make all -C $(UTILS_DIR)
+	# @make all -C $(UTILS_DIR)
 	@make all -C $(HASHDIR)
 	@make all -C $(DOUBLYDIR)
 	@make all -C $(BTREEDIR)
@@ -71,7 +71,7 @@ $(BUILDDIR):
 
 # Project file rule
 $(NAME): $(OBJS)
-	@make all -C $(UTILS_DIR)
+	# @make all -C $(UTILS_DIR)
 	@make all -C $(HASHDIR)
 	@make all -C $(DOUBLYDIR)
 	@make all -C $(BTREEDIR)
@@ -86,7 +86,7 @@ clean:
 	@echo "\033[92mClean daemon files...\033[0m"
 	rm -rf $(BUILDDIR)
 	rm -rf $(OBJS)
-	make -C $(UTILS_DIR) clean
+	# make -C $(UTILS_DIR) clean
 	make -C $(HASHDIR) clean
 	make -C $(DOUBLYDIR) clean
 	make -C $(BTREEDIR) clean
@@ -100,7 +100,7 @@ fclean:
 	rm -rf $(BUILDDIR)
 	rm -rf $(OBJS)
 	rm -rf $(NAME)
-	make -C $(UTILS_DIR) fclean
+	# make -C $(UTILS_DIR) fclean
 	make -C $(HASHDIR) fclean
 	make -C $(DOUBLYDIR) fclean
 	make -C $(BTREEDIR) fclean

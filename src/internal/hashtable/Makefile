@@ -18,7 +18,7 @@ CC				=	cc
 CFLAGS			=	-Wall -Wextra -Werror
 AR				=	ar rcsuv
 
-INC				=	hashtable.h
+INC				=	../../../include/minishell.h
 
 FILES			=	create \
 					delete \

@@ -14,7 +14,7 @@
 // 어휘 분석기
 # define LEXER_H
 
-# include "Token.h"
+# include "../../../include/minishell.h"
 
 /* Tokens structure */
 typedef struct s_tokens

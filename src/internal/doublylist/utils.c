@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "doublylist.h"
+#include "../../../include/minishell.h"
 
 int	is_list_empty(t_doubly_list *lst)
 {

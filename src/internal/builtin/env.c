@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "builtin.h"
+#include "../../../include/minishell.h"
 
 static void	_display_env_list(t_doubly_list *lst)
 {

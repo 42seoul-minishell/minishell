@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "builtin.h"
+#include "../../../include/minishell.h"
 
 void	builtin_exit(int signal)
 {
