@@ -19,7 +19,7 @@ t_token	*create_token(t_type type, char *value)
 	new = malloc(sizeof(t_token));
 	if (!new)
 		return (NULL);
-	if (switch_type(type) == FALSE)
+	if (check_type(type) == FALSE)
 		return (NULL);
 	new->type = type;
 	new->value = value;

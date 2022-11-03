@@ -32,12 +32,12 @@ void	display_list(t_doubly_list *lst)
 	{
 		printf("doubly list node, index of %zd\n", count);
 		printf("token value = %s\n", node->token->value);
-		switch_type(node->token->type);
+		check_type(node->token->type);
 		node = node->next;
 	}
 }
 
-t_type	switch_type(t_type type)
+t_type	check_type(t_type type)
 {
 	if (type == T_NULL)
 		return (T_NULL);

@@ -21,6 +21,7 @@ DOUBLYDIR		= ./src/internal/doublylist/
 BTREEDIR		= ./src/internal/btree/
 HASHDIR			= ./src/internal/hashtable/
 COREDIR			= ./src/internal/core/
+TOKENDIR		= ./src/internal/token/
 
 UTILS			= ./src/utils/utils.a
 LIBFT			= ./include/libft/libft.a
@@ -28,6 +29,7 @@ BTREE			= $(BTREEDIR)btree.a
 HASH			= $(HASHDIR)hashtable.a
 DOUBLY			= $(DOUBLYDIR)doubly.a
 CORE			= $(COREDIR)core.a
+TOKEN			= $(TOKENDIR)token.a
 
 BUILDDIR		= ./build/
 INC				= ./include/minishell.h
@@ -41,8 +43,8 @@ OBJS		= $(SRCS:.c=.o)
 # Compiler Flag and Command
 CC				= cc
 CFLAGS			= -Wall -Wextra -Werror
-LINKING_FLAGS	=	-lreadline -L ${HOME}/.brew/opt/readline/lib
-COMPILE_FLAGS	=	-I${HOME}/.brew/opt/readline/include
+LINKING_FLAGS	= -lreadline -L ${HOME}/.brew/opt/readline/lib
+COMPILE_FLAGS	= -I${HOME}/.brew/opt/readline/include
 # Debugging Flag
 DEBUG			= -g
 
@@ -55,6 +57,7 @@ all:  $(BUILDDIR)
 	@make all -C $(BTREEDIR)
 	@make all -C $(COREDIR)
 	@make all -C $(LIBFT_DIR)
+	@make all -C $(TOKENDIR)
 	@echo "\033[92mBuild minishell daemon...\033[0m"
 	make $(NAME)
 
@@ -74,8 +77,9 @@ $(NAME): $(OBJS)
 	@make all -C $(BTREEDIR)
 	@make all -C $(COREDIR)
 	@make all -C $(LIBFT_DIR)
+	@make all -C $(TOKENDIR)
 	@echo "\033[92mBuild minishell daemon...\033[0m"
-	$(CC) $(CFLAGS) $(LINKING_FLAGS) -o $(BUILDDIR)$(NAME) $(OBJS) $(UTILS) $(DOUBLY) $(BTREE) $(CORE) $(HASH) $(LIBFT) -I$(INC)
+	$(CC) $(CFLAGS) $(LINKING_FLAGS) -o $(BUILDDIR)$(NAME) $(OBJS) $(UTILS) $(DOUBLY) $(BTREE) $(CORE) $(HASH) $(TOKEN) $(LIBFT) -I$(INC)
 
 # Make clean
 clean:
@@ -88,6 +92,7 @@ clean:
 	make -C $(BTREEDIR) clean
 	make -C $(COREDIR) clean
 	make -C $(LIBFT_DIR) clean
+	make -C $(TOKENDIR) clean
 
 # Make fclean
 fclean: 
@@ -101,6 +106,7 @@ fclean:
 	make -C $(BTREEDIR) fclean
 	make -C $(COREDIR) fclean
 	make -C $(LIBFT_DIR) fclean
+	make -C $(TOKENDIR) fclean
 
 # Make re
 re: 

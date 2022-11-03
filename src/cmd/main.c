@@ -34,30 +34,34 @@ static void	sys_stdin(char **input_ptr)
 	free(prompt);
 }
 
-static void	run(void)
+static void	run(t_doubly_list *lst)
 {
-	char	*input;
+	char			*input;
 
 	while (1)
 	{
 		input = NULL;
 		sys_stdin(&input);
 		save_history(input);
-		free(input);
 		// tokenizing
+		tokenizing(lst, ft_strdup(input));
+		display_list(lst);
 		// parsing
 		// execute
 		// free
+		free(input);
 	}
 }
 
 int	main(void)
 {
-	t_hashtable	*table;
+	t_hashtable		*table;
+	t_doubly_list	*lst;
 
 	setting_signal();
 	table = parse_env_to_hashtable(environ);
-	run();
+	lst = create_doubly_list();
+	run(lst);
 	system("leaks minishell");
 	return (0);
 }
