@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "token.h"
+#include "../../../include/minishell.h"
 
 static char	*get_prev(char *str, char sep)
 {

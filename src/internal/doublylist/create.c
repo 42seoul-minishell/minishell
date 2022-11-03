@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "doublylist.h"
+#include "../../../include/minishell.h"
 
 t_token	*create_token(t_type type, char *value)
 {

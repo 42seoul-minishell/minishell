@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "hashtable.h"
+#include "../../../include/minishell.h"
 
 size_t	hash_index(char *key, size_t size)
 {

@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "test_builtin.h"
+#include "test_../../../include/minishell.h"
 
 static void	_should_pass(int rv)
 {

@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Token.h"
+#include "../../../include/minishell.h"
 
 int	compare_type(t_token *t1, t_token *t2)
 {

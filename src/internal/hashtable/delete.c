@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "hashtable.h"
+#include "../../../include/minishell.h"
 
 void	delete_item(t_ht_item *item)
 {

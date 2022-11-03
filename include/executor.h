@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   builtin.h                                          :+:      :+:    :+:   */
+/*   executor.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mingkim <mingkim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/14 15:27:24 by mingkim           #+#    #+#             */
-/*   Updated: 2022/10/18 12:24:32 by mingkim          ###   ########.fr       */
+/*   Updated: 2022/10/17 11:18:28 by mingkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef BUILTIN_H
-# define BUILTIN_H
+#ifndef EXECUTOR_H
+# define EXECUTOR_H
 
-# include "../../../include/minishell.h"
+# include "./struct.h"
 
 #endif
