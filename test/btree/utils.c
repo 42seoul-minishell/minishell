@@ -19,21 +19,7 @@ void init_btree(t_btree *btree)
 	btree->root = NULL;
 }
 
-t_token *create_token(t_type type, char *value)
-{
-	t_token *new;
-
-	new = malloc(sizeof(t_token));
-	if (!new)
-		return (NULL);
-	if (switch_type(type) == FALSE)
-		return (NULL);
-	new->type = type;
-	new->value = value;
-	return (new);
-}
-
-t_type switch_type(t_type type)
+t_type check_type(t_type type)
 {
 	if (type == T_NULL)
 		return (T_NULL);
@@ -47,4 +33,18 @@ t_type switch_type(t_type type)
 		return (T_DOUBLE_QUOTES);
 	else
 		return (0);
+}
+
+t_token *create_token(t_type type, char *value)
+{
+	t_token *new;
+
+	new = malloc(sizeof(t_token));
+	if (!new)
+		return (NULL);
+	if (check_type(type) == FALSE)
+		return (NULL);
+	new->type = type;
+	new->value = value;
+	return (new);
 }
