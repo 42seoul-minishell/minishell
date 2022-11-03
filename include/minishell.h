@@ -41,17 +41,21 @@ typedef struct s_btree
 /* insert.c */
 int				insert_lc_node(t_btree_node *parent, t_token *token);
 int				insert_rc_node(t_btree_node *parent, t_token *token);
+
 /* create.c */
 t_btree			*create_btree(void);
 t_btree_node	*create_btree_node(t_token *token);
+
 /* delete.c */
 void			delete_btree_node_child(t_btree_node *parent);
 int				delete_btree_node_lc(t_btree_node *parent);
 int				delete_btree_node_rc(t_btree_node *parent);
+
 /* utils.c */
 void			display_btree_node_child(t_btree_node *node);
 void			display_btree_node_by_preorder(t_btree_node *node);
 void			display_btree_by_preorder(t_btree *btree);
+
 /* read.c */
 t_btree_node	*get_btree_node_by_id(t_btree_node *node, int id);
 

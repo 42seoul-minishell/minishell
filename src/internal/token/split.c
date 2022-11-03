@@ -27,6 +27,55 @@ static char	*get_prev(char *str, char sep)
 	return (ptr);
 }
 
+static size_t	perfect_quotes(char *str)
+{
+	size_t	i;
+	size_t	cnt;
+
+	i = 0;
+	cnt = 0;
+	while (str[i])
+	{
+		if (str[i] == '"')
+			cnt++;
+		i++;
+	}
+	return (cnt);
+}
+
+int	split_quotes(t_doubly_list *lst, char *str)
+{
+	ssize_t			idx;
+	ssize_t			start;
+	char			*prev;
+	t_token			*token;
+	t_doubly_node	*node;
+	
+	if (!str || perfect_quotes(str) % 2 == 1)
+		return (FALSE);
+	start = 0;
+	idx = -1;
+	while (str[++idx])
+	{
+		if (str[idx] == '"')
+		{
+			prev = ft_substr(str, start, idx - start);
+			start = idx + 1;
+			if (str[idx - start + 1] == '"')
+				token = create_token(T_DOUBLE_QUOTES, prev);
+			else
+				token = create_token(T_NULL, prev);
+			node = create_doubly_node(token);
+			insert_node(lst, node);
+		}
+	}
+	ft_substr(str, start, ft_strlen(str));
+	token = create_token(T_NULL, prev);
+	node = create_doubly_node(token);
+	insert_node(lst, node);
+	return (TRUE);
+}
+
 void	split(t_doubly_list *lst, char *str, char sep)
 {
 	char			*next;

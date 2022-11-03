@@ -18,6 +18,7 @@
 /* in ../src/internal/core/ */
 /* prompt.c */
 char			*create_prompt(void);
+
 /* signal.c */
 void			sig_handler(int signal);
 void			setting_signal(void);

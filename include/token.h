@@ -19,6 +19,8 @@
 /* split.c */
 int				is_have(char *str, char sep);
 void			split(t_doubly_list *lst, char *str, char sep);
+int	            split_quotes(t_doubly_list *lst, char *str);
+
 /* token.c */
 void			tokenizing(t_doubly_list *lst, char *str);
 

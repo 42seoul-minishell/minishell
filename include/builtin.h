@@ -19,10 +19,13 @@
 /* cd.c */
 void			_invalid_err_cd(const char *str);
 int				builtin_cd(char *directory);
+
 /* echo.c */
 int				builtin_echo(const char *str, int fd, int flag);
+
 /* pwd.c */
 int				builtin_pwd(void);
+
 /* env.c */
 void			builtin_env(t_doubly_list *lst);
 
