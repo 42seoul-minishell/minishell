@@ -12,98 +12,78 @@
 
 #include "../../../include/minishell.h"
 
-int	 is_have(char *str, char sep)
+static int	is_have(char *str, char sep)
 {
 	if (ft_strchr(str, sep))
-		return TRUE;
-	return FALSE;
+		return (TRUE);
+	return (FALSE);
 }
 
-/** 
-	읽으면서 파이프 기준으로 자르고 앞에 있던 놈들 prev, 뒤에 놈들 next, 재귀
-	뒤에 놈들 다시 들어와서 똑같은 짓하고 재귀
-`
-	echo asdoada | cat asdjiasbfdiua | echo asdasdjiasbd | ls -al 
-
-	 cd ../ | ls -al | echo "hello world' | 'example | echo ' hello ' | pipe test" > test.txt
-
-	 1. `"`로 분할
-	 => cd ../	| la | echo $
-	 => " hello world$
-	 => "  | $
-	 => "example | echo $
-	 => " hello $
-	 => " | pipe test$
-	 => " > test$
-
-	 2. `|`로 분할
-	 => cd ../	$
-	 => | la $
-	 => | echo $
-	 => " hello world$
-	 => "  $
-	 => | $
-	 => "example$ 
-	 => | echo $
-	 => " hello $
-	 => " $
-	 => | pipe test$
-	 => " > test$
-	
-	3. `(` 또는 `)`으로 분할
-	
-	4. ` `으로 분할
- 	 => cd
-	 => ../
-	 => |
-	 => la
-	 => |
-	 => echo
-	 => "
-	 => hello
-	 => world
-	 => "
-	 => |
-	 => "example		// issue
-	 => |
-	 => echo
-	 => "
-	 => hello
-	 => "
-	 => |
-	 => pipe
-	 => test
-	 => "
-	 => >
-	 => test
-*/
-
-void	tokenizing(t_doubly_list *lst, char *str)
+static size_t	is_pair_double_quotes(char *str)
 {
-	// t_doubly_node	*node;
+	size_t	i;
+	size_t	cnt;
 
-	// 토큰화가 필요없는 경우
+	i = 0;
+	cnt = 0;
+	while (str[i])
+	{
+		if (str[i] == '"')
+			cnt++;
+		i++;
+	}
+	if (cnt % 2 == 1)
+		return (FALSE);
+	return (TRUE);
+}
+
+static size_t	is_pair_bracket(char *str, char open, char close)
+{
+	size_t	i;
+	size_t	cnt;
+
+	i = 0;
+	cnt = 0;
+	while (str[i])
+	{
+		if (str[i] == open)
+			cnt++;
+		if (str[i] == close)
+			cnt--;
+		i++;
+	}
+	if (cnt != 0)
+		return (FALSE);
+	return (TRUE);
+}
+
+void	tokenizer(t_doubly_list *lst, char *str)
+{
+	char	*tmp;
+
 	if (str[0] == '\0')
 		return ;
-	// 문자열 앞에 공백 제거
 	while (*str == ' ')
 		str++;
-	// quotes("")가 존재하는 경우
-	if (is_have(str, '"'))
-		split_quotes(lst, str);
-	// 파이프가 존재하는 경우
+	// if (is_have(str, '"') && is_pair_double_quotes(str, '"'))
+	// {
+	// 	while (is_have(str, '"'))
+	// 	{
+	// 		tmp = extract_from_str(&str, '"');
+	// 	}
+	// }
 	// if (is_have(str, '|'))
 	// {
-	// 	split(lst, str, '|');
-	// 	node = lst->header.next;
-	// 	// while(node)
-	// 	// {
-	// 		/*
-	// 			노드 내 값에 각각 '"', '(', ')' 존재하는지 확인하여 split
-	// 			doubly list 들을 모아두는 구조제를 사용한다고 할 때 얼마나 많은 doubly list가 생성될 지 모름
-	// 			또한 이를 관리를 어떻게 해야하는지에 대한 이슈도 존재
-	// 			==> 각각 나누어둔 것을 circular 가 아닌 linked로 생성하여 기존 circular 리스트에 추가하는 방식은 어떨지?
-	// 		*/
-	// 	// }
+	// 	while (is_have(str, '|'))
+	// 	{
+	// 		tmp = extract_from_str(&str, '|');
+	// 	}
+	// }
+	// if (is_have('(') && is_pair_bracket(str, '(', ')'))
+	// {
+	// 	while (is_have(str, '('))
+	// 	{
+	// 		tmp = extract_brackets(&str, '(', ')');
+	// 	}
 	// }
 }
