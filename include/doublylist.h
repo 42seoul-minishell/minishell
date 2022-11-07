@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ../../../include/minishell.h                                       :+:      :+:    :+:   */
+/*   doublylist.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mingkim <mingkim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/14 15:29:32 by mingkim           #+#    #+#             */
-/*   Updated: 2022/10/14 15:33:14 by mingkim          ###   ########.fr       */
+/*   Created: 2022/11/03 18:31:44 by mingkim           #+#    #+#             */
+/*   Updated: 2022/11/03 18:32:42 by mingkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ t_doubly_node	*create_doubly_node(t_token *token);
 int				insert_node(t_doubly_list *lst, t_doubly_node *node);
 int				insert_node_by_index(t_doubly_list *lst,
 					t_doubly_node *node, size_t index);
-					
+
 /* read.c */
 t_doubly_node	*get_node_by_index(t_doubly_list *lst, size_t idx);
 
