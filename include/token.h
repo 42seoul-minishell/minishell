@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ../../../include/minishell.h                                            :+:      :+:    :+:   */
+/*   token.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mingkim <mingkim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/02 14:09:26 by mingkim           #+#    #+#             */
-/*   Updated: 2022/11/02 14:10:41 by mingkim          ###   ########.fr       */
+/*   Created: 2022/11/03 18:31:59 by mingkim           #+#    #+#             */
+/*   Updated: 2022/11/03 18:32:27 by mingkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 /* split.c */
 int				is_have(char *str, char sep);
 void			split(t_doubly_list *lst, char *str, char sep);
-int	            split_quotes(t_doubly_list *lst, char *str);
+int				split_quotes(t_doubly_list *lst, char *str);
 
 /* token.c */
 void			tokenizing(t_doubly_list *lst, char *str);

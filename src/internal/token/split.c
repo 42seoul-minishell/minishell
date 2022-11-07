@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   split_pipe.c                                       :+:      :+:    :+:   */
+/*   split.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bolee <bolee@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mingkim <mingkim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 17:12:00 by bolee             #+#    #+#             */
-/*   Updated: 2022/11/02 17:12:01 by bolee            ###   ########.fr       */
+/*   Updated: 2022/11/04 13:35:34 by mingkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static char	*get_prev(char *str, char sep)
 	idx = ft_strlen(str);
 	while (idx--)
 		if (str[idx] == sep)
-			break;
+			break ;
 	ptr = (char *)malloc(sizeof(char) * idx);
 	ft_strlcpy(ptr, str, idx);
 	free(str);
@@ -50,7 +50,7 @@ int	split_quotes(t_doubly_list *lst, char *str)
 	char			*prev;
 	t_token			*token;
 	t_doubly_node	*node;
-	
+
 	if (!str || perfect_quotes(str) % 2 == 1)
 		return (FALSE);
 	start = 0;

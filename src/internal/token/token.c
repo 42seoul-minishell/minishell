@@ -6,20 +6,20 @@
 /*   By: mingkim <mingkim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 14:09:18 by mingkim           #+#    #+#             */
-/*   Updated: 2022/11/02 14:10:52 by mingkim          ###   ########.fr       */
+/*   Updated: 2022/11/03 18:42:37 by mingkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../include/minishell.h"
 
-int	 is_have(char *str, char sep)
+int	is_have(char *str, char sep)
 {
 	if (ft_strchr(str, sep))
-		return TRUE;
-	return FALSE;
+		return (TRUE);
+	return (FALSE);
 }
 
-/** 
+/**
 	읽으면서 파이프 기준으로 자르고 앞에 있던 놈들 prev, 뒤에 놈들 next, 재귀
 	뒤에 놈들 다시 들어와서 똑같은 짓하고 재귀
 `
