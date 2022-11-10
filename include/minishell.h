@@ -6,7 +6,7 @@
 /*   By: mingkim <mingkim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 11:08:00 by mingkim           #+#    #+#             */
-/*   Updated: 2022/11/02 14:46:37 by mingkim          ###   ########.fr       */
+/*   Updated: 2022/11/09 21:20:39 by mingkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 # include "./token.h"
 # include "./struct.h"
 # include "./base.h"
+# include "./error.h"
 
 /* btree node */
 typedef struct s_btree_node
