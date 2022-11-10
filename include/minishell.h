@@ -6,7 +6,7 @@
 /*   By: mingkim <mingkim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 11:08:00 by mingkim           #+#    #+#             */
-/*   Updated: 2022/11/09 21:20:39 by mingkim          ###   ########.fr       */
+/*   Updated: 2022/11/10 20:34:10 by mingkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define MINISHELL_H
 
 # include "./builtin.h"
+# include "./utils.h"
 # include "./core.h"
 # include "./doublylist.h"
 # include "./executor.h"
@@ -22,6 +23,7 @@
 # include "./struct.h"
 # include "./base.h"
 # include "./error.h"
+# include "./lexer.h"
 
 /* btree node */
 typedef struct s_btree_node

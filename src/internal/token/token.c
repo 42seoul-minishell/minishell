@@ -6,7 +6,7 @@
 /*   By: mingkim <mingkim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 14:09:18 by mingkim           #+#    #+#             */
-/*   Updated: 2022/11/09 21:19:52 by mingkim          ###   ########.fr       */
+/*   Updated: 2022/11/10 20:50:35 by mingkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,20 +62,26 @@ void	insert_token(t_doubly_list *lst, char **splited)
 	size_t			idx;
 	t_type			type;
 
-	idx = -1;
-	while (splited[++idx])
+	idx = 0;
+	while (splited[idx] && splited[idx])
 	{
 		type = type_casting(splited[idx]);
 		if (type == T_DOUBLE_QUOTES)
 		{
-			idx++;
-			while (type_casting(splited[idx]) != T_DOUBLE_QUOTES)
-				safe_insert(lst, T_DOUBLE_QUOTES, splited[idx++]);
-			idx++;
+			free(splited[idx++]);
+			while (splited[idx] && \
+					type_casting(splited[idx]) != T_DOUBLE_QUOTES)
+			{
+				safe_insert(lst, T_DOUBLE_QUOTES, ft_strdup(splited[idx]));
+				free(splited[idx++]);
+			}
+			free(splited[idx++]);
 			continue ;
 		}
-		safe_insert(lst, type, splited[idx]);
+		safe_insert(lst, type, ft_strdup(splited[idx]));
+		free(splited[idx++]);
 	}
+	free(splited);
 }
 
 void	tokenizer(t_doubly_list *lst, char *str)
@@ -94,4 +100,5 @@ void	tokenizer(t_doubly_list *lst, char *str)
 	splited = ft_split(tmp, ' ');
 	check_double_pointer((void **) splited);
 	insert_token(lst, splited);
+	free(tmp);
 }

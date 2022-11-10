@@ -6,7 +6,7 @@
 /*   By: mingkim <mingkim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 10:58:16 by mingkim           #+#    #+#             */
-/*   Updated: 2022/11/09 21:21:10 by mingkim          ###   ########.fr       */
+/*   Updated: 2022/11/10 20:51:12 by mingkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,16 +36,21 @@ static void	sys_stdin(char **input_ptr)
 
 static void	run(t_doubly_list *lst)
 {
-	char			*input;
+	char	*input;
+	char	*temp;
 
 	while (1)
 	{
 		input = NULL;
 		sys_stdin(&input);
 		save_history(input);
-		tokenizer(lst, ft_strdup(input));
-		display_list(lst);
+		temp = ft_strdup(input);
+		tokenizer(lst, temp);
+		lexer(lst, temp);
 		free(input);
+		free(temp);
+		release_doubly_list(lst);
+		break ;
 	}
 }
 

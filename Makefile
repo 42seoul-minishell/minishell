@@ -6,7 +6,7 @@
 #    By: mingkim <mingkim@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/05 11:13:33 by mingkim           #+#    #+#              #
-#    Updated: 2022/11/09 21:06:23 by mingkim          ###   ########.fr        #
+#    Updated: 2022/11/10 20:23:16 by mingkim          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,6 +22,7 @@ DOUBLYDIR		= ./src/internal/doublylist/
 HASHDIR			= ./src/internal/hashtable/
 COREDIR			= ./src/internal/core/
 TOKENDIR		= ./src/internal/token/
+LEXERDIR		= ./src/internal/lexer/
 
 ERROR			= $(ERROR_DIR)error.a
 UTILS			= $(UTILS_DIR)utils.a
@@ -30,6 +31,7 @@ HASH			= $(HASHDIR)hashtable.a
 DOUBLY			= $(DOUBLYDIR)doubly.a
 CORE			= $(COREDIR)core.a
 TOKEN			= $(TOKENDIR)token.a
+LEXER			= $(LEXERDIR)lexer.a
 
 BUILDDIR		= ./build/
 INC				= ./include/minishell.h
@@ -58,6 +60,7 @@ all:  $(BUILDDIR)
 	@make all -C $(COREDIR)
 	@make all -C $(LIBFT_DIR)
 	@make all -C $(TOKENDIR)
+	@make all -C $(LEXERDIR)
 	@echo "\033[92mBuild minishell daemon...\033[0m"
 	make $(NAME)
 
@@ -78,8 +81,9 @@ $(NAME): $(OBJS)
 	@make all -C $(COREDIR)
 	@make all -C $(LIBFT_DIR)
 	@make all -C $(TOKENDIR)
+	@make all -C $(LEXERDIR)
 	@echo "\033[92mBuild minishell daemon...\033[0m"
-	$(CC) $(CFLAGS) $(LINKING_FLAGS) -o $(BUILDDIR)$(NAME) $(OBJS) $(ERROR) $(UTILS) $(DOUBLY) $(CORE) $(HASH) $(TOKEN) $(LIBFT) -I$(INC)
+	$(CC) $(CFLAGS) $(LINKING_FLAGS) -o $(BUILDDIR)$(NAME) $(OBJS) $(ERROR) $(UTILS) $(DOUBLY) $(CORE) $(HASH) $(TOKEN) $(LIBFT) $(LEXER) -I$(INC)
 
 # Make clean
 clean:
@@ -93,6 +97,7 @@ clean:
 	make -C $(COREDIR) clean
 	make -C $(LIBFT_DIR) clean
 	make -C $(TOKENDIR) clean
+	make -C $(LEXERDIR) clean
 
 # Make fclean
 fclean: 
@@ -107,6 +112,7 @@ fclean:
 	make -C $(COREDIR) fclean
 	make -C $(LIBFT_DIR) fclean
 	make -C $(TOKENDIR) fclean
+	make -C $(LEXERDIR) fclean
 
 # Make re
 re: 

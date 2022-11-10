@@ -6,7 +6,7 @@
 /*   By: mingkim <mingkim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/04 15:47:25 by bolee             #+#    #+#             */
-/*   Updated: 2022/11/09 21:22:24 by mingkim          ###   ########.fr       */
+/*   Updated: 2022/11/10 21:03:36 by mingkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ void			tokenizer(t_doubly_list *lst, char *str);
 /* utils.c */
 void			pass_space(char *str);
 int				is_operator(char *str);
+int				is_double_operator(char *str);
 int				is_space(char c);
 t_type			type_casting(char *str);
 int				safe_insert(t_doubly_list *lst, t_type type, char *str);
