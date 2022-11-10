@@ -21,6 +21,7 @@ static void	space_around_operator(char *dest, char *src, size_t len)
 	src_idx = 0;
 	while (dest_idx < len && src[src_idx])
 	{
+		printf("ss\n");
 		if (is_operator(src + src_idx))
 		{
 			dest[dest_idx++] = ' ';
@@ -40,7 +41,7 @@ static int	count_operator(char *str)
 
 	cnt = 0;
 	tmp = str;
-	while (tmp)
+	while (*tmp)
 	{
 		if (is_operator(tmp))
 			cnt++;
@@ -57,7 +58,7 @@ char	*make_clean_sentence(char *str)
 
 	tmp = str;
 	len = ft_strlen(str) + (count_operator(str) * 2) + 1;
-	cleaned = malloc(sizeof(char) * len);
+	cleaned = (char *)malloc(sizeof(char) * len);
 	if (!cleaned)
 		return (NULL);
 	space_around_operator(cleaned, str, len);

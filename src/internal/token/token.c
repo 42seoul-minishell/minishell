@@ -57,7 +57,6 @@ static size_t	is_pair_bracket(char *str, char open, char close)
 	return (TRUE);
 }
 
-// while 돌면서 node로 감싸서 넣어주는 함수 실행
 void	insert_token(t_doubly_list *lst, char **splited)
 {
 	size_t			idx;
