@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   struct.h                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mingkim <mingkim@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/11/09 21:13:05 by mingkim           #+#    #+#             */
+/*   Updated: 2022/11/09 21:13:23 by mingkim          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef STRUCT_H
 # define STRUCT_H
 
@@ -7,10 +19,11 @@
 typedef enum e_type
 {
 	T_NULL = 1,
-	T_WORD,
+	T_CMD,
 	T_PIPE,
 	T_REDIRECT,
 	T_DOUBLE_QUOTES,
+	T_BRACKET,
 }	t_type;
 
 /* token structure */
@@ -34,7 +47,6 @@ typedef struct s_doubly_list
 	t_doubly_node	header;
 	size_t			len;
 }	t_doubly_list;
-
 
 /* hashtable item structure */
 typedef struct s_ht_item

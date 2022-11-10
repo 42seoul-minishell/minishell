@@ -6,7 +6,7 @@
 /*   By: mingkim <mingkim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 10:58:16 by mingkim           #+#    #+#             */
-/*   Updated: 2022/11/02 15:10:07 by mingkim          ###   ########.fr       */
+/*   Updated: 2022/11/09 21:21:10 by mingkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,23 +43,21 @@ static void	run(t_doubly_list *lst)
 		input = NULL;
 		sys_stdin(&input);
 		save_history(input);
-		// tokenizing
-		tokenizing(lst, ft_strdup(input));
+		tokenizer(lst, ft_strdup(input));
 		display_list(lst);
-		// parsing
-		// execute
-		// free
 		free(input);
 	}
 }
 
-int	main(void)
+int	main(int ac, char **av, char **envp)
 {
 	t_hashtable		*table;
 	t_doubly_list	*lst;
 
+	ac = 0;
+	av = NULL;
 	setting_signal();
-	table = parse_env_to_hashtable(environ);
+	table = parse_env_to_hashtable(envp);
 	lst = create_doubly_list();
 	run(lst);
 	system("leaks minishell");

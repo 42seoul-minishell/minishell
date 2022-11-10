@@ -6,7 +6,7 @@
 /*   By: mingkim <mingkim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 15:35:19 by mingkim           #+#    #+#             */
-/*   Updated: 2022/10/14 15:34:49 by mingkim          ###   ########.fr       */
+/*   Updated: 2022/11/09 20:59:19 by mingkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,8 @@ t_type	check_type(t_type type)
 {
 	if (type == T_NULL)
 		return (T_NULL);
-	else if (type == T_WORD)
-		return (T_WORD);
+	else if (type == T_CMD)
+		return (T_CMD);
 	else if (type == T_PIPE)
 		return (T_PIPE);
 	else if (type == T_REDIRECT)

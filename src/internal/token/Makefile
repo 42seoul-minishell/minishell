@@ -9,7 +9,10 @@ AR				=	ar rcsuv
 INC				=	../../../include/minishell.h
 
 FILES			=	token \
-					split
+					split \
+					clean \
+					utils \
+					extract
 
 
 SRCS_DIR		=	./
