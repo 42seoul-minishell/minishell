@@ -1,30 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   lexer.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mingkim <mingkim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/05 11:42:46 by mingkim           #+#    #+#             */
-/*   Updated: 2022/11/14 15:02:21 by mingkim          ###   ########.fr       */
+/*   Created: 2022/11/10 20:18:27 by mingkim           #+#    #+#             */
+/*   Updated: 2022/11/14 15:07:17 by mingkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/minishell.h"
+#ifndef LEXER_H
+# define LEXER_H
 
-void	free_pointers(size_t length, ...)
-{
-	va_list	ap;
-	void	*next;
-	size_t	idx;
+# include "./struct.h"
 
-	idx = 0;
-	va_start(ap, length);
-	while (idx < length)
-	{
-		next = va_arg(ap, void *);
-		free(next);
-	}
-	va_end(ap);
-	printf("END");
-}
+void	lexer(char *str);
+int		is_space_around_operator(char *str);
+size_t	is_pair_bracket(char *str, char open, char close);
+size_t	is_pair_double_quotes(char *str);
+
+#endif
