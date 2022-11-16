@@ -73,4 +73,19 @@ typedef struct s_global
 	int				status;
 }	t_global;
 
+/* bintree node */
+typedef struct s_bintree_node
+{
+	int					id;
+	t_token				*token;
+	struct s_bintree_node	*lc;
+	struct s_bintree_node	*rc;
+}	t_bintree_node;
+
+/* bintree structure */
+typedef struct s_bintree
+{
+	t_bintree_node	*root;
+}	t_bintree;
+
 #endif

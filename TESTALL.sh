@@ -5,4 +5,9 @@ sleep 3
 
 make -C ./doublylist fclean
 
-make -C ./btree all
+make -C ./bintree all
+
+./bintree/testBinTree
+sleep3
+
+make -C ./bintree fclean
