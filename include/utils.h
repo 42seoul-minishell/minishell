@@ -6,7 +6,7 @@
 /*   By: mingkim <mingkim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 20:26:53 by mingkim           #+#    #+#             */
-/*   Updated: 2022/11/10 20:34:41 by mingkim          ###   ########.fr       */
+/*   Updated: 2022/11/14 15:02:25 by mingkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,5 +16,4 @@
 # include "struct.h"
 
 void	free_pointers(size_t length, ...);
-
 #endif

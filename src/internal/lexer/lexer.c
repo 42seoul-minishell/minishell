@@ -6,11 +6,18 @@
 /*   By: mingkim <mingkim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 20:17:33 by mingkim           #+#    #+#             */
-/*   Updated: 2022/11/10 21:06:48 by mingkim          ###   ########.fr       */
+/*   Updated: 2022/11/14 15:07:11 by mingkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../include/minishell.h"
+
+static int	is_have(char *str, char sep)
+{
+	if (ft_strchr(str, sep))
+		return (TRUE);
+	return (FALSE);
+}
 
 /* 연산자 앞뒤로 스페이스바가 있는지 확인 */
 int	is_space_around_operator(char *str)
@@ -26,9 +33,51 @@ int	is_space_around_operator(char *str)
 				continue ;
 			if (str[idx + 1] == str[idx])
 				continue ;
+			if (str[idx] == '"')
+				continue ;
 			return (FALSE);
 		}
 	}
+	return (TRUE);
+}
+
+/* bracket 짝이 맞는지 확인 */
+size_t	is_pair_bracket(char *str, char open, char close)
+{
+	size_t	i;
+	size_t	cnt;
+
+	i = 0;
+	cnt = 0;
+	while (str[i])
+	{
+		if (str[i] == open)
+			cnt++;
+		if (str[i] == close)
+			cnt--;
+		i++;
+	}
+	if (cnt != 0)
+		return (FALSE);
+	return (TRUE);
+}
+
+/* Double quote 짝이 맞는지 확인 */
+size_t	is_pair_double_quotes(char *str)
+{
+	size_t	i;
+	size_t	cnt;
+
+	i = 0;
+	cnt = 0;
+	while (str[i])
+	{
+		if (str[i] == '"')
+			cnt++;
+		i++;
+	}
+	if (cnt % 2 == 1)
+		return (FALSE);
 	return (TRUE);
 }
 
@@ -36,9 +85,10 @@ int	is_space_around_operator(char *str)
 /* 존재하는 명령어인지 확인 */
 /*  */
 
-void	lexer(t_doubly_list *lst, char *str)
+void	lexer(char *str)
 {
-	display_list(lst);
-	if (is_space_around_operator(str) == FALSE)
-		printf("FALSE");
+	if ((is_have(str, '"') == TRUE && is_pair_double_quotes(str) == FALSE) \
+	|| (is_have(str, '(') == TRUE && is_pair_bracket(str, '(', ')') == FALSE) \
+	|| (is_space_around_operator(str) == FALSE))
+		exit(1);
 }
