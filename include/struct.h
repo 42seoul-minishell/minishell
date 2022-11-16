@@ -6,7 +6,7 @@
 /*   By: mingkim <mingkim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 21:13:05 by mingkim           #+#    #+#             */
-/*   Updated: 2022/11/09 21:13:23 by mingkim          ###   ########.fr       */
+/*   Updated: 2022/11/16 15:13:32 by mingkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,5 +63,14 @@ typedef struct s_hashtable
 	size_t			size;
 	size_t			count;
 }	t_hashtable;
+
+/* structure includes all other structures */
+typedef struct s_global
+{
+	t_hashtable		*envp;
+	t_doubly_list	*lst;
+	t_btree			*tree;
+	int				status;
+}	t_global;
 
 #endif

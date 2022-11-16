@@ -6,7 +6,7 @@
 /*   By: mingkim <mingkim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 11:08:00 by mingkim           #+#    #+#             */
-/*   Updated: 2022/11/10 20:34:10 by mingkim          ###   ########.fr       */
+/*   Updated: 2022/11/16 15:19:54 by mingkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@
 # include "./base.h"
 # include "./error.h"
 # include "./lexer.h"
+# include "./global.h"
 
 /* btree node */
 typedef struct s_btree_node

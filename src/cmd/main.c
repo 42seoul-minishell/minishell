@@ -6,7 +6,7 @@
 /*   By: mingkim <mingkim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 10:58:16 by mingkim           #+#    #+#             */
-/*   Updated: 2022/11/14 15:07:21 by mingkim          ###   ########.fr       */
+/*   Updated: 2022/11/16 15:20:02 by mingkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,12 +59,14 @@ int	main(int ac, char **av, char **envp)
 {
 	t_hashtable		*table;
 	t_doubly_list	*lst;
+	t_global		*global;
 
 	ac = 0;
 	av = NULL;
 	setting_signal();
 	table = parse_env_to_hashtable(envp);
 	lst = create_doubly_list();
+	global = create_global(lst, table);
 	run(lst);
 	return (0);
 }
