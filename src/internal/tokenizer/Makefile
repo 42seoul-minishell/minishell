@@ -1,5 +1,5 @@
 # Project File
-NAME			=	token.a
+NAME			=	tokenizer.a
 
 # Compiler Flag and Command`
 CC				=	cc
@@ -8,7 +8,7 @@ AR				=	ar rcsuv
 
 INC				=	../../../include/minishell.h
 
-FILES			=	token \
+FILES			=	tokenizer \
 					split \
 					clean \
 					utils \

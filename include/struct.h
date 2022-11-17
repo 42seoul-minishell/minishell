@@ -6,7 +6,7 @@
 /*   By: mingkim <mingkim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 21:13:05 by mingkim           #+#    #+#             */
-/*   Updated: 2022/11/16 15:13:32 by mingkim          ###   ########.fr       */
+/*   Updated: 2022/11/17 21:18:34 by mingkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,22 +15,34 @@
 
 # include "./base.h"
 
-/* token type enumerate */
-typedef enum e_type
+typedef enum e_token_type
 {
-	T_NULL = 1,
-	T_CMD,
-	T_PIPE,
-	T_REDIRECT,
-	T_DOUBLE_QUOTES,
-	T_BRACKET,
-}	t_type;
+	NONE,
+	PIPE,
+	CMD,
+	OPTION,
+	D_QUOTE,
+	S_QUOTE,
+	INPUT_RD,
+	OUTPUT_RD,
+	APPEND_RD,
+	HERE_DOC,
+	BRACKET,
+}	t_tType;
+
+typedef enum e_node_type
+{
+	TN_NONE,
+	TN_PIPE,
+	TN_WORD,
+	TN_BRACKET,
+}	t_tnType;
 
 /* token structure */
 typedef struct s_token
 {
-	t_type	type;
-	char	*value;
+	t_tType			type;
+	char			*value;
 }	t_token;
 
 /* node of double linked list */
@@ -64,20 +76,11 @@ typedef struct s_hashtable
 	size_t			count;
 }	t_hashtable;
 
-/* structure includes all other structures */
-typedef struct s_global
-{
-	t_hashtable		*envp;
-	t_doubly_list	*lst;
-	t_btree			*tree;
-	int				status;
-}	t_global;
-
 /* bintree node */
 typedef struct s_bintree_node
 {
-	int					id;
-	t_token				*token;
+	t_tnType				type;
+	t_token					*token;
 	struct s_bintree_node	*lc;
 	struct s_bintree_node	*rc;
 }	t_bintree_node;
@@ -87,5 +90,28 @@ typedef struct s_bintree
 {
 	t_bintree_node	*root;
 }	t_bintree;
+
+/* pipe structure */
+typedef struct s_pipe
+{
+	pid_t	pid;
+	int		cnt;
+	int		fd[2];
+	int		prev;
+	int		status;
+}	t_pipe;
+
+/* structure includes all other structures */
+typedef struct s_global
+{
+	t_hashtable		*envp;
+	t_bintree		*tree;
+	int				heredoc_cnt;
+	int				status;
+	int				fd_stdin;
+	int				fd_stdout;
+	struct termios	nodisplay_set;
+	struct termios	display_set;
+}	t_global;
 
 #endif

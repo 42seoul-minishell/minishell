@@ -6,7 +6,7 @@
 #    By: mingkim <mingkim@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/05 11:13:33 by mingkim           #+#    #+#              #
-#    Updated: 2022/11/16 15:18:56 by mingkim          ###   ########.fr        #
+#    Updated: 2022/11/16 17:31:37 by mingkim          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,7 @@ LIBFT_DIR		= ./include/libft/
 DOUBLYDIR		= ./src/internal/doublylist/
 HASHDIR			= ./src/internal/hashtable/
 COREDIR			= ./src/internal/core/
-TOKENDIR		= ./src/internal/token/
+TOKENIZERDIR	= ./src/internal/tokenizer/
 LEXERDIR		= ./src/internal/lexer/
 GLOBALDIR		= ./src/internal/global/
 
@@ -31,7 +31,7 @@ LIBFT			= $(LIBFT_DIR)libft.a
 HASH			= $(HASHDIR)hashtable.a
 DOUBLY			= $(DOUBLYDIR)doubly.a
 CORE			= $(COREDIR)core.a
-TOKEN			= $(TOKENDIR)token.a
+TOKENIZER		= $(TOKENDIR)tokenizer.a
 LEXER			= $(LEXERDIR)lexer.a
 GLOBAL			= $(GLOBALDIR)global.a
 
@@ -61,7 +61,7 @@ all:  $(BUILDDIR)
 	@make all -C $(DOUBLYDIR)
 	@make all -C $(COREDIR)
 	@make all -C $(LIBFT_DIR)
-	@make all -C $(TOKENDIR)
+	@make all -C $(TOKENIZERDIR)
 	@make all -C $(LEXERDIR)
 	@make all -C $(GLOBALDIR)
 	@echo "\033[92mBuild minishell daemon...\033[0m"
@@ -83,16 +83,15 @@ $(NAME): $(OBJS)
 	@make all -C $(DOUBLYDIR)
 	@make all -C $(COREDIR)
 	@make all -C $(LIBFT_DIR)
-	@make all -C $(TOKENDIR)
+	@make all -C $(TOKENIZERDIR)
 	@make all -C $(LEXERDIR)
 	@make all -C $(GLOBALDIR)
 	@echo "\033[92mBuild minishell daemon...\033[0m"
-	$(CC) $(CFLAGS) $(LINKING_FLAGS) -o $(BUILDDIR)$(NAME) $(OBJS) $(ERROR) $(UTILS) $(DOUBLY) $(CORE) $(HASH) $(TOKEN) $(LIBFT) $(LEXER) $(GLOBAL) -I$(INC)
+	$(CC) $(CFLAGS) $(LINKING_FLAGS) -o $(BUILDDIR)$(NAME) $(OBJS) $(ERROR) $(UTILS) $(DOUBLY) $(CORE) $(HASH) $(TOKENIZER) $(LIBFT) $(LEXER) $(GLOBAL) -I$(INC)
 
 # Make clean
 clean:
 	@echo "\033[92mClean daemon files...\033[0m"
-	rm -rf $(BUILDDIR)
 	rm -rf $(OBJS)
 	make -C $(ERROR_DIR) clean
 	make -C $(UTILS_DIR) clean
@@ -100,7 +99,7 @@ clean:
 	make -C $(DOUBLYDIR) clean
 	make -C $(COREDIR) clean
 	make -C $(LIBFT_DIR) clean
-	make -C $(TOKENDIR) clean
+	make -C $(TOKENIZERDIR) clean
 	make -C $(LEXERDIR) clean
 	make -C $(GLOBALDIR) clean
 
@@ -116,7 +115,7 @@ fclean:
 	make -C $(DOUBLYDIR) fclean
 	make -C $(COREDIR) fclean
 	make -C $(LIBFT_DIR) fclean
-	make -C $(TOKENDIR) fclean
+	make -C $(TOKENIZERDIR) fclean
 	make -C $(LEXERDIR) fclean
 	make -C $(GLOBALDIR) fclean
 

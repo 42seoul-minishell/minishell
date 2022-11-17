@@ -1,6 +1,6 @@
 #include "test_doublylist.h"
 
-int test_insert_node_empty(t_type type, char *value)
+int test_insert_node_empty(t_tType type, char *value)
 {
 	t_token token;
 	t_doubly_node node;
@@ -19,7 +19,7 @@ int test_insert_node_empty(t_type type, char *value)
 	return (TRUE);
 }
 
-int test_insert_node(t_type type, char *value)
+int test_insert_node(t_tType type, char *value)
 {
 	t_token token[3];
 	t_doubly_node node[3];
@@ -83,7 +83,7 @@ int test_insert_node_node_null(void)
 	return (FALSE);
 }
 
-int test_insert_node_by_index_empty(t_type type, char *value, size_t index)
+int test_insert_node_by_index_empty(t_tType type, char *value, size_t index)
 {
 	t_token token;
 	t_doubly_node node;
@@ -101,7 +101,7 @@ int test_insert_node_by_index_empty(t_type type, char *value, size_t index)
 	return (TRUE);
 }
 
-int test_insert_node_by_index(t_type type, char *value, size_t index)
+int test_insert_node_by_index(t_tType type, char *value, size_t index)
 {
 	t_token token[3];
 	t_doubly_node node[3];

@@ -6,7 +6,7 @@
 /*   By: mingkim <mingkim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 13:37:40 by mingkim           #+#    #+#             */
-/*   Updated: 2022/11/10 21:04:34 by mingkim          ###   ########.fr       */
+/*   Updated: 2022/11/17 20:28:09 by mingkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ char	*make_clean_sentence(char *str)
 	len = ft_strlen(str) + (count_operator(str) * 2) + 1;
 	cleaned = (char *)malloc(sizeof(char) * len);
 	if (!cleaned)
-		return (NULL);
+		exit(1);
 	space_around_operator(cleaned, str, len);
 	return (cleaned);
 }

@@ -6,15 +6,12 @@
 /*   By: mingkim <mingkim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 16:42:45 by mingkim           #+#    #+#             */
-/*   Updated: 2022/10/14 15:35:07 by mingkim          ###   ########.fr       */
+/*   Updated: 2022/11/17 17:03:50 by mingkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../include/minishell.h"
-/**
- * 인덱스 0에 접근할 때  || 인덱스 (len -1)에 접근할 때
- *
- */
+
 void	delete_doubly_node(t_doubly_list *lst, t_doubly_node *node)
 {
 	if (lst->header.next == node)

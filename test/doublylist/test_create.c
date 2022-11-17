@@ -1,6 +1,6 @@
 #include "test_doublylist.h"
 
-int	test_create_token(t_type type, char *value)
+int	test_create_token(t_tType type, char *value)
 {
 	t_token	*token;
 
@@ -33,7 +33,7 @@ int	test_create_doubly_list(void)
 	return (TRUE);
 }
 
-int	test_create_doubly_node(t_type type, char *value)
+int	test_create_doubly_node(t_tType type, char *value)
 {
 	t_token			token;
 	t_doubly_node	*node;

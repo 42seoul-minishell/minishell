@@ -6,7 +6,7 @@
 /*   By: mingkim <mingkim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/04 16:36:52 by bolee             #+#    #+#             */
-/*   Updated: 2022/11/09 21:22:55 by mingkim          ###   ########.fr       */
+/*   Updated: 2022/11/17 20:28:09 by mingkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ char	*extract_double_quotes(char **str)
 	char	*tmp;
 
 	if (!str)
-		return (NULL);
+		exit(1);
 	start = ft_strchr(*str, '"') + 1;
 	end = ft_strchr(start, '"') - 1;
 	result = ft_substr(*str, start - *str, end - start + 1);
@@ -40,7 +40,7 @@ char	*extract_brackets(char **str, char open, char close)
 	char	*tmp;
 
 	if (!str)
-		return (NULL);
+		exit(1);
 	start = ft_strchr(*str, open) + 1;
 	end = ft_strchr(start, close) - 1;
 	result = ft_substr(*str, start - *str, end - start + 1);

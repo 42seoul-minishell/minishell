@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   search.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gimmingyu <gimmingyu@student.42.fr>        +#+  +:+       +#+        */
+/*   By: mingkim <mingkim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/31 16:39:53 by gimmingyu         #+#    #+#             */
-/*   Updated: 2022/10/31 16:45:17 by gimmingyu        ###   ########.fr       */
+/*   Updated: 2022/11/17 20:28:09 by mingkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,5 +25,5 @@ char	*search(t_hashtable *table, char *key)
 			return (item->value);
 		item = item->next;
 	}
-	return (NULL);
+	exit(1);
 }

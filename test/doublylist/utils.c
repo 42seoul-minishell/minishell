@@ -1,6 +1,6 @@
 #include "test_doublylist.h"
 
-void	init_token(t_token *token, t_type type, char *value)
+void	init_token(t_token *token, t_tType type, char *value)
 {
 	token->type = type;
 	token->value = value;

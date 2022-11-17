@@ -6,7 +6,7 @@
 /*   By: mingkim <mingkim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 11:08:00 by mingkim           #+#    #+#             */
-/*   Updated: 2022/11/16 15:19:54 by mingkim          ###   ########.fr       */
+/*   Updated: 2022/11/17 17:45:58 by mingkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,14 @@
 # include "./doublylist.h"
 # include "./executor.h"
 # include "./hashtable.h"
-# include "./token.h"
+# include "./tokenizer.h"
 # include "./struct.h"
 # include "./base.h"
 # include "./error.h"
 # include "./lexer.h"
 # include "./global.h"
 # include "./bintree.h"
+
+t_global		*g_global;
 
 #endif

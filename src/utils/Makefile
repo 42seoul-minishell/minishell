@@ -6,7 +6,7 @@
 #    By: mingkim <mingkim@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/05 11:35:24 by mingkim           #+#    #+#              #
-#    Updated: 2022/11/09 21:18:51 by mingkim          ###   ########.fr        #
+#    Updated: 2022/11/17 21:03:57 by mingkim          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,6 +21,7 @@ AR			= ar rcsuv
 INC			= ../../include/minishell.h
 
 FILES		= utils \
+				verify_utils
 
 SRCS_DIR	= ./
 SRCS		= $(addprefix $(SRCS_DIR), $(addsuffix .c, $(FILES)))

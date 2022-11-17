@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   create.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gimmingyu <gimmingyu@student.42.fr>        +#+  +:+       +#+        */
+/*   By: mingkim <mingkim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/31 15:06:11 by gimmingyu         #+#    #+#             */
-/*   Updated: 2022/10/31 19:28:58 by gimmingyu        ###   ########.fr       */
+/*   Updated: 2022/11/17 20:27:36 by mingkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ t_ht_item	*create_ht_item(char *key, char *value)
 
 	item = malloc(sizeof(t_ht_item));
 	if (!item)
-		return (NULL);
+		exit(1);
 	item->key = malloc(ft_strlen(key) + 1);
 	item->value = malloc(ft_strlen(value) + 1);
 	ft_strlcpy(item->key, key, ft_strlen(key) + 1);

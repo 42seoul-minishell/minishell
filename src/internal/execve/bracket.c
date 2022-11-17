@@ -1,27 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   read.c                                             :+:      :+:    :+:   */
+/*   bracket.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mingkim <mingkim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/05 16:16:11 by mingkim           #+#    #+#             */
-/*   Updated: 2022/11/17 20:28:09 by mingkim          ###   ########.fr       */
+/*   Created: 2022/11/16 19:04:59 by mingkim           #+#    #+#             */
+/*   Updated: 2022/11/16 19:13:37 by mingkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../include/minishell.h"
 
-t_doubly_node	*get_node_by_index(t_doubly_list *lst, size_t idx)
+int	execute_bracket(t_bintree_node *root)
 {
-	size_t			count;
-	t_doubly_node	*node;
+	pid_t	pid;
+	int		status;
+	char	*cmd_line;
 
-	if (!lst || is_list_empty(lst) || lst->len <= idx)
-		exit(1);
-	count = -1;
-	node = lst->header.next;
-	while (++count < idx)
-		node = node->next;
-	return (node);
+	status = EXIT_SUCCESS;
+	cmd_line = exec_rm_char(root->token);
+	pid = fork();
+	if (pid == -1)
+		exit(0);
+	if (pid == 0)
+	{
+		if (cmd_line)
+			executor(cmd_line);
+		exit(EXIT_SUCCESS);
+	}
+	waitpid(pid, &status, 0);
+	return (check_status(status));
 }

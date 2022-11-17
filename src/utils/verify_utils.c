@@ -1,27 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   read.c                                             :+:      :+:    :+:   */
+/*   verify_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mingkim <mingkim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/05 16:16:11 by mingkim           #+#    #+#             */
-/*   Updated: 2022/11/17 20:28:09 by mingkim          ###   ########.fr       */
+/*   Created: 2022/11/17 21:03:36 by mingkim           #+#    #+#             */
+/*   Updated: 2022/11/17 21:03:48 by mingkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../include/minishell.h"
 
-t_doubly_node	*get_node_by_index(t_doubly_list *lst, size_t idx)
+int	str_parens(char *str, int i)
 {
-	size_t			count;
-	t_doubly_node	*node;
+	int	cnt;
 
-	if (!lst || is_list_empty(lst) || lst->len <= idx)
-		exit(1);
-	count = -1;
-	node = lst->header.next;
-	while (++count < idx)
-		node = node->next;
-	return (node);
+	if (str[i] == ')')
+		return (-1);
+	i += 1;
+	cnt = 1;
+	while (cnt && str[i])
+	{
+		if (str[i] == '(')
+			cnt += 1;
+		else if (str[i] == ')')
+			cnt -= 1;
+		i++;
+	}
+	if (cnt > 0)
+		return (0);
+	else if (cnt < 0)
+		return (-1);
+	return (i);
 }

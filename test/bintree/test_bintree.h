@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   test_bintree.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bolee <bolee@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mingkim <mingkim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 15:27:28 by bolee             #+#    #+#             */
-/*   Updated: 2022/11/16 15:27:29 by bolee            ###   ########.fr       */
+/*   Updated: 2022/11/17 17:02:12 by mingkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 #include <string.h>
 
 /* in utils.c */
-void init_token(t_token *token, t_type type, char *value);
+void init_token(t_token *token, t_tnType type, char *value);
 void init_bintree_node(t_bintree_node *node, int id);
 void init_bintree(t_bintree *bintree);
 

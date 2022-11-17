@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bolee <bolee@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mingkim <mingkim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 15:23:20 by bolee             #+#    #+#             */
-/*   Updated: 2022/11/16 15:23:21 by bolee            ###   ########.fr       */
+/*   Updated: 2022/11/17 20:28:09 by mingkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "test_bintree.h"
 
-void init_token(t_token *token, t_type type, char *value)
+void init_token(t_token *token, t_tnType type, char *value)
 {
 	token->type = type;
 	token->value = value;
@@ -31,7 +31,7 @@ void init_bintree(t_bintree *bintree)
 	bintree->root = NULL;
 }
 
-t_type check_type(t_type type)
+t_tnType check_type(t_tnType type)
 {
 	if (type == T_NULL)
 		return (T_NULL);
@@ -47,15 +47,15 @@ t_type check_type(t_type type)
 		return (0);
 }
 
-t_token *create_token(t_type type, char *value)
+t_token *create_token(t_tnType type, char *value)
 {
 	t_token *new;
 
 	new = malloc(sizeof(t_token));
 	if (!new)
-		return (NULL);
+		exit(1);
 	if (check_type(type) == FALSE)
-		return (NULL);
+		exit(1);
 	new->type = type;
 	new->value = value;
 	return (new);

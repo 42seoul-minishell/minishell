@@ -6,7 +6,7 @@
 /*   By: mingkim <mingkim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 10:58:16 by mingkim           #+#    #+#             */
-/*   Updated: 2022/11/16 15:20:02 by mingkim          ###   ########.fr       */
+/*   Updated: 2022/11/17 16:45:13 by mingkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,39 +34,38 @@ static void	sys_stdin(char **input_ptr)
 	free(prompt);
 }
 
-static void	run(t_doubly_list *lst)
+static void	run(t_bintree *tree)
 {
 	char	*input;
 	char	*temp;
 
 	while (1)
 	{
+		dup2(g_global->fd_stdin, STDIN_FILENO);
+		dup2(g_global->fd_stdout, STDOUT_FILENO);
 		input = NULL;
 		sys_stdin(&input);
 		save_history(input);
 		temp = ft_strdup(input);
-		lexer(temp);
-		tokenizer(lst, temp);
-		display_list(lst);
+		parser(temp);
+		executor(temp);
 		free(input);
 		free(temp);
-		release_doubly_list(lst);
 		break ;
 	}
 }
 
 int	main(int ac, char **av, char **envp)
 {
-	t_hashtable		*table;
-	t_doubly_list	*lst;
-	t_global		*global;
+	t_hashtable	*table;
+	t_bintree	*tree;
 
 	ac = 0;
 	av = NULL;
 	setting_signal();
 	table = parse_env_to_hashtable(envp);
-	lst = create_doubly_list();
-	global = create_global(lst, table);
-	run(lst);
+	tree = create_bintree();
+	g_global = create_global(tree, table);
+	run(tree);
 	return (0);
 }

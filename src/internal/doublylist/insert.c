@@ -6,12 +6,11 @@
 /*   By: mingkim <mingkim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 16:26:37 by mingkim           #+#    #+#             */
-/*   Updated: 2022/10/14 15:35:27 by mingkim          ###   ########.fr       */
+/*   Updated: 2022/11/17 17:04:04 by mingkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../include/minishell.h"
-
 
 int	insert_node(t_doubly_list *lst, t_doubly_node *node)
 {

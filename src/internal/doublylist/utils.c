@@ -6,7 +6,7 @@
 /*   By: mingkim <mingkim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 15:35:19 by mingkim           #+#    #+#             */
-/*   Updated: 2022/11/10 20:16:49 by mingkim          ###   ########.fr       */
+/*   Updated: 2022/11/17 21:18:34 by mingkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,18 +37,26 @@ void	display_list(t_doubly_list *lst)
 	}
 }
 
-t_type	check_type(t_type type)
+t_tType	check_type(t_tType type)
 {
-	if (type == T_NULL)
-		return (T_NULL);
-	else if (type == T_CMD)
-		return (T_CMD);
-	else if (type == T_PIPE)
-		return (T_PIPE);
-	else if (type == T_REDIRECT)
-		return (T_REDIRECT);
-	else if (type == T_DOUBLE_QUOTES)
-		return (T_DOUBLE_QUOTES);
+	if (type == NONE)
+		return (NONE);
+	else if (type == PIPE)
+		return (PIPE);
+	else if (type == CMD)
+		return (CMD);
+	else if (type == OPTION)
+		return (OPTION);
+	else if (type == D_QUOTE)
+		return (S_QUOTE);
+	else if (type == INPUT_RD)
+		return (INPUT_RD);
+	else if (type == OUTPUT_RD)
+		return (OUTPUT_RD);
+	else if (type == APPEND_RD)
+		return (APPEND_RD);
+	else if (type == HERE_DOC)
+		return (BRACKET);
 	else
 		return (0);
 }
@@ -59,7 +67,7 @@ t_doubly_node	*find_doubly_node(t_doubly_list *lst, char *str)
 	t_doubly_node	*tmp;
 
 	if (is_list_empty(lst))
-		return (NULL);
+		exit(1);
 	node = lst->header.next;
 	if (node != NULL)
 	{
@@ -74,5 +82,5 @@ t_doubly_node	*find_doubly_node(t_doubly_list *lst, char *str)
 			tmp = tmp->next;
 		}
 	}
-	return (NULL);
+	exit(1);
 }

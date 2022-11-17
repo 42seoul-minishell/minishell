@@ -1,21 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   token.c                                            :+:      :+:    :+:   */
+/*   tokenizer.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mingkim <mingkim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 14:09:18 by mingkim           #+#    #+#             */
-/*   Updated: 2022/11/14 15:06:22 by mingkim          ###   ########.fr       */
+/*   Updated: 2022/11/17 20:15:04 by mingkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../include/minishell.h"
 
-void	insert_token(t_doubly_list *lst, char **splited)
+void	make_token_list(t_doubly_list *lst, char **splited)
 {
 	size_t			idx;
-	t_type			type;
+	t_tType			type;
 
 	idx = 0;
 	while (splited[idx] && splited[idx])
@@ -51,6 +51,6 @@ void	tokenizer(t_doubly_list *lst, char *str)
 	check_single_pointer((void *) tmp);
 	splited = ft_split(tmp, ' ');
 	check_double_pointer((void **) splited);
-	insert_token(lst, splited);
+	make_token_list(lst, splited);
 	free(tmp);
 }
