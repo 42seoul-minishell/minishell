@@ -6,7 +6,7 @@
 /*   By: mingkim <mingkim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 15:35:19 by mingkim           #+#    #+#             */
-/*   Updated: 2022/11/17 21:18:34 by mingkim          ###   ########.fr       */
+/*   Updated: 2022/11/18 16:55:41 by mingkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,10 @@ void	display_list(t_doubly_list *lst)
 
 t_tType	check_type(t_tType type)
 {
-	if (type == NONE)
-		return (NONE);
+	if (type == OR)
+		return (OR);
+	else if (type == AND)
+		return (AND);
 	else if (type == PIPE)
 		return (PIPE);
 	else if (type == CMD)
@@ -48,17 +50,19 @@ t_tType	check_type(t_tType type)
 	else if (type == OPTION)
 		return (OPTION);
 	else if (type == D_QUOTE)
+		return (D_QUOTE);
+	else if (type == S_QUOTE)
 		return (S_QUOTE);
-	else if (type == INPUT_RD)
-		return (INPUT_RD);
-	else if (type == OUTPUT_RD)
-		return (OUTPUT_RD);
-	else if (type == APPEND_RD)
-		return (APPEND_RD);
+	else if (type == INP_RDIR)
+		return (INP_RDIR);
+	else if (type == OUT_RDIR)
+		return (OUT_RDIR);
+	else if (type == APP_RDIR)
+		return (APP_RDIR);
 	else if (type == HERE_DOC)
-		return (BRACKET);
+		return (HERE_DOC);
 	else
-		return (0);
+		return (BRACKET);
 }
 
 t_doubly_node	*find_doubly_node(t_doubly_list *lst, char *str)

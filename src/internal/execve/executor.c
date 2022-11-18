@@ -6,7 +6,7 @@
 /*   By: mingkim <mingkim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/14 15:24:57 by mingkim           #+#    #+#             */
-/*   Updated: 2022/11/17 20:45:44 by mingkim          ###   ########.fr       */
+/*   Updated: 2022/11/18 17:57:08 by mingkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ int	serve_status(char *cmd)
 {
 	int	status;
 
+	printf("cmd = %s\n", cmd);
 	status = EXIT_SUCCESS;
 	return (TRUE);
 }

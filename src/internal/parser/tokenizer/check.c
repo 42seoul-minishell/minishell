@@ -6,11 +6,11 @@
 /*   By: mingkim <mingkim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 16:16:46 by mingkim           #+#    #+#             */
-/*   Updated: 2022/11/17 21:00:13 by mingkim          ###   ########.fr       */
+/*   Updated: 2022/11/18 17:11:31 by mingkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../include/minishell.h"
+#include "../../../../include/minishell.h"
 
 int	is_have(char *str, char sep)
 {

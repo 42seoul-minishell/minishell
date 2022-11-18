@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   expand.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mingkim <mingkim@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/11/18 14:53:00 by bolee             #+#    #+#             */
+/*   Updated: 2022/11/18 17:01:16 by mingkim          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../../../include/minishell.h"
 
 static int	get_expand_end_idx(const char *str)
@@ -34,23 +46,22 @@ static void	replace_expand(char **str, int *idx)
 		tmp = ft_itoa(g_global->status);
 		check_single_pointer(tmp);
 		if (*idx)
-			idx_is_not_zero(str, idx, ft_strlen(tmp), tmp);
+			idx_is_not_zero(str, idx, tmp);
 		else
-			idx_is_zero(str, idx, ft_strlen(tmp), tmp);
+			idx_is_zero(str, idx, tmp);
 	}
 	else if ((*str)[*idx + 1] && (*str)[*idx + 1] == '$')
 	{
-		*idx++;
+		*idx += 1;
 	}
 	else
 	{
-		tmp = get_env(str, *idx);
+		tmp = get_env(*str, *idx);
 		check_single_pointer(tmp);
 		if (*idx)
-			idx_is_not_zero(str, idx, \
-				get_expand_end_idx((*str)[*idx + 1]), tmp);
+			idx_is_not_zero(str, idx, tmp);
 		else
-			idx_is_zero(str, idx, get_expand_end_idx((*str)[*idx + 1]), tmp);
+			idx_is_zero(str, idx, tmp);
 	}
 }
 
@@ -58,7 +69,6 @@ void	expand(t_doubly_list *lst)
 {
 	int				i;
 	t_doubly_node	*node;
-	char			*str;
 
 	node = lst->header.next;
 	while (node)

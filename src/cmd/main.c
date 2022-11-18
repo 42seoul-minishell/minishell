@@ -6,7 +6,7 @@
 /*   By: mingkim <mingkim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 10:58:16 by mingkim           #+#    #+#             */
-/*   Updated: 2022/11/17 16:45:13 by mingkim          ###   ########.fr       */
+/*   Updated: 2022/11/18 17:18:17 by mingkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static void	sys_stdin(char **input_ptr)
 	free(prompt);
 }
 
-static void	run(t_bintree *tree)
+static void	run(void)
 {
 	char	*input;
 	char	*temp;
@@ -66,6 +66,6 @@ int	main(int ac, char **av, char **envp)
 	table = parse_env_to_hashtable(envp);
 	tree = create_bintree();
 	g_global = create_global(tree, table);
-	run(tree);
+	run();
 	return (0);
 }

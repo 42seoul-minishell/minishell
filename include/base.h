@@ -40,6 +40,7 @@
 # define MAGIC_NUMBER 5381
 # define DISPLAY 1
 # define NODISPLAY 0
+# define SYNTAXERR	"syntax error near unexpected token `"
 
 /* external variable for environment variables */
 extern char	**environ;

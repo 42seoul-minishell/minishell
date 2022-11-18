@@ -1,3 +1,15 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: mingkim <mingkim@student.42.fr>            +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2022/11/18 16:41:11 by bolee             #+#    #+#              #
+#    Updated: 2022/11/18 18:27:53 by mingkim          ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
 # Project File
 NAME			=	expand.a
 
@@ -6,7 +18,7 @@ CC				=	cc
 CFLAGS			=	-Wall -Wextra -Werror
 AR				=	ar rcsuv
 
-INC				=	../../../../include/minishell.h
+INC				=	../../../../include
 
 FILES			=	expand \
 					util
@@ -19,11 +31,11 @@ OBJS_DIR		=	./
 OBJS			=	$(addprefix $(OBJS_DIR), $(addsuffix .o, $(FILES)))
 
 %.o: %.c
-	$(CC) $(CFLAGS) -c $< -o $@
+	$(CC) $(CFLAGS) -c $< -I$(INC) -o $@
 
 # Main rule
 all: 
-	@echo "\033[92mBuild token...\033[0m"
+	@echo "\033[92mBuild expand...\033[0m"
 	@make $(NAME)
 
 # Project file rule
@@ -32,12 +44,12 @@ $(NAME): $(OBJS)
 
 # Make clean
 clean:
-	@echo "\033[92mClean token files...\033[0m"
+	@echo "\033[92mClean expand files...\033[0m"
 	rm -rf $(OBJS)
 
 # Make fclean
 fclean:
-	@echo "\033[92mForce clean token files...\033[0m"
+	@echo "\033[92mForce clean expand files...\033[0m"
 	rm -rf $(OBJS)
 	rm -rf $(NAME)
 

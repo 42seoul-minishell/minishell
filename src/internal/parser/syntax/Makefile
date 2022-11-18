@@ -6,21 +6,22 @@
 #    By: mingkim <mingkim@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/05 16:33:31 by mingkim           #+#    #+#              #
-#    Updated: 2022/11/16 17:47:43 by mingkim          ###   ########.fr        #
+#    Updated: 2022/11/18 18:27:24 by mingkim          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 # Project File
-NAME			=	lexer.a
+NAME			=	syntax.a
 
 # Compiler Flag and Command
 CC				=	cc
 CFLAGS			=	-Wall -Wextra -Werror
 AR				=	ar rcsuv
 
-INC				=	../../../include/minishell.h
+INC				=	../../../../include
 
-FILES			=	lexer \
+FILES			=	syntax \
+					set_bintree
 
 SRCS_DIR		=	./
 SRCS			=	$(addprefix $(SRCS_DIR), $(addsuffix .c, $(FILES)))
@@ -29,11 +30,11 @@ OBJS_DIR		=	./
 OBJS			=	$(addprefix $(OBJS_DIR), $(addsuffix .o, $(FILES)))
 
 %.o: %.c
-	$(CC) $(CFLAGS) -c $< -o $@
+	$(CC) $(CFLAGS) -c $< -I$(INC) -o $@
 
 # Main rule
 all: 
-	@echo "\033[92mBuild lexer...\033[0m"
+	@echo "\033[92mBuild syntax...\033[0m"
 	@make $(NAME)
 
 # Project file rule
@@ -42,12 +43,12 @@ $(NAME): $(OBJS)
 
 # Make clean
 clean:
-	@echo "\033[92mClean lexer files...\033[0m"
+	@echo "\033[92mClean syntax files...\033[0m"
 	rm -rf $(OBJS)
 
 # Make fclean
 fclean:
-	@echo "\033[92mForce clean lexer files...\033[0m"
+	@echo "\033[92mForce clean syntax files...\033[0m"
 	rm -rf $(OBJS)
 	rm -rf $(NAME)
 

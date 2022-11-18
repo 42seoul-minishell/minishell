@@ -20,4 +20,5 @@ void	ft_display_ctrlx_set(int flag);
 void	sig_exec(int sig);
 int		check_status(int status);
 int		str_parens(char *str, int i);
+int		is_have(char *str, char sep);
 #endif

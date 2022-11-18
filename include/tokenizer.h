@@ -6,7 +6,7 @@
 /*   By: mingkim <mingkim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/04 15:47:25 by bolee             #+#    #+#             */
-/*   Updated: 2022/11/17 20:33:21 by mingkim          ###   ########.fr       */
+/*   Updated: 2022/11/18 16:41:50 by mingkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,15 @@ int				safe_insert(t_doubly_list *lst, t_tType type, char *str);
 int				check_space_around(char *str, char *start);
 char			*make_clean_sentence(char *str);
 
-t_tType			verify_quote_token(char *str);
+t_tType			verify_double_quote(char *str);
+t_tType			verify_single_quote(char *str);
+
 t_tType			verify_token(char *str);
+
+t_tType			verify_input_redir(char *str);
+t_tType			verify_output_redir(char *str);
+
+t_tType			verify_pipe(char *str);
+
+t_tType			verify_bracket(char *str);
 #endif

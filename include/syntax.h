@@ -1,25 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parser.c                                           :+:      :+:    :+:   */
+/*   syntax.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mingkim <mingkim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/16 17:15:27 by mingkim           #+#    #+#             */
-/*   Updated: 2022/11/18 17:16:47 by mingkim          ###   ########.fr       */
+/*   Created: 2022/11/18 17:06:58 by mingkim           #+#    #+#             */
+/*   Updated: 2022/11/18 17:07:45 by mingkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../include/minishell.h"
+#ifndef SYNTAX_H
+# define SYNTAX_H
 
-void	parser(char *str)
-{
-	t_doubly_list	*lst;
+# include "./struct.h"
 
-	lst = create_doubly_list();
-	tokenizer(lst, str);
-	expand(lst);
-	// wildcard(lst);
-	syntax(lst);
-	release_doubly_list(lst);
-}
+void	syntax(t_doubly_list *lst);
+void	set_bintree(t_doubly_list *lst, t_doubly_node *node);
+
+#endif

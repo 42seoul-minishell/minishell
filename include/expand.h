@@ -1,28 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lexer.h                                            :+:      :+:    :+:   */
+/*   expand.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mingkim <mingkim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/10 20:18:27 by mingkim           #+#    #+#             */
-/*   Updated: 2022/11/16 16:19:14 by mingkim          ###   ########.fr       */
+/*   Created: 2022/11/18 16:58:37 by mingkim           #+#    #+#             */
+/*   Updated: 2022/11/18 16:59:35 by mingkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LEXER_H
-# define LEXER_H
+#ifndef EXPAND_H
+# define EXPAND_H
 
-# include "./struct.h"
+# include "base.h"
+# include "struct.h"
 
-/* in ../src/internal/lexer/ */
-/* lexer.c */
-void	lexer(char *str);
-
-/* check.c */
-int		is_have(char *str, char sep);
-int		is_space_around_operator(char *str);
-size_t	is_pair_bracket(char *str, char open, char close);
-size_t	is_pair_double_quotes(char *str);
+void	expand(t_doubly_list *lst);
+void	idx_is_not_zero(char **str, int *i, char *add);
+void	idx_is_zero(char **str, int *i, char *add);
 
 #endif

@@ -1,25 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parser.c                                           :+:      :+:    :+:   */
+/*   parser.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mingkim <mingkim@student.42.fr>            +#+  +:+       +#+        */
+/*   By: bolee <bolee@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/16 17:15:27 by mingkim           #+#    #+#             */
-/*   Updated: 2022/11/18 17:16:47 by mingkim          ###   ########.fr       */
+/*   Created: 2022/11/18 17:58:07 by bolee             #+#    #+#             */
+/*   Updated: 2022/11/18 17:58:08 by bolee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../include/minishell.h"
+#ifndef PARSER_H
+# define PARSER_H
 
-void	parser(char *str)
-{
-	t_doubly_list	*lst;
+# include "./struct.h"
 
-	lst = create_doubly_list();
-	tokenizer(lst, str);
-	expand(lst);
-	// wildcard(lst);
-	syntax(lst);
-	release_doubly_list(lst);
-}
+void	parser(char *str);
+
+#endif

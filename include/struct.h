@@ -6,7 +6,7 @@
 /*   By: mingkim <mingkim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 21:13:05 by mingkim           #+#    #+#             */
-/*   Updated: 2022/11/17 21:18:34 by mingkim          ###   ########.fr       */
+/*   Updated: 2022/11/18 15:49:18 by mingkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,14 +18,16 @@
 typedef enum e_token_type
 {
 	NONE,
+	OR,
+	AND,
 	PIPE,
 	CMD,
 	OPTION,
 	D_QUOTE,
 	S_QUOTE,
-	INPUT_RD,
-	OUTPUT_RD,
-	APPEND_RD,
+	INP_RDIR,
+	OUT_RDIR,
+	APP_RDIR,
 	HERE_DOC,
 	BRACKET,
 }	t_tType;
@@ -33,6 +35,8 @@ typedef enum e_token_type
 typedef enum e_node_type
 {
 	TN_NONE,
+	TN_OR,
+	TN_AND,
 	TN_PIPE,
 	TN_WORD,
 	TN_BRACKET,
