@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   set_bintree.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mingkim <mingkim@student.42.fr>            +#+  +:+       +#+        */
+/*   By: gimmingyu <gimmingyu@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 15:35:03 by bolee             #+#    #+#             */
-/*   Updated: 2022/11/18 17:09:17 by mingkim          ###   ########.fr       */
+/*   Updated: 2022/11/19 00:38:03 by gimmingyu        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../../include/minishell.h"
+#include "../../../include/minishell.h"
 
 static int	set_bintree_type(int type)
 {

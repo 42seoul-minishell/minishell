@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   delete.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mingkim <mingkim@student.42.fr>            +#+  +:+       +#+        */
+/*   By: gimmingyu <gimmingyu@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 15:11:18 by bolee             #+#    #+#             */
-/*   Updated: 2022/11/16 17:28:21 by mingkim          ###   ########.fr       */
+/*   Updated: 2022/11/19 00:57:15 by gimmingyu        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,6 @@ int	delete_bintree_node_rc(t_bintree_node *parent)
 
 int	clear_bintree_node(t_bintree_node *root)
 {
-	t_bintree_node	*next;
-
 	if (root->lc)
 		clear_bintree_node(root->lc);
 	if (root->rc)

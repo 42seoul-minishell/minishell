@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   prompt.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mingkim <mingkim@student.42.fr>            +#+  +:+       +#+        */
+/*   By: gimmingyu <gimmingyu@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/01 12:14:59 by mingkim           #+#    #+#             */
-/*   Updated: 2022/11/02 13:52:46 by mingkim          ###   ########.fr       */
+/*   Updated: 2022/11/19 13:20:58 by gimmingyu        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static char	*get_pwd(void)
 
 static char	*init_prompt_name(void)
 {
-	return (ft_strdup("MINISHELL : "));
+	return (ft_strdup("MICRO SHELL"));
 }
 
 static char	*concat_prompt_name(char *pwd, char *name, char *tail)
@@ -46,7 +46,8 @@ char	*create_prompt(void)
 	char	*tail;
 
 	pwd = get_pwd();
+	printf("pwd = %s\n", pwd);
 	name = init_prompt_name();
 	tail = ft_strdup("$ ");
-	return (concat_prompt_name(name, pwd, tail));
+	return (concat_prompt_name(name, ft_strdup(" "), tail));
 }

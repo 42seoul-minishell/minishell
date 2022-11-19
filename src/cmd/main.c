@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mingkim <mingkim@student.42.fr>            +#+  +:+       +#+        */
+/*   By: gimmingyu <gimmingyu@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 10:58:16 by mingkim           #+#    #+#             */
-/*   Updated: 2022/11/18 17:18:17 by mingkim          ###   ########.fr       */
+/*   Updated: 2022/11/19 13:16:14 by gimmingyu        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,8 +60,8 @@ int	main(int ac, char **av, char **envp)
 	t_hashtable	*table;
 	t_bintree	*tree;
 
-	ac = 0;
-	av = NULL;
+	printf("ac = %d\n", ac);
+	*av = NULL;
 	setting_signal();
 	table = parse_env_to_hashtable(envp);
 	tree = create_bintree();

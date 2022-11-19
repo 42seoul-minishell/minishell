@@ -1,35 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   executor.c                                         :+:      :+:    :+:   */
+/*   verify_pipes.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mingkim <mingkim@student.42.fr>            +#+  +:+       +#+        */
+/*   By: gimmingyu <gimmingyu@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/14 15:24:57 by mingkim           #+#    #+#             */
-/*   Updated: 2022/11/18 17:57:08 by mingkim          ###   ########.fr       */
+/*   Created: 2022/11/18 16:05:42 by mingkim           #+#    #+#             */
+/*   Updated: 2022/11/19 00:38:03 by gimmingyu        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../include/minishell.h"
 
-int	executor(char *cmd)
+t_tType	verify_pipe(char *str)
 {
-	return (run_execute(cmd));
-}
-
-int	run_execute(char *cmd)
-{
-	int	status;
-
-	status = serve_status(cmd);
-	return (status);
-}
-
-int	serve_status(char *cmd)
-{
-	int	status;
-
-	printf("cmd = %s\n", cmd);
-	status = EXIT_SUCCESS;
-	return (TRUE);
+	if (str[0] == '|' && str[1] && str[1] == str[0])
+		return (OR);
+	if (str[0] == '|')
+		return (PIPE);
+	exit_on_error("FUCK YOU");
+	return (NONE);
 }

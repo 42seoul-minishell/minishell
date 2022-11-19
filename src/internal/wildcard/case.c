@@ -1,4 +1,4 @@
-#include "../../../../include/minishell.h"
+#include "../../../include/minishell.h"
 
 int	case_zero(char *d_name, t_token *token, t_token **expan_token)
 {

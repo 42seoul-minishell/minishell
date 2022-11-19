@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mingkim <mingkim@student.42.fr>            +#+  +:+       +#+         #
+#    By: gimmingyu <gimmingyu@student.42.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/05 16:33:31 by mingkim           #+#    #+#              #
-#    Updated: 2022/11/02 14:48:31 by mingkim          ###   ########.fr        #
+#    Updated: 2022/11/19 01:05:42 by gimmingyu        ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@ NAME			=	core.a
 CC				=	cc
 CFLAGS			=	-Wall -Wextra -Werror
 LINKING_FLAGS	=	-lreadline -L ${HOME}/.brew/opt/readline/lib
-COMPILE_FLAGS	=	-I${HOME}/.brew/opt/readline/include
+COMPILE_FLAGS	=	-I${HOME}/.brew/opt/readline/include -I/opt/homebrew/opt/readline/include
 AR				=	ar rcsuv
 
 INC				=	../../../include
