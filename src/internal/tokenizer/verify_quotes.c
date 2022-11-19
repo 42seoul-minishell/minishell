@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   verify_quotes.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mingkim <mingkim@student.42.fr>            +#+  +:+       +#+        */
+/*   By: gimmingyu <gimmingyu@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 15:52:53 by mingkim           #+#    #+#             */
-/*   Updated: 2022/11/18 17:14:41 by mingkim          ###   ########.fr       */
+/*   Updated: 2022/11/19 00:38:03 by gimmingyu        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../../include/minishell.h"
+#include "../../../include/minishell.h"
 
 t_tType	verify_double_quote(char *str)
 {

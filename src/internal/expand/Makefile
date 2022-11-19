@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mingkim <mingkim@student.42.fr>            +#+  +:+       +#+         #
+#    By: gimmingyu <gimmingyu@student.42.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/18 16:41:11 by bolee             #+#    #+#              #
-#    Updated: 2022/11/18 18:27:53 by mingkim          ###   ########.fr        #
+#    Updated: 2022/11/19 01:04:29 by gimmingyu        ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ CC				=	cc
 CFLAGS			=	-Wall -Wextra -Werror
 AR				=	ar rcsuv
 
-INC				=	../../../../include
+INC				=	../../../include
 
 FILES			=	expand \
 					util
@@ -31,7 +31,7 @@ OBJS_DIR		=	./
 OBJS			=	$(addprefix $(OBJS_DIR), $(addsuffix .o, $(FILES)))
 
 %.o: %.c
-	$(CC) $(CFLAGS) -c $< -I$(INC) -o $@
+	$(CC) $(CFLAGS) -c $< -o $@
 
 # Main rule
 all: 

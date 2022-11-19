@@ -1,9 +1,9 @@
 #include "../../../include/minishell.h"
 
-char *get_prefix(char *str)
+char	*get_prefix(char *str)
 {
-	char *prefix;
-	int pos;
+	char	*prefix;
+	int		len;
 
 	len = 0;
 	while (str[len] && str[len] != '*')

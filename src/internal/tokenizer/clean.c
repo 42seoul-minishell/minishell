@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   clean.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mingkim <mingkim@student.42.fr>            +#+  +:+       +#+        */
+/*   By: gimmingyu <gimmingyu@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 13:37:40 by mingkim           #+#    #+#             */
-/*   Updated: 2022/11/17 20:28:09 by mingkim          ###   ########.fr       */
+/*   Updated: 2022/11/19 14:09:29 by gimmingyu        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../../include/minishell.h"
+#include "../../../include/minishell.h"
 
 static void	space_around_operator(char *dest, char *src, size_t len)
 {
@@ -21,17 +21,17 @@ static void	space_around_operator(char *dest, char *src, size_t len)
 	src_idx = 0;
 	while (dest_idx < len && src[src_idx])
 	{
-		if (is_operator(src + src_idx) && is_double_operator(src + src_idx))
+		if (is_operator(src + src_idx))
 		{
+			if (is_double_operator(src + src_idx))
+			{
+				dest[dest_idx++] = ' ';
+				dest[dest_idx++] = src[src_idx++];
+				dest[dest_idx++] = ' ';
+				continue ;
+			}
 			dest[dest_idx++] = ' ';
 			dest[dest_idx++] = src[src_idx++];
-			dest[dest_idx++] = src[src_idx++];
-			dest[dest_idx++] = ' ';
-			continue ;
-		}
-		else if (is_operator(src + src_idx))
-		{
-			dest[dest_idx++] = ' ';
 			dest[dest_idx++] = src[src_idx++];
 			dest[dest_idx++] = ' ';
 			continue ;
@@ -59,11 +59,9 @@ static int	count_operator(char *str)
 
 char	*make_clean_sentence(char *str)
 {
-	char	*tmp;
 	char	*cleaned;
 	int		len;
 
-	tmp = str;
 	len = ft_strlen(str) + (count_operator(str) * 2) + 1;
 	cleaned = (char *)malloc(sizeof(char) * len);
 	if (!cleaned)

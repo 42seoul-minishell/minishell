@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   util.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mingkim <mingkim@student.42.fr>            +#+  +:+       +#+        */
+/*   By: gimmingyu <gimmingyu@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 14:54:18 by bolee             #+#    #+#             */
-/*   Updated: 2022/11/18 17:01:59 by mingkim          ###   ########.fr       */
+/*   Updated: 2022/11/19 00:38:03 by gimmingyu        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../../include/minishell.h"
+#include "../../../include/minishell.h"
 
 void	idx_is_not_zero(char **str, int *i, char *add)
 {

@@ -6,7 +6,7 @@ CC				=	cc
 CFLAGS			=	-Wall -Wextra -Werror
 AR				=	ar rcsuv
 
-INC				=	../../../../include
+INC				=	../../../include
 
 FILES			=	check \
 					clean \
@@ -28,7 +28,7 @@ OBJS_DIR		=	./
 OBJS			=	$(addprefix $(OBJS_DIR), $(addsuffix .o, $(FILES)))
 
 %.o: %.c
-	$(CC) $(CFLAGS) -c $< -I$(INC) -o $@
+	$(CC) $(CFLAGS) -c $<  -o $@
 
 # Main rule
 all: 
