@@ -6,11 +6,25 @@
 /*   By: gimmingyu <gimmingyu@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 13:06:13 by mingkim           #+#    #+#             */
-/*   Updated: 2022/11/19 00:38:03 by gimmingyu        ###   ########.fr       */
+/*   Updated: 2022/11/19 14:09:08 by gimmingyu        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../include/minishell.h"
+
+int	is_quote(char *str)
+{
+	if (*str == '\'' || *str == '\"')
+		return (TRUE);
+	return (FALSE);
+}
+
+int	is_operator(char *str)
+{
+	if (*str == '|' || *str == '>' || *str == '<')
+		return (TRUE);
+	return (FALSE);
+}
 
 int	is_double_operator(char *str)
 {
@@ -19,32 +33,15 @@ int	is_double_operator(char *str)
 	return (FALSE);
 }
 
-int	is_operator(char *str)
+void	white_to_space(char *str)
 {
-	if (*str == '|' || *str == '>' || *str == '<' || *str == '"')
-		return (TRUE);
-	if (is_double_operator(str))
-		return (TRUE);
-	return (FALSE);
-}
+	int		i;
 
-t_tType	tree_node_type(int type)
-{
-	if (type == '|')
-		return (PIPE);
-	else if (type == '(' || type == ')')
-		return (BRACKET);
-	else
-		return (NONE);
-}
-
-int	safe_insert(t_doubly_list *lst, t_tType type, char *str)
-{
-	t_token			*token;
-	t_doubly_node	*node;
-
-	token = create_token(type, str);
-	node = create_doubly_node(token);
-	insert_node(lst, node);
-	return (TRUE);
+	i = 0;
+	while (str[i])
+	{
+		if (str[i] == '\t' || str[i] == '\v' || str[i] == '\r')
+			str[i] = ' ';
+		i++;
+	}
 }

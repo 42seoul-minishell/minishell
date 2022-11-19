@@ -6,41 +6,34 @@
 /*   By: gimmingyu <gimmingyu@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 14:09:18 by mingkim           #+#    #+#             */
-/*   Updated: 2022/11/19 00:38:03 by gimmingyu        ###   ########.fr       */
+/*   Updated: 2022/11/19 14:11:15 by gimmingyu        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../include/minishell.h"
 
 void	make_token_list(t_doubly_list *lst, char *str)
-{
-	char	**splited;
-	// char	*content;
-	ssize_t	idx;
+{	
+	char	*content;
+	ssize_t	current;
+	ssize_t	before;
+	ssize_t	len;
 	t_tType	token_type;
 
-	splited = ft_split(str, ' ');
-	idx = -1;
-	while (splited[++idx])
+	current = -1;
+	before = 0;
+	len = ft_strlen(str);
+	while (str[++current] && current < len)
 	{
-		token_type = verify_token(splited[idx]);
-		// content = extract_by_type(splited[idx], token_type);
-		safe_insert(lst, token_type, splited[idx]);
-		free(splited[idx]);
-	}
-	free(splited);
-}
-
-static void	white_to_space(char *str)
-{
-	int		i;
-
-	i = 0;
-	while (str[i])
-	{
-		if (str[i] == '\t' || str[i] == '\v' || str[i] == '\r')
-			str[i] = ' ';
-		i++;
+		while (is_operator(str + current) == FALSE && \
+				is_quote(str + current) == FALSE)
+			current++;
+		content = safe_malloc(current - before + 1);
+		ft_strlcpy(content, str + before, current - before + 1);
+		before = current;
+		printf("content = %s\n", content);
+		token_type = NONE;
+		safe_insert(lst, token_type, content);
 	}
 }
 

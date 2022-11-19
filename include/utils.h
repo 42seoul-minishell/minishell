@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mingkim <mingkim@student.42.fr>            +#+  +:+       +#+        */
+/*   By: gimmingyu <gimmingyu@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 20:26:53 by mingkim           #+#    #+#             */
-/*   Updated: 2022/11/17 21:06:32 by mingkim          ###   ########.fr       */
+/*   Updated: 2022/11/19 14:08:25 by gimmingyu        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,4 +21,8 @@ void	sig_exec(int sig);
 int		check_status(int status);
 int		str_parens(char *str, int i);
 int		is_have(char *str, char sep);
+
+char	*safe_malloc(size_t idx);
+int		safe_insert(t_doubly_list *lst, t_tType type, char *str);
+
 #endif
