@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   verify_redir.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mingkim <mingkim@student.42.fr>            +#+  +:+       +#+        */
+/*   By: gimmingyu <gimmingyu@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 15:53:58 by mingkim           #+#    #+#             */
-/*   Updated: 2022/11/18 17:15:09 by mingkim          ###   ########.fr       */
+/*   Updated: 2022/11/19 00:38:03 by gimmingyu        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../../include/minishell.h"
+#include "../../../include/minishell.h"
 
 t_tType	verify_input_redir(char *str)
 {

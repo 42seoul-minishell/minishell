@@ -1,4 +1,4 @@
-#include "../../../../include/minishell.h"
+#include "../../../include/minishell.h"
 
 char	*get_prefix(char *str)
 {

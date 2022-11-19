@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mingkim <mingkim@student.42.fr>            +#+  +:+       +#+         #
+#    By: gimmingyu <gimmingyu@student.42.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/05 11:13:33 by mingkim           #+#    #+#              #
-#    Updated: 2022/11/18 18:52:11 by mingkim          ###   ########.fr        #
+#    Updated: 2022/11/19 13:10:25 by gimmingyu        ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,6 +23,12 @@ HASHDIR			= ./src/internal/hashtable/
 COREDIR			= ./src/internal/core/
 GLOBALDIR		= ./src/internal/global/
 PARSERDIR		= ./src/internal/parser/
+TOKENIZERDIR	= ./src/internal/tokenizer/
+SYNTAXDIR		= ./src/internal/syntax/
+WILDCARDDIR		= ./src/internal/wildcard/
+EXPANDDIR		= ./src/internal/expand/
+BINTREEDIR		= ./src/internal/bintree/
+EXECUTORDIR		= ./src/internal/executor/
 
 # Libaray Files
 ERROR			= $(ERROR_DIR)error.a
@@ -33,9 +39,13 @@ DOUBLY			= $(DOUBLYDIR)doubly.a
 CORE			= $(COREDIR)core.a
 GLOBAL			= $(GLOBALDIR)global.a
 PARSER			= $(PARSERDIR)parser.a
+TOKENIZER		= $(TOKENIZERDIR)tokenizer.a
+SYNTAX			= $(SYNTAXDIR)syntax.a
+WILDCARD		= $(WILDCARDDIR)wildcard.a
+EXPAND			= $(EXPANDDIR)expand.a
+BINTREE			= $(BINTREEDIR)bintree.a
+EXECUTOR		= $(EXECUTORDIR)executor.a
 
-# Build directory
-BUILDDIR		= ./build/
 # Includ directory
 INC				= ./include/
 FILES			= main
@@ -47,9 +57,12 @@ OBJS			= $(SRCS:.c=.o)
 
 # Compiler Flag and Command
 CC				= cc
-CFLAGS			= -Wall -Wextra -Werror
-LINKING_FLAGS	= -l readline -L ${HOME}/.brew/opt/readline/lib
-COMPILE_FLAGS	= -I ${HOME}/.brew/opt/readline/include
+CFLAGS			= -Wall -Wextra -Werror 
+LINKING_FLAGS	= -l readline -L/opt/homebrew/opt/readline/lib
+COMPILE_FLAGS	= -I/opt/homebrew/opt/readline/include
+
+DEV_LINKING_FLAGS	= -L/opt/homebrew/opt/readline/lib
+DEV_COMPILE_FLAGS	= -I/opt/homebrew/opt/readline/include
 
 # Debugging Flag
 DEBUG			= -g
@@ -60,13 +73,9 @@ all:
 	@echo "\033[92mBuild minishell daemon...\033[0m"
 	make $(NAME)
 
-# Object dir rule
-$(BUILDDIR):
-	mkdir -p $(BUILDDIR)
-
 # Object rule
 %.o: %.c
-	$(CC) $(CFLAGS) $(COMPILE_FLAGS) -I $(INC) -c $< -o $@
+	$(CC) $(CFLAGS) -I $(INC) -c $< -o $@
 
 # Project file rule
 $(NAME): $(OBJS)
@@ -78,9 +87,14 @@ $(NAME): $(OBJS)
 	@make all -C $(LIBFT_DIR)
 	@make all -C $(PARSERDIR)
 	@make all -C $(GLOBALDIR)
+	@make all -C $(TOKENIZERDIR)
+	@make all -C $(SYNTAXDIR)
+	@make all -C $(BINTREEDIR)
+	@make all -C $(EXPANDDIR)
+	@make all -C $(EXECUTORDIR)
 	@echo "\033[92mBuild minishell daemon...\033[0m"
-	$(CC) $(CFLAGS) $(LINKING_FLAGS) $(INC)minishell.h $(LIBFT) $(ERROR) $(UTILS) $(DOUBLY) $(PARSER) $(CORE) $(HASH) $(GLOBAL) -o $(BUILDDIR)$(NAME) $(OBJS)
-
+	$(CC) $(CFLAGS) $(LINKING_FLAGS) -I$(INC)minishell.h $(LIBFT) $(ERROR) $(UTILS) $(DOUBLY) $(PARSER) $(CORE) $(HASH) $(GLOBAL) $(TOKENIZER) $(SYNTAX) $(BINTREE) $(EXPAND) $(EXECUTOR) -o $(NAME) $(OBJS) 
+	
 # Make clean
 clean:
 	@echo "\033[92mClean daemon files...\033[0m"
@@ -93,6 +107,13 @@ clean:
 	make -C $(LIBFT_DIR) clean
 	make -C $(PARSERDIR) clean
 	make -C $(GLOBALDIR) clean
+	make -C $(TOKENIZERDIR) clean
+	make -C $(SYNTAXDIR) clean
+	make -C $(BINTREEDIR) clean
+	make -C $(EXPANDDIR) clean
+	make -C $(EXECUTORDIR) clean
+	
+	
 
 # Make fclean
 fclean: 
@@ -108,6 +129,12 @@ fclean:
 	make -C $(LIBFT_DIR) fclean
 	make -C $(PARSERDIR) fclean
 	make -C $(GLOBALDIR) fclean
+	make -C $(TOKENIZERDIR) fclean
+	make -C $(SYNTAXDIR) fclean
+	make -C $(BINTREEDIR) fclean
+	make -C $(EXPANDDIR) fclean
+	make -C $(EXECUTORDIR) fclean
+	
 
 # Make re
 re: 

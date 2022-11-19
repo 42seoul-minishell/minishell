@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: bolee <bolee@student.42.fr>                +#+  +:+       +#+         #
+#    By: gimmingyu <gimmingyu@student.42.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/16 15:12:47 by bolee             #+#    #+#              #
-#    Updated: 2022/11/16 15:12:48 by bolee            ###   ########.fr        #
+#    Updated: 2022/11/19 00:59:02 by gimmingyu        ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,6 @@ INC				=	../../../include
 FILES			=	create \
 					delete \
 					insert \
-					read \
 					utils
 
 SRCS_DIR		=	./
