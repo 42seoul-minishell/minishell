@@ -14,8 +14,8 @@
 
 char	*search(t_hashtable *table, char *key)
 {
-	size_t			idx;
-	t_ht_item		*item;
+	size_t		idx;
+	t_ht_item	*item;
 
 	idx = hash_index(key, table->size);
 	item = table->items[idx];
@@ -25,5 +25,5 @@ char	*search(t_hashtable *table, char *key)
 			return (item->value);
 		item = item->next;
 	}
-	exit(1);
+	return (NULL);
 }

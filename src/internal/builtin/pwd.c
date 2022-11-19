@@ -14,12 +14,12 @@
 
 int	builtin_pwd(void)
 {
-	char	*path;
+	char *path;
 
 	path = getcwd(NULL, 0);
 	if (!path)
 		return (FALSE);
-	printf("path = %s\n", path);
+	printf("%s\n", path);
 	free(path);
 	return (TRUE);
 }

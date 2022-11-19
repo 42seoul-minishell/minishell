@@ -12,24 +12,29 @@
 
 #include "../../../include/minishell.h"
 
-static void	_display_env_list(t_doubly_list *lst)
-{
-	size_t			count;
-	t_doubly_node	*node;
+// static void	_display_env_list(t_doubly_list *lst)
+// {
+// 	size_t			count;
+// 	t_doubly_node	*node;
 
-	if (!lst || is_list_empty(lst))
-		return ;
-	count = -1;
-	node = lst->header.next;
-	while (++count < lst->len)
-	{
-		printf("%s\n", node->token->value);
-		node = node->next;
-	}
-}
+// 	if (!lst || is_list_empty(lst))
+// 		return ;
+// 	count = -1;
+// 	node = lst->header.next;
+// 	while (++count < lst->len)
+// 	{
+// 		printf("%s\n", node->token->value);
+// 		node = node->next;
+// 	}
+// }
 
 // env 명령은 환경변수의 목록을 출력해줌.
-void	builtin_env(t_doubly_list *lst)
+// void	builtin_env(t_doubly_list *lst)
+// {
+// 	_display_env_list(lst);
+// }
+
+void	builtin_env(void)
 {
-	_display_env_list(lst);
+	display_hashtable(g_global->envp);
 }
