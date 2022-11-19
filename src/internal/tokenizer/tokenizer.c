@@ -6,7 +6,7 @@
 /*   By: gimmingyu <gimmingyu@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 14:09:18 by mingkim           #+#    #+#             */
-/*   Updated: 2022/11/19 19:27:35 by gimmingyu        ###   ########.fr       */
+/*   Updated: 2022/11/20 00:44:09 by gimmingyu        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,28 +30,35 @@ ssize_t	get_operator_length(char *str)
 }
 
 /* operator에 도달 시 호출. operator만 따로 담아서 넣는다 */
-void	smart_insert(t_doubly_list *lst, char *str, ssize_t *c, ssize_t *b)
+void	insert_helper(t_doubly_list *lst, char *str, ssize_t *c, ssize_t *b)
 {
 	char	*before_op;
 	char	*after_op;
+	char	*trimmed;
 	ssize_t	op_len;
 
 	if (*c - *b > 0)
 	{
 		before_op = safe_malloc(*c - *b);
 		ft_strlcpy(before_op, str + *b, *c - *b + 1);
-		safe_insert(lst, NONE, before_op);
+		trimmed = ft_strtrim(before_op, " ");
+		if (is_only_space(trimmed) == FALSE)
+			safe_insert(lst, NONE, trimmed);
+		free(before_op);
 	}
 	op_len = get_operator_length(str + *c);
 	after_op = safe_malloc(op_len);
 	ft_strlcpy(after_op, str + *c, op_len + 1);
-	safe_insert(lst, NONE, after_op);
+	trimmed = ft_strtrim(before_op, " ");
+	free(after_op);
+	if (is_only_space(trimmed) == FALSE)
+		safe_insert(lst, NONE, trimmed);
 	*c += op_len;
 	*b = *c;
 }
 
 /* operator에 도달 시 호출. 현재 기준 이전과 그 다음 블록까지 lst에 넣는다 */
-void	smart_insert_quote_case(t_doubly_list *lst, char *str, \
+void	insert_helper_quote_case(t_doubly_list *lst, char *str, \
 								ssize_t *c, ssize_t *b)
 {
 	char	*before_op;
@@ -63,13 +70,15 @@ void	smart_insert_quote_case(t_doubly_list *lst, char *str, \
 	ft_strlcpy(before_op, str + *b, *c - *b + 1);
 	trimmed = ft_strtrim(before_op, " ");
 	free(before_op);
-	safe_insert(lst, NONE, trimmed);
+	if (is_only_space(trimmed) == FALSE)
+		safe_insert(lst, NONE, trimmed);
 	op_len = get_operator_length(str + *c) + 1;
 	after_op = safe_malloc(op_len);
 	ft_strlcpy(after_op, str + *c, op_len + 1);
 	*c += op_len;
 	*b = *c;
-	safe_insert(lst, NONE, after_op);
+	if (is_only_space(after_op) == FALSE)
+		safe_insert(lst, NONE, after_op);
 }
 
 void	make_token_list(t_doubly_list *lst, char *str)
@@ -86,10 +95,11 @@ void	make_token_list(t_doubly_list *lst, char *str)
 		if (!is_operator(str + current) && !is_quote(str + current))
 			continue ;
 		if (is_quote(str + current))
-			smart_insert_quote_case(lst, str, &current, &before);
+			insert_helper_quote_case(lst, str, &current, &before);
 		else if (is_operator(str + current))
-			smart_insert(lst, str, &current, &before);
+			insert_helper(lst, str, &current, &before);
 	}
+	insert_helper(lst, str, &current, &before);
 }
 
 void	tokenizer(t_doubly_list *lst, char *str)
