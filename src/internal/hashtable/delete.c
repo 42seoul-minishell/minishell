@@ -21,9 +21,9 @@ void	delete_item(t_ht_item *item)
 
 void	delete_table(t_hashtable *table)
 {
-	size_t			idx;
-	t_ht_item		*item;
-	t_ht_item		*next;
+	size_t		idx;
+	t_ht_item	*item;
+	t_ht_item	*next;
 
 	idx = -1;
 	while (++idx < table->size)
@@ -38,4 +38,37 @@ void	delete_table(t_hashtable *table)
 	}
 	free(table->items);
 	free(table);
+}
+
+void	delete_item_by_key(t_hashtable *table, char *key)
+{
+	size_t		idx;
+	t_ht_item	*item;
+	t_ht_item	*prev;
+	t_ht_item	*tmp;
+
+	idx = hash_index(key, table->size);
+	item = table->items[idx];
+	prev = NULL;
+	while (item)
+	{
+		if (ft_strncmp(item->key, key, ft_strlen(key) + 1) == 0)
+		{
+			if (!prev)
+			{
+				tmp = item->next;
+				delete_item(item);
+				table->items[idx] = tmp;
+			}
+			else
+			{
+				tmp = item->next;
+				prev->next = tmp;
+				delete_item(item);
+			}
+			break ;
+		}
+		prev = item;
+		item = item->next;
+	}
 }
