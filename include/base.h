@@ -26,6 +26,8 @@
 # include <fcntl.h>
 # include <stdarg.h>
 # include <termios.h>
+# include <dirent.h>
+# include <errno.h>
 /* GNU readline header */
 # include <readline/readline.h>
 # include <readline/history.h>
@@ -40,6 +42,8 @@
 # define MAGIC_NUMBER 5381
 # define DISPLAY 1
 # define NODISPLAY 0
+
+/* Error message */
 # define SYNTAXERR	"syntax error near unexpected token `"
 
 /* external variable for environment variables */
