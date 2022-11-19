@@ -118,4 +118,11 @@ typedef struct s_global
 	struct termios	display_set;
 }	t_global;
 
+/* structure for wildcard */
+typedef struct s_wildcard
+{
+	char	*prefix;
+	char	*suffix;
+}	t_wildcard;
+
 #endif

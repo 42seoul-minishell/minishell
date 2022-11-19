@@ -12,56 +12,91 @@
 
 #include "../../../include/minishell.h"
 
-static void	get_expans_list(t_token *token, t_token **expan_token)
+static void set_res(char *res, char *str)
 {
-	struct dirent	*dirent;
-	DIR				*dir;
-	t_aster			*ast;
+	char *tmp;
 
-	ast = malloc(sizeof(t_aster));
-	ast->prefix = get_prefix(token->content);
-	ast->suffix = get_suffix(token->content);
-	dir = opendir(".");
-	while (1)
+	if (!res)
+		return (str);
+	tmp = ft_strjoin(res, str);
+	if (!tmp)
+		exit(1);
+	free(res);
+	free(str);
+	return (tmp);
+}
+
+static void convert_wildcard(DIR *dir, t_wildcard *wildcard)
+{
+	char *res;
+	char *tmp;
+	struct dirent *dirent;
+
+	res = NULL;
+	dirent = readdir(dir);
+	while (dirent)
 	{
+		if (!wildcard->prefix && !wildcard->suffix)
+			tmp = nothing_have(dirent->d_name);
+		else if (wildcard->prefix && !wildcard->suffix)
+			tmp = only_prefix(dirent->d_name, wildcard->prefix);
+		else if (!wildcard->prefix && wildcard->suffix)
+			tmp = only_suffix(dirent->d_name, wildcard->suffix);
+		else
+			tmp = both_have(dirent->d_name, wildcard);
+		if (!tmp)
+			exit(1);
+		res = set_res(res, tmp);
 		dirent = readdir(dir);
-		if (!dirent)
-			break ;
-		if (!ast->prefix && !ast->suffix)
-			case_zero(dirent->d_name, token, expan_token);
-		else if (ast->prefix && !ast->suffix)
-			case_one(dirent->d_name, ast->prefix, token, expan_token);
-		else if (!ast->prefix && ast->suffix)
-			case_two(dirent->d_name, ast->suffix, token, expan_token);
-		else if (ast->prefix && ast->suffix)
-			case_three(dirent->d_name, ast, token, expan_token);
 	}
+	return (tmp);
+}
+
+static char *wildcard_to_str(char *str)
+{
+	char *res;
+	DIR *dir;
+	t_wildcard *wildcard;
+
+	wildchard = (t_wildcard *)sp_malloc(sizeof(t_wildcard));
+	wildcard.prefix = get_prefix(str);
+	wildcard.suffix = get_suffix(str);
+	if (wildchard.prefix[ft_strlen(wildcard.prefix) - 1] == '/')
+		dir = opendir(wildcard.prefix);
+	else
+		dir = opendir(".");
+	if (!dir)
+	{
+		printf("%s\n", strerror(errno));
+		return;
+	}
+	res = convert_wildcard(dir, wildcard);
 	closedir(dir);
+	free(wildcard->prefix);
+	free(wildcard->suffix);
+	free(wildcard);
+	return (res);
 }
 
-static int	is_wlidcard(t_token token)
+void wildcard(t_doubly_list *lst)
 {
-	int		result;
+	char *tmp;
+	t_doubly_node *node;
 
-	result = 0;
-	if (ft_strchr(token.content, '*'))
+	node = lst->header.next;
+	while (node)
 	{
-		result = 1;
-	}
-	return (result);
-}
-
-void	wildcard(t_doubly_list *lst)
-{
-	t_doubly_node	*node;
-
-	while (tmp)
-	{
-		if (is_wildcard(*tmp))
+		if (ft_strchr(node->token->value, '*'))
 		{
-			get_expans_list(tmp, &expan_tokens);
-			token_replace(tokens_list, tmp, expan_tokens);
+			tmp = wildcard_to_str(node->token->value);
+			if (!tmp)
+			{
+				free(node->token->value);
+				node->token->value = tmp;
+			}
 		}
-		tmp = tmp->next;
+		node = node->next;
+		if (node == lst->header.next)
+			break;
 	}
 }
