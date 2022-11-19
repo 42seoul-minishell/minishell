@@ -6,7 +6,7 @@
 /*   By: gimmingyu <gimmingyu@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 10:58:16 by mingkim           #+#    #+#             */
-/*   Updated: 2022/11/19 13:16:14 by gimmingyu        ###   ########.fr       */
+/*   Updated: 2022/11/19 15:09:48 by gimmingyu        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ static void	run(void)
 	}
 }
 
+// echo "hello world" > test.txt | cat < test.txt > other.txt
 int	main(int ac, char **av, char **envp)
 {
 	t_hashtable	*table;
