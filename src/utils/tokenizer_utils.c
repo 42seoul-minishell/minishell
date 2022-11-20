@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   safe.c                                             :+:      :+:    :+:   */
+/*   tokenizer_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gimmingyu <gimmingyu@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/19 14:07:19 by gimmingyu         #+#    #+#             */
-/*   Updated: 2022/11/19 14:08:05 by gimmingyu        ###   ########.fr       */
+/*   Updated: 2022/11/20 00:40:05 by gimmingyu        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,5 +30,17 @@ int	safe_insert(t_doubly_list *lst, t_tType type, char *str)
 	token = create_token(type, str);
 	node = create_doubly_node(token);
 	insert_node(lst, node);
+	return (TRUE);
+}
+
+int	is_only_space(char *str)
+{
+	ssize_t	idx;
+
+	idx = -1;
+	while (str[++idx])
+		if (str[idx] != ' ')
+			return (FALSE);
+	free(str);
 	return (TRUE);
 }
