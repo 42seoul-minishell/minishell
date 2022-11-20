@@ -6,7 +6,7 @@
 /*   By: gimmingyu <gimmingyu@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 13:06:13 by mingkim           #+#    #+#             */
-/*   Updated: 2022/11/20 16:35:14 by gimmingyu        ###   ########.fr       */
+/*   Updated: 2022/11/20 17:03:28 by gimmingyu        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ int	is_operator(char *str)
 int	is_double_operator(char *str)
 {
 	if (ft_strncmp(str, ">>", 2) == 0 || ft_strncmp(str, "<<", 2) == 0)
+		return (TRUE);
+	if (ft_strncmp(str, "||", 2) == 0 || ft_strncmp(str, "&&", 2) == 0)
 		return (TRUE);
 	return (FALSE);
 }
