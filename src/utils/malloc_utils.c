@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   malloc_utils.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gimmingyu <gimmingyu@student.42.fr>        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/11/20 00:46:59 by gimmingyu         #+#    #+#             */
+/*   Updated: 2022/11/20 00:47:14 by gimmingyu        ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../include/minishell.h"
 
 void	*sp_malloc(ssize_t size)
@@ -15,7 +27,7 @@ void	*sp_malloc(ssize_t size)
 
 void	*dp_malloc(ssize_t size)
 {
-	void 	**tmp;
+	void	**tmp;
 
 	tmp = (void **)malloc(size);
 	if (!tmp)

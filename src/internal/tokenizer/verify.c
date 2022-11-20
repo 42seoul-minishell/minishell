@@ -6,7 +6,7 @@
 /*   By: gimmingyu <gimmingyu@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 20:19:33 by mingkim           #+#    #+#             */
-/*   Updated: 2022/11/19 00:38:03 by gimmingyu        ###   ########.fr       */
+/*   Updated: 2022/11/20 16:48:53 by gimmingyu        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,5 +36,5 @@ t_tType	verify_token(char *str)
 		else if (str[idx] == '&' && str[idx + 1] && str[idx + 1] == str[idx])
 			return (AND);
 	}
-	return (NONE);
+	return (CMD);
 }
