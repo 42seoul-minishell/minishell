@@ -6,7 +6,7 @@
 /*   By: gimmingyu <gimmingyu@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 15:52:53 by mingkim           #+#    #+#             */
-/*   Updated: 2022/11/19 00:38:03 by gimmingyu        ###   ########.fr       */
+/*   Updated: 2022/11/20 17:10:52 by gimmingyu        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,8 @@ t_tType	verify_double_quote(char *str)
 	while (str[++idx])
 		if (str[idx] == '\"')
 			return (D_QUOTE);
-	exit_on_error("minish: syntax error near unexpected token `\"'");
+	// exit_on_error("minish: syntax error near unexpected token `\"'");
+	printf("str = %s\n", str);
 	return (NONE);
 }
 

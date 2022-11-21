@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mingkim <mingkim@student.42.fr>            +#+  +:+       +#+        */
+/*   By: gimmingyu <gimmingyu@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 15:35:19 by mingkim           #+#    #+#             */
-/*   Updated: 2022/11/18 16:55:41 by mingkim          ###   ########.fr       */
+/*   Updated: 2022/11/20 16:46:57 by gimmingyu        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,8 @@ void	display_list(t_doubly_list *lst)
 	node = lst->header.next;
 	while (++count < lst->len)
 	{
-		printf("doubly list node, index of %zd\n", count);
 		printf("token value = %s\n", node->token->value);
+		printf("token type = %d\n", node->token->type);
 		check_type(node->token->type);
 		node = node->next;
 	}

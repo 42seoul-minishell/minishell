@@ -6,7 +6,7 @@
 /*   By: gimmingyu <gimmingyu@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 14:09:18 by mingkim           #+#    #+#             */
-/*   Updated: 2022/11/20 00:44:09 by gimmingyu        ###   ########.fr       */
+/*   Updated: 2022/11/20 17:17:25 by gimmingyu        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,12 @@ ssize_t	get_operator_length(char *str)
 	if (is_quote(str))
 		while (*(str + len) != c)
 			len++;
+	else if (*str == '(' || *str == ')')
+		return (1);
 	else if (is_double_operator(str))
 		return (2);
 	else if (is_operator(str))
-		return (len);
+		return (1);
 	return (len);
 }
 
@@ -37,13 +39,13 @@ void	insert_helper(t_doubly_list *lst, char *str, ssize_t *c, ssize_t *b)
 	char	*trimmed;
 	ssize_t	op_len;
 
-	if (*c - *b > 0)
+	if (*c - *b >= 0)
 	{
 		before_op = safe_malloc(*c - *b);
 		ft_strlcpy(before_op, str + *b, *c - *b + 1);
 		trimmed = ft_strtrim(before_op, " ");
 		if (is_only_space(trimmed) == FALSE)
-			safe_insert(lst, NONE, trimmed);
+			safe_insert(lst, verify_token(trimmed), trimmed);
 		free(before_op);
 	}
 	op_len = get_operator_length(str + *c);
@@ -52,7 +54,7 @@ void	insert_helper(t_doubly_list *lst, char *str, ssize_t *c, ssize_t *b)
 	trimmed = ft_strtrim(before_op, " ");
 	free(after_op);
 	if (is_only_space(trimmed) == FALSE)
-		safe_insert(lst, NONE, trimmed);
+		safe_insert(lst, verify_token(trimmed), trimmed);
 	*c += op_len;
 	*b = *c;
 }
@@ -71,14 +73,14 @@ void	insert_helper_quote_case(t_doubly_list *lst, char *str, \
 	trimmed = ft_strtrim(before_op, " ");
 	free(before_op);
 	if (is_only_space(trimmed) == FALSE)
-		safe_insert(lst, NONE, trimmed);
+		safe_insert(lst, verify_token(trimmed), trimmed);
 	op_len = get_operator_length(str + *c) + 1;
 	after_op = safe_malloc(op_len);
 	ft_strlcpy(after_op, str + *c, op_len + 1);
 	*c += op_len;
 	*b = *c;
 	if (is_only_space(after_op) == FALSE)
-		safe_insert(lst, NONE, after_op);
+		safe_insert(lst, verify_token(after_op), after_op);
 }
 
 void	make_token_list(t_doubly_list *lst, char *str)
@@ -87,19 +89,22 @@ void	make_token_list(t_doubly_list *lst, char *str)
 	ssize_t	before;
 	ssize_t	len;
 
-	current = -1;
+	current = 0;
 	before = 0;
 	len = ft_strlen(str);
-	while (str[++current] && current < len && before < len)
+	while (str[current] && current < len && before < len)
 	{
-		if (!is_operator(str + current) && !is_quote(str + current))
-			continue ;
+		while (!is_operator(str + current) && !is_quote(str + current))
+			current++;
 		if (is_quote(str + current))
 			insert_helper_quote_case(lst, str, &current, &before);
 		else if (is_operator(str + current))
 			insert_helper(lst, str, &current, &before);
 	}
 	insert_helper(lst, str, &current, &before);
+	printf("str + current = %s\n", str + current);
+	printf("*(str + current) = %c\n", *(str + current));
+	printf("current = %td\n", current);
 }
 
 void	tokenizer(t_doubly_list *lst, char *str)
@@ -107,5 +112,4 @@ void	tokenizer(t_doubly_list *lst, char *str)
 	if (str[0] == '\0')
 		return ;
 	make_token_list(lst, str);
-	display_list(lst);
 }
