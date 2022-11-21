@@ -15,40 +15,34 @@
 
 # include "./struct.h"
 
-/* in ../src/internal/token/ */
-/* split.c */
-// int				is_have(char *str, char sep);
-// size_t			is_pair(char *str, char sep);
-// void			split(t_doubly_list *lst, char *str, char sep);
-// int				split_quotes(t_doubly_list *lst, char *str);
-
 /* extract.c */
-char			*extract_double_quotes(char **str);
-char			*extract_brackets(char **str, char open, char close);
-char			*extract_pipe(char **str);
+char	*extract_double_quotes(char **str);
+char	*extract_brackets(char **str, char open, char close);
+char	*extract_pipe(char **str);
 
 /* token.c */
-void			tokenizer(t_doubly_list *lst, char *str);
+void	tokenizer(t_doubly_list *lst, char *str);
 
 /* utils.c */
-int				is_operator(char *str);
-int				is_quote(char *str);
-int				is_double_operator(char *str);
-void			white_to_space(char *str);
+int		is_operator(char *str);
+int		is_quote(char *str);
+int		is_double_operator(char *str);
+void	white_to_space(char *str);
 
 /* clean.c */
-int				check_space_around(char *str, char *start);
-char			*make_clean_sentence(char *str);
+int		check_space_around(char *str, char *start);
+char	*make_clean_sentence(char *str);
 
-t_tType			verify_double_quote(char *str);
-t_tType			verify_single_quote(char *str);
+t_tType	verify_double_quote(char *str);
+t_tType	verify_single_quote(char *str);
 
-t_tType			verify_token(char *str);
+t_tType	verify_token(char *str);
 
-t_tType			verify_input_redir(char *str);
-t_tType			verify_output_redir(char *str);
+t_tType	verify_input_redir(char *str);
+t_tType	verify_output_redir(char *str);
 
-t_tType			verify_pipe(char *str);
+t_tType	verify_pipe(char *str);
 
-t_tType			verify_bracket(char *str);
+t_tType	verify_bracket(char *str);
+
 #endif

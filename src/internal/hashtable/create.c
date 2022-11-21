@@ -14,12 +14,12 @@
 
 t_hashtable	*create_hashtable(size_t size)
 {
-	t_hashtable		*table;
-	t_ht_item		**items;
-	size_t			idx;
+	t_hashtable	*table;
+	t_ht_item	**items;
+	size_t		idx;
 
-	table = ft_calloc(1, sizeof(t_hashtable));
-	items = ft_calloc(size, sizeof(t_ht_item));
+	table = (t_hashtable *)sp_malloc(sizeof(t_hashtable));
+	items = (t_ht_item **)dp_malloc(size * sizeof(t_ht_item *));
 	table->items = items;
 	table->size = size;
 	idx = 0;
@@ -32,11 +32,9 @@ t_ht_item	*create_ht_item(char *key, char *value)
 {
 	t_ht_item	*item;
 
-	item = malloc(sizeof(t_ht_item));
-	if (!item)
-		exit(1);
-	item->key = malloc(ft_strlen(key) + 1);
-	item->value = malloc(ft_strlen(value) + 1);
+	item = (t_ht_item *)sp_malloc(sizeof(t_ht_item));
+	item->key = (char *)sp_malloc(ft_strlen(key) + 1);
+	item->value = (char *)sp_malloc(ft_strlen(value) + 1);
 	ft_strlcpy(item->key, key, ft_strlen(key) + 1);
 	ft_strlcpy(item->value, value, ft_strlen(value) + 1);
 	return (item);

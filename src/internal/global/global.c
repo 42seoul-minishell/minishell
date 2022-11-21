@@ -16,9 +16,7 @@ t_global	*create_global(t_bintree *tree, t_hashtable *envp)
 {
 	t_global	*global;
 
-	global = malloc(sizeof(t_global));
-	if (!global)
-		exit(1);
+	global = (t_global *)sp_malloc(sizeof(t_global));
 	global->envp = envp;
 	global->status = 0;
 	global->fd_stdin = dup(STDIN_FILENO);

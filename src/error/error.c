@@ -12,39 +12,8 @@
 
 #include "../../include/minishell.h"
 
-void	check_single_pointer(void *pointer)
-{
-	if (pointer == NULL)
-		exit(1);
-	return ;
-}
-
-void	check_double_pointer(void **pointer)
-{
-	if (pointer == NULL)
-		exit(1);
-	return ;
-}
-
 void	exit_on_error(const char *str)
 {
-	printf("%s", str);
+	ft_putstr_fd(str, 2);
 	exit(1);
-}
-
-void	print_error(char *format, ...)
-{
-	va_list	args;
-	char	*arg;
-
-	va_start(args, format);
-	ft_putstr_fd("minish: ", 2);
-	ft_putstr_fd(format, 2);
-	arg = va_arg(args, char *);
-	while (arg)
-	{
-		ft_putendl_fd(arg, 2);
-		arg = va_arg(args, char *);
-	}
-	va_end(args);
 }
