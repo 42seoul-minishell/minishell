@@ -12,7 +12,7 @@
 
 #include "../../include/minishell.h"
 
-void	*sp_malloc(ssize_t size)
+void	*sp_malloc(size_t size)
 {
 	void	*tmp;
 
@@ -25,7 +25,7 @@ void	*sp_malloc(ssize_t size)
 	return (tmp);
 }
 
-void	*dp_malloc(ssize_t size)
+void	*dp_malloc(size_t size)
 {
 	void	**tmp;
 

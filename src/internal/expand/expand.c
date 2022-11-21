@@ -6,7 +6,7 @@
 /*   By: gimmingyu <gimmingyu@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 14:53:00 by bolee             #+#    #+#             */
-/*   Updated: 2022/11/21 15:08:03 by gimmingyu        ###   ########.fr       */
+/*   Updated: 2022/11/21 20:33:46 by gimmingyu        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,8 @@ static void	replace_expand(char **str, int *idx)
 	if ((*str)[*idx + 1] && (*str)[*idx + 1] == '?')
 	{
 		tmp = ft_itoa(g_global->status);
-		check_single_pointer(tmp);
+		if (!tmp)
+			exit_on_error("Error...");
 		if (*idx)
 			idx_is_not_zero(str, idx, tmp);
 		else
@@ -55,7 +56,8 @@ static void	replace_expand(char **str, int *idx)
 	else
 	{
 		tmp = get_env(*str, *idx);
-		check_single_pointer(tmp);
+		if (!tmp)
+			exit_on_error("Error...");
 		if (*idx)
 			idx_is_not_zero(str, idx, tmp);
 		else

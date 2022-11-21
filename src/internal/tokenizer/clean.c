@@ -28,13 +28,13 @@ static void	space_around_operator(char *dest, char *src, size_t len)
 				dest[dest_idx++] = ' ';
 				dest[dest_idx++] = src[src_idx++];
 				dest[dest_idx++] = ' ';
-				continue ;
+				continue;
 			}
 			dest[dest_idx++] = ' ';
 			dest[dest_idx++] = src[src_idx++];
 			dest[dest_idx++] = src[src_idx++];
 			dest[dest_idx++] = ' ';
-			continue ;
+			continue;
 		}
 		dest[dest_idx++] = src[src_idx++];
 	}
@@ -63,9 +63,7 @@ char	*make_clean_sentence(char *str)
 	int		len;
 
 	len = ft_strlen(str) + (count_operator(str) * 2) + 1;
-	cleaned = (char *)malloc(sizeof(char) * len);
-	if (!cleaned)
-		exit(1);
+	cleaned = (char *)sp_malloc(sizeof(char) * len);
 	space_around_operator(cleaned, str, len);
 	return (cleaned);
 }

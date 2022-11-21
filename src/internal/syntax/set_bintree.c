@@ -43,8 +43,7 @@ static void	lower_priority(t_bintree_node *node)
 
 	flag = 0;
 	node_type = node->type;
-	if (node_type == TN_OR || node_type == TN_AND \
-			|| node_type == TN_PIPE)
+	if (node_type == TN_OR || node_type == TN_AND || node_type == TN_PIPE)
 		flag = 1;
 	if (g_global->tree->root->type < node_type && flag)
 	{
@@ -57,23 +56,23 @@ static void	lower_priority(t_bintree_node *node)
 		while (tmp->rc)
 			tmp = tmp->rc;
 		tmp->rc = node;
-	}	
+	}
 }
 
 void	set_bintree(t_doubly_list *lst, t_doubly_node *node)
 {
 	t_bintree_node	*bt_node;
 
+	bt_node = create_bintree_node(
+		create_token(node->token->type, node->token->value),
+		set_bintree_type(node->token->type));
 	if (g_global->tree->root == NULL)
 	{
-		g_global->tree->root = create_bintree_node(node->token, \
-									set_bintree_type(node->token->type));
+		g_global->tree->root = bt_node;
 		node = node->next;
 	}
 	if (node == lst->header.next)
-		return ;
-	bt_node = create_bintree_node(node->token, \
-				set_bintree_type(node->token->type));
+		return;
 	upper_priority(bt_node);
 	lower_priority(bt_node);
 	set_bintree(lst, node->next);

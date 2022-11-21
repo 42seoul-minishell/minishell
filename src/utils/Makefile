@@ -6,7 +6,7 @@
 #    By: gimmingyu <gimmingyu@student.42.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/05 11:35:24 by mingkim           #+#    #+#              #
-#    Updated: 2022/11/20 00:35:26 by gimmingyu        ###   ########.fr        #
+#    Updated: 2022/11/21 20:35:02 by gimmingyu        ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,8 @@ INC			= ../../include/minishell.h
 
 FILES		= utils \
 				verify_utils \
-				tokenizer_utils
+				tokenizer_utils \
+				malloc_utils \
 
 SRCS_DIR	= ./
 SRCS		= $(addprefix $(SRCS_DIR), $(addsuffix .c, $(FILES)))
