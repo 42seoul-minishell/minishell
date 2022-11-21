@@ -6,7 +6,7 @@
 /*   By: gimmingyu <gimmingyu@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 14:09:18 by mingkim           #+#    #+#             */
-/*   Updated: 2022/11/20 17:17:25 by gimmingyu        ###   ########.fr       */
+/*   Updated: 2022/11/21 13:47:30 by gimmingyu        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,9 +102,6 @@ void	make_token_list(t_doubly_list *lst, char *str)
 			insert_helper(lst, str, &current, &before);
 	}
 	insert_helper(lst, str, &current, &before);
-	printf("str + current = %s\n", str + current);
-	printf("*(str + current) = %c\n", *(str + current));
-	printf("current = %td\n", current);
 }
 
 void	tokenizer(t_doubly_list *lst, char *str)

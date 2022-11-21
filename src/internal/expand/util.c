@@ -6,23 +6,41 @@
 /*   By: gimmingyu <gimmingyu@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 14:54:18 by bolee             #+#    #+#             */
-/*   Updated: 2022/11/19 00:38:03 by gimmingyu        ###   ########.fr       */
+/*   Updated: 2022/11/21 15:05:37 by gimmingyu        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../include/minishell.h"
 
+static int	get_expand_end_idx(const char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i] && str[i] != '$' && str[i] != '\"' \
+		&& str[i] != '\'')
+		i++;
+	return (i);
+}
+
+static int	get_key_length(const char *str, int idx)
+{
+	int			end;
+	char		*env_key;
+
+	end = get_expand_end_idx(&str[idx + 1]);
+	env_key = ft_substr(str, idx + 1, end);
+	return (ft_strlen(env_key));
+}
+
 void	idx_is_not_zero(char **str, int *i, char *add)
 {
-	int		len;
 	char	*tmp;
 	char	*front;
 	char	*back;
 
-	len = ft_strlen(add);
-	front = ft_substr(*str, 0, (size_t) i);
-	back = ft_substr(*str, *i + len + 1, \
-		ft_strlen(*str) - *i - len - 1);
+	front = ft_substr(*str, 0, *i);
+	back = ft_substr(*str, *i + get_key_length(*str, *i) + 1, ft_strlen(*str));
 	tmp = ft_strjoin(front, add);
 	free(front);
 	free(add);
@@ -32,8 +50,6 @@ void	idx_is_not_zero(char **str, int *i, char *add)
 	free(tmp);
 	free(back);
 	check_single_pointer(*str);
-	if (len != 1)
-		*i += len;
 }
 
 void	idx_is_zero(char **str, int *i, char *add)

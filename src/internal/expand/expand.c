@@ -6,7 +6,7 @@
 /*   By: gimmingyu <gimmingyu@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 14:53:00 by bolee             #+#    #+#             */
-/*   Updated: 2022/11/19 00:38:03 by gimmingyu        ###   ########.fr       */
+/*   Updated: 2022/11/21 15:08:03 by gimmingyu        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,9 +51,7 @@ static void	replace_expand(char **str, int *idx)
 			idx_is_zero(str, idx, tmp);
 	}
 	else if ((*str)[*idx + 1] && (*str)[*idx + 1] == '$')
-	{
 		*idx += 1;
-	}
 	else
 	{
 		tmp = get_env(*str, *idx);
@@ -79,10 +77,7 @@ void	expand(t_doubly_list *lst)
 			while (node->token->value[i])
 			{
 				if (node->token->value[i] == '$')
-				{
 					replace_expand(&(node->token->value), &i);
-					continue ;
-				}
 				i++;
 			}
 		}
