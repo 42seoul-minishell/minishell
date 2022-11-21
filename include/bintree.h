@@ -30,12 +30,19 @@ t_bintree_node	*create_bintree_node(t_token *token, t_tnType type);
 void			delete_bintree_node_child(t_bintree_node *parent);
 int				delete_bintree_node_lc(t_bintree_node *parent);
 int				delete_bintree_node_rc(t_bintree_node *parent);
+int				clear_bintree_node(t_bintree_node *root);
 
 /* utils.c */
 void			display_bintree_node_child(t_bintree_node *node);
+// preorder
 void			display_bintree_node_by_preorder(t_bintree_node *node);
 void			display_bintree_by_preorder(t_bintree *bintree);
-int				clear_bintree_node(t_bintree_node *root);
+// inorder
+void			display_bintree_node_by_inorder(t_bintree_node *node);
+void			display_bintree_by_inorder(t_bintree *bintree);
+//postorder
+void			display_bintree_node_by_postorder(t_bintree_node *node);
+void			display_bintree_by_postorder(t_bintree *bintree);
 
 /* read.c */
 t_bintree_node	*get_bintree_node_by_id(t_bintree_node *node, int id);

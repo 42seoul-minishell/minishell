@@ -15,6 +15,8 @@
 int	executor(char *cmd)
 {
 	display_bintree_by_preorder(g_global->tree);
+	display_bintree_by_inorder(g_global->tree);
+	display_bintree_by_postorder(g_global->tree);
 	return (run_execute(cmd));
 }
 
@@ -28,7 +30,7 @@ int	run_execute(char *cmd)
 
 int	serve_status(char *cmd)
 {
-	int	status;
+	int status;
 
 	printf("cmd = %s\n", cmd);
 	status = EXIT_SUCCESS;
