@@ -15,10 +15,14 @@
 
 # include "struct.h"
 
+/* in src/utils/ */
+/* utils.c */
 void	free_pointers(size_t length, ...);
 void	ft_display_ctrlx_set(int flag);
 void	sig_exec(int sig);
 int		check_status(int status);
+
+/* verify_utils.c */
 int		str_parens(char *str, int i);
 int		is_have(char *str, char sep);
 
@@ -26,5 +30,9 @@ int		is_have(char *str, char sep);
 char	*safe_malloc(size_t idx);
 int		safe_insert(t_doubly_list *lst, t_tType type, char *str);
 int		is_only_space(char *str);
+
+/* malloc_tuils.c */
+void	*sp_malloc(size_t size);
+void	*dp_malloc(size_t size);
 
 #endif

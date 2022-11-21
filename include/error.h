@@ -13,13 +13,10 @@
 #ifndef ERROR_H
 # define ERROR_H
 
-# include "./struct.h"
+#include "./struct.h"
 
 /* in ../src/error/ */
 /* error.c */
-void	check_single_pointer(void *pointer);
-void	check_double_pointer(void **pointer);
 void	exit_on_error(const char *str);
-void	print_error(char *format, ...);
 
 #endif
