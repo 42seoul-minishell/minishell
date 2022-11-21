@@ -6,7 +6,7 @@
 /*   By: gimmingyu <gimmingyu@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 14:54:18 by bolee             #+#    #+#             */
-/*   Updated: 2022/11/21 15:05:37 by gimmingyu        ###   ########.fr       */
+/*   Updated: 2022/11/21 20:34:15 by gimmingyu        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,11 +45,13 @@ void	idx_is_not_zero(char **str, int *i, char *add)
 	free(front);
 	free(add);
 	free(*str);
-	check_single_pointer(tmp);
+	if (!tmp)
+		exit_on_error("Error...\n");
 	*str = ft_strjoin(tmp, back);
 	free(tmp);
 	free(back);
-	check_single_pointer(*str);
+	if (!*str)
+		exit_on_error("Error...\n");
 }
 
 void	idx_is_zero(char **str, int *i, char *add)
@@ -64,7 +66,8 @@ void	idx_is_zero(char **str, int *i, char *add)
 	*str = ft_strjoin(add, back);
 	free(back);
 	free(add);
-	check_single_pointer(*str);
+	if (!*str)
+		exit_on_error("Error...\n");
 	if (len != 1)
 		*i += len;
 }

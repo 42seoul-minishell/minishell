@@ -11,7 +11,6 @@ INC				=	../../../include
 FILES			=	check \
 					clean \
 					extract \
-					split \
 					tokenizer \
 					utils \
 					verify_brackets \
