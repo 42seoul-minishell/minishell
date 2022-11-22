@@ -25,8 +25,6 @@ t_bintree_node	*create_bintree_node(t_token *token, t_tnType type)
 {
 	t_bintree_node	*node;
 
-	if (token == NULL)
-		exit(1);
 	node = (t_bintree_node *)sp_malloc(sizeof(t_bintree_node));
 	node->type = type;
 	node->token = token;

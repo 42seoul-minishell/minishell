@@ -19,15 +19,15 @@ static int	is_valid_next_token(t_doubly_node *cur, t_doubly_node *next)
 
 	cur_type = cur->token->type;
 	next_type = next->token->type;
-	if ((cur_type == CMD && next_type == BRACKET) ||
-		(cur_type == BRACKET && next_type == CMD) ||
-		(cur_type == BRACKET && next_type == BRACKET))
+	if ((cur_type == CMD && next_type == BRACKET) \
+		|| (cur_type == BRACKET && next_type == CMD) \
+		|| (cur_type == BRACKET && next_type == BRACKET))
 		return (FALSE);
-	if ((cur_type >= INP_RDIR && cur_type <= HERE_DOC) &&
-		!(next_type >= CMD && next_type <= S_QUOTE))
+	if ((cur_type >= INP_RDIR && cur_type <= HERE_DOC) \
+		&& !(next_type >= CMD && next_type <= S_QUOTE))
 		return (FALSE);
-	if ((cur_type >= OR && cur_type <= PIPE) &&
-		(next_type >= OR && next_type <= PIPE))
+	if ((cur_type >= OR && cur_type <= PIPE) \
+		&& (next_type >= OR && next_type <= PIPE))
 		return (FALSE);
 	return (TRUE);
 }
@@ -54,10 +54,7 @@ static int	is_valid_tokens(t_doubly_list *lst)
 	}
 	if (!(cur_node->token->type >= CMD && cur_node->token->type <= S_QUOTE) && \
 			cur_node->token->type != BRACKET)
-	{
 		exit_on_error(SYNTAXERR);
-		return (FALSE);
-	}
 	return (TRUE);
 }
 
@@ -68,12 +65,10 @@ void	syntax(t_doubly_list *lst)
 	if (!lst || !lst->len)
 		exit(1);
 	node = lst->header.next;
-	if (node->token->type == AND || node->token->type == OR || node->token->type == PIPE)
-	{
+	if (node->token->type == AND || node->token->type == OR || \
+		node->token->type == PIPE)
 		exit_on_error(SYNTAXERR);
-		exit(1);
-	}
 	if (!is_valid_tokens(lst))
-		exit(1);
+		exit_on_error(SYNTAXERR);
 	set_bintree(lst, lst->header.next);
 }

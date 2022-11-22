@@ -30,7 +30,7 @@ int	run_execute(char *cmd)
 
 int	serve_status(char *cmd)
 {
-	int status;
+	int	status;
 
 	printf("cmd = %s\n", cmd);
 	status = EXIT_SUCCESS;

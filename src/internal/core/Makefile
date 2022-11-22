@@ -31,8 +31,10 @@ SRCS			=	$(addprefix $(SRCS_DIR), $(addsuffix .c, $(FILES)))
 OBJS_DIR		=	./
 OBJS			=	$(addprefix $(OBJS_DIR), $(addsuffix .o, $(FILES)))
 
+CPPFLAGS = -I/Users/bolee/.brew/opt/readline/include
+
 %.o: %.c
-	$(CC) $(CFLAGS) $(COMPILE_FLAGS) -c $< -o $@
+	$(CC) $(CFLAGS) $(CPPFLAGS) -c $< -o $@
 
 # Main rule
 all: 

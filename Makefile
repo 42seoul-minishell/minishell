@@ -64,6 +64,9 @@ COMPILE_FLAGS	= -I/opt/homebrew/opt/readline/include
 DEV_LINKING_FLAGS	= -L/opt/homebrew/opt/readline/lib
 DEV_COMPILE_FLAGS	= -I/opt/homebrew/opt/readline/include
 
+CPPFLAGS = -I/Users/bolee/.brew/opt/readline/include
+LDFLAGS = -L/Users/bolee/.brew/opt/readline/lib -lreadline
+
 # Debugging Flag
 DEBUG			= -g
 
@@ -75,7 +78,7 @@ all:
 
 # Object rule
 %.o: %.c
-	$(CC) $(CFLAGS) -I $(INC) -c $< -o $@
+	$(CC) $(CFLAGS) $(CPPFLAGS) -I $(INC) -c $< -o $@
 
 # Project file rule
 $(NAME): $(OBJS)
@@ -93,7 +96,7 @@ $(NAME): $(OBJS)
 	@make all -C $(EXPANDDIR)
 	@make all -C $(EXECUTORDIR)
 	@echo "\033[92mBuild minishell daemon...\033[0m"
-	$(CC) $(CFLAGS) $(LINKING_FLAGS) -I$(INC)minishell.h $(LIBFT) $(ERROR) $(UTILS) $(DOUBLY) $(PARSER) $(CORE) $(HASH) $(GLOBAL) $(TOKENIZER) $(SYNTAX) $(BINTREE) $(EXPAND) $(EXECUTOR) -o $(NAME) $(OBJS) 
+	$(CC) $(CFLAGS) $(LDFLAGS) -I$(INC)minishell.h $(LIBFT) $(ERROR) $(UTILS) $(DOUBLY) $(PARSER) $(CORE) $(HASH) $(GLOBAL) $(TOKENIZER) $(SYNTAX) $(BINTREE) $(EXPAND) $(EXECUTOR) -o $(NAME) $(OBJS) 
 	
 # Make clean
 clean:
