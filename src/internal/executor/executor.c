@@ -14,9 +14,7 @@
 
 int	executor(char *cmd)
 {
-	display_bintree_by_preorder(g_global->tree);
 	display_bintree_by_inorder(g_global->tree);
-	display_bintree_by_postorder(g_global->tree);
 	return (run_execute(cmd));
 }
 
