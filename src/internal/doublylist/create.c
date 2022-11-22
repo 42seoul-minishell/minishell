@@ -17,8 +17,6 @@ t_token	*create_token(t_tType type, char *value)
 	t_token	*new;
 
 	new = (t_token *)sp_malloc(sizeof(t_token));
-	if (check_type(type) == FALSE)
-		exit(1);
 	new->type = type;
 	new->value = value;
 	return (new);
