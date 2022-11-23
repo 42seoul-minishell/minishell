@@ -19,8 +19,8 @@ static void	lc_process(t_bintree_node *node, int *fd, int *pid)
 		exit(1);
 	if (*pid == 0)
 	{
-		dup2(fd[1], STDOUT_FILENO);
 		close(fd[0]);
+		dup2(fd[1], STDOUT_FILENO);
 		close(fd[1]);
 		executor(node->lc);
 	}
@@ -33,9 +33,9 @@ static void	rc_process(t_bintree_node *node, int *fd, int *pid)
 		exit(1);
 	if (*pid == 0)
 	{
+		close(fd[1]);
 		dup2(fd[0], STDIN_FILENO);
 		close(fd[0]);
-		close(fd[1]);
 		executor(node->rc);
 	}
 }

@@ -45,16 +45,16 @@ static int	is_valid_tokens(t_doubly_list *lst)
 		{
 			if (cur_node->token->type >= INP_RDIR && \
 				cur_node->token->type <= HERE_DOC)
-				exit_on_error(SYNTAXERR);
+				exit_on_error(SYNTAX_ERR);
 			else
-				exit_on_error(SYNTAXERR);
+				exit_on_error(SYNTAX_ERR);
 			return (FALSE);
 		}
 		cur_node = cur_node->next;
 	}
 	if (!(cur_node->token->type >= CMD && cur_node->token->type <= S_QUOTE) && \
 			cur_node->token->type != BRACKET)
-		exit_on_error(SYNTAXERR);
+		exit_on_error(SYNTAX_ERR);
 	return (TRUE);
 }
 
@@ -67,8 +67,8 @@ void	syntax(t_doubly_list *lst)
 	node = lst->header.next;
 	if (node->token->type == AND || node->token->type == OR || \
 		node->token->type == PIPE)
-		exit_on_error(SYNTAXERR);
+		exit_on_error(SYNTAX_ERR);
 	if (!is_valid_tokens(lst))
-		exit_on_error(SYNTAXERR);
+		exit_on_error(SYNTAX_ERR);
 	set_bintree(lst, lst->header.next);
 }

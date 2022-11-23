@@ -23,6 +23,7 @@ INC				=	../../../include
 FILES			=	create \
 					delete \
 					insert \
+					read \
 					utils
 
 SRCS_DIR		=	./

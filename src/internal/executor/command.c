@@ -34,6 +34,6 @@ void	execute_command(t_bintree_node *node)
 	else if (ft_strncmp(split[0], "exit", ft_strlen(split[0])) == 0)
 		builtin_exit();
 	else
-		exit_on_error(CMDNFERR);
+		exit_on_error(NOT_FOUND_ERR);
 	free(split);
 }

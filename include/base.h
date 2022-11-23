@@ -42,10 +42,11 @@
 # define MAGIC_NUMBER 5381
 # define DISPLAY 1
 # define NODISPLAY 0
+# define TMP_FILE "/tmp_file"
 
 /* Error message */
-# define SYNTAXERR	"syntax error near unexpected token `"
-# define CMDNFERR "command not found";
+# define SYNTAX_ERR	"syntax error near unexpected token `"
+# define NOT_FOUND_ERR "command not found";
 
 /* external variable for environment variables */
 extern char	**environ;
