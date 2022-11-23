@@ -45,6 +45,7 @@
 
 /* Error message */
 # define SYNTAXERR	"syntax error near unexpected token `"
+# define CMDNFERR "command not found";
 
 /* external variable for environment variables */
 extern char	**environ;

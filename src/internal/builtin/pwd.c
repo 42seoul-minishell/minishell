@@ -12,14 +12,13 @@
 
 #include "../../../include/minishell.h"
 
-int	builtin_pwd(void)
+void	builtin_pwd(void)
 {
-	char *path;
+	char	*path;
 
 	path = getcwd(NULL, 0);
 	if (!path)
-		return (FALSE);
+		exit_on_error(strerror(errno));
 	printf("%s\n", path);
 	free(path);
-	return (TRUE);
 }

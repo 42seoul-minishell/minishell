@@ -12,18 +12,21 @@
 
 #include "../../../include/minishell.h"
 
-int	executor(char *cmd)
+/* execute by preorder */
+void	executor(t_bintree_node *root)
 {
-	display_bintree_by_inorder(g_global->tree);
-	return (run_execute(cmd));
-}
-
-int	run_execute(char *cmd)
-{
-	int	status;
-
-	status = serve_status(cmd);
-	return (status);
+	if (root->type == TN_OR)
+		execute_or(root);
+	else if (root->type == TN_AND)
+		execute_and(root);
+	else if (root->type == TN_PIPE)
+		execute_pipe(root);
+	else if (root->type == TN_RDIR)
+		execute_redirect(root);
+	else if (root->type == TN_BRACKET)
+		execute_bracket(root);
+	else
+		execute_word(root);
 }
 
 int	serve_status(char *cmd)
