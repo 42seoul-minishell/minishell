@@ -51,7 +51,7 @@ void	insert_helper(t_doubly_list *lst, char *str, ssize_t *c, ssize_t *b)
 	op_len = get_operator_length(str + *c);
 	after_op = safe_malloc(op_len);
 	ft_strlcpy(after_op, str + *c, op_len + 1);
-	trimmed = ft_strtrim(before_op, " ");
+	trimmed = ft_strtrim(after_op, " ");
 	free(after_op);
 	if (is_only_space(trimmed) == FALSE)
 		safe_insert(lst, verify_token(trimmed), trimmed);
