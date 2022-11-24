@@ -44,14 +44,14 @@ void	insert_helper(t_doubly_list *lst, char *str, ssize_t *c, ssize_t *b)
 		before_op = safe_malloc(*c - *b);
 		ft_strlcpy(before_op, str + *b, *c - *b + 1);
 		trimmed = ft_strtrim(before_op, " ");
+		free(before_op);
 		if (is_only_space(trimmed) == FALSE)
 			safe_insert(lst, verify_token(trimmed), trimmed);
-		free(before_op);
 	}
 	op_len = get_operator_length(str + *c);
 	after_op = safe_malloc(op_len);
 	ft_strlcpy(after_op, str + *c, op_len + 1);
-	trimmed = ft_strtrim(before_op, " ");
+	trimmed = ft_strtrim(after_op, " ");
 	free(after_op);
 	if (is_only_space(trimmed) == FALSE)
 		safe_insert(lst, verify_token(trimmed), trimmed);
@@ -94,7 +94,8 @@ void	make_token_list(t_doubly_list *lst, char *str)
 	len = ft_strlen(str);
 	while (str[current] && current < len && before < len)
 	{
-		while (!is_operator(str + current) && !is_quote(str + current))
+		while (str[current] && !is_operator(str + current) \
+			&& !is_quote(str + current))
 			current++;
 		if (is_quote(str + current))
 			insert_helper_quote_case(lst, str, &current, &before);

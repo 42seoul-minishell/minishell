@@ -20,6 +20,8 @@ static int	set_bintree_type(int type)
 		return (TN_AND);
 	else if (type == PIPE)
 		return (TN_PIPE);
+	else if (type >= INP_RDIR && type <= HERE_DOC)
+		return (TN_RDIR);
 	else if (type == BRACKET)
 		return (TN_BRACKET);
 	else
@@ -43,7 +45,7 @@ static void	lower_priority(t_bintree_node *node)
 
 	flag = 0;
 	node_type = node->type;
-	if (node_type == TN_OR || node_type == TN_AND || node_type == TN_PIPE)
+	if (node_type >= TN_OR && node_type <= TN_RDIR)
 		flag = 1;
 	if (g_global->tree->root->type < node_type && flag)
 	{
@@ -63,7 +65,7 @@ void	set_bintree(t_doubly_list *lst, t_doubly_node *node)
 {
 	t_bintree_node	*bt_node;
 
-	if (node->next == lst->header.next)
+	if (g_global->tree->root && node == lst->header.next)
 		return ;
 	bt_node = create_bintree_node(\
 		create_token(node->token->type, node->token->value), \
