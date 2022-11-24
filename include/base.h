@@ -46,7 +46,7 @@
 
 /* Error message */
 # define SYNTAX_ERR	"syntax error near unexpected token `"
-# define NOT_FOUND_ERR "command not found";
+# define NOT_FOUND_ERR "command not found"
 
 /* external variable for environment variables */
 extern char	**environ;

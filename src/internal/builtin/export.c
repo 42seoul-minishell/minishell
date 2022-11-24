@@ -12,6 +12,23 @@
 
 #include "../../../include/minishell.h"
 
+/* 
+	- input -
+	export h = 1
+
+	- result -
+	h에 대한 value가 없어 정상 작동 되지 않음
+	+
+	bash: export: `=': not a valid identifier
+	bash: export: `1': not a valid identifier
+
+
+	- input -
+	export a=1 b=2
+	
+	- result -
+	둘 다 정상적으로 저장됨
+*/
 int	builtin_export(char *key, char *value)
 {
 	size_t			idx;

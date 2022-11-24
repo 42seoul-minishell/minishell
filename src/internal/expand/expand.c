@@ -12,7 +12,7 @@
 
 #include "../../../include/minishell.h"
 
-static int	get_expand_end_idx(const char *str)
+static int	_get_expand_end_idx(const char *str)
 {
 	int	i;
 
@@ -23,13 +23,13 @@ static int	get_expand_end_idx(const char *str)
 	return (i);
 }
 
-static char	*get_env(const char *str, int idx)
+static char	*_get_env(const char *str, int idx)
 {
-	int			end;
-	char		*env_key;
-	char		*env_value;
+	int		end;
+	char	*env_key;
+	char	*env_value;
 
-	end = get_expand_end_idx(&str[idx + 1]);
+	end = _get_expand_end_idx(&str[idx + 1]);
 	env_key = ft_substr(str, idx + 1, end);
 	env_value = search(g_global->envp, env_key);
 	if (!env_value)
@@ -37,7 +37,7 @@ static char	*get_env(const char *str, int idx)
 	return (ft_strdup(env_value));
 }
 
-static void	replace_expand(char **str, int *idx)
+static void	_replace_expand(char **str, int *idx)
 {
 	char	*tmp;
 
@@ -55,7 +55,7 @@ static void	replace_expand(char **str, int *idx)
 		*idx += 1;
 	else
 	{
-		tmp = get_env(*str, *idx);
+		tmp = _get_env(*str, *idx);
 		if (!tmp)
 			exit_on_error("Error...");
 		if (*idx)
@@ -67,24 +67,25 @@ static void	replace_expand(char **str, int *idx)
 
 void	expand(t_doubly_list *lst)
 {
-	int				i;
+	int			i;
 	t_doubly_node	*node;
 
 	node = lst->header.next;
 	while (node)
 	{
-		if (node->token->type >= CMD && node->token->type <= D_QUOTE)
+		if (node->token->type >= CMD \
+			&& node->token->type <= D_QUOTE)
 		{
 			i = 0;
 			while (node->token->value[i])
 			{
 				if (node->token->value[i] == '$')
-					replace_expand(&(node->token->value), &i);
+					_replace_expand(&(node->token->value), &i);
 				i++;
 			}
 		}
 		node = node->next;
 		if (node == lst->header.next)
-			break ;
+			break;
 	}
 }

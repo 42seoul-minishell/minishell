@@ -12,9 +12,9 @@
 
 #include "../../../include/minishell.h"
 
-static void set_res(char *res, char *str)
+static char	*_set_res(char *res, char *str)
 {
-	char *tmp;
+	char	*tmp;
 
 	if (!res)
 		return (str);
@@ -26,11 +26,11 @@ static void set_res(char *res, char *str)
 	return (tmp);
 }
 
-static void convert_wildcard(DIR *dir, t_wildcard *wildcard)
+static void	_convert_wildcard(DIR *dir, t_wildcard *wildcard)
 {
-	char *res;
-	char *tmp;
-	struct dirent *dirent;
+	char			*res;
+	char			*tmp;
+	struct dirent	*dirent;
 
 	res = NULL;
 	dirent = readdir(dir);
@@ -46,16 +46,16 @@ static void convert_wildcard(DIR *dir, t_wildcard *wildcard)
 			tmp = both_have(dirent->d_name, wildcard);
 		if (!tmp)
 			exit(1);
-		res = set_res(res, tmp);
+		res = _set_res(res, tmp);
 		dirent = readdir(dir);
 	}
 	return (tmp);
 }
 
-static char *wildcard_to_str(char *str)
+static char	*_wildcard_to_str(char *str)
 {
-	char *res;
-	DIR *dir;
+	char		*res;
+	DIR			*dir;
 	t_wildcard *wildcard;
 
 	wildchard = (t_wildcard *)sp_malloc(sizeof(t_wildcard));
@@ -70,7 +70,7 @@ static char *wildcard_to_str(char *str)
 		printf("%s\n", strerror(errno));
 		return;
 	}
-	res = convert_wildcard(dir, wildcard);
+	res = _convert_wildcard(dir, wildcard);
 	closedir(dir);
 	free(wildcard->prefix);
 	free(wildcard->suffix);
@@ -78,17 +78,17 @@ static char *wildcard_to_str(char *str)
 	return (res);
 }
 
-void wildcard(t_doubly_list *lst)
+void	wildcard(t_doubly_list *lst)
 {
-	char *tmp;
-	t_doubly_node *node;
+	char			*tmp;
+	t_doubly_node	*node;
 
 	node = lst->header.next;
 	while (node)
 	{
 		if (ft_strchr(node->token->value, '*'))
 		{
-			tmp = wildcard_to_str(node->token->value);
+			tmp = _wildcard_to_str(node->token->value);
 			if (!tmp)
 			{
 				free(node->token->value);

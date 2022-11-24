@@ -12,7 +12,7 @@
 
 #include "../../../include/minishell.h"
 
-static int	is_valid_next_token(t_doubly_node *cur, t_doubly_node *next)
+static int	_is_valid_next_token(t_doubly_node *cur, t_doubly_node *next)
 {
 	int	cur_type;
 	int	next_type;
@@ -32,7 +32,7 @@ static int	is_valid_next_token(t_doubly_node *cur, t_doubly_node *next)
 	return (TRUE);
 }
 
-static int	is_valid_tokens(t_doubly_list *lst)
+static int	_is_valid_tokens(t_doubly_list *lst)
 {
 	t_doubly_node	*cur_node;
 	t_doubly_node	*next_node;
@@ -41,9 +41,9 @@ static int	is_valid_tokens(t_doubly_list *lst)
 	while (cur_node != lst->header.prev)
 	{
 		next_node = cur_node->next;
-		if (is_valid_next_token(cur_node, next_node) == FALSE)
+		if (_is_valid_next_token(cur_node, next_node) == FALSE)
 		{
-			if (cur_node->token->type >= INP_RDIR && \
+			if (cur_node->token->type >= INP_RDIR &&
 				cur_node->token->type <= HERE_DOC)
 				exit_on_error(SYNTAX_ERR);
 			else
@@ -52,8 +52,9 @@ static int	is_valid_tokens(t_doubly_list *lst)
 		}
 		cur_node = cur_node->next;
 	}
-	if (!(cur_node->token->type >= CMD && cur_node->token->type <= S_QUOTE) && \
-			cur_node->token->type != BRACKET)
+	if (!(cur_node->token->type >= CMD \
+		&& cur_node->token->type <= S_QUOTE) \
+		&& cur_node->token->type != BRACKET)
 		exit_on_error(SYNTAX_ERR);
 	return (TRUE);
 }
@@ -65,10 +66,10 @@ void	syntax(t_doubly_list *lst)
 	if (!lst || !lst->len)
 		exit(1);
 	node = lst->header.next;
-	if (node->token->type == AND || node->token->type == OR || \
+	if (node->token->type == AND || node->token->type == OR ||
 		node->token->type == PIPE)
 		exit_on_error(SYNTAX_ERR);
-	if (!is_valid_tokens(lst))
+	if (!_is_valid_tokens(lst))
 		exit_on_error(SYNTAX_ERR);
 	set_bintree(lst, lst->header.next);
 }

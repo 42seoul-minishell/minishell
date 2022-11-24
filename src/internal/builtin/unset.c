@@ -12,6 +12,10 @@
 
 #include "../../../include/minishell.h"
 
+/*
+	key가 없는 key일 경우
+	=> 아무 작동도 하지 않음
+*/
 void	builtin_unset(char *key)
 {
 	delete_item_by_key(g_global->envp, key);

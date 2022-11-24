@@ -12,7 +12,7 @@
 
 #include "../../../include/minishell.h"
 
-static void	input_redirect(t_bintree_node *node)
+static void	_input_redirect(t_bintree_node *node)
 {
 	int				fd;
 	t_bintree_node	*last_rc;
@@ -25,7 +25,7 @@ static void	input_redirect(t_bintree_node *node)
 	close(fd);
 }
 
-static void	ouput_redirect(t_bintree_node *node)
+static void	_ouput_redirect(t_bintree_node *node)
 {
 	int	fd;
 
@@ -37,9 +37,9 @@ static void	ouput_redirect(t_bintree_node *node)
 	close(fd);
 }
 
-static void	append_redirect(t_bintree_node *node)
+static void _append_redirect(t_bintree_node *node)
 {
-	int	fd;
+	int fd;
 
 	fd = open(node->rc->token->value, \
 		O_CREAT | O_WRONLY | O_APPEND, 0644);
@@ -52,11 +52,11 @@ static void	append_redirect(t_bintree_node *node)
 void	execute_redirect(t_bintree_node *node)
 {
 	if (node->token->type == INP_RDIR)
-		input_redirect(node);
+		_input_redirect(node);
 	else if (node->token->type == OUT_RDIR)
-		ouput_redirect(node);
+		_ouput_redirect(node);
 	else if (node->token->type == APP_RDIR)
-		append_redirect(node);
+		_append_redirect(node);
 	else if (node->token->type == HERE_DOC)
 		heredoc_redirect(node);
 }

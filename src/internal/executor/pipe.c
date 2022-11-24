@@ -12,7 +12,7 @@
 
 #include "../../../include/minishell.h"
 
-static void	lc_process(t_bintree_node *node, int *fd, int *pid)
+static void	_lc_process(t_bintree_node *node, int *fd, int *pid)
 {
 	*pid = fork();
 	if (*pid < 0)
@@ -26,7 +26,7 @@ static void	lc_process(t_bintree_node *node, int *fd, int *pid)
 	}
 }
 
-static void	rc_process(t_bintree_node *node, int *fd, int *pid)
+static void	_rc_process(t_bintree_node *node, int *fd, int *pid)
 {
 	*pid = fork();
 	if (*pid < 0)
@@ -47,9 +47,9 @@ void	execute_pipe(t_bintree_node *node)
 
 	if (pipe(fd) == -1)
 		exit(1);
-	lc_process(node, fd, &pid[0]);
+	_lc_process(node, fd, &pid[0]);
 	if (pid[0])
-		rc_process(node, fd, &pid[1]);
+		_rc_process(node, fd, &pid[1]);
 	close(fd[0]);
 	close(fd[1]);
 	waitpid(pid[0], NULL, 0);

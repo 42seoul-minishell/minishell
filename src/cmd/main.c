@@ -12,13 +12,13 @@
 
 #include "../../include/minishell.h"
 
-static void	save_history(char *input)
+static void	_save_history(char *input)
 {
 	if (input && *input)
 		add_history(input);
 }
 
-static void	sys_stdin(char **input_ptr)
+static void	_sys_stdin(char **input_ptr)
 {
 	char	*prompt;
 
@@ -34,7 +34,7 @@ static void	sys_stdin(char **input_ptr)
 	free(prompt);
 }
 
-static void	run(void)
+static void	_run(void)
 {
 	char	*input;
 	char	*temp;
@@ -44,18 +44,17 @@ static void	run(void)
 		dup2(g_global->fd_stdin, STDIN_FILENO);
 		dup2(g_global->fd_stdout, STDOUT_FILENO);
 		input = NULL;
-		sys_stdin(&input);
-		save_history(input);
+		_sys_stdin(&input);
+		_save_history(input);
 		temp = ft_strdup(input);
 		parser(temp);
 		executor(temp);
 		free(input);
 		free(temp);
-		break ;
+		break;
 	}
 }
 
-// echo "hello world" > test.txt | cat < test.txt > other.txt
 int	main(int ac, char **av, char **envp)
 {
 	t_hashtable	*table;
@@ -67,6 +66,6 @@ int	main(int ac, char **av, char **envp)
 	table = parse_env_to_hashtable(envp);
 	tree = create_bintree();
 	g_global = create_global(tree, table);
-	run();
+	_run();
 	return (0);
 }

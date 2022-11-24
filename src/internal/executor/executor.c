@@ -12,7 +12,7 @@
 
 #include "../../../include/minishell.h"
 
-/* execute by preorder */
+/* execute by preorder and inorder */
 void	executor(t_bintree_node *root)
 {
 	if (root->type == TN_OR)

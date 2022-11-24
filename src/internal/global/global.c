@@ -27,6 +27,6 @@ t_global	*create_global(t_bintree *tree, t_hashtable *envp)
 	if (tcgetattr(STDIN_FILENO, &(global->nodisplay_set)) == ERROR)
 		exit_on_error("minsh: tcgetattr");
 	global->nodisplay_set.c_lflag &= ~ECHOCTL;
-	ft_display_ctrlx_set(NODISPLAY);
+	display_ctrlx_set(NODISPLAY);
 	return (global);
 }
