@@ -28,6 +28,7 @@
 # include "./bintree.h"
 # include "./expand.h"
 # include "./parser.h"
+# include "./wildcard.h"
 
 t_global		*g_global;
 

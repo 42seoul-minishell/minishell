@@ -16,11 +16,11 @@ char	*get_prefix(char *str)
 	return (prefix);
 }
 
-char *get_suffix(char *str)
+char	*get_suffix(char *str)
 {
-	char *suffix;
-	int pos;
-	int len;
+	char	*suffix;
+	int		pos;
+	int		len;
 
 	pos = 0;
 	len = ft_strlen(str);

@@ -26,7 +26,7 @@ static char	*_set_res(char *res, char *str)
 	return (tmp);
 }
 
-static void	_convert_wildcard(DIR *dir, t_wildcard *wildcard)
+static char	*_convert_wildcard(DIR *dir, t_wildcard *wildcard)
 {
 	char			*res;
 	char			*tmp;
@@ -58,17 +58,17 @@ static char	*_wildcard_to_str(char *str)
 	DIR			*dir;
 	t_wildcard *wildcard;
 
-	wildchard = (t_wildcard *)sp_malloc(sizeof(t_wildcard));
-	wildcard.prefix = get_prefix(str);
-	wildcard.suffix = get_suffix(str);
-	if (wildchard.prefix[ft_strlen(wildcard.prefix) - 1] == '/')
-		dir = opendir(wildcard.prefix);
+	wildcard = (t_wildcard *)sp_malloc(sizeof(t_wildcard));
+	wildcard->prefix = get_prefix(str);
+	wildcard->suffix = get_suffix(str);
+	if (wildcard->prefix[ft_strlen(wildcard->prefix) - 1] == '/')
+		dir = opendir(wildcard->prefix);
 	else
 		dir = opendir(".");
 	if (!dir)
 	{
 		printf("%s\n", strerror(errno));
-		return;
+		return (NULL);	
 	}
 	res = _convert_wildcard(dir, wildcard);
 	closedir(dir);
@@ -90,13 +90,12 @@ void	wildcard(t_doubly_list *lst)
 		{
 			tmp = _wildcard_to_str(node->token->value);
 			if (!tmp)
-			{
-				free(node->token->value);
-				node->token->value = tmp;
-			}
+				break ;
+			free(node->token->value);
+			node->token->value = tmp;
 		}
 		node = node->next;
 		if (node == lst->header.next)
-			break;
+			break ;
 	}
 }
