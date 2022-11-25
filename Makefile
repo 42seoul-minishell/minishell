@@ -95,8 +95,9 @@ $(NAME): $(OBJS)
 	@make all -C $(BINTREEDIR)
 	@make all -C $(EXPANDDIR)
 	@make all -C $(EXECUTORDIR)
+	@make all -C $(WILDCARDDIR)
 	@echo "\033[92mBuild minishell daemon...\033[0m"
-	$(CC) $(CFLAGS) $(LDFLAGS) -I$(INC)minishell.h $(LIBFT) $(ERROR) $(UTILS) $(DOUBLY) $(PARSER) $(CORE) $(HASH) $(GLOBAL) $(TOKENIZER) $(SYNTAX) $(BINTREE) $(EXPAND) $(EXECUTOR) -o $(NAME) $(OBJS) 
+	$(CC) $(CFLAGS) $(LDFLAGS) -I$(INC)minishell.h $(LIBFT) $(ERROR) $(UTILS) $(DOUBLY) $(PARSER) $(CORE) $(HASH) $(GLOBAL) $(TOKENIZER) $(SYNTAX) $(BINTREE) $(EXPAND) $(EXECUTOR) $(WILDCARD) -o $(NAME) $(OBJS) 
 	
 # Make clean
 clean:
@@ -115,6 +116,7 @@ clean:
 	make -C $(BINTREEDIR) clean
 	make -C $(EXPANDDIR) clean
 	make -C $(EXECUTORDIR) clean
+	make -c $(WILDCARDDIR) clean
 	
 	
 
@@ -137,6 +139,7 @@ fclean:
 	make -C $(BINTREEDIR) fclean
 	make -C $(EXPANDDIR) fclean
 	make -C $(EXECUTORDIR) fclean
+	make -C $(WILDCARDDIR) fclean
 	
 
 # Make re

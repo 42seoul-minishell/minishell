@@ -12,39 +12,28 @@
 
 #include "../../../include/minishell.h"
 
-// static int	_insert_env_node(t_doubly_list *lst, t_doubly_node *node)
-// {
-// 	return (insert_node(lst, node));
-// }
+/* 
+	- input -
+	export h = 1
 
-// static void	_update_value(t_doubly_node *node, char *value)
-// {
-// 	free(node->token->value);
-// 	node->token->value = value;
-// }
+	- result -
+	h에 대한 value가 없어 정상 작동 되지 않음
+	+
+	bash: export: `=': not a valid identifier
+	bash: export: `1': not a valid identifier
 
-// int	builtin_export(t_doubly_list *lst, char *key, char *value)
-// {
-// 	char			*temp;
-// 	char			*full_string;
-// 	t_doubly_node	*node;
 
-// 	temp = ft_strjoin(key, "=");
-// 	full_string = ft_strjoin(temp, value);
-// 	free(temp);
-// 	node = find_doubly_node(lst, full_string);
-// 	if (!node)
-// 		_insert_env_node(lst, node);
-// 	else
-// 		_update_value(node, full_string);
-// 	return (TRUE);
-// }
-
+	- input -
+	export a=1 b=2
+	
+	- result -
+	둘 다 정상적으로 저장됨
+*/
 int	builtin_export(char *key, char *value)
 {
 	size_t			idx;
-	t_ht_item 	*item;
-	char 		*tmp;
+	t_ht_item		*item;
+	char			*tmp;
 
 	tmp = search(g_global->envp, key);
 	if (!tmp)

@@ -16,8 +16,8 @@
 # include "./struct.h"
 
 /* executor.c */
-int		executor(char *cmd);
-int		run_execute(char *cmd);
+void	executor(t_bintree_node *root);
+// int		run_execute(char *cmd);
 int		serve_status(char *cmd);
 int		serve_status(char *cmd);
 

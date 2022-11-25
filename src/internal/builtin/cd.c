@@ -14,7 +14,7 @@
 
 void	_invalid_err_cd(const char *str)
 {
-	printf("cd: No such file or directory: %s\n", str);
+	printf("minishell: cd: %s: No such file or directory\n", str);
 }
 
 int	builtin_cd(char *directory)

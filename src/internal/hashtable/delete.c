@@ -40,33 +40,38 @@ void	delete_table(t_hashtable *table)
 	free(table);
 }
 
+static void	*_set_new_hashtable(t_hashtable *table, t_ht_item *item, t_ht_item *prev, size_t idx)
+{
+	t_ht_item	*tmp;
+
+	if (!prev)
+	{
+		tmp = item->next;
+		delete_item(item);
+		table->items[idx] = tmp;
+	}
+	else
+	{
+		tmp = item->next;
+		prev->next = tmp;
+		delete_item(item);
+	}
+}
+
 void	delete_item_by_key(t_hashtable *table, char *key)
 {
 	size_t		idx;
 	t_ht_item	*item;
 	t_ht_item	*prev;
-	t_ht_item	*tmp;
 
 	idx = hash_index(key, table->size);
 	item = table->items[idx];
-	prev = NULL;
 	while (item)
 	{
 		if (ft_strncmp(item->key, key, ft_strlen(key) + 1) == 0)
 		{
-			if (!prev)
-			{
-				tmp = item->next;
-				delete_item(item);
-				table->items[idx] = tmp;
-			}
-			else
-			{
-				tmp = item->next;
-				prev->next = tmp;
-				delete_item(item);
-			}
-			break ;
+			_set_new_hashtable(table, item, prev, idx);
+			break;
 		}
 		prev = item;
 		item = item->next;

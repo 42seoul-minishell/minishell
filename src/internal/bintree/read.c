@@ -1,22 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   unset.c                                            :+:      :+:    :+:   */
+/*   read.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bolee <bolee@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/23 14:58:23 by bolee             #+#    #+#             */
-/*   Updated: 2022/11/23 14:58:24 by bolee            ###   ########.fr       */
+/*   Created: 2022/11/23 16:43:14 by bolee             #+#    #+#             */
+/*   Updated: 2022/11/23 16:43:17 by bolee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../include/minishell.h"
+#include "../../../include/minishell.h";
 
-/*
-	key가 없는 key일 경우
-	=> 아무 작동도 하지 않음
-*/
-void	builtin_unset(char *key)
+t_bintree_node	*get_last_rc_node(t_bintree_node *node)
 {
-	delete_item_by_key(g_global->envp, key);
+	t_bintree_node	*tmp;
+
+	tmp = node;
+	while (tmp)
+		tmp = node->rc;
+	return (tmp);
+}
+
+t_bintree_node	*get_last_lc_node(t_bintree_node *node)
+{
+	t_bintree_node	*tmp;
+
+	tmp = node;
+	while (tmp)
+		tmp = node->lc;
+	return (tmp);
 }

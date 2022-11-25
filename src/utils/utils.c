@@ -29,7 +29,7 @@ void	free_pointers(size_t length, ...)
 	printf("END");
 }
 
-void	ft_display_ctrlx_set(int flag)
+void	display_ctrlx_set(int flag)
 {
 	if (flag == DISPLAY)
 		tcsetattr(STDIN_FILENO, TCSANOW, &(g_global->display_set));

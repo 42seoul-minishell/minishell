@@ -12,7 +12,7 @@
 
 #include "../../../include/minishell.h"
 
-static int	set_bintree_type(int type)
+static int	_set_bintree_type(int type)
 {
 	if (type == OR)
 		return (TN_OR);
@@ -28,7 +28,7 @@ static int	set_bintree_type(int type)
 		return (TN_WORD);
 }
 
-static void	upper_priority(t_bintree_node *node)
+static void	_upper_priority(t_bintree_node *node)
 {
 	if (g_global->tree->root->type >= node->type)
 	{
@@ -37,7 +37,7 @@ static void	upper_priority(t_bintree_node *node)
 	}
 }
 
-static void	lower_priority(t_bintree_node *node)
+static void	_lower_priority(t_bintree_node *node)
 {
 	int				flag;
 	t_tnType		node_type;
@@ -66,17 +66,17 @@ void	set_bintree(t_doubly_list *lst, t_doubly_node *node)
 	t_bintree_node	*bt_node;
 
 	if (g_global->tree->root && node == lst->header.next)
-		return ;
-	bt_node = create_bintree_node(\
-		create_token(node->token->type, node->token->value), \
-		set_bintree_type(node->token->type));
+		return;
+	bt_node = create_bintree_node(
+		create_token(node->token->type, node->token->value),
+		_set_bintree_type(node->token->type));
 	if (g_global->tree->root == NULL)
 	{
 		g_global->tree->root = bt_node;
 		set_bintree(lst, node->next);
-		return ;
+		return;
 	}
-	upper_priority(bt_node);
-	lower_priority(bt_node);
+	_upper_priority(bt_node);
+	_lower_priority(bt_node);
 	set_bintree(lst, node->next);
 }

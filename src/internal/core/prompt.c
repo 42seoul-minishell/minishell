@@ -12,7 +12,7 @@
 
 #include "../../../include/minishell.h"
 
-static char	*get_pwd(void)
+static char	*_get_pwd(void)
 {
 	char	*buffer;
 
@@ -20,12 +20,12 @@ static char	*get_pwd(void)
 	return (getcwd(buffer, 0));
 }
 
-static char	*init_prompt_name(void)
+static char	*_init_prompt_name(void)
 {
 	return (ft_strdup("MICRO SHELL"));
 }
 
-static char	*concat_prompt_name(char *pwd, char *name, char *tail)
+static char	*_concat_prompt_name(char *pwd, char *name, char *tail)
 {
 	char	*full_sentence;
 	char	*temp;
@@ -45,9 +45,9 @@ char	*create_prompt(void)
 	char	*name;
 	char	*tail;
 
-	pwd = get_pwd();
+	pwd = _get_pwd();
 	printf("pwd = %s\n", pwd);
-	name = init_prompt_name();
+	name = _init_prompt_name();
 	tail = ft_strdup("$ ");
-	return (concat_prompt_name(name, ft_strdup(" "), tail));
+	return (_concat_prompt_name(name, ft_strdup(" "), tail));
 }

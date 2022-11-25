@@ -38,6 +38,7 @@ void			display_bintree_node_by_inorder(t_bintree_node *node);
 void			display_bintree_by_inorder(t_bintree *bintree);
 
 /* read.c */
-t_bintree_node	*get_bintree_node_by_id(t_bintree_node *node, int id);
+t_bintree_node	*get_last_rc_node(t_bintree_node *node);
+t_bintree_node	*get_last_lc_node(t_bintree_node *node);
 
 #endif

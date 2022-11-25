@@ -12,6 +12,22 @@
 
 #include "../../../include/minishell.h"
 
+/*
+   - input -
+   exit hello
+
+   - result -
+   exit
+   bash: exit: hello: numeric argument required
+
+
+   - input -
+   exit hello world
+
+   - result -
+   exit
+   bash: exit: hello: numeric argument required
+*/
 void	builtin_exit(int signal)
 {
 	printf("exit\n");
