@@ -12,10 +12,12 @@
 
 #include "../../../include/minishell.h"
 
-void	execute_command(t_bintree_node *node)
+static void _separate_cmd(t_bintree_node *node)
 {
-	char	**split;
+	char **split;
 
+	if (!node)
+		return;
 	split = ft_split(node->token->value, ' ');
 	if (!split)
 		exit(1);
@@ -36,4 +38,11 @@ void	execute_command(t_bintree_node *node)
 	else
 		exit_on_error(NOT_FOUND_ERR);
 	free(split);
+}
+
+void execute_command(t_bintree_node *node)
+{
+	executor(node->lc);
+	_separate_cmd(node);
+	executor(node->rc);
 }

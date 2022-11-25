@@ -12,46 +12,35 @@
 
 #include "../../../include/minishell.h"
 
-static void	_lc_process(t_bintree_node *node, int *fd, int *pid)
+static void _lc_process(t_bintree_node *node, int *fd)
 {
-	*pid = fork();
-	if (*pid < 0)
-		exit(1);
-	if (*pid == 0)
-	{
-		close(fd[0]);
-		dup2(fd[1], STDOUT_FILENO);
-		close(fd[1]);
-		executor(node->lc);
-	}
+	close(fd[0]);
+	dup2(fd[1], STDOUT_FILENO);
+	close(fd[1]);
+	executor(node->lc);
 }
 
-static void	_rc_process(t_bintree_node *node, int *fd, int *pid)
+static void _rc_process(t_bintree_node *node, int *fd)
 {
-	*pid = fork();
-	if (*pid < 0)
-		exit(1);
-	if (*pid == 0)
-	{
-		close(fd[1]);
-		dup2(fd[0], STDIN_FILENO);
-		close(fd[0]);
-		executor(node->rc);
-	}
+	close(fd[1]);
+	dup2(fd[0], STDIN_FILENO);
+	close(fd[0]);
+	executor(node->rc);
 }
 
-void	execute_pipe(t_bintree_node *node)
+void execute_pipe(t_bintree_node *node)
 {
-	int	fd[2];
-	int	pid[2];
+	int fd[2];
+	int pid;
 
 	if (pipe(fd) == -1)
 		exit(1);
-	_lc_process(node, fd, &pid[0]);
-	if (pid[0])
-		_rc_process(node, fd, &pid[1]);
-	close(fd[0]);
-	close(fd[1]);
-	waitpid(pid[0], NULL, 0);
-	waitpid(pid[1], NULL, 0);
+	pid = fork();
+	if (pid < 0)
+		exit_on_error(strerror(errno));
+	if (pid == 0)
+		_lc_process(node, fd);
+	else
+		_rc_process(node, fd);
+	waitpid(pid, NULL, 0);
 }
