@@ -17,7 +17,6 @@
 
 /* in src/utils/ */
 /* utils.c */
-void	free_pointers(size_t length, ...);
 void	display_ctrlx_set(int flag);
 void	sig_exec(int sig);
 int		check_status(int status);

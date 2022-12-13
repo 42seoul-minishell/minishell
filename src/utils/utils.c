@@ -12,23 +12,6 @@
 
 #include "../../include/minishell.h"
 
-void	free_pointers(size_t length, ...)
-{
-	va_list	ap;
-	void	*next;
-	size_t	idx;
-
-	idx = 0;
-	va_start(ap, length);
-	while (idx < length)
-	{
-		next = va_arg(ap, void *);
-		free(next);
-	}
-	va_end(ap);
-	printf("END");
-}
-
 void	display_ctrlx_set(int flag)
 {
 	if (flag == DISPLAY)
