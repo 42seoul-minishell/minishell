@@ -15,7 +15,8 @@
 static void _lc_process(t_bintree_node *node, int *fd)
 {
 	close(fd[0]);
-	dup2(fd[1], STDOUT_FILENO);
+	dup2(fd[1], g_global.fd_stdout);
+	g_global.fd_stdout = fd[1];
 	close(fd[1]);
 	executor(node->lc);
 }
@@ -23,7 +24,8 @@ static void _lc_process(t_bintree_node *node, int *fd)
 static void _rc_process(t_bintree_node *node, int *fd)
 {
 	close(fd[1]);
-	dup2(fd[0], STDIN_FILENO);
+	dup2(fd[0], g_global.fd_stdin);
+	g_global.fd_stdin = fd[0];
 	close(fd[0]);
 	executor(node->rc);
 }
