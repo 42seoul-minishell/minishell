@@ -28,7 +28,7 @@ void	not_found_error(const char *str)
 	printf("minish: %s: command not found\n", str);
 }
 
-void	no_file_direct_error(const char *str)
+void	no_file_direct_error(const char *str1, const char *str2)
 {
-	printf("minish: %s: No such file or directory\n", str);
+	printf("%s: %s: No such file or directory\n", str1, str2);
 }

@@ -28,6 +28,7 @@
 # include <termios.h>
 # include <dirent.h>
 # include <errno.h>
+
 /* GNU readline header */
 # include <readline/readline.h>
 # include <readline/history.h>
@@ -42,9 +43,6 @@
 # define MAGIC_NUMBER 5381
 # define DISPLAY 1
 # define NODISPLAY 0
-# define TMP_FILE "/tmp_file"
-
-/* external variable for environment variables */
-extern char	**environ;
+# define TMP_FILE "./tmp_file"
 
 #endif

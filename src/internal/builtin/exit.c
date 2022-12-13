@@ -31,6 +31,6 @@
 void	builtin_exit(int signal)
 {
 	printf("exit\n");
-	g_global->status = signal;
+	g_global.status = signal;
 	exit(signal);
 }

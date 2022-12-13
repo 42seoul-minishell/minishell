@@ -16,7 +16,7 @@ void interrupt_here_document(int signal)
 {
 	if (signal == SIGINT)
 	{
-		g_global->status = 130;
+		g_global.status = 130;
 		ft_putchar_fd('\n', 1);
 		exit(130);
 	}
@@ -89,7 +89,7 @@ void heredoc_redirect(t_bintree_node *node, char *eof, int *save_fd)
 	if (WIFEXITED(status))
 	{
 		close(tmp_fd);
-		g_global->status = WEXITSTATUS(status);
+		g_global.status = WEXITSTATUS(status);
 	}
 	_make_tmp_file_input();
 	dup2(save_fd_out, STDOUT_FILENO);

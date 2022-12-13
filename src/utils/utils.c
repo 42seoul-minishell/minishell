@@ -14,10 +14,15 @@
 
 void	display_ctrlx_set(int flag)
 {
+	int	return_val;
+
+	return_val = 0;
 	if (flag == DISPLAY)
-		tcsetattr(STDIN_FILENO, TCSANOW, &(g_global->display_set));
+		return_val = tcsetattr(STDIN_FILENO, TCSANOW, &(g_global.display_set));
 	else if (flag == NODISPLAY)
-		tcsetattr(STDOUT_FILENO, TCSANOW, &(g_global->nodisplay_set));
+		return_val = tcsetattr(STDIN_FILENO, TCSANOW, &(g_global.nodisplay_set));
+	if (return_val == ERROR)
+		exit_error("\033[31mError: tcsetattr(): Falied to set attribute\n\033[0m");
 }
 
 void	sig_exec(int sig)
@@ -34,7 +39,7 @@ void	redir_unlink(void)
 	char	*filename;
 
 	hd_cnt = 0;
-	while (hd_cnt <= g_global->heredoc_cnt)
+	while (hd_cnt <= g_global.heredoc_cnt)
 	{
 		filename = ft_strjoin(".here_doc", ft_itoa(hd_cnt));
 		if (access(filename, F_OK) == 0)

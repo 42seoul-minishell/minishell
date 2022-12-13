@@ -16,6 +16,6 @@
 # include "base.h"
 # include "struct.h"
 
-t_global	*create_global(t_bintree *tree, t_hashtable *envp);
+void	create_global(t_bintree *tree, t_hashtable *envp);
 
 #endif

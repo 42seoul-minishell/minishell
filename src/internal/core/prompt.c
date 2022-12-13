@@ -22,7 +22,7 @@ static char	*_get_pwd(void)
 
 static char	*_init_prompt_name(void)
 {
-	return (ft_strdup("MICRO SHELL"));
+	return (ft_strdup("MINISHELL"));
 }
 
 static char	*_concat_prompt_name(char *pwd, char *name, char *tail)

@@ -14,5 +14,5 @@
 
 void	builtin_env(void)
 {
-	display_hashtable(g_global->envp);
+	display_hashtable(g_global.envp);
 }

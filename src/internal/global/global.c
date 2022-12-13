@@ -12,21 +12,17 @@
 
 #include "../../../include/minishell.h"
 
-t_global	*create_global(t_bintree *tree, t_hashtable *envp)
+void	create_global(t_bintree *tree, t_hashtable *envp)
 {
-	t_global	*global;
-
-	global = (t_global *)sp_malloc(sizeof(t_global));
-	global->envp = envp;
-	global->status = 0;
-	global->fd_stdin = dup(STDIN_FILENO);
-	global->fd_stdout = dup(STDOUT_FILENO);
-	global->tree = tree;
-	if (tcgetattr(STDIN_FILENO, &(global->display_set)) == ERROR)
+	g_global.envp = envp;
+	g_global.status = 0;
+	g_global.fd_stdin = dup(STDIN_FILENO);
+	g_global.fd_stdout = dup(STDOUT_FILENO);
+	g_global.tree = tree;
+	if (tcgetattr(STDIN_FILENO, &(g_global.display_set)) == ERROR)
 		exit_error("\033[31mError: tcgetattr(): Falied to get attribute\n\033[0m");
-	if (tcgetattr(STDIN_FILENO, &(global->nodisplay_set)) == ERROR)
+	if (tcgetattr(STDIN_FILENO, &(g_global.nodisplay_set)) == ERROR)
 		exit_error("\033[31mError: tcgetattr(): Falied to get attribute\n\033[0m");
-	global->nodisplay_set.c_lflag &= ~ECHOCTL;
+	g_global.nodisplay_set.c_lflag &= ~ECHOCTL;
 	display_ctrlx_set(NODISPLAY);
-	return (global);
 }

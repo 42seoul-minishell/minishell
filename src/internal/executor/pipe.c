@@ -28,10 +28,11 @@ static void _rc_process(t_bintree_node *node, int *fd)
 	executor(node->rc);
 }
 
-void execute_pipe(t_bintree_node *node)
+int execute_pipe(t_bintree_node *node)
 {
-	int fd[2];
-	int pid;
+	int		fd[2];
+	int		status;
+	pid_t	pid;
 
 	if (pipe(fd) == -1)
 		exit(1);
@@ -39,8 +40,10 @@ void execute_pipe(t_bintree_node *node)
 	if (pid < 0)
 		exit_error(strerror(errno));
 	if (pid == 0)
-		_lc_process(node, fd);
-	else
 		_rc_process(node, fd);
-	waitpid(pid, NULL, 0);
+	else
+		_lc_process(node, fd);
+	waitpid(pid, &status, 0);
+	// 상태 저장
+	g_global.status = check_status(status);
 }

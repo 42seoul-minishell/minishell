@@ -14,8 +14,14 @@
 
 void	sig_handler(int signal)
 {
+	char	*prompt;
+
 	if (signal == SIGINT)
-		printf("MINISHELL : \n");
+	{
+		prompt = create_prompt();
+		printf("%s\n", prompt);
+		free(prompt);
+	}
 	if (rl_on_new_line() == -1)
 		exit(1);
 	rl_replace_line("", 1);

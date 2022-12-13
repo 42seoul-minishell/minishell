@@ -31,7 +31,7 @@ static char	*_get_env(const char *str, int idx)
 
 	end = _get_expand_end_idx(&str[idx + 1]);
 	env_key = ft_substr(str, idx + 1, end);
-	env_value = search(g_global->envp, env_key);
+	env_value = search(g_global.envp, env_key);
 	if (!env_value)
 		return (ft_strdup(""));
 	return (ft_strdup(env_value));
@@ -43,7 +43,7 @@ static void	_replace_expand(char **str, int *idx)
 
 	if ((*str)[*idx + 1] && (*str)[*idx + 1] == '?')
 	{
-		tmp = ft_itoa(g_global->status);
+		tmp = ft_itoa(g_global.status);
 		if (!tmp)
 			exit_error("Error...");
 		if (*idx)
