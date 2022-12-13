@@ -42,10 +42,13 @@ int execute_pipe(t_bintree_node *node)
 	if (pid < 0)
 		exit_error(strerror(errno));
 	if (pid == 0)
+	{
 		_rc_process(node, fd);
+		waitpid(pid, &status, 0);
+		// 상태 저장
+		g_global.status = check_status(status);
+	}
 	else
 		_lc_process(node, fd);
-	waitpid(pid, &status, 0);
-	// 상태 저장
-	g_global.status = check_status(status);
+	return (g_global.status);
 }
