@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   verify_brackets.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gimmingyu <gimmingyu@student.42.fr>        +#+  +:+       +#+        */
+/*   By: bolee <bolee@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/18 16:05:42 by mingkim           #+#    #+#             */
-/*   Updated: 2022/11/19 00:38:03 by gimmingyu        ###   ########.fr       */
+/*   Created: 2022/12/13 14:27:18 by bolee             #+#    #+#             */
+/*   Updated: 2022/12/13 14:27:19 by bolee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ t_tType	verify_bracket(char *str)
 	ssize_t	idx;
 
 	if (str[0] != '(')
-		exit_on_error("FUCK YOU");
+		exit_error("FUCK YOU");
 	idx = 0;
 	if (str[++idx])
 	{
@@ -25,8 +25,8 @@ t_tType	verify_bracket(char *str)
 			idx++;
 		if (str[idx] == ')')
 			return (BRACKET);
-		exit_on_error("FUCK YOU TWICE");
+		exit_error("FUCK YOU TWICE");
 	}
-	exit_on_error("FUCK YOU AGAIN");
+	exit_error("FUCK YOU AGAIN");
 	return (NONE);
 }

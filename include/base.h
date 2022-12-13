@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   base.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mingkim <mingkim@student.42.fr>            +#+  +:+       +#+        */
+/*   By: bolee <bolee@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/09 21:12:59 by mingkim           #+#    #+#             */
-/*   Updated: 2022/11/16 16:14:20 by mingkim          ###   ########.fr       */
+/*   Created: 2022/12/13 13:31:23 by bolee             #+#    #+#             */
+/*   Updated: 2022/12/13 13:31:31 by bolee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,10 +43,6 @@
 # define DISPLAY 1
 # define NODISPLAY 0
 # define TMP_FILE "/tmp_file"
-
-/* Error message */
-# define SYNTAX_ERR	"syntax error near unexpected token `"
-# define NOT_FOUND_ERR "command not found"
 
 /* external variable for environment variables */
 extern char	**environ;

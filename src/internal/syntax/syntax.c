@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   syntax.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gimmingyu <gimmingyu@student.42.fr>        +#+  +:+       +#+        */
+/*   By: bolee <bolee@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/10 20:17:33 by mingkim           #+#    #+#             */
-/*   Updated: 2022/11/19 00:38:03 by gimmingyu        ###   ########.fr       */
+/*   Created: 2022/12/13 14:26:24 by bolee             #+#    #+#             */
+/*   Updated: 2022/12/13 14:26:25 by bolee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,11 +43,7 @@ static int	_is_valid_tokens(t_doubly_list *lst)
 		next_node = cur_node->next;
 		if (_is_valid_next_token(cur_node, next_node) == FALSE)
 		{
-			if (cur_node->token->type >= INP_RDIR &&
-				cur_node->token->type <= HERE_DOC)
-				exit_on_error(SYNTAX_ERR);
-			else
-				exit_on_error(SYNTAX_ERR);
+			syntax_error(cur_node->token->value);
 			return (FALSE);
 		}
 		cur_node = cur_node->next;
@@ -55,7 +51,10 @@ static int	_is_valid_tokens(t_doubly_list *lst)
 	if (!(cur_node->token->type >= CMD \
 		&& cur_node->token->type <= S_QUOTE) \
 		&& cur_node->token->type != BRACKET)
-		exit_on_error(SYNTAX_ERR);
+	{
+		syntax_error(cur_node->token->value);
+		return (FALSE);
+	}
 	return (TRUE);
 }
 
@@ -68,8 +67,11 @@ void	syntax(t_doubly_list *lst)
 	node = lst->header.next;
 	if (node->token->type == AND || node->token->type == OR ||
 		node->token->type == PIPE)
-		exit_on_error(SYNTAX_ERR);
+	{
+		syntax_error(node->token->value);
+		return ;
+	}
 	if (!_is_valid_tokens(lst))
-		exit_on_error(SYNTAX_ERR);
+		return ;
 	set_bintree(lst, lst->header.next);
 }

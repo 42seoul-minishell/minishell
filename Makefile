@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: gimmingyu <gimmingyu@student.42.fr>        +#+  +:+       +#+         #
+#    By: bolee <bolee@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2022/10/05 11:13:33 by mingkim           #+#    #+#              #
-#    Updated: 2022/11/19 13:10:25 by gimmingyu        ###   ########.fr        #
+#    Created: 2022/12/13 14:29:10 by bolee             #+#    #+#              #
+#    Updated: 2022/12/13 14:29:11 by bolee            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,7 +28,7 @@ SYNTAXDIR		= ./src/internal/syntax/
 WILDCARDDIR		= ./src/internal/wildcard/
 EXPANDDIR		= ./src/internal/expand/
 BINTREEDIR		= ./src/internal/bintree/
-EXECUTORDIR		= ./src/internal/executor/
+# EXECUTORDIR		= ./src/internal/executor/
 
 # Libaray Files
 ERROR			= $(ERROR_DIR)error.a
@@ -44,7 +44,7 @@ SYNTAX			= $(SYNTAXDIR)syntax.a
 WILDCARD		= $(WILDCARDDIR)wildcard.a
 EXPAND			= $(EXPANDDIR)expand.a
 BINTREE			= $(BINTREEDIR)bintree.a
-EXECUTOR		= $(EXECUTORDIR)executor.a
+# EXECUTOR		= $(EXECUTORDIR)executor.a
 
 # Includ directory
 INC				= ./include/
@@ -94,10 +94,10 @@ $(NAME): $(OBJS)
 	@make all -C $(SYNTAXDIR)
 	@make all -C $(BINTREEDIR)
 	@make all -C $(EXPANDDIR)
-	@make all -C $(EXECUTORDIR)
+	# @make all -C $(EXECUTORDIR)
 	@make all -C $(WILDCARDDIR)
 	@echo "\033[92mBuild minishell daemon...\033[0m"
-	$(CC) $(CFLAGS) $(LDFLAGS) -I$(INC)minishell.h $(LIBFT) $(ERROR) $(UTILS) $(DOUBLY) $(PARSER) $(CORE) $(HASH) $(GLOBAL) $(TOKENIZER) $(SYNTAX) $(BINTREE) $(EXPAND) $(EXECUTOR) $(WILDCARD) -o $(NAME) $(OBJS) 
+	$(CC) $(CFLAGS) $(LDFLAGS) -I$(INC)minishell.h $(LIBFT) $(ERROR) $(UTILS) $(DOUBLY) $(PARSER) $(CORE) $(HASH) $(GLOBAL) $(TOKENIZER) $(SYNTAX) $(BINTREE) $(EXPAND) $(WILDCARD) -o $(NAME) $(OBJS) 
 	
 # Make clean
 clean:
@@ -115,8 +115,8 @@ clean:
 	make -C $(SYNTAXDIR) clean
 	make -C $(BINTREEDIR) clean
 	make -C $(EXPANDDIR) clean
-	make -C $(EXECUTORDIR) clean
-	make -c $(WILDCARDDIR) clean
+	# make -C $(EXECUTORDIR) clean
+	make -C $(WILDCARDDIR) clean
 	
 	
 
@@ -138,7 +138,7 @@ fclean:
 	make -C $(SYNTAXDIR) fclean
 	make -C $(BINTREEDIR) fclean
 	make -C $(EXPANDDIR) fclean
-	make -C $(EXECUTORDIR) fclean
+	# make -C $(EXECUTORDIR) fclean
 	make -C $(WILDCARDDIR) fclean
 	
 

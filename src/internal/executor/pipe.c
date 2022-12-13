@@ -37,7 +37,7 @@ void execute_pipe(t_bintree_node *node)
 		exit(1);
 	pid = fork();
 	if (pid < 0)
-		exit_on_error(strerror(errno));
+		exit_error(strerror(errno));
 	if (pid == 0)
 		_lc_process(node, fd);
 	else

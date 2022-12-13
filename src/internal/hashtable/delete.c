@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   delete.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mingkim <mingkim@student.42.fr>            +#+  +:+       +#+        */
+/*   By: bolee <bolee@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/31 16:03:25 by gimmingyu         #+#    #+#             */
-/*   Updated: 2022/11/01 12:40:53 by mingkim          ###   ########.fr       */
+/*   Created: 2022/12/13 13:38:21 by bolee             #+#    #+#             */
+/*   Updated: 2022/12/13 14:22:08 by bolee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	delete_table(t_hashtable *table)
 	free(table);
 }
 
-static void	*_set_new_hashtable(t_hashtable *table, t_ht_item *item, t_ht_item *prev, size_t idx)
+static void	_set_new_hashtable(t_hashtable *table, t_ht_item *item, t_ht_item *prev, size_t idx)
 {
 	t_ht_item	*tmp;
 

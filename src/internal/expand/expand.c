@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gimmingyu <gimmingyu@student.42.fr>        +#+  +:+       +#+        */
+/*   By: bolee <bolee@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/18 14:53:00 by bolee             #+#    #+#             */
-/*   Updated: 2022/11/21 20:33:46 by gimmingyu        ###   ########.fr       */
+/*   Created: 2022/12/13 14:20:24 by bolee             #+#    #+#             */
+/*   Updated: 2022/12/13 14:20:25 by bolee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ static void	_replace_expand(char **str, int *idx)
 	{
 		tmp = ft_itoa(g_global->status);
 		if (!tmp)
-			exit_on_error("Error...");
+			exit_error("Error...");
 		if (*idx)
 			idx_is_not_zero(str, idx, tmp);
 		else
@@ -57,7 +57,7 @@ static void	_replace_expand(char **str, int *idx)
 	{
 		tmp = _get_env(*str, *idx);
 		if (!tmp)
-			exit_on_error("Error...");
+			exit_error("Error...");
 		if (*idx)
 			idx_is_not_zero(str, idx, tmp);
 		else

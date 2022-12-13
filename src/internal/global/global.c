@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   global.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mingkim <mingkim@student.42.fr>            +#+  +:+       +#+        */
+/*   By: bolee <bolee@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/16 15:15:34 by mingkim           #+#    #+#             */
-/*   Updated: 2022/11/16 17:35:26 by mingkim          ###   ########.fr       */
+/*   Created: 2022/12/13 14:20:46 by bolee             #+#    #+#             */
+/*   Updated: 2022/12/13 14:20:47 by bolee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,9 @@ t_global	*create_global(t_bintree *tree, t_hashtable *envp)
 	global->fd_stdout = dup(STDOUT_FILENO);
 	global->tree = tree;
 	if (tcgetattr(STDIN_FILENO, &(global->display_set)) == ERROR)
-		exit_on_error("minsh: tcgetattr");
+		exit_error("\033[31mError: tcgetattr(): Falied to get attribute\n\033[0m");
 	if (tcgetattr(STDIN_FILENO, &(global->nodisplay_set)) == ERROR)
-		exit_on_error("minsh: tcgetattr");
+		exit_error("\033[31mError: tcgetattr(): Falied to get attribute\n\033[0m");
 	global->nodisplay_set.c_lflag &= ~ECHOCTL;
 	display_ctrlx_set(NODISPLAY);
 	return (global);

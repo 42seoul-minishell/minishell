@@ -6,11 +6,11 @@
 /*   By: bolee <bolee@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 16:43:14 by bolee             #+#    #+#             */
-/*   Updated: 2022/11/23 16:43:17 by bolee            ###   ########.fr       */
+/*   Updated: 2022/12/13 14:17:02 by bolee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../include/minishell.h";
+#include "../../../include/minishell.h"
 
 t_bintree_node	*get_last_rc_node(t_bintree_node *node)
 {

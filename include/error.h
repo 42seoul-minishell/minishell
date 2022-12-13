@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mingkim <mingkim@student.42.fr>            +#+  +:+       +#+        */
+/*   By: bolee <bolee@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/09 21:12:53 by mingkim           #+#    #+#             */
-/*   Updated: 2022/11/18 17:06:05 by mingkim          ###   ########.fr       */
+/*   Created: 2022/12/13 13:34:29 by bolee             #+#    #+#             */
+/*   Updated: 2022/12/13 13:34:31 by bolee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,9 @@
 
 /* in ../src/error/ */
 /* error.c */
-void	exit_on_error(const char *str);
+void	exit_error(const char *str);
+void	syntax_error(const char *str);
+void	not_found_error(const char *str);
+void	no_file_direct_error(const char *str);
 
 #endif

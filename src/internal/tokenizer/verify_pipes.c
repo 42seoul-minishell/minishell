@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   verify_pipes.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gimmingyu <gimmingyu@student.42.fr>        +#+  +:+       +#+        */
+/*   By: bolee <bolee@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/18 16:05:42 by mingkim           #+#    #+#             */
-/*   Updated: 2022/11/19 00:38:03 by gimmingyu        ###   ########.fr       */
+/*   Created: 2022/12/13 14:27:24 by bolee             #+#    #+#             */
+/*   Updated: 2022/12/13 14:27:24 by bolee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,6 @@ t_tType	verify_pipe(char *str)
 		return (OR);
 	if (str[0] == '|')
 		return (PIPE);
-	exit_on_error("FUCK YOU");
+	exit_error("FUCK YOU");
 	return (NONE);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   verify_redir.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gimmingyu <gimmingyu@student.42.fr>        +#+  +:+       +#+        */
+/*   By: bolee <bolee@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/18 15:53:58 by mingkim           #+#    #+#             */
-/*   Updated: 2022/11/19 00:38:03 by gimmingyu        ###   ########.fr       */
+/*   Created: 2022/12/13 14:27:39 by bolee             #+#    #+#             */
+/*   Updated: 2022/12/13 14:27:40 by bolee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ t_tType	verify_input_redir(char *str)
 		return (HERE_DOC);
 	if (str[0] == '<')
 		return (INP_RDIR);
-	exit_on_error("syntax error near unexpected token `>'");
+	syntax_error(">");
 	return (NONE);
 }
 
@@ -28,6 +28,6 @@ t_tType	verify_output_redir(char *str)
 		return (APP_RDIR);
 	if (str[0] == '>')
 		return (OUT_RDIR);
-	exit_on_error("syntax error near unexpected token `<'");
+	syntax_error("<");
 	return (NONE);
 }

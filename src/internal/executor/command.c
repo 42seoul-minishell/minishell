@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   command.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mingkim <mingkim@student.42.fr>            +#+  +:+       +#+        */
+/*   By: bolee <bolee@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/16 19:05:11 by mingkim           #+#    #+#             */
-/*   Updated: 2022/11/16 19:05:11 by mingkim          ###   ########.fr       */
+/*   Created: 2022/12/13 14:19:43 by bolee             #+#    #+#             */
+/*   Updated: 2022/12/13 14:19:44 by bolee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ static void _separate_cmd(t_bintree_node *node)
 	else if (ft_strncmp(split[0], "exit", ft_strlen(split[0])) == 0)
 		builtin_exit();
 	else
-		exit_on_error(NOT_FOUND_ERR);
+		not_found_error(split[0]);
 	free(split);
 }
 

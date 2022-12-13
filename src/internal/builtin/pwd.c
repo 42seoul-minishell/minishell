@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pwd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mingkim <mingkim@student.42.fr>            +#+  +:+       +#+        */
+/*   By: bolee <bolee@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/18 12:36:03 by mingkim           #+#    #+#             */
-/*   Updated: 2022/10/18 12:39:36 by mingkim          ###   ########.fr       */
+/*   Created: 2022/12/13 14:03:39 by bolee             #+#    #+#             */
+/*   Updated: 2022/12/13 14:18:09 by bolee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	builtin_pwd(void)
 
 	path = getcwd(NULL, 0);
 	if (!path)
-		exit_on_error(strerror(errno));
+		exit_error(strerror(errno));
 	printf("%s\n", path);
 	free(path);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gimmingyu <gimmingyu@student.42.fr>        +#+  +:+       +#+        */
+/*   By: bolee <bolee@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/05 10:58:16 by mingkim           #+#    #+#             */
-/*   Updated: 2022/11/19 15:09:48 by gimmingyu        ###   ########.fr       */
+/*   Created: 2022/12/13 13:36:05 by bolee             #+#    #+#             */
+/*   Updated: 2022/12/13 13:36:06 by bolee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,12 +25,7 @@ static void	_sys_stdin(char **input_ptr)
 	prompt = create_prompt();
 	*input_ptr = readline(prompt);
 	if (!*input_ptr)
-	{
-		printf("\033[1A");
-		printf("\033[%tdC", ft_strlen(prompt));
-		printf("exit\n");
-		exit(0);
-	}
+		exit_error("\033[31mError: readline(): Failed to read line\n\033[0m");
 	free(prompt);
 }
 
@@ -48,7 +43,7 @@ static void	_run(void)
 		_save_history(input);
 		temp = ft_strdup(input);
 		parser(temp);
-		executor(temp);
+		// executor(temp);
 		free(input);
 		free(temp);
 		break;
