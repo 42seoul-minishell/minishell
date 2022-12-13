@@ -20,7 +20,7 @@ t_tType	verify_double_quote(char *str)
 	while (str[++idx])
 		if (str[idx] == '\"')
 			return (D_QUOTE);
-	// exit_error("minish: syntax error near unexpected token `\"'");
+	syntax_error("\"");
 	printf("str = %s\n", str);
 	return (NONE);
 }

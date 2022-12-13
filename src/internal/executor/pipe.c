@@ -40,7 +40,7 @@ int execute_pipe(t_bintree_node *node)
 		exit(1);
 	pid = fork();
 	if (pid < 0)
-		exit_error(strerror(errno));
+		exit_error("\033[31mError: fork(): Failed to fork process\n\033[0m");
 	if (pid == 0)
 	{
 		_rc_process(node, fd);

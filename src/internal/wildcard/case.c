@@ -18,7 +18,7 @@ char	*nothing_have(char *d_name)
 
 	tmp = ft_strdup(d_name);
 	if (!tmp)
-		return (NULL);
+		exit_error("\033[31mError: ft_substr(): Failed to subtract string\n\033[0m");
 	return (tmp);
 }
 
@@ -29,11 +29,11 @@ char	*only_prefix(char *d_name, char *prefix)
 
 	tmp = ft_strdup(d_name);
 	if (!tmp)
-		return (NULL);
+		exit_error("\033[31mError: ft_substr(): Failed to subtract string\n\033[0m");
 	res = ft_strjoin(prefix, tmp);
 	free(tmp);
 	if (!res)
-		return (NULL);
+		exit_error("\033[31mError: ft_strjoin(): Failed to join strings\n\033[0m");
 	return (res);
 }
 
@@ -44,11 +44,11 @@ char	*only_suffix(char *d_name, char *suffix)
 
 	tmp = ft_strdup(d_name);
 	if (!tmp)
-		return (NULL);
+		exit_error("\033[31mError: ft_substr(): Failed to subtract string\n\033[0m");
 	res = ft_strjoin(tmp, suffix);
 	free(tmp);
 	if (!res)
-		return (NULL);
+		exit_error("\033[31mError: ft_strjoin(): Failed to join strings\n\033[0m");
 	return (res);
 }
 
@@ -59,15 +59,15 @@ char	*both_have(char *d_name, t_wildcard *wildcard)
 
 	tmp = ft_strdup(d_name);
 	if (!tmp)
-		return (NULL);
+		exit_error("\033[31mError: ft_substr(): Failed to subtract string\n\033[0m");
 	res = ft_strjoin(wildcard->prefix, tmp);
 	free(tmp);
 	if (!res)
-		return (NULL);
+		exit_error("\033[31mError: ft_substr(): Failed to subtract string\n\033[0m");
 	tmp = res;
 	res = ft_strjoin(tmp, wildcard->suffix);
 	free(tmp);
 	if (!res)
-		return (NULL);
+		exit_error("\033[31mError: ft_strjoin(): Failed to join strings\n\033[0m");
 	return (res);
 }

@@ -12,6 +12,14 @@
 
 #include "../../../include/minishell.h"
 
+/*
+	에러 처리 해야할 것
+
+	파일 권한이 없는 경우
+		- 읽기 권한이 없는데 읽기 전용으로 열거나, 쓰기 권한이 없는데 쓰기 전용으로 열거나
+	파일이 존재하지 않는 경우
+		- strerror(errno); 로 관련 에러 메세지가 나오지만 좀 더 bash 에러 메세지처럼 만들어야 함
+*/
 static void	_input_redirect(t_bintree_node *node)
 {
 	int				fd;

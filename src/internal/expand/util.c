@@ -46,12 +46,12 @@ void	idx_is_not_zero(char **str, int *i, char *add)
 	free(add);
 	free(*str);
 	if (!tmp)
-		exit_error("Error...\n");
+		exit_error("\033[31mError: ft_strjoin(): Failed to join strings\n\033[0m");
 	*str = ft_strjoin(tmp, back);
 	free(tmp);
 	free(back);
 	if (!*str)
-		exit_error("Error...\n");
+		exit_error("\033[31mError: ft_strjoin(): Failed to join strings\n\033[0m");
 }
 
 void	idx_is_zero(char **str, int *i, char *add)
@@ -67,7 +67,7 @@ void	idx_is_zero(char **str, int *i, char *add)
 	free(back);
 	free(add);
 	if (!*str)
-		exit_error("Error...\n");
+		exit_error("\033[31mError: ft_strjoin(): Failed to join strings\n\033[0m");
 	if (len != 1)
 		*i += len;
 }

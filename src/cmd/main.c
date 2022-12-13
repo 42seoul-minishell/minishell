@@ -47,11 +47,9 @@ static void	_run(void)
 		input = NULL;
 		_sys_stdin(&input);
 		_save_history(input);
-		temp = ft_strdup(input);
-		parser(temp);
-		// executor(temp);
+		parser(input);
+		// executor(input);
 		free(input);
-		free(temp);
 		break;
 	}
 }

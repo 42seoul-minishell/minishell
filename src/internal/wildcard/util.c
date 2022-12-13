@@ -24,7 +24,7 @@ char	*get_prefix(char *str)
 		return (NULL);
 	prefix = ft_substr(str, 0, len);
 	if (!prefix)
-		return (NULL);
+		exit_error("\033[31mError: ft_substr(): Failed to subtract string\n\033[0m");
 	return (prefix);
 }
 
@@ -42,6 +42,6 @@ char	*get_suffix(char *str)
 		return (NULL);
 	suffix = ft_substr(str, pos + 1, len - pos - 1);
 	if (!suffix)
-		return (NULL);
+		exit_error("\033[31mError: ft_substr(): Failed to subtract string\n\033[0m");
 	return (suffix);
 }
