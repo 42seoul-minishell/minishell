@@ -27,7 +27,6 @@ int		str_parens(char *str, int i);
 int		is_have(char *str, char sep);
 
 /* tokenizer_utils.c */
-char	*safe_malloc(size_t idx);
 int		safe_insert(t_doubly_list *lst, t_tType type, char *str);
 int		is_only_space(char *str);
 

@@ -41,7 +41,7 @@ void	insert_helper(t_doubly_list *lst, char *str, ssize_t *c, ssize_t *b)
 
 	if (*c - *b >= 0)
 	{
-		before_op = safe_malloc(*c - *b);
+		before_op = (char *)sp_malloc(sizeof(char) * (*c - *b + 1));
 		ft_strlcpy(before_op, str + *b, *c - *b + 1);
 		trimmed = ft_strtrim(before_op, " ");
 		free(before_op);
@@ -49,7 +49,7 @@ void	insert_helper(t_doubly_list *lst, char *str, ssize_t *c, ssize_t *b)
 			safe_insert(lst, verify_token(trimmed), trimmed);
 	}
 	op_len = get_operator_length(str + *c);
-	after_op = safe_malloc(op_len);
+	after_op = (char *)sp_malloc(sizeof(char) * (op_len + 1));
 	ft_strlcpy(after_op, str + *c, op_len + 1);
 	trimmed = ft_strtrim(after_op, " ");
 	free(after_op);
@@ -68,14 +68,14 @@ void	insert_helper_quote_case(t_doubly_list *lst, char *str, \
 	char	*trimmed;
 	ssize_t	op_len;
 
-	before_op = safe_malloc(*c - *b + 1);
+	before_op = (char *)sp_malloc(sizeof(char) * (*c - *b + 2));
 	ft_strlcpy(before_op, str + *b, *c - *b + 1);
 	trimmed = ft_strtrim(before_op, " ");
 	free(before_op);
 	if (is_only_space(trimmed) == FALSE)
 		safe_insert(lst, verify_token(trimmed), trimmed);
 	op_len = get_operator_length(str + *c) + 1;
-	after_op = safe_malloc(op_len);
+	after_op = (char *)sp_malloc(sizeof(char) * (op_len + 1));
 	ft_strlcpy(after_op, str + *c, op_len + 1);
 	*c += op_len;
 	*b = *c;

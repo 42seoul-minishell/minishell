@@ -12,16 +12,6 @@
 
 #include "../../include/minishell.h"
 
-char	*safe_malloc(size_t length)
-{
-	char	*ret;
-
-	ret = malloc(sizeof(char) * length + 1);
-	if (!ret)
-		exit_error("memory allocate error\n");
-	return (ret);
-}
-
 int	safe_insert(t_doubly_list *lst, t_tType type, char *str)
 {
 	t_token			*token;
