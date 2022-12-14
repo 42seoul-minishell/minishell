@@ -20,8 +20,7 @@ t_tType	verify_double_quote(char *str)
 	while (str[++idx])
 		if (str[idx] == '\"')
 			return (D_QUOTE);
-	syntax_error("\"");
-	printf("str = %s\n", str);
+	// syntax_error("\"");
 	return (NONE);
 }
 
@@ -33,6 +32,6 @@ t_tType	verify_single_quote(char *str)
 	while (str[++idx])
 		if (str[idx] == '\'')
 			return (S_QUOTE);
-	syntax_error("'");
+	// syntax_error("'");
 	return (NONE);
 }

@@ -18,6 +18,5 @@ t_tType	verify_pipe(char *str)
 		return (OR);
 	if (str[0] == '|')
 		return (PIPE);
-	exit_error("FUCK YOU");
 	return (NONE);
 }

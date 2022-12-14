@@ -18,7 +18,13 @@ static void _lc_process(t_bintree_node *node, int *fd)
 	dup2(fd[1], g_global.fd_stdout);
 	g_global.fd_stdout = fd[1];
 	close(fd[1]);
-	executor(node->lc);
+	if (node->lc)
+	{
+		executor(node->lc);
+		exit(0);
+	}
+	syntax_error("|");
+	exit(1);
 }
 
 static void _rc_process(t_bintree_node *node, int *fd)
@@ -43,8 +49,8 @@ int execute_pipe(t_bintree_node *node)
 		exit_error("\033[31mError: fork(): Failed to fork process\n\033[0m");
 	if (pid == 0)
 	{
-		_rc_process(node, fd);
 		waitpid(pid, &status, 0);
+		_rc_process(node, fd);
 		// 상태 저장
 		g_global.status = check_status(status);
 	}

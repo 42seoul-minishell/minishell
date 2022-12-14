@@ -35,16 +35,3 @@ int	is_double_operator(char *str)
 		return (TRUE);
 	return (FALSE);
 }
-
-void	white_to_space(char *str)
-{
-	int		i;
-
-	i = 0;
-	while (str[i])
-	{
-		if (str[i] == '\t' || str[i] == '\v' || str[i] == '\r')
-			str[i] = ' ';
-		i++;
-	}
-}

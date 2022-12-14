@@ -12,7 +12,7 @@
 
 #include "../../../include/minishell.h"
 
-ssize_t	get_operator_length(char *str)
+static ssize_t	_get_operator_length(char *str)
 {
 	ssize_t	len;
 	char	c;
@@ -32,7 +32,7 @@ ssize_t	get_operator_length(char *str)
 }
 
 /* operator에 도달 시 호출. operator만 따로 담아서 넣는다 */
-void	insert_helper(t_doubly_list *lst, char *str, ssize_t *c, ssize_t *b)
+static void	_insert_helper(t_doubly_list *lst, char *str, ssize_t *c, ssize_t *b)
 {
 	char	*before_op;
 	char	*after_op;
@@ -48,7 +48,7 @@ void	insert_helper(t_doubly_list *lst, char *str, ssize_t *c, ssize_t *b)
 		if (is_only_space(trimmed) == FALSE)
 			safe_insert(lst, verify_token(trimmed), trimmed);
 	}
-	op_len = get_operator_length(str + *c);
+	op_len = _get_operator_length(str + *c);
 	after_op = (char *)sp_malloc(sizeof(char) * (op_len + 1));
 	ft_strlcpy(after_op, str + *c, op_len + 1);
 	trimmed = ft_strtrim(after_op, " ");
@@ -59,26 +59,28 @@ void	insert_helper(t_doubly_list *lst, char *str, ssize_t *c, ssize_t *b)
 	*b = *c;
 }
 
-/* operator에 도달 시 호출. 현재 기준 이전과 그 다음 블록까지 lst에 넣는다 */
-void	insert_helper_quote_case(t_doubly_list *lst, char *str, \
-								ssize_t *c, ssize_t *b)
+/* operator(', ")에 도달 시 호출. 현재 기준 이전과 그 다음 블록까지 lst에 넣는다 */
+static void	_insert_helper_quote_case(t_doubly_list *lst, char *str, \
+								ssize_t *current, ssize_t *before)
 {
 	char	*before_op;
 	char	*after_op;
 	char	*trimmed;
 	ssize_t	op_len;
 
-	before_op = (char *)sp_malloc(sizeof(char) * (*c - *b + 2));
-	ft_strlcpy(before_op, str + *b, *c - *b + 1);
+	before_op = (char *)sp_malloc(sizeof(char) * (*current - *before + 2));
+	ft_strlcpy(before_op, str + *before, *current - *before + 1);
 	trimmed = ft_strtrim(before_op, " ");
+	if (!trimmed)
+		exit_error("\033[31mError: ft_strtrim(): Failed to trim string\n\033[0m");
 	free(before_op);
 	if (is_only_space(trimmed) == FALSE)
 		safe_insert(lst, verify_token(trimmed), trimmed);
-	op_len = get_operator_length(str + *c) + 1;
+	op_len = _get_operator_length(str + *current) + 1;
 	after_op = (char *)sp_malloc(sizeof(char) * (op_len + 1));
-	ft_strlcpy(after_op, str + *c, op_len + 1);
-	*c += op_len;
-	*b = *c;
+	ft_strlcpy(after_op, str + *current, op_len + 1);
+	*current += op_len;
+	*before = *current;
 	if (is_only_space(after_op) == FALSE)
 		safe_insert(lst, verify_token(after_op), after_op);
 }
@@ -97,12 +99,12 @@ void	make_token_list(t_doubly_list *lst, char *str)
 		while (str[current] && !is_operator(str + current) \
 			&& !is_quote(str + current))
 			current++;
-		if (is_quote(str + current))
-			insert_helper_quote_case(lst, str, &current, &before);
-		else if (is_operator(str + current))
-			insert_helper(lst, str, &current, &before);
+		if (is_quote(str + current)) 	// ' 또는 " 일 경우
+			_insert_helper_quote_case(lst, str, &current, &before);
+		else if (is_operator(str + current))	// |, >, <, (, ) 일 경우
+			_insert_helper(lst, str, &current, &before);
 	}
-	insert_helper(lst, str, &current, &before);
+	_insert_helper(lst, str, &current, &before);
 }
 
 void	tokenizer(t_doubly_list *lst, char *str)

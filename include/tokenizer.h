@@ -27,7 +27,6 @@ void	tokenizer(t_doubly_list *lst, char *str);
 int		is_operator(char *str);
 int		is_quote(char *str);
 int		is_double_operator(char *str);
-void	white_to_space(char *str);
 
 /* clean.c */
 int		check_space_around(char *str, char *start);

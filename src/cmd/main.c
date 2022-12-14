@@ -38,7 +38,6 @@ static void	_sys_stdin(char **input_ptr)
 static void	_run(void)
 {
 	char	*input;
-	char	*temp;
 
 	while (1)
 	{
