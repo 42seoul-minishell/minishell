@@ -17,16 +17,24 @@
 
 /* in ../src/internal/builtin/ */
 /* cd.c */
-void	_invalid_err_cd(const char *str);
 int		builtin_cd(char *directory);
 
 /* echo.c */
 int		builtin_echo(const char *str, int fd, int flag);
 
-/* pwd.c */
-int		builtin_pwd(void);
-
 /* env.c */
 void	builtin_env(void);
+
+/* exit.c */
+void	builtin_exit(int signal);
+
+/* export.c */
+int		builtin_export(char *key, char *value);
+
+/* pwd.c */
+void	builtin_pwd(void);
+
+/* unset.c */
+void	builtin_unset(char *key);
 
 #endif

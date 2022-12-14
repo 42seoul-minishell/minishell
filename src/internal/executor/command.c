@@ -28,13 +28,13 @@ static void _separate_cmd(t_bintree_node *node)
 	else if (ft_strncmp(split[0], "pwd", ft_strlen(split[0])) == 0)
 		builtin_pwd();
 	else if (ft_strncmp(split[0], "export", ft_strlen(split[0])) == 0)
-		builtin_export();
+		builtin_export(split[1], split[2]);
 	else if (ft_strncmp(split[0], "unset", ft_strlen(split[0])) == 0)
-		builtin_unset();
+		builtin_unset(split[1]);
 	else if (ft_strncmp(split[0], "env", ft_strlen(split[0])) == 0)
 		builtin_env();
 	else if (ft_strncmp(split[0], "exit", ft_strlen(split[0])) == 0)
-		builtin_exit();
+		builtin_exit(1);
 	else
 		not_found_error(split[0]);
 	free(split);

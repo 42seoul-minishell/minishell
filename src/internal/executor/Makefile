@@ -21,6 +21,12 @@ AR				=	ar rcsuv
 INC				=	executor.h
 
 FILES			=	executor \
+					and_or \
+					command \
+					pipe \
+					redirect \
+					# heredoc_redirect \
+					# double_quotes \
 
 
 SRCS_DIR		=	./

@@ -16,8 +16,7 @@ NAME			=	core.a
 # Compiler Flag and Command
 CC				=	cc
 CFLAGS			=	-Wall -Wextra -Werror
-LINKING_FLAGS	=	-lreadline -L ${HOME}/.brew/opt/readline/lib
-COMPILE_FLAGS	=	-I${HOME}/.brew/opt/readline/include -I/opt/homebrew/opt/readline/include
+COMPILE_FLAGS	= -I/Users/$(USER)/.brew/opt/readline/include
 AR				=	ar rcsuv
 
 INC				=	../../../include
@@ -31,10 +30,10 @@ SRCS			=	$(addprefix $(SRCS_DIR), $(addsuffix .c, $(FILES)))
 OBJS_DIR		=	./
 OBJS			=	$(addprefix $(OBJS_DIR), $(addsuffix .o, $(FILES)))
 
-CPPFLAGS = -I/Users/bolee/.brew/opt/readline/include
+
 
 %.o: %.c
-	$(CC) $(CFLAGS) $(CPPFLAGS) -c $< -o $@
+	$(CC) $(CFLAGS) $(COMPILE_FLAGS) -c $< -o $@
 
 # Main rule
 all: 

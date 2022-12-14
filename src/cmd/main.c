@@ -47,7 +47,7 @@ static void	_run(void)
 		_sys_stdin(&input);
 		_save_history(input);
 		parser(input);
-		// executor(input);
+		executor(g_global.tree->root);
 		free(input);
 		break;
 	}

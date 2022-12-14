@@ -65,6 +65,6 @@ void	execute_redirect(t_bintree_node *node)
 		_ouput_redirect(node);
 	else if (node->token->type == APP_RDIR)
 		_append_redirect(node);
-	else if (node->token->type == HERE_DOC)
-		heredoc_redirect(node);
+	// else if (node->token->type == HERE_DOC)
+	// 	heredoc_redirect(node);
 }

@@ -13,20 +13,20 @@
 #include "../../../include/minishell.h"
 
 /* execute by preorder and inorder */
-void	executor(t_bintree_node *root)
+void	executor(t_bintree_node	*root)
 {
-	if (root->type == TN_OR)
-		execute_or(root);
-	else if (root->type == TN_AND)
-		execute_and(root);
-	else if (root->type == TN_PIPE)
-		execute_pipe(root);
-	else if (root->type == TN_RDIR)
-		execute_redirect(root);
-	else if (root->type == TN_BRACKET)
-		execute_bracket(root);
-	else
-		execute_word(root);
+	// if (root->type == TN_OR)
+	// 	execute_or(root);
+	// else if (root->type == TN_AND)
+	// 	execute_and(root);
+	// else if (root->type == TN_PIPE)
+	// 	execute_pipe(root);
+	// else if (root->type == TN_RDIR)
+	// 	execute_redirect(root);
+	// else if (root->type == TN_BRACKET)
+	// 	execute_bracket(root);
+	// else
+		execute_command(root);
 }
 
 int	serve_status(char *cmd)

@@ -37,6 +37,7 @@ size_t			hash_index(char *key, size_t size);
 /* delete.c */
 void			delete_item(t_ht_item *item);
 void			delete_table(t_hashtable *table);
+void			delete_item_by_key(t_hashtable *table, char *key);
 
 /* search.c */
 char			*search(t_hashtable *table, char *key);

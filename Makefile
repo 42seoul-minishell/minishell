@@ -28,7 +28,8 @@ SYNTAXDIR		= ./src/internal/syntax/
 WILDCARDDIR		= ./src/internal/wildcard/
 EXPANDDIR		= ./src/internal/expand/
 BINTREEDIR		= ./src/internal/bintree/
-# EXECUTORDIR		= ./src/internal/executor/
+EXECUTORDIR		= ./src/internal/executor/
+BUILTINDIR		= ./src/internal/builtin/
 
 # Libaray Files
 ERROR			= $(ERROR_DIR)error.a
@@ -44,7 +45,8 @@ SYNTAX			= $(SYNTAXDIR)syntax.a
 WILDCARD		= $(WILDCARDDIR)wildcard.a
 EXPAND			= $(EXPANDDIR)expand.a
 BINTREE			= $(BINTREEDIR)bintree.a
-# EXECUTOR		= $(EXECUTORDIR)executor.a
+EXECUTOR		= $(EXECUTORDIR)executor.a
+BUILTIN			= $(BUILTINDIR)builtin.a
 
 # Includ directory
 INC				= ./include/
@@ -58,14 +60,9 @@ OBJS			= $(SRCS:.c=.o)
 # Compiler Flag and Command
 CC				= cc
 CFLAGS			= -Wall -Wextra -Werror 
-LINKING_FLAGS	= -l readline -L/opt/homebrew/opt/readline/lib
-COMPILE_FLAGS	= -I/opt/homebrew/opt/readline/include
 
-DEV_LINKING_FLAGS	= -L/opt/homebrew/opt/readline/lib
-DEV_COMPILE_FLAGS	= -I/opt/homebrew/opt/readline/include
-
-CPPFLAGS = -I/Users/bolee/.brew/opt/readline/include
-LDFLAGS = -L/Users/bolee/.brew/opt/readline/lib -lreadline
+COMPILE_FLAGS	= -I/Users/$(USER)/.brew/opt/readline/include
+LINKING_FLAGS	= -L/Users/$(USER)/.brew/opt/readline/lib -lreadline
 
 # Debugging Flag
 DEBUG			= -g
@@ -78,7 +75,7 @@ all:
 
 # Object rule
 %.o: %.c
-	$(CC) $(CFLAGS) $(CPPFLAGS) -I $(INC) -c $< -o $@
+	$(CC) $(CFLAGS) $(COMPILE_FLAGS) -I $(INC) -c $< -o $@
 
 # Project file rule
 $(NAME): $(OBJS)
@@ -94,10 +91,11 @@ $(NAME): $(OBJS)
 	@make all -C $(SYNTAXDIR)
 	@make all -C $(BINTREEDIR)
 	@make all -C $(EXPANDDIR)
-	# @make all -C $(EXECUTORDIR)
 	@make all -C $(WILDCARDDIR)
+	@make all -C $(EXECUTORDIR)
+	@make all -C $(BUILTINDIR)
 	@echo "\033[92mBuild minishell daemon...\033[0m"
-	$(CC) $(CFLAGS) $(LDFLAGS) -I$(INC)minishell.h $(LIBFT) $(ERROR) $(UTILS) $(DOUBLY) $(PARSER) $(CORE) $(HASH) $(GLOBAL) $(TOKENIZER) $(SYNTAX) $(BINTREE) $(EXPAND) $(WILDCARD) -o $(NAME) $(OBJS) 
+	$(CC) $(CFLAGS) $(LINKING_FLAGS) -I$(INC)minishell.h $(EXECUTOR) $(BUILTIN) $(LIBFT) $(ERROR) $(UTILS) $(DOUBLY) $(PARSER) $(CORE) $(HASH) $(GLOBAL) $(TOKENIZER) $(SYNTAX) $(BINTREE) $(EXPAND) $(WILDCARD) -o $(NAME) $(OBJS) 
 	
 # Make clean
 clean:
@@ -115,8 +113,9 @@ clean:
 	make -C $(SYNTAXDIR) clean
 	make -C $(BINTREEDIR) clean
 	make -C $(EXPANDDIR) clean
-	# make -C $(EXECUTORDIR) clean
 	make -C $(WILDCARDDIR) clean
+	make -C $(EXECUTORDIR) clean
+	make -C $(BUILTINDIR) clean
 	
 	
 
@@ -138,8 +137,9 @@ fclean:
 	make -C $(SYNTAXDIR) fclean
 	make -C $(BINTREEDIR) fclean
 	make -C $(EXPANDDIR) fclean
-	# make -C $(EXECUTORDIR) fclean
 	make -C $(WILDCARDDIR) fclean
+	make -C $(EXECUTORDIR) fclean
+	make -C $(BUILTINDIR) fclean
 	
 
 # Make re
