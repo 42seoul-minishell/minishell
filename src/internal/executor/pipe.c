@@ -33,7 +33,8 @@ static void _rc_process(t_bintree_node *node, int *fd)
 	dup2(fd[0], g_global.fd_stdin);
 	g_global.fd_stdin = fd[0];
 	close(fd[0]);
-	executor(node->rc);
+	if (node->rc)
+		executor(node->rc);
 }
 
 int execute_pipe(t_bintree_node *node)

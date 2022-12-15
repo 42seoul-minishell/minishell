@@ -20,10 +20,10 @@ void	parser(char *str)
 	tokenizer(lst, str);
 	// display_list(lst);
 	expand(lst);
-	// display_list(lst);
+	display_list(lst);
 	// wildcard 수정 필요
 	wildcard(lst);
-	// display_list(lst);
+	display_list(lst);
 	syntax(lst);
 	release_doubly_list(lst);
 }

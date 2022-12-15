@@ -44,30 +44,35 @@ static char	*_convert_wildcard(DIR *dir, t_wildcard *wildcard)
 			tmp = only_suffix(dirent->d_name, wildcard->suffix);
 		else
 			tmp = both_have(dirent->d_name, wildcard);
+		if (!tmp)
+		{
+			dirent = readdir(dir);
+			continue ;
+		}
 		res = _set_res(res, tmp);
 		dirent = readdir(dir);
 	}
-	return (tmp);
+	return (res);
 }
 
 static char	*_wildcard_to_str(char *str)
 {
 	char		*res;
 	DIR			*dir;
-	t_wildcard *wildcard;
+	t_wildcard	*wildcard;
 
 	wildcard = (t_wildcard *)sp_malloc(sizeof(t_wildcard));
 	wildcard->prefix = get_prefix(str);
 	wildcard->suffix = get_suffix(str);
-	if (wildcard->prefix[ft_strlen(wildcard->prefix) - 1] == '/')
+	if (wildcard->prefix && wildcard->prefix[ft_strlen(wildcard->prefix) - 1] == '/')
 		dir = opendir(wildcard->prefix);
 	else
 		dir = opendir(".");
+	// 에러 메세지 수정 필요
 	if (!dir)
-	{
-		printf("%s\n", strerror(errno));
-		return (NULL);
-	}
+		exit_error("\033[31mError: opendir(): Failed to open directory\n\033[0m");
+	// dir에 따라 분기를 나누어 처리할 필요가 있음
+	// 안 그러면 prefix가 없는 파일이름을 가지고 와일드 카드를 대체하는 작업을 진행함
 	res = _convert_wildcard(dir, wildcard);
 	closedir(dir);
 	free(wildcard->prefix);
@@ -86,9 +91,16 @@ void	wildcard(t_doubly_list *lst)
 	{
 		if (ft_strchr(node->token->value, '*'))
 		{
+			// wildcard 이전에 문자를 없애지 않도록 수정해야함
+			// 결과 값에 공백 추가해야함
 			tmp = _wildcard_to_str(node->token->value);
-			free(node->token->value);
-			node->token->value = tmp;
+			if (tmp && ft_strlen(tmp))
+			{
+				free(node->token->value);
+				node->token->value = tmp;
+			}
+			else if (tmp)
+				free(tmp);
 		}
 		node = node->next;
 		if (node == lst->header.next)
