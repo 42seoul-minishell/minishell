@@ -31,6 +31,7 @@ int		is_only_space(char *str);
 
 /* malloc_tuils.c */
 void	*sp_malloc(size_t size);
-void	*dp_malloc(size_t size);
+void	**dp_malloc(size_t size);
+void	free_dp(void **dp);
 
 #endif
