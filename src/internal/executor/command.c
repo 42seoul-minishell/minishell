@@ -37,12 +37,14 @@ static void _separate_cmd(t_bintree_node *node)
 		builtin_exit(1);
 	else
 		not_found_error(split[0]);
-	free(split);
+	free_dp((void **) split);
 }
 
 void execute_command(t_bintree_node *node)
 {
-	executor(node->lc);
+	if (node->lc)
+		executor(node->lc);
 	_separate_cmd(node);
-	executor(node->rc);
+	if (node->rc)
+		executor(node->rc);
 }

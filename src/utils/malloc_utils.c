@@ -25,7 +25,7 @@ void	*sp_malloc(size_t size)
 	return (tmp);
 }
 
-void	*dp_malloc(size_t size)
+void	**dp_malloc(size_t size)
 {
 	void	**tmp;
 
@@ -36,4 +36,17 @@ void	*dp_malloc(size_t size)
 		exit(1);
 	}
 	return (tmp);
+}
+
+void	free_dp(void **dp)
+{
+	int	i;
+
+	i = 0;
+	while (dp[i])
+	{
+		free(dp[i]);
+		i++;
+	}
+	free(dp);
 }
