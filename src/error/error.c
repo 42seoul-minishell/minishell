@@ -20,12 +20,12 @@ void	exit_error(const char *str)
 
 void	syntax_error(const char *str)
 {
-	printf("minish: syntax error near unexpected token `%s'\n", str);
+	printf("MINISHELL: syntax error near unexpected token `%s'\n", str);
 }
 
 void	not_found_error(const char *str)
 {
-	printf("minish: %s: command not found\n", str);
+	printf("MINISHELL: %s: command not found\n", str);
 }
 
 void	no_file_direct_error(const char *str1, const char *str2)
