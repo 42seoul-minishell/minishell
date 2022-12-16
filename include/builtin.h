@@ -11,9 +11,9 @@
 /* ************************************************************************** */
 
 #ifndef BUILTIN_H
-#define BUILTIN_H
+# define BUILTIN_H
 
-#include "./struct.h"
+# include "./struct.h"
 
 /* in ../src/internal/builtin/ */
 /* cd.c */
