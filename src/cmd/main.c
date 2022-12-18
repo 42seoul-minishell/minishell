@@ -49,7 +49,7 @@ static void	_run(void)
 		parser(input);
 		executor(g_global.tree->root);
 		free(input);
-		break;
+		break ;
 	}
 }
 

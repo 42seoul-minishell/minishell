@@ -1,35 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   verify_quotes.c                                    :+:      :+:    :+:   */
+/*   only_suffix.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bolee <bolee@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/13 14:27:30 by bolee             #+#    #+#             */
-/*   Updated: 2022/12/13 14:27:31 by bolee            ###   ########.fr       */
+/*   Created: 2022/12/16 15:46:51 by bolee             #+#    #+#             */
+/*   Updated: 2022/12/16 15:46:52 by bolee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../include/minishell.h"
 
-t_tType	verify_double_quote(char *str)
+char	*only_suffix(char *d_name, char *suffix)
 {
-	ssize_t	idx;
+	char	*tmp;
 
-	idx = 0;
-	while (str[++idx])
-		if (str[idx] == '\"')
-			return (D_QUOTE);
-	return (NONE);
-}
-
-t_tType	verify_single_quote(char *str)
-{
-	ssize_t	idx;
-
-	idx = 0;
-	while (str[++idx])
-		if (str[idx] == '\'')
-			return (S_QUOTE);
-	return (NONE);
+	if (is_have_suffix(d_name, suffix) == FALSE)
+		return (NULL);
+	tmp = ft_strdup(d_name);
+	if (!tmp)
+		exit_error("\033[31mError: ft_substr(): \
+			Failed to subtract string\n\033[0m");
+	return (tmp);
 }
