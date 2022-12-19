@@ -67,6 +67,20 @@ CC				= cc
 CFLAGS			= -Wall -Wextra -Werror -I$(INC)
 UNAME			= $(shell uname -s)
 
+# Debugging Flag
+DEBUG			= -g
+
+
+# Main rule
+all:	
+	@echo "\033[92mBuild minishell daemon...\033[0m"
+	make $(NAME)
+
+# Object rule
+%.o: %.c
+	$(CC) $(CFLAGS) -c $< -o $@
+
+# Project file rule
 ifeq ($(UNAME), Linux)
 LINKING_FLAGS	= -I/usr/lib32 -lreadline
 $(NAME): $(OBJS)
@@ -107,42 +121,8 @@ $(NAME): $(OBJS)
 	@make all -C $(EXECUTORDIR)
 	@make all -C $(BUILTINDIR)
 	@echo "\033[92mBuild minishell daemon...\033[0m"
-	$(CC) $(CFLAGS) -o $(NAME) $(OBJS) $(ERROR) $(UTILS) $(LIBFT) $(HASH) $(DOUBLY) $(CORE) $(GLOBAL) $(PARSER) $(TOKENIZER) $(SYNTAX) $(WILDCARD) $(EXPAND) $(BINTREE) $(EXECUTOR) $(BUILTIN)  $(LINKING_FLAGS)
+	$(CC) $(CFLAGS) -o $(NAME) $(OBJS) $(ERROR) $(UTILS) $(LIBFT) $(HASH) $(DOUBLY) $(CORE) $(GLOBAL) $(PARSER) $(TOKENIZER) $(SYNTAX) $(WILDCARD) $(EXPAND) $(BINTREE) $(EXECUTOR) $(BUILTIN) $(LINKING_FLAGS)
 endif
-
-# Debugging Flag
-DEBUG			= -g
-
-
-# Main rule
-all:	
-	@echo "\033[92mBuild minishell daemon...\033[0m"
-	make $(NAME)
-
-# Object rule
-%.o: %.c
-	$(CC) $(CFLAGS) -c $< -o $@
-
-# Project file rule
-$(NAME): $(OBJS)
-	@make all -C $(LIBFT_DIR)
-	@make all -C $(ERROR_DIR)
-	@make all -C $(UTILS_DIR)
-	@make all -C $(HASHDIR)
-	@make all -C $(DOUBLYDIR)
-	@make all -C $(COREDIR)
-	@make all -C $(PARSERDIR)
-	@make all -C $(GLOBALDIR)
-	@make all -C $(TOKENIZERDIR)
-	@make all -C $(SYNTAXDIR)
-	@make all -C $(BINTREEDIR)
-	@make all -C $(EXPANDDIR)
-	@make all -C $(WILDCARDDIR)
-	@make all -C $(EXECUTORDIR)
-	@make all -C $(BUILTINDIR)
-	@echo "\033[92mBuild minishell daemon...\033[0m"
-	ar rcsuvT $(LIB_DIR)/$(LIB_NAME) $(ERROR) $(UTILS) $(LIBFT) $(HASH) $(DOUBLY) $(CORE) $(GLOBAL) $(PARSER) $(TOKENIZER) $(SYNTAX) $(WILDCARD) $(EXPAND) $(BINTREE) $(EXECUTOR) $(BUILTIN)
-	$(CC) $(CFLAGS) -o $(NAME) $(OBJS) -L./lib -lminishell $(LINKING_FLAGS)
 
 # Make clean
 clean:
