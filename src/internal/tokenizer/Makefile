@@ -13,9 +13,15 @@
 # Project File
 NAME			=	libtokenizer.a
 
-# Compiler Flag and Command`
+ifeq ($(OS), Linux)
+READLINE_INC	=	/usr/include/readline
+else ($(OS), Darwin)
+READLINE_INC	=	/Users/$(USER)/.brew/opt/readline/include
+endif
+
+# Compiler Flag and Command
 CC				=	cc
-CFLAGS			=	-Wall -Wextra -Werror -I$(INC)
+CFLAGS			=	-Wall -Wextra -Werror -I$(INC) -I$(READLINE_INC)
 AR				=	ar rcsuv
 
 INC				= 	../../../include

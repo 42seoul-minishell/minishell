@@ -11,24 +11,30 @@
 # **************************************************************************** #
 
 # Project File
-NAME		=	libbuiltin.a
+NAME			=	libbuiltin.a
+
+ifeq ($(OS), Linux)
+READLINE_INC	=	/usr/include/readline
+else ($(OS), Darwin)
+READLINE_INC	=	/Users/$(USER)/.brew/opt/readline/include
+endif
 
 # Compiler Flag and Command
-CC			=	cc
-CFLAGS		=	-Wall -Wextra -Werror -I$(INC)
-AR			=	ar rcsuv
+CC				=	cc
+CFLAGS			=	-Wall -Wextra -Werror -I$(INC) -I$(READLINE_INC)
+AR				=	ar rcsuv
 
 INC				= 	../../../include
 LIB_DIR			= 	../../../lib
 
-FILES		=	builtin \
-				cd \
-				echo \
-				env \
-				exit \
-				export \
-				pwd \
-				unset \
+FILES			=	builtin \
+					cd \
+					echo \
+					env \
+					exit \
+					export \
+					pwd \
+					unset \
 
 SRCS_DIR	=	./
 SRCS		=	$(addprefix $(SRCS_DIR), $(addsuffix .c, $(FILES)))

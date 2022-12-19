@@ -13,9 +13,15 @@
 # Project File
 NAME			=	libcore.a
 
+ifeq ($(OS), Linux)
+READLINE_INC	=	/usr/include/readline
+else ($(OS), Darwin)
+READLINE_INC	=	/Users/$(USER)/.brew/opt/readline/include
+endif
+
 # Compiler Flag and Command
 CC				=	cc
-CFLAGS			=	-Wall -Wextra -Werror -I$(INC)
+CFLAGS			=	-Wall -Wextra -Werror -I$(INC) -I$(READLINE_INC)
 AR				=	ar rcsuv
 
 INC				= 	../../../include
@@ -42,7 +48,7 @@ all:
 $(NAME): $(OBJS)
 	$(AR) $@ $?
 	mv $(NAME) $(LIB_DIR)
-	
+
 # Make clean
 clean:
 	@echo "\033[92mClean core files...\033[0m"
