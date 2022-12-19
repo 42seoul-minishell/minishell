@@ -14,7 +14,7 @@ CC			=	cc
 CFLAG		=	-Wall -Werror -Wextra -I$(INC)
 
 INC			= ../../include
-LIB_DIR		= ../../lib
+LIB_DIR		= ../../lib/
 
 AR			=	ar
 ARFLAG		=	rcusv

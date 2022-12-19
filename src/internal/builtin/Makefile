@@ -25,7 +25,7 @@ CFLAGS			=	-Wall -Wextra -Werror -I$(INC) -I$(READLINE_INC)
 AR				=	ar rcsuv
 
 INC				= 	../../../include
-LIB_DIR			= 	../../../lib
+LIB_DIR			= 	../../../lib/
 
 FILES			=	builtin \
 					cd \
