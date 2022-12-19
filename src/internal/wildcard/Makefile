@@ -15,7 +15,7 @@ NAME			=	libwildcard.a
 
 ifeq ($(OS), Linux)
 READLINE_INC	=	/usr/include/readline
-else ($(OS), Darwin)
+else
 READLINE_INC	=	/Users/$(USER)/.brew/opt/readline/include
 endif
 
