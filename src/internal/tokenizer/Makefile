@@ -30,7 +30,8 @@ FILES			=	check \
 					verify_pipes \
 					verify_quotes \
 					verify_redir \
-					verify
+					verify \
+					relocation_doubly_lst
 
 
 SRCS_DIR		=	./

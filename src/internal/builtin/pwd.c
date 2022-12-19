@@ -27,7 +27,8 @@ void	builtin_pwd(void)
 
 	path = getcwd(NULL, 0);
 	if (!path)
-		exit_error("\033[31mError: getcwd(): Failed to get current working directory\n\033[0m");
+		exit_error("\033[31mError: getcwd(): \
+			Failed to get current working directory\n\033[0m");
 	printf("%s\n", path);
 	free(path);
 }

@@ -66,15 +66,15 @@ void	set_bintree(t_doubly_list *lst, t_doubly_node *node)
 	t_bintree_node	*bt_node;
 
 	if (g_global.tree->root && node == lst->header.next)
-		return;
-	bt_node = create_bintree_node(
-		create_token(node->token->type, node->token->value),
+		return ;
+	bt_node = create_bintree_node(\
+		create_token(node->token->type, node->token->value), \
 		_set_bintree_type(node->token->type));
 	if (g_global.tree->root == NULL)
 	{
 		g_global.tree->root = bt_node;
 		set_bintree(lst, node->next);
-		return;
+		return ;
 	}
 	_upper_priority(bt_node);
 	_lower_priority(bt_node);

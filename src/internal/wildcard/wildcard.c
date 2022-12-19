@@ -18,7 +18,7 @@ static char	*_set_res(char *res, char *str)
 
 	if (!res)
 		return (str);
-	tmp = ft_strjoin(res, str);
+	tmp = join_with_blank(res, str);
 	if (!tmp)
 		exit_error("\033[31mError: ft_strjoin(): Failed to join strings\n\033[0m");
 	free(res);
@@ -64,15 +64,11 @@ static char	*_wildcard_to_str(char *str)
 	wildcard = (t_wildcard *)sp_malloc(sizeof(t_wildcard));
 	wildcard->prefix = get_prefix(str);
 	wildcard->suffix = get_suffix(str);
-	if (wildcard->prefix && wildcard->prefix[ft_strlen(wildcard->prefix) - 1] == '/')
-		dir = opendir(wildcard->prefix);
-	else
-		dir = opendir(".");
-	// 에러 메세지 수정 필요
-	if (!dir)
+	dir = get_dir_pointer(wildcard);
+	if (wildcard->prefix && ft_strchr(wildcard->prefix, '/') && !dir)
+		return (NULL);
+	else if (!dir)
 		exit_error("\033[31mError: opendir(): Failed to open directory\n\033[0m");
-	// dir에 따라 분기를 나누어 처리할 필요가 있음
-	// 안 그러면 prefix가 없는 파일이름을 가지고 와일드 카드를 대체하는 작업을 진행함
 	res = _convert_wildcard(dir, wildcard);
 	closedir(dir);
 	free(wildcard->prefix);
@@ -81,9 +77,38 @@ static char	*_wildcard_to_str(char *str)
 	return (res);
 }
 
+static char	*_convert_str(char *str)
+{
+	char	**split;
+	char	*res;
+	char	*tmp;
+	int		i;
+
+	split = ft_split(str, ' ');
+	if (!split)
+		exit_error("\033[31mError: ft_split(): Failed to split string\n\033[0m");
+	i = 0;
+	while (split[i])
+	{
+		if (ft_strchr(split[i], '*'))
+		{
+			tmp = _wildcard_to_str(split[i]);
+			if (tmp)
+			{
+				free(split[i]);
+				split[i] = tmp;
+			}
+		}
+		i++;
+	}
+	res = wildcard_join(split);
+	free_dp((void **) split);
+	return (res);
+}
+
 void	wildcard(t_doubly_list *lst)
 {
-	char			*tmp;
+	char			*res;
 	t_doubly_node	*node;
 
 	node = lst->header.next;
@@ -91,16 +116,12 @@ void	wildcard(t_doubly_list *lst)
 	{
 		if (ft_strchr(node->token->value, '*'))
 		{
-			// wildcard 이전에 문자를 없애지 않도록 수정해야함
-			// 결과 값에 공백 추가해야함
-			tmp = _wildcard_to_str(node->token->value);
-			if (tmp && ft_strlen(tmp))
+			res = _convert_str(node->token->value);
+			if (res)
 			{
 				free(node->token->value);
-				node->token->value = tmp;
+				node->token->value = res;
 			}
-			else if (tmp)
-				free(tmp);
 		}
 		node = node->next;
 		if (node == lst->header.next)

@@ -22,7 +22,10 @@ INC				=	../../../include
 LIB_DIR			=	../../../lib
 
 FILES			=	wildcard \
-					case \
+					both_have \
+					nothing_have \
+					only_prefix \
+					only_suffix \
 					util
 
 SRCS_DIR		=	./

@@ -19,23 +19,28 @@
 void	executor(t_bintree_node	*root);
 int		serve_status(char *cmd);
 
+/* and_or.c */
 void	execute_and(t_bintree_node *node);
 void	execute_or(t_bintree_node *node);
 
 /* bracket.c */
 int		execute_bracket(t_bintree_node *root);
 
-void execute_command(t_bintree_node *node);
+/* cammand.c */
+void	execute_command(t_bintree_node *node);
 
+/* double_quotes.c */
+int		exec_word(t_bintree_node *root);
+int		exec_last_word_child(t_bintree_node *root, t_pipe p);
+int		exec_word_child(t_bintree_node *root);
 
-int	exec_word(t_bintree_node *root);
-int	exec_last_word_child(t_bintree_node *root, t_pipe p);
-int	exec_word_child(t_bintree_node *root);
+/* heredoc_redirect.c */
+void	heredoc_redirect(t_bintree_node *node, char *eof, int *save_fd);
 
-void heredoc_redirect(t_bintree_node *node, char *eof, int *save_fd);
+/* pipe.c */
+int		execute_pipe(t_bintree_node *node);
 
-int execute_pipe(t_bintree_node *node);
-
+/* redirect.c */
 void	execute_redirect(t_bintree_node *node);
 
 #endif

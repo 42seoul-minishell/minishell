@@ -26,6 +26,7 @@ t_doubly_node	*find_doubly_node(t_doubly_list *lst, char *str);
 void			delete_doubly_node(t_doubly_list *lst, t_doubly_node *node);
 void			find_delete_doubly_node(t_doubly_list *lst, char *str);
 void			release_doubly_list(t_doubly_list *lst);
+void			release_doubly_node(t_doubly_node *node);
 
 /* create.c */
 t_token			*create_token(t_tType type, char *value);

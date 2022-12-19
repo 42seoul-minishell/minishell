@@ -12,10 +12,10 @@
 
 #include "minishell.h"
 
-static void _space_around_operator(char *dest, char *src, size_t len)
+static void	_space_around_operator(char *dest, char *src, size_t len)
 {
-	size_t dest_idx;
-	size_t src_idx;
+	size_t	dest_idx;
+	size_t	src_idx;
 
 	dest_idx = 0;
 	src_idx = 0;
@@ -28,23 +28,23 @@ static void _space_around_operator(char *dest, char *src, size_t len)
 				dest[dest_idx++] = ' ';
 				dest[dest_idx++] = src[src_idx++];
 				dest[dest_idx++] = ' ';
-				continue;
+				continue ;
 			}
 			dest[dest_idx++] = ' ';
 			dest[dest_idx++] = src[src_idx++];
 			dest[dest_idx++] = src[src_idx++];
 			dest[dest_idx++] = ' ';
-			continue;
+			continue ;
 		}
 		dest[dest_idx++] = src[src_idx++];
 	}
 	dest[dest_idx] = '\0';
 }
 
-static int _count_operator(char *str)
+static int	_count_operator(char *str)
 {
-	char *tmp;
-	int cnt;
+	char	*tmp;
+	int		cnt;
 
 	cnt = 0;
 	tmp = str;
@@ -57,10 +57,10 @@ static int _count_operator(char *str)
 	return (cnt);
 }
 
-char *make_clean_sentence(char *str)
+char	*make_clean_sentence(char *str)
 {
-	char *cleaned;
-	int len;
+	char	*cleaned;
+	int		len;
 
 	len = ft_strlen(str) + (_count_operator(str) * 2) + 1;
 	cleaned = (char *)sp_malloc(sizeof(char) * len);

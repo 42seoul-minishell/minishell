@@ -20,7 +20,8 @@ void	display_ctrlx_set(int flag)
 	if (flag == DISPLAY)
 		return_val = tcsetattr(STDIN_FILENO, TCSANOW, &(g_global.display_set));
 	else if (flag == NODISPLAY)
-		return_val = tcsetattr(STDIN_FILENO, TCSANOW, &(g_global.nodisplay_set));
+		return_val = tcsetattr(STDIN_FILENO, TCSANOW, \
+			&(g_global.nodisplay_set));
 	if (return_val == ERROR)
 		exit_error("\033[31mError: tcsetattr(): Falied to set attribute\n\033[0m");
 }

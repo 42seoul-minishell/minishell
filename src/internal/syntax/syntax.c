@@ -65,7 +65,7 @@ void	syntax(t_doubly_list *lst)
 	if (!lst || !lst->len)
 		exit(1);
 	node = lst->header.next;
-	if (node->token->type == AND || node->token->type == OR ||
+	if (node->token->type == AND || node->token->type == OR || \
 		node->token->type == PIPE)
 	{
 		syntax_error(node->token->value);
