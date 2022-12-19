@@ -37,7 +37,7 @@ OBJS_DIR	=	./
 OBJS		=	$(addprefix $(OBJS_DIR), $(addsuffix .o, $(FILES)))
 
 %.o: %.c
-	$(CC) $(CFLAGS) -c $< -o $@ -L$(LIB_DIR) -lft
+	$(CC) $(CFLAGS) -c $< -o $@
 
 # Main rule
 all: 
