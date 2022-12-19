@@ -11,14 +11,22 @@
 # **************************************************************************** #
 
 # Project File
-NAME			=	global.a
+NAME			=	libglobal.a
+UNAME			= $(shell uname -s)
+
+ifeq ($(UNAME), Linux)
+READLINE_INC	=	/usr/include/readline
+else
+READLINE_INC	=	/Users/$(USER)/.brew/opt/readline/include
+endif
 
 # Compiler Flag and Command
 CC				=	cc
-CFLAGS			=	-Wall -Wextra -Werror
+CFLAGS			=	-Wall -Wextra -Werror -I$(INC) -I$(READLINE_INC)
 AR				=	ar rcsuv
 
-INC				=	../../../include/minishell.h
+INC				= 	../../../include
+LIB_DIR			= 	../../../lib/
 
 FILES			=	global \
 					
@@ -39,7 +47,7 @@ all:
 # Project file rule
 $(NAME): $(OBJS)
 	$(AR) $@ $?
-
+	mv $(NAME) $(LIB_DIR)
 # Make clean
 clean:
 	@echo "\033[92mClean global files...\033[0m"

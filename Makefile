@@ -12,12 +12,13 @@
 
 # Project File
 NAME			= minishell
+LIB_NAME		= libminishell.a
 
 # Project sources, includes, builds
 CMD_DIR			= ./src/cmd/
 UTILS_DIR		= ./src/utils/
 ERROR_DIR		= ./src/error/
-LIBFT_DIR		= ./include/libft/
+LIBFT_DIR		= ./src/libft/
 DOUBLYDIR		= ./src/internal/doublylist/
 HASHDIR			= ./src/internal/hashtable/
 COREDIR			= ./src/internal/core/
@@ -31,25 +32,29 @@ BINTREEDIR		= ./src/internal/bintree/
 EXECUTORDIR		= ./src/internal/executor/
 BUILTINDIR		= ./src/internal/builtin/
 
+# Library Directory
+LIB_DIR			= ./lib
+
 # Libaray Files
-ERROR			= $(ERROR_DIR)error.a
-UTILS			= $(UTILS_DIR)utils.a
-LIBFT			= $(LIBFT_DIR)libft.a
-HASH			= $(HASHDIR)hashtable.a
-DOUBLY			= $(DOUBLYDIR)doubly.a
-CORE			= $(COREDIR)core.a
-GLOBAL			= $(GLOBALDIR)global.a
-PARSER			= $(PARSERDIR)parser.a
-TOKENIZER		= $(TOKENIZERDIR)tokenizer.a
-SYNTAX			= $(SYNTAXDIR)syntax.a
-WILDCARD		= $(WILDCARDDIR)wildcard.a
-EXPAND			= $(EXPANDDIR)expand.a
-BINTREE			= $(BINTREEDIR)bintree.a
-EXECUTOR		= $(EXECUTORDIR)executor.a
-BUILTIN			= $(BUILTINDIR)builtin.a
+ERROR			= $(LIB_DIR)/liberror.a
+UTILS			= $(LIB_DIR)/libutils.a
+LIBFT			= $(LIB_DIR)/libft.a
+HASH			= $(LIB_DIR)/libhashtable.a
+DOUBLY			= $(LIB_DIR)/libdoubly.a
+CORE			= $(LIB_DIR)/libcore.a
+GLOBAL			= $(LIB_DIR)/libglobal.a
+PARSER			= $(LIB_DIR)/libparser.a
+TOKENIZER		= $(LIB_DIR)/libtokenizer.a
+SYNTAX			= $(LIB_DIR)/libsyntax.a
+WILDCARD		= $(LIB_DIR)/libwildcard.a
+EXPAND			= $(LIB_DIR)/libexpand.a
+BINTREE			= $(LIB_DIR)/libbintree.a
+EXECUTOR		= $(LIB_DIR)/libexecutor.a
+BUILTIN			= $(LIB_DIR)/libbuiltin.a
 
 # Includ directory
-INC				= ./include/
+INC				= ./include
+LIB_DIR			= ./lib
 FILES			= main
 
 SRCS_DIR		= $(CMD_DIR)
@@ -59,10 +64,8 @@ OBJS			= $(SRCS:.c=.o)
 
 # Compiler Flag and Command
 CC				= cc
-CFLAGS			= -Wall -Wextra -Werror 
-
-COMPILE_FLAGS	= -I/Users/$(USER)/.brew/opt/readline/include
-LINKING_FLAGS	= -L/Users/$(USER)/.brew/opt/readline/lib -lreadline
+CFLAGS			= -Wall -Wextra -Werror -I$(INC)
+UNAME			= $(shell uname -s)
 
 # Debugging Flag
 DEBUG			= -g
@@ -75,16 +78,18 @@ all:
 
 # Object rule
 %.o: %.c
-	$(CC) $(CFLAGS) $(COMPILE_FLAGS) -I $(INC) -c $< -o $@
+	$(CC) $(CFLAGS) -c $< -o $@
 
 # Project file rule
+ifeq ($(UNAME), Linux)
+LINKING_FLAGS	= -I/usr/lib32 -lreadline
 $(NAME): $(OBJS)
+	@make all -C $(LIBFT_DIR)
 	@make all -C $(ERROR_DIR)
 	@make all -C $(UTILS_DIR)
 	@make all -C $(HASHDIR)
 	@make all -C $(DOUBLYDIR)
 	@make all -C $(COREDIR)
-	@make all -C $(LIBFT_DIR)
 	@make all -C $(PARSERDIR)
 	@make all -C $(GLOBALDIR)
 	@make all -C $(TOKENIZERDIR)
@@ -95,8 +100,30 @@ $(NAME): $(OBJS)
 	@make all -C $(EXECUTORDIR)
 	@make all -C $(BUILTINDIR)
 	@echo "\033[92mBuild minishell daemon...\033[0m"
-	$(CC) $(CFLAGS) $(LINKING_FLAGS) -I$(INC)minishell.h $(EXECUTOR) $(BUILTIN) $(LIBFT) $(ERROR) $(UTILS) $(DOUBLY) $(PARSER) $(CORE) $(HASH) $(GLOBAL) $(TOKENIZER) $(SYNTAX) $(BINTREE) $(EXPAND) $(WILDCARD) -o $(NAME) $(OBJS) 
-	
+	ar rcsuvT $(LIB_DIR)/$(LIB_NAME) $(ERROR) $(UTILS) $(LIBFT) $(HASH) $(DOUBLY) $(CORE) $(GLOBAL) $(PARSER) $(TOKENIZER) $(SYNTAX) $(WILDCARD) $(EXPAND) $(BINTREE) $(EXECUTOR) $(BUILTIN)
+	$(CC) $(CFLAGS) -o $(NAME) $(OBJS) -L./lib -lminishell $(LINKING_FLAGS)
+else
+LINKING_FLAGS	= -I/Users/$(USER)/.brew/opt/readline/include -L/Users/$(USER)/.brew/opt/readline/lib -lreadline
+$(NAME): $(OBJS)
+	@make all -C $(LIBFT_DIR)
+	@make all -C $(ERROR_DIR)
+	@make all -C $(UTILS_DIR)
+	@make all -C $(HASHDIR)
+	@make all -C $(DOUBLYDIR)
+	@make all -C $(COREDIR)
+	@make all -C $(PARSERDIR)
+	@make all -C $(GLOBALDIR)
+	@make all -C $(TOKENIZERDIR)
+	@make all -C $(SYNTAXDIR)
+	@make all -C $(BINTREEDIR)
+	@make all -C $(EXPANDDIR)
+	@make all -C $(WILDCARDDIR)
+	@make all -C $(EXECUTORDIR)
+	@make all -C $(BUILTINDIR)
+	@echo "\033[92mBuild minishell daemon...\033[0m"
+	$(CC) $(CFLAGS) -o $(NAME) $(OBJS) $(ERROR) $(UTILS) $(LIBFT) $(HASH) $(DOUBLY) $(CORE) $(GLOBAL) $(PARSER) $(TOKENIZER) $(SYNTAX) $(WILDCARD) $(EXPAND) $(BINTREE) $(EXECUTOR) $(BUILTIN) $(LINKING_FLAGS)
+endif
+
 # Make clean
 clean:
 	@echo "\033[92mClean daemon files...\033[0m"
@@ -125,6 +152,7 @@ fclean:
 	rm -rf $(BUILDDIR)
 	rm -rf $(OBJS)
 	rm -rf $(NAME)
+	rm -rf $(LIB_DIR)/*
 	make -C $(ERROR_DIR) fclean
 	make -C $(UTILS_DIR) fclean
 	make -C $(HASHDIR) fclean
@@ -140,7 +168,6 @@ fclean:
 	make -C $(WILDCARDDIR) fclean
 	make -C $(EXECUTORDIR) fclean
 	make -C $(BUILTINDIR) fclean
-	
 
 # Make re
 re: 

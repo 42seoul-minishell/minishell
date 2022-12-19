@@ -11,23 +11,31 @@
 # **************************************************************************** #
 
 # Project File
-NAME		=	builtin.a
+NAME			=	libbuiltin.a
+UNAME			= $(shell uname -s)
+
+ifeq ($(UNAME), Linux)
+READLINE_INC	=	/usr/include/readline
+else
+READLINE_INC	=	/Users/$(USER)/.brew/opt/readline/include
+endif
 
 # Compiler Flag and Command
-CC			=	cc
-CFLAGS		=	-Wall -Wextra -Werror
-AR			=	ar rcsuv
+CC				=	cc
+CFLAGS			=	-Wall -Wextra -Werror -I$(INC) -I$(READLINE_INC)
+AR				=	ar rcsuv
 
-INC			=	../../../include/minishell.h
+INC				= 	../../../include
+LIB_DIR			= 	../../../lib/
 
-FILES		=	builtin \
-				cd \
-				echo \
-				env \
-				exit \
-				export \
-				pwd \
-				unset \
+FILES			=	builtin \
+					cd \
+					echo \
+					env \
+					exit \
+					export \
+					pwd \
+					unset \
 
 SRCS_DIR	=	./
 SRCS		=	$(addprefix $(SRCS_DIR), $(addsuffix .c, $(FILES)))
@@ -46,6 +54,7 @@ all:
 # Project file rule
 $(NAME): $(OBJS)
 	$(AR) $@ $?
+	mv $(NAME) $(LIB_DIR)
 
 # Make clean
 clean:

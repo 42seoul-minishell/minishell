@@ -13,7 +13,7 @@
 #ifndef TOKENIZER_H
 # define TOKENIZER_H
 
-# include "./struct.h"
+# include "struct.h"
 
 /* extract.c */
 char	*extract_double_quotes(char **str);

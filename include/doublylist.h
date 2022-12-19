@@ -13,7 +13,7 @@
 #ifndef DOUBLYLIST_H
 # define DOUBLYLIST_H
 
-# include "./struct.h"
+# include "struct.h"
 
 /* in ../src/internal/doublylist/ */
 /* utils.c */

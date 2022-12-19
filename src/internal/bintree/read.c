@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../include/minishell.h"
+#include "minishell.h"
 
 t_bintree_node	*get_last_rc_node(t_bintree_node *node)
 {

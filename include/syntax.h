@@ -13,7 +13,7 @@
 #ifndef SYNTAX_H
 # define SYNTAX_H
 
-# include "./struct.h"
+# include "struct.h"
 
 void	syntax(t_doubly_list *lst);
 void	set_bintree(t_doubly_list *lst, t_doubly_node *node);

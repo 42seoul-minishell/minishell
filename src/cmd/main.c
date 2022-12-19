@@ -10,7 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/minishell.h"
+#include "minishell.h"
+
+t_global	g_global;
 
 static void	_save_history(char *input)
 {

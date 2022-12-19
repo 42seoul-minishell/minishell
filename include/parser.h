@@ -13,7 +13,7 @@
 #ifndef PARSER_H
 # define PARSER_H
 
-# include "./struct.h"
+# include "struct.h"
 
 void	parser(char *str);
 

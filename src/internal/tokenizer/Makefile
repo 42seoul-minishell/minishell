@@ -11,14 +11,22 @@
 # **************************************************************************** #
 
 # Project File
-NAME			=	tokenizer.a
+NAME			=	libtokenizer.a
+UNAME			= $(shell uname -s)
 
-# Compiler Flag and Command`
+ifeq ($(UNAME), Linux)
+READLINE_INC	=	/usr/include/readline
+else
+READLINE_INC	=	/Users/$(USER)/.brew/opt/readline/include
+endif
+
+# Compiler Flag and Command
 CC				=	cc
-CFLAGS			=	-Wall -Wextra -Werror
+CFLAGS			=	-Wall -Wextra -Werror -I$(INC) -I$(READLINE_INC)
 AR				=	ar rcsuv
 
-INC				=	../../../include
+INC				= 	../../../include
+LIB_DIR			= 	../../../lib/
 
 FILES			=	check \
 					clean \
@@ -50,6 +58,7 @@ all:
 # Project file rule
 $(NAME): $(OBJS)
 	$(AR) $@ $?
+	mv $(NAME) $(LIB_DIR)
 
 # Make clean
 clean:

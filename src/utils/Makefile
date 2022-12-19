@@ -11,14 +11,22 @@
 # **************************************************************************** #
 
 # Project File
-NAME		= utils.a
+NAME		= libutils.a
+UNAME			= $(shell uname -s)
+
+ifeq ($(UNAME), Linux)
+READLINE_INC	=	/usr/include/readline
+else
+READLINE_INC	=	/Users/$(USER)/.brew/opt/readline/include
+endif
 
 # Compiler Flag and Command
-CC			= cc
-CFLAGS		= -Wall -Wextra -Werror
+CC				=	cc
+CFLAGS			=	-Wall -Wextra -Werror -I$(INC) -I$(READLINE_INC)
 AR			= ar rcsuv
 
-INC			= ../../include/minishell.h
+INC			= ../../include
+LIB_DIR		= ../../lib/
 
 FILES		= utils \
 				verify_utils \
@@ -42,6 +50,7 @@ all:
 # Project file rule
 $(NAME): $(OBJS)
 	$(AR) $@ $?
+	mv $(NAME) $(LIB_DIR)
 
 # Make clean
 clean:

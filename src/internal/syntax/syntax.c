@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../include/minishell.h"
+#include "minishell.h"
 
 static int	_is_valid_next_token(t_doubly_node *cur, t_doubly_node *next)
 {

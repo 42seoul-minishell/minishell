@@ -13,7 +13,7 @@
 #ifndef CORE_H
 # define CORE_H
 
-# include "./struct.h"
+# include "struct.h"
 
 /* in ../src/internal/core/ */
 /* prompt.c */

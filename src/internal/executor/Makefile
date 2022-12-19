@@ -11,14 +11,22 @@
 # **************************************************************************** #
 
 # Project File
-NAME			=	executor.a
+NAME			=	libexecutor.a
+UNAME			= $(shell uname -s)
+
+ifeq ($(UNAME), Linux)
+READLINE_INC	=	/usr/include/readline
+else
+READLINE_INC	=	/Users/$(USER)/.brew/opt/readline/include
+endif
 
 # Compiler Flag and Command
 CC				=	cc
-CFLAGS			=	-Wall -Wextra -Werror
+CFLAGS			=	-Wall -Wextra -Werror -I$(INC) -I$(READLINE_INC)
 AR				=	ar rcsuv
 
-INC				=	executor.h
+INC				= 	../../../include
+LIB_DIR			= 	../../../lib/
 
 FILES			=	executor \
 					and_or \
@@ -46,7 +54,7 @@ all:
 # Project file rule
 $(NAME): $(OBJS)
 	$(AR) $@ $?
-
+	mv $(NAME) $(LIB_DIR)
 # Make clean
 clean:
 	@echo "\033[92mClean executor files...\033[0m"

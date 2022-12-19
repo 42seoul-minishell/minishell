@@ -13,23 +13,24 @@
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
-# include "./base.h"
-# include "./struct.h"
-# include "./builtin.h"
-# include "./utils.h"
-# include "./core.h"
-# include "./doublylist.h"
-# include "./executor.h"
-# include "./hashtable.h"
-# include "./tokenizer.h"
-# include "./error.h"
-# include "./global.h"
-# include "./syntax.h"
-# include "./bintree.h"
-# include "./expand.h"
-# include "./parser.h"
-# include "./wildcard.h"
+# include "base.h"
+# include "struct.h"
+# include "builtin.h"
+# include "utils.h"
+# include "core.h"
+# include "doublylist.h"
+# include "executor.h"
+# include "hashtable.h"
+# include "tokenizer.h"
+# include "error.h"
+# include "global.h"
+# include "syntax.h"
+# include "bintree.h"
+# include "expand.h"
+# include "parser.h"
+# include "wildcard.h"
+# include "libft.h"
 
-t_global	g_global;
+extern t_global	g_global;
 
 #endif

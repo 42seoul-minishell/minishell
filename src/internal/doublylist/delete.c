@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../include/minishell.h"
+#include "minishell.h"
 
 void	delete_doubly_node(t_doubly_list *lst, t_doubly_node *node)
 {
