@@ -87,7 +87,7 @@ static void	_insert_helper_quote_case(t_doubly_list *lst, char *str, \
 		safe_insert(lst, verify_token(after_op), after_op);
 }
 
-void	make_token_list(t_doubly_list *lst, char *str)
+static void	_make_token_list(t_doubly_list *lst, char *str)
 {	
 	ssize_t	current;
 	ssize_t	before;
@@ -113,5 +113,6 @@ void	tokenizer(t_doubly_list *lst, char *str)
 {
 	if (str[0] == '\0')
 		return ;
-	make_token_list(lst, str);
+	_make_token_list(lst, str);
+	relocation_doubly_lst(lst);
 }
