@@ -67,11 +67,9 @@ CC				= cc
 CFLAGS			= -Wall -Wextra -Werror -I$(INC)
 
 ifeq ($(OS), Linux)
-COMPILE_FLAGS	= -I./lib
-LINKING_FLAGS	= -lreadline
+LINKING_FLAGS	= -I/usr/lib32 -lreadline
 else
-COMPILE_FLAGS	= -I/Users/$(USER)/.brew/opt/readline/include
-LINKING_FLAGS	= -L/Users/$(USER)/.brew/opt/readline/lib -lreadline
+LINKING_FLAGS	= -I/Users/$(USER)/.brew/opt/readline/include -L/Users/$(USER)/.brew/opt/readline/lib -lreadline
 endif
 
 # Debugging Flag
@@ -85,7 +83,7 @@ all:
 
 # Object rule
 %.o: %.c
-	$(CC) $(CFLAGS) $(COMPILE_FLAGS) -c $< -o $@
+	$(CC) $(CFLAGS) -c $< -o $@
 
 # Project file rule
 $(NAME): $(OBJS)
@@ -106,8 +104,8 @@ $(NAME): $(OBJS)
 	@make all -C $(BUILTINDIR)
 	@echo "\033[92mBuild minishell daemon...\033[0m"
 	ar rcsuvT $(LIB_DIR)/$(LIB_NAME) $(ERROR) $(UTILS) $(LIBFT) $(HASH) $(DOUBLY) $(CORE) $(GLOBAL) $(PARSER) $(TOKENIZER) $(SYNTAX) $(WILDCARD) $(EXPAND) $(BINTREE) $(EXECUTOR) $(BUILTIN)
-	$(CC) $(CFLAGS) -o $(NAME) $(OBJS) -L./lib -lminishell -lreadline
-	
+	$(CC) $(CFLAGS) -o $(NAME) $(OBJS) -L./lib -lminishell $(LINKING_FLAGS)
+
 # Make clean
 clean:
 	@echo "\033[92mClean daemon files...\033[0m"

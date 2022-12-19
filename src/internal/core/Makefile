@@ -16,7 +16,6 @@ NAME			=	libcore.a
 # Compiler Flag and Command
 CC				=	cc
 CFLAGS			=	-Wall -Wextra -Werror -I$(INC)
-COMPILE_FLAGS	= -I/Users/$(USER)/.brew/opt/readline/include
 AR				=	ar rcsuv
 
 INC				= 	../../../include
@@ -32,7 +31,7 @@ OBJS_DIR		=	./
 OBJS			=	$(addprefix $(OBJS_DIR), $(addsuffix .o, $(FILES)))
 
 %.o: %.c
-	$(CC) $(CFLAGS) $(COMPILE_FLAGS) -c $< -o $@ -L$(LIB_DIR) -lft
+	$(CC) $(CFLAGS) -c $< -o $@
 
 # Main rule
 all: 
@@ -43,6 +42,7 @@ all:
 $(NAME): $(OBJS)
 	$(AR) $@ $?
 	mv $(NAME) $(LIB_DIR)
+	
 # Make clean
 clean:
 	@echo "\033[92mClean core files...\033[0m"
