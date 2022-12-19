@@ -13,7 +13,7 @@
 #ifndef EXECUTOR_H
 # define EXECUTOR_H
 
-# include "./struct.h"
+# include "struct.h"
 
 /* executor.c */
 void	executor(t_bintree_node	*root);

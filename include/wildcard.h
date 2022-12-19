@@ -13,7 +13,7 @@
 #ifndef WILDCARD_H
 # define WILDCARD_H
 
-# include "./struct.h"
+# include "struct.h"
 
 /* in src/internal/wildcard/ */
 /* wildcard.c */

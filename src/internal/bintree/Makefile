@@ -11,14 +11,15 @@
 # **************************************************************************** #
 
 # Project File
-NAME			=	bintree.a
+NAME			=	libbintree.a
 
 # Compiler Flag and Command
 CC				=	cc
-CFLAGS			=	-Wall -Wextra -Werror
+CFLAGS			=	-Wall -Wextra -Werror -I$(INC)
 AR				=	ar rcsuv
 
-INC				=	../../../include
+INC				= 	../../../include
+LIB_DIR			= 	../../../lib
 
 FILES			=	create \
 					delete \
@@ -43,6 +44,7 @@ all:
 # Project file rule
 $(NAME): $(OBJS)
 	$(AR) $@ $?
+	mv $(NAME) $(LIB_DIR)
 
 # Make clean
 clean:

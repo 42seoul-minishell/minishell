@@ -11,14 +11,15 @@
 # **************************************************************************** #
 
 # Project File
-NAME		= error.a
+NAME		= liberror.a
 
 # Compiler Flag and Command
 CC			= cc
-CFLAGS		= -Wall -Wextra -Werror
+CFLAGS		= -Wall -Wextra -Werror -I$(INC)
 AR			= ar rcsuv
 
-INC			= ../../include/minishell.h
+INC			= ../../include
+LIB_DIR		= ../../lib
 
 FILES		= error \
 
@@ -39,6 +40,7 @@ all:
 # Project file rule
 $(NAME): $(OBJS)
 	$(AR) $@ $?
+	mv $(NAME) $(LIB_DIR)
 
 # Make clean
 clean:

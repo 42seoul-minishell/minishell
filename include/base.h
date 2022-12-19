@@ -34,7 +34,7 @@
 # include <readline/history.h>
 
 /* libft header */
-# include "libft/libft.h"
+# include "libft.h"
 
 /* macros */
 # define TRUE 1

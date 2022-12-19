@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../include/minishell.h"
+#include "minishell.h"
 
 int	insert_lc_node(t_bintree_node *parent, t_token *token, t_tnType type)
 {

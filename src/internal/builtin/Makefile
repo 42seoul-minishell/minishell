@@ -11,14 +11,15 @@
 # **************************************************************************** #
 
 # Project File
-NAME		=	builtin.a
+NAME		=	libbuiltin.a
 
 # Compiler Flag and Command
 CC			=	cc
-CFLAGS		=	-Wall -Wextra -Werror
+CFLAGS		=	-Wall -Wextra -Werror -I$(INC)
 AR			=	ar rcsuv
 
-INC			=	../../../include/minishell.h
+INC				= 	../../../include
+LIB_DIR			= 	../../../lib
 
 FILES		=	builtin \
 				cd \
@@ -36,7 +37,7 @@ OBJS_DIR	=	./
 OBJS		=	$(addprefix $(OBJS_DIR), $(addsuffix .o, $(FILES)))
 
 %.o: %.c
-	$(CC) $(CFLAGS) -c $< -o $@
+	$(CC) $(CFLAGS) -c $< -o $@ -L$(LIB_DIR) -lft
 
 # Main rule
 all: 
@@ -46,6 +47,7 @@ all:
 # Project file rule
 $(NAME): $(OBJS)
 	$(AR) $@ $?
+	mv $(NAME) $(LIB_DIR)
 
 # Make clean
 clean:

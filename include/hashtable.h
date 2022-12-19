@@ -13,7 +13,7 @@
 #ifndef HASHTABLE_H
 # define HASHTABLE_H
 
-# include "./struct.h"
+# include "struct.h"
 
 /* in ../src/internal/hashmap/ */
 /* create.c */

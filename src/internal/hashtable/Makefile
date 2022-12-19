@@ -11,14 +11,15 @@
 # **************************************************************************** #
 
 # Project File
-NAME			=	hashtable.a
+NAME			=	libhashtable.a
 
 # Compiler Flag and Command
 CC				=	cc
-CFLAGS			=	-Wall -Wextra -Werror
+CFLAGS			=	-Wall -Wextra -Werror -I$(INC)
 AR				=	ar rcsuv
 
-INC				=	../../../include/minishell.h
+INC				= 	../../../include
+LIB_DIR			= 	../../../lib
 
 FILES			=	create \
 					delete \
@@ -44,7 +45,7 @@ all:
 # Project file rule
 $(NAME): $(OBJS)
 	$(AR) $@ $?
-
+	mv $(NAME) $(LIB_DIR)
 # Make clean
 clean:
 	@echo "\033[92mClean hashtable files...\033[0m"

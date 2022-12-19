@@ -13,7 +13,7 @@
 #ifndef BINTREE_H
 # define BINTREE_H
 
-# include "./struct.h"
+# include "struct.h"
 
 /* in ../src/internal/bintree/ */
 /* insert.c */

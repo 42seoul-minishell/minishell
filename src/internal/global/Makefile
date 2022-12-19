@@ -11,14 +11,15 @@
 # **************************************************************************** #
 
 # Project File
-NAME			=	global.a
+NAME			=	libglobal.a
 
 # Compiler Flag and Command
 CC				=	cc
-CFLAGS			=	-Wall -Wextra -Werror
+CFLAGS			=	-Wall -Wextra -Werror -I$(INC)
 AR				=	ar rcsuv
 
-INC				=	../../../include/minishell.h
+INC				= 	../../../include
+LIB_DIR			= 	../../../lib
 
 FILES			=	global \
 					
@@ -39,7 +40,7 @@ all:
 # Project file rule
 $(NAME): $(OBJS)
 	$(AR) $@ $?
-
+	mv $(NAME) $(LIB_DIR)
 # Make clean
 clean:
 	@echo "\033[92mClean global files...\033[0m"

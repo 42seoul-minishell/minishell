@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../include/minishell.h"
+#include "minishell.h"
 
 int	insert_node(t_doubly_list *lst, t_doubly_node *node)
 {

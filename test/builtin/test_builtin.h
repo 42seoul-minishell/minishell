@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   test_../../../include/minishell.h                                     :+:      :+:    :+:   */
+/*   test_minishell.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mingkim <mingkim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -13,6 +13,6 @@
 #ifndef TEST_BUILTIN_H
 # define TEST_BUILTIN_H
 
-# include "../../include/minishell.h"
+# include "minishell.h"
 
 #endif

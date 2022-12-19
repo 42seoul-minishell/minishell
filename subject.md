@@ -56,7 +56,7 @@ _요약: 이번 프로젝트의 목표는 간단한 쉘을 만드는 것입니�
 
 - ##### _If the subject requires it, you must submit a Makefile which will compile your source files to the required output with the flags -Wall, -Wextra and -Werror, and your Makefile must not relink._
 
-  과제에서 필요한 경우, **-Wall -Wextra -Werror** 플래그를 지정하여 컴파일을 수행하는 **Makefile**을 제출해야 합니다. Makefile은 relink 되어서는 안 됩니다.
+  과제에서 필요한 경우, **-Wall -Wextra -Werror -I$(INC)** 플래그를 지정하여 컴파일을 수행하는 **Makefile**을 제출해야 합니다. Makefile은 relink 되어서는 안 됩니다.
 
 - ##### _Your Makefile must at least contain the rules $(NAME), all, clean, fclean and re._
 

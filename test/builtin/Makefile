@@ -15,7 +15,7 @@ NAME			=	testBuiltin
 
 # Compiler Flag and Command
 CC				=	cc
-CFLAGS			=	-Wall -Wextra -Werror
+CFLAGS			=	-Wall -Wextra -Werror -I$(INC)
 
 # Debugging Flag
 DEBUG			=	-g

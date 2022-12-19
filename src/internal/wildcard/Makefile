@@ -11,14 +11,15 @@
 # **************************************************************************** #
 
 # Project File
-NAME			=	wildcard.a
+NAME			=	libwildcard.a
 
 # Compiler Flag and Command
 CC				=	cc
-CFLAGS			=	-Wall -Wextra -Werror
+CFLAGS			=	-Wall -Wextra -Werror -I$(INC)
 AR				=	ar rcsuv
 
 INC				=	../../../include
+LIB_DIR			=	../../../lib
 
 FILES			=	wildcard \
 					case \
@@ -41,6 +42,7 @@ all:
 # Project file rule
 $(NAME): $(OBJS)
 	$(AR) $@ $?
+	mv $(NAME) $(LIB_DIR)
 
 # Make clean
 clean:

@@ -1,7 +1,7 @@
 #ifndef TEST_DOUBLYLIST_H
 #define TEST_DOUBLYLIST_H
 
-#include "../../include/minishell.h"
+#include "minishell.h"
 #include <string.h>
 #include <errno.h>
 

@@ -13,7 +13,7 @@
 #ifndef TEST_bintree_H
 #define TEST_bintree_H
 
-#include "../../include/minishell.h"
+#include "minishell.h"
 #include <string.h>
 
 /* in utils.c */

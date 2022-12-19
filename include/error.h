@@ -13,7 +13,7 @@
 #ifndef ERROR_H
 # define ERROR_H
 
-#include "./struct.h"
+#include "struct.h"
 
 /* in ../src/error/ */
 /* error.c */

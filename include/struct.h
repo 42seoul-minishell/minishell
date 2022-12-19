@@ -13,7 +13,7 @@
 #ifndef STRUCT_H
 # define STRUCT_H
 
-# include "./base.h"
+# include "base.h"
 
 typedef enum e_token_type
 {

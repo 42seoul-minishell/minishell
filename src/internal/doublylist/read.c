@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../include/minishell.h"
+#include "minishell.h"
 
 t_doubly_node	*get_node_by_index(t_doubly_list *lst, size_t idx)
 {
