@@ -60,3 +60,10 @@ void	release_doubly_list(t_doubly_list *lst)
 	}
 	free(lst);
 }
+
+void	release_doubly_node(t_doubly_node *node)
+{
+	free(node->token->value);
+	free(node->token);
+	free(node);
+}
