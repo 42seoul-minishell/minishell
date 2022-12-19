@@ -12,8 +12,9 @@
 
 # Project File
 NAME			=	libexpand.a
+UNAME			= $(shell uname -s)
 
-ifeq ($(OS), Linux)
+ifeq ($(UNAME), Linux)
 READLINE_INC	=	/usr/include/readline
 else
 READLINE_INC	=	/Users/$(USER)/.brew/opt/readline/include

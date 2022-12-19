@@ -12,6 +12,7 @@
 
 # Project File
 NAME			=	testDoublyList
+UNAME			= $(shell uname -s)
 
 # Compiler Flag and Command
 CC				=	cc

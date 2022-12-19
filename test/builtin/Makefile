@@ -12,6 +12,7 @@
 
 # Project File
 NAME			=	testBuiltin
+UNAME			= $(shell uname -s)
 
 # Compiler Flag and Command
 CC				=	cc
