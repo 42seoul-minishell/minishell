@@ -72,7 +72,7 @@ DEBUG			= -g
 
 
 # Main rule
-all:	
+all:
 	@echo "\033[92mBuild minishell daemon...\033[0m"
 	make $(NAME)
 
@@ -84,6 +84,7 @@ all:
 ifeq ($(UNAME), Linux)
 LINKING_FLAGS	= -I/usr/lib32 -lreadline
 $(NAME): $(OBJS)
+	@mkdir -p $(LIB_DIR)
 	@make all -C $(LIBFT_DIR)
 	@make all -C $(ERROR_DIR)
 	@make all -C $(UTILS_DIR)
@@ -105,6 +106,7 @@ $(NAME): $(OBJS)
 else
 LINKING_FLAGS	= -I/Users/$(USER)/.brew/opt/readline/include -L/Users/$(USER)/.brew/opt/readline/lib -lreadline
 $(NAME): $(OBJS)
+	@mkdir -p $(LIB_DIR)
 	@make all -C $(LIBFT_DIR)
 	@make all -C $(ERROR_DIR)
 	@make all -C $(UTILS_DIR)
@@ -143,11 +145,11 @@ clean:
 	make -C $(WILDCARDDIR) clean
 	make -C $(EXECUTORDIR) clean
 	make -C $(BUILTINDIR) clean
-	
-	
+
+
 
 # Make fclean
-fclean: 
+fclean:
 	@echo "\033[92mForce clean daemon files...\033[0m"
 	rm -rf $(BUILDDIR)
 	rm -rf $(OBJS)
@@ -170,7 +172,7 @@ fclean:
 	make -C $(BUILTINDIR) fclean
 
 # Make re
-re: 
+re:
 	@echo "\033[92mRebuild daemon files...\033[0m"
 	make fclean
 	make all
