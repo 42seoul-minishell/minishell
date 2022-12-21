@@ -63,9 +63,12 @@ char	*join_with_blank(char *str1, char *str2)
 	total_len = ft_strlen(str1) + ft_strlen(str2) + 2;
 	res = (char *)sp_malloc(total_len * sizeof(char));
 	tmp = res;
-	while (*str1)
-		*(tmp++) = *(str1++);
-	*(tmp++) = ' ';
+	if (str1)
+	{
+		while (*str1)
+			*(tmp++) = *(str1++);
+		*(tmp++) = ' ';
+	}
 	while (*str2)
 		*(tmp++) = *(str2++);
 	*tmp = '\0';
@@ -87,7 +90,6 @@ char	*wildcard_join(char **split)
 	{
 		tmp = res;
 		res = join_with_blank(tmp, split[i]);
-		printf("res: %s\n", res);
 		free(tmp);
 		i++;
 	}

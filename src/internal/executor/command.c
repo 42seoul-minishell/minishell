@@ -18,7 +18,7 @@ static void _separate_cmd(t_bintree_node *node)
 
 	if (!node)
 		return;
-	split = ft_split(node->token->value, ' ');
+	split = ft_split(node->token->value, ' ', 0);
 	if (!split)
 		exit(1);
 	if (ft_strncmp(split[0], "echo", ft_strlen(split[0])) == 0)

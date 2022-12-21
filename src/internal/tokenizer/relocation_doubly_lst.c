@@ -50,7 +50,7 @@ static t_doubly_node	*_split_doubly_node(t_doubly_list *lst, \
 	t_doubly_node	*curr;
 	t_doubly_node	*tmp;
 
-	split = ft_split(node->token->value, ' ');
+	split = ft_split(node->token->value, ' ', 0);
 	i = 0;
 	while (split[i])
 	{

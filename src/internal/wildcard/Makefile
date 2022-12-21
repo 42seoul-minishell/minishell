@@ -22,7 +22,7 @@ endif
 
 # Compiler Flag and Command
 CC				=	cc
-CFLAGS			=	-Wall -Wextra -Werror -I$(INC) -I$(READLINE_INC)
+CFLAGS			=	-I$(INC) -I$(READLINE_INC)
 AR				=	ar rcsuv
 
 INC				=	../../../include
