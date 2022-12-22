@@ -85,7 +85,7 @@ typedef struct s_hashtable
 typedef struct s_bintree_node
 {
 	t_tnType				type;
-	t_token					*token;
+	t_list					*token_lst;
 	struct s_bintree_node	*lc;
 	struct s_bintree_node	*rc;
 }	t_bintree_node;

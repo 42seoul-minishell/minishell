@@ -85,7 +85,7 @@ ifeq ($(UNAME), Linux)
 LINKING_FLAGS	= -I/usr/lib32 -lreadline
 $(NAME): $(OBJS)
 	@mkdir -p $(LIB_DIR)
-	@make all -C $(LIBFT_DIR)
+	@make bonus -C $(LIBFT_DIR)
 	@make all -C $(ERROR_DIR)
 	@make all -C $(UTILS_DIR)
 	@make all -C $(HASHDIR)
@@ -107,7 +107,7 @@ else
 LINKING_FLAGS	= -I/Users/$(USER)/.brew/opt/readline/include -L/Users/$(USER)/.brew/opt/readline/lib -lreadline
 $(NAME): $(OBJS)
 	@mkdir -p $(LIB_DIR)
-	@make all -C $(LIBFT_DIR)
+	@make bonus -C $(LIBFT_DIR)
 	@make all -C $(ERROR_DIR)
 	@make all -C $(UTILS_DIR)
 	@make all -C $(HASHDIR)
