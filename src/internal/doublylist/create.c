@@ -37,5 +37,7 @@ t_doubly_node	*create_doubly_node(t_token *token)
 
 	new = (t_doubly_node *)sp_malloc(sizeof(t_doubly_node));
 	new->token = token;
+	new->next = NULL;
+	new->prev = NULL;
 	return (new);
 }

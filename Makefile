@@ -64,7 +64,7 @@ OBJS			= $(SRCS:.c=.o)
 
 # Compiler Flag and Command
 CC				= cc
-CFLAGS			= -Wall -Wextra -Werror -I$(INC) -g
+CFLAGS			= -Wall -Wextra -Werror -I$(INC)
 UNAME			= $(shell uname -s)
 
 # Debugging Flag

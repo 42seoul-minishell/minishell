@@ -22,7 +22,7 @@ endif
 
 # Compiler Flag and Command
 CC				=	cc
-CFLAGS			=	-I$(INC) -I$(READLINE_INC)
+CFLAGS			=	-Wall -Wextra -Werror -I$(INC) -I$(READLINE_INC)
 AR				=	ar rcsuv
 
 INC				=	../../../include
@@ -45,7 +45,7 @@ OBJS			=	$(addprefix $(OBJS_DIR), $(addsuffix .o, $(FILES)))
 	$(CC) $(CFLAGS) -c $<  -o $@
 
 # Main rule
-all: 
+all:
 	@echo "\033[92mBuild wildcard...\033[0m"
 	@make $(NAME)
 

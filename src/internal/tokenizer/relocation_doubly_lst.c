@@ -19,12 +19,12 @@ static t_doubly_node	*_link_lst(t_doubly_list *lst, t_doubly_node *node, \
 
 	if (lst->len == 1)
 	{
-		curr->prev = curr->next;
-		curr->next->next = curr;
+		curr->prev = curr;
+		curr->next = curr;
 		lst->header.next = curr;
-		lst->header.prev = curr->next;
+		lst->header.prev = curr;
 		release_doubly_node(node);
-		return (curr->next);
+		return (curr);
 	}
 	tmp = node;
 	node = curr;
