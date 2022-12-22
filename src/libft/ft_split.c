@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include <stdlib.h>
+#include "libft.h"
 
 static char	**free_all(char ***res)
 {
@@ -24,7 +25,7 @@ static char	**free_all(char ***res)
 	return (0);
 }
 
-static int	cnt_words(char const *s, char c)
+static int	cnt_words(char const *s, char c, int include)
 {
 	int	i;
 	int	cnt;
@@ -32,17 +33,24 @@ static int	cnt_words(char const *s, char c)
 	i = 0;
 	if (s[0] == '\0')
 		return (0);
-	while (s[i] == c)
+	while (!include && s[i] == c)
 		i++;
 	cnt = 0;
 	while (s[i])
 	{
-		if (s[i] == c && s[i - 1] != c)
+		if (s[i] == c)
+		{
+			if (include)
+				cnt++;
+			i++;
+		}
+		else
+		{
+			while (s[i] && s[i] != c)
+				i++;
 			cnt++;
-		i++;
+		}
 	}
-	if (s[i - 1] != c)
-		cnt++;
 	return (cnt);
 }
 
@@ -56,36 +64,17 @@ static int	find_len(char const *s, int start, char c)
 	return (len);
 }
 
-static char	*set_str(char const *s, int start, char c)
-{
-	int		i;
-	int		len;
-	char	*ptr;
-
-	len = find_len(s, start, c);
-	ptr = (char *)malloc((len + 1) * sizeof(char));
-	if (!ptr)
-		return (0);
-	i = 0;
-	while (i < len)
-	{
-		ptr[i] = s[start + i];
-		i++;
-	}
-	ptr[i] = '\0';
-	return (ptr);
-}
-
-char	**ft_split(char const *s, char c)
+char	**ft_split(char const *s, char c, int include)
 {
 	int		i;
 	int		start;
 	int		words;
+	int		sep_off;
 	char	**res;
 
 	if (!s)
 		return (0);
-	words = cnt_words(s, c);
+	words = cnt_words(s, c, include);
 	res = (char **)malloc((words + 1) * sizeof(char *));
 	if (!res)
 		return (0);
@@ -94,12 +83,16 @@ char	**ft_split(char const *s, char c)
 	start = 0;
 	while (++i < words)
 	{
-		while (s[start] == c)
+		while (!include && s[start] == c)
 			start++;
-		res[i] = set_str(s, start, c);
+		sep_off = find_len(s, start, c);
+		if (include && s[start] == c)
+			sep_off++;
+		res[i] = malloc(sep_off + 1);
 		if (!(res[i]))
 			return (free_all(&res));
-		start += find_len(s, start, c);
+		ft_strlcpy(res[i], (s + start), sep_off + 1);
+		start += sep_off;
 	}
 	return (res);
 }

@@ -63,9 +63,12 @@ char	*join_with_blank(char *str1, char *str2)
 	total_len = ft_strlen(str1) + ft_strlen(str2) + 2;
 	res = (char *)sp_malloc(total_len * sizeof(char));
 	tmp = res;
-	while (*str1)
-		*(tmp++) = *(str1++);
-	*(tmp++) = ' ';
+	if (str1)
+	{
+		while (*str1)
+			*(tmp++) = *(str1++);
+		*(tmp++) = ' ';
+	}
 	while (*str2)
 		*(tmp++) = *(str2++);
 	*tmp = '\0';
@@ -74,22 +77,26 @@ char	*join_with_blank(char *str1, char *str2)
 
 char	*wildcard_join(char **split)
 {
+	size_t	total_len;
 	int		i;
-	char	*tmp;
 	char	*res;
 
-	i = 1;
-	res = ft_strdup(split[0]);
+	total_len = 0;
+	i = 0;
+	while (split && split[i])
+		total_len += ft_strlen(split[i++]);
+	res = (char *)sp_malloc(total_len + i + 1);
+	res[total_len + i] = 0;
 	if (!res)
 		exit_error("\033[31mError: ft_strdup(): \
 			Failed to duplicate string\n\033[0m");
+	i = 0;
 	while (split[i])
 	{
-		tmp = res;
-		res = join_with_blank(tmp, split[i]);
-		printf("res: %s\n", res);
-		free(tmp);
-		i++;
+		ft_strlcat(res, split[i], total_len + i + 1);
+		free(split[i]);
+		if (split[++i])
+			ft_strlcat(res, " ", total_len + i + 1);
 	}
 	return (res);
 }
