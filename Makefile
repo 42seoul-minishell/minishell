@@ -64,7 +64,7 @@ OBJS			= $(SRCS:.c=.o)
 
 # Compiler Flag and Command
 CC				= cc
-CFLAGS			= -Wall -Wextra -Werror -I$(INC)
+CFLAGS			= -Wall -Wextra -Werror -I$(INC) -g
 UNAME			= $(shell uname -s)
 
 # Debugging Flag
@@ -72,7 +72,7 @@ DEBUG			= -g
 
 
 # Main rule
-all:	
+all:
 	@echo "\033[92mBuild minishell daemon...\033[0m"
 	make $(NAME)
 
@@ -143,11 +143,11 @@ clean:
 	make -C $(WILDCARDDIR) clean
 	make -C $(EXECUTORDIR) clean
 	make -C $(BUILTINDIR) clean
-	
-	
+
+
 
 # Make fclean
-fclean: 
+fclean:
 	@echo "\033[92mForce clean daemon files...\033[0m"
 	rm -rf $(BUILDDIR)
 	rm -rf $(OBJS)
@@ -170,7 +170,7 @@ fclean:
 	make -C $(BUILTINDIR) fclean
 
 # Make re
-re: 
+re:
 	@echo "\033[92mRebuild daemon files...\033[0m"
 	make fclean
 	make all
