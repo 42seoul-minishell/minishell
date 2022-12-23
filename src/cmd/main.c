@@ -55,7 +55,8 @@ static void	_run(void)
 	}
 }
 
-void	check_leak() {
+void	check_leak(void)
+{
 	system("leaks minishell");
 }
 
