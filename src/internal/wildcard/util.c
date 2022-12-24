@@ -26,6 +26,26 @@ void	lstinsort(t_list *lst, t_list *new_lst, \
 	node->next = new_lst;
 }
 
+int	check_matched(char *wildcard, char dirent[])
+{
+	if (*dirent == '\0')
+	{
+		while (*wildcard)
+		{
+			if (*wildcard != '*' && *wildcard != '\0')
+				return (0);
+			wildcard++;
+		}
+		return (1);
+	}
+	if ((*wildcard == *dirent) && check_matched(wildcard + 1, dirent + 1))
+		return (1);
+	if (*wildcard == '*')
+		return (check_matched(wildcard + 1, dirent) \
+			|| check_matched(wildcard, dirent + 1));
+	return (0);
+}
+
 char	*wildcard_join(t_wildcard *wc)
 {
 	size_t	total_len;

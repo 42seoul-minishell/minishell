@@ -12,30 +12,12 @@
 
 #include "minishell.h"
 
+static void	_next(t_wildcard *wc, t_list *lst, int curr_depth);
+
 static void	_destroy_wildcard(t_wildcard *wc)
 {
 	free_dp((void **)wc->path_token);
 	ft_lstclear(&wc->lst.next, free);
-}
-
-static int	_check_matched(char *wildcard, char dirent[])
-{
-	if (*dirent == '\0')
-	{
-		while (*wildcard)
-		{
-			if (*wildcard != '*' && *wildcard != '\0')
-				return (0);
-			wildcard++;
-		}
-		return (1);
-	}
-	if ((*wildcard == *dirent) && _check_matched(wildcard + 1, dirent + 1))
-		return (1);
-	if (*wildcard == '*')
-		return (_check_matched(wildcard + 1, dirent) \
-			|| _check_matched(wildcard, dirent + 1));
-	return (0);
 }
 
 static int	_check_recur(t_wildcard *wc, int curr_depth, \
@@ -46,7 +28,7 @@ static int	_check_recur(t_wildcard *wc, int curr_depth, \
 	if (!(ft_strchr(wc->path_token[curr_depth], '*') && d_name[0] == '.') \
 		&& (wc->path_token[curr_depth + 1] == NULL \
 		|| (*wc->path_token[curr_depth + 1] == '/' && type == 4)) \
-		&& _check_matched(wc->path_token[curr_depth], d_name))
+		&& check_matched(wc->path_token[curr_depth], d_name))
 		return (1);
 	return (0);
 }
@@ -56,7 +38,6 @@ static void	_find_matched(t_wildcard *wc, char *path, \
 {
 	struct dirent	*_dirent;
 	t_list			lst;
-	t_list			*node;
 
 	ft_memset(&lst, 0, sizeof(t_list));
 	if (!wc->path_token[curr_depth] && ++wc->lst_size)
@@ -74,16 +55,24 @@ static void	_find_matched(t_wildcard *wc, char *path, \
 			_dirent = readdir(dir);
 		}
 	}
-	node = &lst;
+	if (dir)
+		closedir(dir);
+	_next(wc, &lst, curr_depth);
+}
+
+static void	_next(t_wildcard *wc, t_list *lst, int curr_depth)
+{
+	t_list	*node;
+
+	node = lst;
 	while (node->next)
 	{
 		_find_matched(wc, (char *)node->next->content, curr_depth + 1,
 			opendir((char *)node->next->content));
 		node = node->next;
 	}
-	ft_lstclear(&lst.next, free);
-	if (dir)
-		closedir(dir);
+	ft_lstclear(&lst->next, free);
+	lst->next = NULL;
 }
 
 void	wildcard(t_doubly_list *lst)
