@@ -12,19 +12,20 @@
 
 #include "minishell.h"
 
-void	parser(char *str)
+void parser(char *str)
 {
-	t_doubly_list	*lst;
+	t_doubly_list *lst;
 
 	lst = create_doubly_list();
 	tokenizer(lst, str);
-	display_list(lst);
+	// display_list(lst);
 	expand(lst);
 	relocation_doubly_lst(lst);
-	display_list(lst);
+	// display_list(lst);
 	wildcard(lst);
 	relocation_doubly_lst(lst);
 	display_list(lst);
 	syntax(lst);
+	display_bintree_by_inorder(g_global.tree);
 	release_doubly_list(lst);
 }
