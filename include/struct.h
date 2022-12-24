@@ -122,8 +122,10 @@ typedef struct s_global
 /* structure for wildcard */
 typedef struct s_wildcard
 {
-	char	*prefix;
-	char	*suffix;
+	char	**path_token;
+	char	*token_value;
+	t_list	lst;
+	size_t	lst_size;
 }	t_wildcard;
 
 #endif
