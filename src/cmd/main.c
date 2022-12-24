@@ -55,11 +55,17 @@ static void	_run(void)
 	}
 }
 
+void	check_leak(void)
+{
+	system("leaks minishell");
+}
+
 int	main(int ac, char **av, char **envp)
 {
 	t_hashtable	*table;
 	t_bintree	*tree;
 
+	atexit(check_leak);
 	printf("ac = %d\n", ac);
 	*av = NULL;
 	setting_signal();

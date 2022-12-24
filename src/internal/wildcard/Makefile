@@ -29,10 +29,6 @@ INC				=	../../../include
 LIB_DIR			=	../../../lib/
 
 FILES			=	wildcard \
-					both_have \
-					nothing_have \
-					only_prefix \
-					only_suffix \
 					util
 
 SRCS_DIR		=	./
@@ -45,7 +41,7 @@ OBJS			=	$(addprefix $(OBJS_DIR), $(addsuffix .o, $(FILES)))
 	$(CC) $(CFLAGS) -c $<  -o $@
 
 # Main rule
-all: 
+all:
 	@echo "\033[92mBuild wildcard...\033[0m"
 	@make $(NAME)
 

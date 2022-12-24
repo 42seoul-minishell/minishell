@@ -12,116 +12,102 @@
 
 #include "minishell.h"
 
-static char	*_set_res(char *res, char *str)
+static void	_destroy_wildcard(t_wildcard *wc)
 {
-	char	*tmp;
-
-	if (!res)
-		return (str);
-	tmp = join_with_blank(res, str);
-	if (!tmp)
-		exit_error("\033[31mError: ft_strjoin(): Failed to join strings\n\033[0m");
-	free(res);
-	free(str);
-	return (tmp);
+	free_dp((void **)wc->path_token);
+	ft_lstclear(&wc->lst.next, free);
 }
 
-static char	*_convert_wildcard(DIR *dir, t_wildcard *wildcard)
+static int	_check_matched(char *wildcard, char dirent[])
 {
-	char			*res;
-	char			*tmp;
-	struct dirent	*dirent;
-
-	res = NULL;
-	dirent = readdir(dir);
-	while (dirent)
+	if (*dirent == '\0')
 	{
-		if (!wildcard->prefix && !wildcard->suffix)
-			tmp = nothing_have(dirent->d_name);
-		else if (wildcard->prefix && !wildcard->suffix)
-			tmp = only_prefix(dirent->d_name, wildcard->prefix);
-		else if (!wildcard->prefix && wildcard->suffix)
-			tmp = only_suffix(dirent->d_name, wildcard->suffix);
-		else
-			tmp = both_have(dirent->d_name, wildcard);
-		if (!tmp)
+		while (*wildcard)
 		{
-			dirent = readdir(dir);
-			continue ;
+			if (*wildcard != '*' && *wildcard != '\0')
+				return (0);
+			wildcard++;
 		}
-		res = _set_res(res, tmp);
-		dirent = readdir(dir);
+		return (1);
 	}
-	return (res);
+	if ((*wildcard == *dirent) && _check_matched(wildcard + 1, dirent + 1))
+		return (1);
+	if (*wildcard == '*')
+		return (_check_matched(wildcard + 1, dirent) \
+			|| _check_matched(wildcard, dirent + 1));
+	return (0);
 }
 
-static char	*_wildcard_to_str(char *str)
+static int	_check_recur(t_wildcard *wc, int curr_depth, \
+	char d_name[], unsigned char type)
 {
-	char		*res;
-	DIR			*dir;
-	t_wildcard	*wildcard;
-
-	wildcard = (t_wildcard *)sp_malloc(sizeof(t_wildcard));
-	wildcard->prefix = get_prefix(str);
-	wildcard->suffix = get_suffix(str);
-	dir = get_dir_pointer(wildcard);
-	if (wildcard->prefix && ft_strchr(wildcard->prefix, '/') && !dir)
-		return (NULL);
-	else if (!dir)
-		exit_error("\033[31mError: opendir(): Failed to open directory\n\033[0m");
-	res = _convert_wildcard(dir, wildcard);
-	closedir(dir);
-	free(wildcard->prefix);
-	free(wildcard->suffix);
-	free(wildcard);
-	return (res);
+	if (*wc->path_token[curr_depth] == '/')
+		return (1);
+	if (!(ft_strchr(wc->path_token[curr_depth], '*') && d_name[0] == '.') \
+		&& (wc->path_token[curr_depth + 1] == NULL \
+		|| (*wc->path_token[curr_depth + 1] == '/' && type == 4)) \
+		&& _check_matched(wc->path_token[curr_depth], d_name))
+		return (1);
+	return (0);
 }
 
-static char	*_convert_str(char *str)
+static void	_find_matched(t_wildcard *wc, char *path, \
+	int curr_depth, DIR *dir)
 {
-	char	**split;
-	char	*res;
-	char	*tmp;
-	int		i;
+	struct dirent	*_dirent;
+	t_list			lst;
+	t_list			*node;
 
-	split = ft_split(str, ' ');
-	if (!split)
-		exit_error("\033[31mError: ft_split(): Failed to split string\n\033[0m");
-	i = 0;
-	while (split[i])
+	ft_memset(&lst, 0, sizeof(t_list));
+	if (!wc->path_token[curr_depth] && ++wc->lst_size)
+		ft_lstadd_back(&wc->lst.next, ft_lstnew((void *)ft_strdup(path)));
+	else if (*wc->path_token[curr_depth] == '/')
+		lstinsort(&lst, ft_lstnew(ft_strjoin(path, "/")), ft_strncmp);
+	else
 	{
-		if (ft_strchr(split[i], '*'))
+		_dirent = readdir(dir);
+		while (_dirent)
 		{
-			tmp = _wildcard_to_str(split[i]);
-			if (tmp)
-			{
-				free(split[i]);
-				split[i] = tmp;
-			}
+			if (_check_recur(wc, curr_depth, _dirent->d_name, _dirent->d_type))
+				lstinsort(&lst, \
+					ft_lstnew(ft_strjoin(path, _dirent->d_name)), ft_strncmp);
+			_dirent = readdir(dir);
 		}
-		i++;
 	}
-	res = wildcard_join(split);
-	free_dp((void **) split);
-	return (res);
+	node = &lst;
+	while (node->next)
+	{
+		_find_matched(wc, (char *)node->next->content, curr_depth + 1,
+			opendir((char *)node->next->content));
+		node = node->next;
+	}
+	ft_lstclear(&lst.next, free);
+	if (dir)
+		closedir(dir);
 }
 
 void	wildcard(t_doubly_list *lst)
 {
-	char			*res;
+	t_wildcard		wc;
 	t_doubly_node	*node;
+	DIR				*dir;
 
 	node = lst->header.next;
 	while (node)
 	{
 		if (ft_strchr(node->token->value, '*'))
 		{
-			res = _convert_str(node->token->value);
-			if (res)
-			{
-				free(node->token->value);
-				node->token->value = res;
-			}
+			ft_memset(&wc, 0, sizeof(t_wildcard));
+			wc.token_value = ft_strdup(node->token->value);
+			wc.path_token = ft_split(node->token->value, '/', 1);
+			if (wc.path_token[0][0] == '/')
+				dir = opendir("/");
+			else
+				dir = opendir(".");
+			_find_matched(&wc, "", 0, dir);
+			free(node->token->value);
+			node->token->value = wildcard_join(&wc);
+			_destroy_wildcard(&wc);
 		}
 		node = node->next;
 		if (node == lst->header.next)
