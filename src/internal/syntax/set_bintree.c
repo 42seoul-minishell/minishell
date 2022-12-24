@@ -12,7 +12,7 @@
 
 #include "minishell.h"
 
-static int	_set_bintree_type(int type)
+static int _set_bintree_type(int type)
 {
 	if (type == OR)
 		return (TN_OR);
@@ -28,55 +28,71 @@ static int	_set_bintree_type(int type)
 		return (TN_WORD);
 }
 
-static void	_upper_priority(t_bintree_node *node)
+static void _upper_priority(t_doubly_node *node, t_tnType bt_type)
 {
-	if (g_global.tree->root->type >= node->type)
-	{
-		node->lc = g_global.tree->root;
-		g_global.tree->root = node;
-	}
+	t_bintree_node *bt_node;
+
+	bt_node = create_bintree_node(
+		create_token(node->token->type, node->token->value), bt_type);
+	bt_node->lc = g_global.tree->root;
+	g_global.tree->root = bt_node;
 }
 
-static void	_lower_priority(t_bintree_node *node)
+static void _lower_priority(t_doubly_node *node, t_tnType bt_type)
 {
-	int				flag;
-	t_tnType		node_type;
-	t_bintree_node	*tmp;
+	int flag;
+	t_bintree_node *tmp;
 
 	flag = 0;
-	node_type = node->type;
-	if (node_type >= TN_OR && node_type <= TN_RDIR)
-		flag = 1;
-	if (g_global.tree->root->type < node_type && flag)
+	if (bt_type >= TN_OR && bt_type <= TN_RDIR)
 	{
-		node->lc = g_global.tree->root->rc;
-		g_global.tree->root->rc = node;
+		tmp = create_bintree_node(
+			create_token(node->token->type, node->token->value), bt_type);
+		tmp->lc = g_global.tree->root->rc;
+		g_global.tree->root->rc = tmp;
 	}
-	else if (g_global.tree->root->type < node_type)
+	else
 	{
 		tmp = g_global.tree->root;
 		while (tmp->rc)
+		{
 			tmp = tmp->rc;
-		tmp->rc = node;
+			if (tmp->type == bt_type)
+			{
+				flag = 1;
+				break;
+			}
+		}
+		if (flag)
+			ft_lstadd_back(&tmp->token_lst, ft_lstnew((void *)node->token));
+		else
+			tmp->rc = create_bintree_node(
+				create_token(node->token->type, node->token->value), bt_type);
 	}
 }
 
-void	set_bintree(t_doubly_list *lst, t_doubly_node *node)
+void set_bintree(t_doubly_list *lst, t_doubly_node *node)
 {
-	t_bintree_node	*bt_node;
+	t_tnType bt_type;
 
 	if (g_global.tree->root && node == lst->header.next)
-		return ;
-	bt_node = create_bintree_node(\
-		create_token(node->token->type, node->token->value), \
-		_set_bintree_type(node->token->type));
+		return;
+	bt_type = _set_bintree_type(node->token->type);
 	if (g_global.tree->root == NULL)
 	{
-		g_global.tree->root = bt_node;
+		g_global.tree->root = create_bintree_node(
+			create_token(node->token->type, node->token->value), bt_type);
 		set_bintree(lst, node->next);
-		return ;
+		return;
 	}
-	_upper_priority(bt_node);
-	_lower_priority(bt_node);
+	if (g_global.tree->root->type == TN_RDIR && node->token->type >= CMD &&
+		node->token->type <= OPTION && node->prev->token->type >= INP_RDIR && node->prev->token->type <= HERE_DOC)
+		ft_lstadd_back(&(g_global.tree->root->token_lst), ft_lstnew((void *)node->token));
+	else if (g_global.tree->root->type > bt_type || (bt_type >= TN_OR && bt_type <= TN_RDIR))
+		_upper_priority(node, bt_type);
+	else if (g_global.tree->root->type < bt_type)
+		_lower_priority(node, bt_type);
+	else
+		ft_lstadd_back(&(g_global.tree->root->token_lst), ft_lstnew((void *)node->token));
 	set_bintree(lst, node->next);
 }

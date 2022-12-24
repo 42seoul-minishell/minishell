@@ -33,6 +33,7 @@ int				delete_bintree_node_rc(t_bintree_node *parent);
 int				clear_bintree_node(t_bintree_node *root);
 
 /* utils.c */
+void			print_token_lst(t_list *token_lst);
 void			display_bintree_node_child(t_bintree_node *node);
 void			display_bintree_node_by_inorder(t_bintree_node *node);
 void			display_bintree_by_inorder(t_bintree *bintree);

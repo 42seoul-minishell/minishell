@@ -12,29 +12,39 @@
 
 #include "minishell.h"
 
+void	print_token_lst(t_list *token_lst)
+{
+	t_token	*content;
+
+	while (token_lst)
+	{
+		content = token_lst->content;
+		printf("%s ", content->value);
+		token_lst = token_lst->next;
+	}
+}
+
 void	display_bintree_node_child(t_bintree_node *node)
 {
 	if (node == NULL)
-	{
 		printf("There is no NODE\n");
-		return ;
-	}
 	else if (node->lc == NULL && node->rc == NULL)
-	{
 		printf("NODE doesn't have child node\n");
-		return ;
-	}
 	else if (node->lc == NULL)
 	{
-		printf("(Empty) %s\n", node->rc->token->value);
-		return ;
+		printf("(Empty)");
+		print_token_lst(node->rc->token_lst);
 	}
 	else if (node->rc == NULL)
 	{
-		printf("%s (Empty)\n", node->lc->token->value);
-		return ;
+		print_token_lst(node->lc->token_lst);
 	}
-	printf("%s %s\n", node->lc->token->value, node->rc->token->value);
+	else
+	{
+		print_token_lst(node->lc->token_lst);
+		print_token_lst(node->rc->token_lst);
+		printf("\n");
+	}
 }
 
 void	display_bintree_node_by_inorder(t_bintree_node *node)
@@ -42,7 +52,8 @@ void	display_bintree_node_by_inorder(t_bintree_node *node)
 	if (node == NULL)
 		return ;
 	display_bintree_node_by_inorder(node->lc);
-	printf("%s$ ", node->token->value);
+	print_token_lst(node->token_lst);
+	printf("$\n");
 	display_bintree_node_by_inorder(node->rc);
 }
 

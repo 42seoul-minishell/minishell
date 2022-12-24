@@ -14,12 +14,22 @@
 
 void	delete_bintree_node_child(t_bintree_node *parent)
 {
+	t_list	*tmp;
+	t_token	*content;
+
 	if (parent == NULL)
 		return ;
 	delete_bintree_node_child(parent->lc);
 	delete_bintree_node_child(parent->rc);
-	free(parent->token->value);
-	free(parent->token);
+	while (parent->token_lst)
+	{
+		tmp = parent->token_lst;
+		content = parent->token_lst->content;
+		free(content->value);
+		free(content);
+		parent->token_lst = parent->token_lst->next;
+		free(tmp);
+	}
 	free(parent);
 }
 
