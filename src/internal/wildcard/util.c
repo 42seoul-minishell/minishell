@@ -13,14 +13,13 @@
 #include "minishell.h"
 
 void	lstinsort(t_list *lst, t_list *new_lst, \
-	int (*cmp)(const char *p1, const char *p2, size_t size))
+	int (*cmp)(const char *p1, const char *p2))
 {
 	t_list	*node;
 
 	node = lst;
 	while ((node && node->next) \
-		&& cmp(node->next->content, new_lst->content, \
-			ft_strlen((char *)new_lst->content)) < 0)
+		&& cmp(node->next->content, new_lst->content) < 0)
 		node = node->next;
 	new_lst->next = node->next;
 	node->next = new_lst;
