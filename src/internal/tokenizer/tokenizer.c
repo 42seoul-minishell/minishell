@@ -35,18 +35,18 @@ static ssize_t	_get_operator_length(char *str)
 static void	_insert_helper(t_doubly_list *lst, char *str, \
 								ssize_t *current, ssize_t *before)
 {
-	char	*beforeefore_op;
+	char	*before_op;
 	char	*after_op;
 	char	*trimmed;
 	ssize_t	op_len;
 
 	if (*current - *before >= 0)
 	{
-		beforeefore_op = (char *)sp_malloc(sizeof(char) * \
+		before_op = (char *)sp_malloc(sizeof(char) * \
 								(*current - *before + 1));
-		ft_strlcpy(beforeefore_op, str + *before, *current - *before + 1);
-		trimmed = ft_strtrim(beforeefore_op, " ");
-		free(beforeefore_op);
+		ft_strlcpy(before_op, str + *before, *current - *before + 1);
+		trimmed = ft_strtrim(before_op, " ");
+		free(before_op);
 		if (is_only_space(trimmed) == FALSE)
 			safe_insert(lst, verify_token(trimmed), trimmed);
 	}
