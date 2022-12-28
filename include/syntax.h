@@ -22,6 +22,6 @@ void	syntax(t_doubly_list *lst);
 void	set_bintree(t_doubly_list *lst, t_doubly_node *node);
 
 /* utils.c*/
-int		set_bintree_type(int type)
+int		set_bintree_type(int type);
 
 #endif
