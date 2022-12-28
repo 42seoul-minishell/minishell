@@ -20,10 +20,10 @@ int	builtin_pwd(void)
 	if (!path)
 	{
 		ft_putstr_fd("\033[31mError: getcwd(): \
-			Failed to get current working directory\n\033[0m", 2);
+			Failed to get current working directory\n\033[0m", STDERR_FILENO);
 		return (1);
 	}
-	printf("%s\n", path);
+	ft_putstr_fd(path, STDIN_FILENO);
 	free(path);
 	return (0);
 }

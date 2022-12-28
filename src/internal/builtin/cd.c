@@ -12,10 +12,6 @@
 
 #include "minishell.h"
 
-static void	_set_oldpwd(char *pwd)
-{
-}
-
 static int	_cd_home(char *pwd)
 {
 	char		*oldpwd;
@@ -35,7 +31,7 @@ static int	_cd_home(char *pwd)
 	if (!pwd)
 	{
 		ft_putstr_fd("\033[31mError: getcwd(): \
-			Failed to get current working directory\n\033[0m", 2);
+			Failed to get current working directory\n\033[0m", STDERR_FILDNO);
 		return (1);
 	}
 	update_value(g_global.envp, "PWD", ft_strdup(pwd));
@@ -50,7 +46,7 @@ static int	_cd_prev(char *pwd)
 	oldpwd = search(g_global.envp, "OLDPWD");
 	if (!oldpwd || ft_strcmp(oldpwd, "") == 0)
 	{
-		ft_putstr_fd("minsh: cd: OLDPWD not set\n", 2);
+		ft_putstr_fd("minsh: cd: OLDPWD not set\n", STDERR_FILENO);
 		free(pwd);
 		return (1);
 	}
@@ -76,14 +72,14 @@ static int	_cd_chdir(char *pwd, char *path)
 	}
 	if (errno == ENOTDIR)
 	{
-		ft_putstr_fd("MINISHELL: cd: ", 2);
-		ft_putstr_fd(path, 2);
-		ft_putstr_fd(": Not a directory\n", 2);
+		ft_putstr_fd("MINISHELL: cd: ", STDERR_FILENO);
+		ft_putstr_fd(path, STDERR_FILENO);
+		ft_putstr_fd(": Not a directory\n", STDERR_FILENO);
 	}
 	else if (errno == ENOENT) (
-		ft_putstr_fd("MINISHELL: cd: ", 2);
-		ft_putstr_fd(path, 2);
-		ft_putstr_fd(": Not such file or directory\n", 2);
+		ft_putstr_fd("MINISHELL: cd: ", STDERR_FILENO);
+		ft_putstr_fd(path, STDERR_FILENO);
+		ft_putstr_fd(": Not such file or directory\n", STDERR_FILENO);
 	)
 	free(pwd);
 	return (1);
@@ -100,7 +96,7 @@ int	builtin_cd(t_list *lst)
 	if (!pwd)
 	{
 		ft_putstr_fd("\033[31mError: getcwd(): \
-			Failed to get current working directory\n\033[0m", 2);
+			Failed to get current working directory\n\033[0m", STDERR_FILENO);
 		return (1);
 	}
 	if (!lst)
