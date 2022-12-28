@@ -18,7 +18,7 @@ t_tType	verify_input_redir(char *str)
 		return (HERE_DOC);
 	if (str[0] == '<')
 		return (INP_RDIR);
-	syntax_error(">");
+	syntax_error("<");
 	return (NONE);
 }
 
@@ -28,6 +28,6 @@ t_tType	verify_output_redir(char *str)
 		return (APP_RDIR);
 	if (str[0] == '>')
 		return (OUT_RDIR);
-	syntax_error("<");
+	syntax_error(">");
 	return (NONE);
 }

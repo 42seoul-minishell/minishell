@@ -28,7 +28,8 @@ AR				=	ar rcsuv
 INC				= 	../../../include
 LIB_DIR			= 	../../../lib/
 
-FILES			=	parser
+FILES			=	parser \
+					relocation_doubly_lst
 
 SRCS_DIR		=	./
 SRCS			=	$(addprefix $(SRCS_DIR), $(addsuffix .c, $(FILES)))

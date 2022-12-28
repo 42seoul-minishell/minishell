@@ -43,7 +43,7 @@ static void	_find_matched(t_wildcard *wc, char *path, \
 	if (!wc->path_token[curr_depth] && ++wc->lst_size)
 		ft_lstadd_back(&wc->lst.next, ft_lstnew((void *)ft_strdup(path)));
 	else if (*wc->path_token[curr_depth] == '/')
-		lstinsort(&lst, ft_lstnew(ft_strjoin(path, "/")), ft_strncmp);
+		lstinsort(&lst, ft_lstnew(ft_strjoin(path, "/")), ft_strcmp);
 	else
 	{
 		_dirent = readdir(dir);
@@ -51,7 +51,7 @@ static void	_find_matched(t_wildcard *wc, char *path, \
 		{
 			if (_check_recur(wc, curr_depth, _dirent->d_name, _dirent->d_type))
 				lstinsort(&lst, \
-					ft_lstnew(ft_strjoin(path, _dirent->d_name)), ft_strncmp);
+					ft_lstnew(ft_strjoin(path, _dirent->d_name)), ft_strcmp);
 			_dirent = readdir(dir);
 		}
 	}
