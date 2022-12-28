@@ -46,7 +46,7 @@ int	execute_builtin(t_list *lst)
 	else if (ft_strcmp(cmd, "unset") == 0)
 		return (builtin_unset(lst->next));
 	else if (ft_strcmp(cmd, "env") == 0)
-		return (builtin_env(lst->next));
+		return (builtin_env());
 	else if (ft_strcmp(cmd, "exit") == 0)
 		return (builtin_exit(lst->next));
 	return (1);

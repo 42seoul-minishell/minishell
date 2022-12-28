@@ -66,7 +66,6 @@ void	display_hashtable(t_hashtable *table)
 {
 	size_t			idx;
 	t_ht_item		*item;
-	t_ht_item		*next;
 
 	idx = 0;
 	while (idx < table->size)
@@ -74,16 +73,12 @@ void	display_hashtable(t_hashtable *table)
 		item = table->items[idx];
 		while (item != NULL)
 		{
-			next = item->next;
-			ft_putendl_fd("----------------------------", 1);
-			ft_putstr_fd("| ", 1);
-			ft_putstr_fd(item->key, 1);
-			ft_putstr_fd(" | = | ", 1);
-			ft_putstr_fd(item->value, 1);
-			ft_putendl_fd(" |", 1);
-			item = next;
+			ft_putstr_fd(item->key, STDOUT_FILENO);
+			ft_putstr_fd("=", STDOUT_FILENO);
+			ft_putstr_fd(item->value, STDOUT_FILENO);
+			ft_putstr_fd("\n", STDOUT_FILENO);
+			item = item->next;
 		}
 		idx++;
 	}
-	ft_putendl_fd("----------------------------", 1);
 }
