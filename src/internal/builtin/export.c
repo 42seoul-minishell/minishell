@@ -77,10 +77,11 @@ int	builtin_export(t_list *lst)
 	while (lst)
 	{
 		data = ((t_token *) lst->content)->value;
-		if (_is_valid_identifier(value, &exit_code) == TRUE)
+		if (_is_valid_identifier(value, &exit_code) == TRUE && \
+			ft_strchr(data, '='))
 		{
-			key = get_key_from_env(str);
-			value = get_key_from_env(str);
+			key = get_key_from_env(data);
+			value = get_key_from_env(data);
 			set_env(key, value);
 		}
 		lst = lst->next;
