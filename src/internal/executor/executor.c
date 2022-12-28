@@ -25,18 +25,27 @@ void	executor(t_bintree_node	*root, int sup_fd[], int dir)
 
 	init_fd(fd);
 	if (!root)
-		return (1);
-	if (root->type == TN_RDIR)
-		g_golbal.status = execute_redirect(root, fd);
-
-	else if (root->type == TN_BRACKET)
-		g_golbal.status = execute_bracket(root, sup_fd, dir);
+		return ;
+	// if (root->type == TN_RDIR)
+	// 	execute_redirect(root, fd);
+	if (root->type == TN_WORD)
+	{
+		fprintf(g_global.fp, "execute_cmd fd[0]: %i, fd[1]: %i\n", fd[0], fd[1]);
+		execute_command(root, fd, sup_fd, dir);
+	}
+	// else if (root->type == TN_BRACKET)
+	// 	g_global.status = execute_bracket(root, sup_fd, dir);
 	else if (root->type == TN_AND)
-		execute_and(root, fd, dir);
+		execute_and(root, fd);
 	else if (root->type == TN_OR)
-		execute_or(root, fd, dir);
+		execute_or(root, fd);
 	else if (root->type == TN_PIPE)
-		g_golbal.status = execute_pipe(root, fd);
+	{
+		fprintf(g_global.fp, "execute_pipe fd[0]: %i, fd[1]: %i\n", fd[0], fd[1]);
+		execute_pipe(root, fd);
+		execute_command(root->lc, fd, sup_fd, 0);
+		execute_command(root->rc, fd, sup_fd, 1);
+	}
 	// return (g_golbal.status);
 }
 

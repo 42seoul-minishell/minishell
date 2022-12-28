@@ -12,7 +12,7 @@
 
 #include "minishell.h"
 
-/* 
+/*
 	- input -
 	export h = 1
 
@@ -25,7 +25,7 @@
 
 	- input -
 	export a=1 b=2
-	
+
 	- result -
 	둘 다 정상적으로 저장됨
 
@@ -37,7 +37,6 @@
 */
 static void	set_env(char *key, char *value)
 {
-	size_t			idx;
 	t_ht_item		*item;
 	char			*tmp;
 
@@ -69,7 +68,7 @@ int	builtin_export(t_list *lst)
 	char	*value;
 
 	exit_code = 0;
-	if (command == NULL || ((t_token *) lst->content)->value[0] == '#')
+	if (lst == NULL || ((t_token *) lst->content)->value[0] == '#')
 	{
 		display_hashtable(g_global.envp);
 		return (0);

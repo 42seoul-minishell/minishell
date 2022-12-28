@@ -27,77 +27,140 @@
 // 	}
 // 	return (p.status);
 // }
-
 static char	**_token_list_to_array(t_list *token_lst)
 {
 	char 	**cmd_arr;
 	size_t	size;
+	size_t	idx;
+	t_token	*token;
+	t_list	*node;
 
-	while (token_lst)
+	node = token_lst;
+	size = 0;
+	idx = 0;
+	while (node)
 	{
+		size++;
+		node = node->next;
+	}
+	cmd_arr = ft_malloc(sizeof(char *) * (size + 1));
+	cmd_arr[size] = NULL;
+	node = token_lst;
+	while (idx < size)
+	{
+		token = node->content;
+		cmd_arr[idx] = token->value;
+		node = node->next;
+		idx++;
+	}
+	return (cmd_arr);
+}
 
+static void	_run_cmd(char *abs_path, char *argv[])
+{
+
+	if (access(abs_path, X_OK) == -1)
+	{
+		perror(": permission denied");
+		exit(127);
+	}
+	if (execve(abs_path, argv, g_global.envp_arr) == -1)
+	{
+		perror(": command not found");
+		exit(127);
 	}
 }
 
-int	exec_word_child(t_bintree_node *node)
+char	*get_abs_path(char *cmd)
+{
+	int		i;
+	char	*check;
+	char	**paths;
+
+	i = 0;
+	paths = ft_split(search(g_global.envp, "PATH"), ':', 0);
+	if (access(cmd, X_OK) == 0)
+		return (ft_strdup(cmd));
+	if (paths)
+	{
+		cmd = ft_strjoin("/", cmd);
+		while (paths[i])
+		{
+			check = ft_strjoin(paths[i], cmd);
+			if (access(check, X_OK) == 0)
+				return (check);
+			free(check);
+			i++;
+		}
+	}
+	return (NULL);
+}
+
+static int	_exec_word_child(t_bintree_node *node, int fd[], int sup_fd[], int dir)
 {
 	char	*path;
-	char	**env;
-	char	**cmd_list;
+	char	**cmd_arr;
 
-	if (redirection(node) != EXIT_SUCCESS)
-		return (EXIT_FAILURE);
-	if (node->command)
+	fprintf(g_global.fp, "node: %s\n",((t_token *) node->token_lst->content)->value);
+	fprintf(g_global.fp, "fd[0]: %i, fd[1]: %i\n", fd[0], fd[1]);
+	fprintf(g_global.fp, "sup_fd[0]: %i, sup_fd[1]: %i\n", sup_fd[0], sup_fd[1]);
+	fprintf(g_global.fp, "Hello History\n");
+	if (dir == 0 && fd[1] != 1)
+		dup2(fd[1], 1);
+	if (dir == 1)
 	{
-		token_list_to_array
-		cmd_list = exec_token_str_list(node->command);
-		env = exec_env_str_list();
-		if (ft_strchr(cmd_list[0], '/'))
-			path = cmd_list[0];
-		else
-			path = exec_find_path(ft_strjoin("/", cmd_list[0]), env);
-		if (execve(path, cmd_list, env) == -1)
+		if (sup_fd[1] != 1)
+			dup2(sup_fd[1], 1);
+		if (fd[0] != 0)
 		{
-			ft_perror(*cmd_list, ": command not found");
-			return (127);
+			dup2(fd[0], 0);
+			close(fd[0]);
 		}
+	}
+	if (node->token_lst)
+	{
+		cmd_arr = _token_list_to_array(node->token_lst);
+		path = get_abs_path(cmd_arr[0]);
+		_run_cmd(path, cmd_arr);
 	}
 	return (EXIT_SUCCESS);
 }
 
-static void	_wait_word_child(t_bintree_node *node, int fd[])
+static void	_wait_word_child(int pid, int fd[], int *status)
 {
-	int	status;
-
-	close(fd[1]);
-	waitpid(NULL, &status, WNOHANG);
+	if (fd[1] != 1)
+		close(fd[1]);
+	if (fd[0] != 0)
+		close(fd[0]);
+	printf("pid, status%i%i", pid, *status);
+	waitpid(pid, status, 0);
 }
 
-void	execute_command(t_bintree_node *node, int fd[], int sup_fd[], int dir)
+int	execute_command(t_bintree_node *node, int fd[], int sup_fd[], int dir)
 {
 	pid_t	pid;
 	int		status;
 	int		p_status;
 
-	set_execute_signal();
+	fprintf(g_global.fp, "node: %s\n",((t_token *) node->token_lst->content)->value);
+	fprintf(g_global.fp, "fd[0]: %i, fd[1]: %i\n", fd[0], fd[1]);
+	fprintf(g_global.fp, "sup_fd[0]: %i, sup_fd[1]: %i\n", sup_fd[0], sup_fd[1]);
+	fprintf(g_global.fp, "Hello tistory\n");
+
+	// set_execute_signal();
 	p_status = 0;
-	if (check_builtin(node->lst) == TRUE)
-		return (execute_builtin(node->lst));
-	else
+
+	pid = fork();
+	if (pid == -1)
+		exit(1);
+	else if (pid == 0)
 	{
-		pid = fork();
-		if (pid == -1)
-			exit(1);
-		else if (pid == 0)
-		{
-			status = exec_word_child(node);
-			exit(status);
-		}
-		else
-			wait_word_child(node);
-		waitpid(pid, &p_status, 0);
-		return (check_status(p_status));
+		status = _exec_word_child(node, fd, sup_fd, dir);
+		// exit(status);
 	}
+	else
+		_wait_word_child(pid, fd, &p_status);
+	return (check_status(p_status));
 }
 
 // if (node->lc)

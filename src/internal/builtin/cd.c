@@ -31,7 +31,7 @@ static int	_cd_home(char *pwd)
 	if (!pwd)
 	{
 		ft_putstr_fd("\033[31mError: getcwd(): \
-			Failed to get current working directory\n\033[0m", STDERR_FILDNO);
+			Failed to get current working directory\n\033[0m", STDERR_FILENO);
 		return (1);
 	}
 	update_value(g_global.envp, "PWD", ft_strdup(pwd));
@@ -76,11 +76,12 @@ static int	_cd_chdir(char *pwd, char *path)
 		ft_putstr_fd(path, STDERR_FILENO);
 		ft_putstr_fd(": Not a directory\n", STDERR_FILENO);
 	}
-	else if (errno == ENOENT) (
+	else if (errno == ENOENT)
+	{
 		ft_putstr_fd("MINISHELL: cd: ", STDERR_FILENO);
 		ft_putstr_fd(path, STDERR_FILENO);
 		ft_putstr_fd(": Not such file or directory\n", STDERR_FILENO);
-	)
+	}
 	free(pwd);
 	return (1);
 }

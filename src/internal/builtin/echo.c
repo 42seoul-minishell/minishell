@@ -54,7 +54,6 @@ static void	_echo_print(t_list *lst)
 int	builtin_echo(t_list *lst)
 {
 	int		option;
-	t_token	*tmp;
 
 	if (!lst)
 	{

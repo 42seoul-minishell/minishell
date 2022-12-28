@@ -17,19 +17,19 @@
 
 /* in ../src/internal/builtin/ */
 /* cd.c */
-int		builtin_cd(char *directory);
+int		builtin_cd(t_list *lst);
 
 /* echo.c */
-int		builtin_echo(const char *str, int fd, int flag);
+int     builtin_echo(t_list *lst);
 
 /* env.c */
 void	builtin_env(void);
 
 /* exit.c */
-void	builtin_exit(int signal);
+void    builtin_exit(t_list *lst);
 
 /* export.c */
-int		builtin_export(char *key, char *value);
+int     builtin_export(t_list *lst);
 
 /* pwd.c */
 int		builtin_pwd(void);
