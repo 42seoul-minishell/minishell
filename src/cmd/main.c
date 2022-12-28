@@ -40,16 +40,18 @@ static void	_sys_stdin(char **input_ptr)
 static void	_run(void)
 {
 	char	*input;
+	int		fd[2];
 
 	while (1)
 	{
+		init_fd(fd);
 		dup2(g_global.fd_stdin, STDIN_FILENO);
 		dup2(g_global.fd_stdout, STDOUT_FILENO);
 		input = NULL;
 		_sys_stdin(&input);
 		_save_history(input);
 		parser(input);
-		executor(g_global.tree->root);
+		executor(g_global.tree->root, fd, 0);
 		free(input);
 		break ;
 	}
@@ -68,7 +70,7 @@ int	main(int ac, char **av, char **envp)
 	atexit(check_leak);
 	printf("ac = %d\n", ac);
 	*av = NULL;
-	setting_signal();
+	set_signal();
 	table = parse_env_to_hashtable(envp);
 	tree = create_bintree();
 	create_global(tree, table);

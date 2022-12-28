@@ -33,8 +33,8 @@ FILES			=	executor \
 					command \
 					pipe \
 					redirect \
-					# heredoc_redirect \
-					# double_quotes \
+					builtin \
+					# heredoc_redirect \0
 
 
 SRCS_DIR		=	./

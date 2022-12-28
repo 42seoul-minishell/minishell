@@ -32,7 +32,7 @@ void	builtin_exit(int signal);
 int		builtin_export(char *key, char *value);
 
 /* pwd.c */
-void	builtin_pwd(void);
+int		builtin_pwd(void);
 
 /* unset.c */
 void	builtin_unset(char *key);

@@ -54,11 +54,9 @@ char	*ft_strtrim(char const *s1, char const *set)
 	start = find_start(s1, set);
 	end = find_end(s1, set);
 	if (end < start)
-		res = (char *)malloc(1 * sizeof(char));
+		res = (char *)ft_malloc(1 * sizeof(char));
 	else
-		res = (char *)malloc((end - start + 1) * sizeof(char));
-	if (!res)
-		return (0);
+		res = (char *)ft_malloc((end - start + 1) * sizeof(char));
 	i = 0;
 	while (start + i < end)
 	{

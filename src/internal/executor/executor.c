@@ -12,21 +12,32 @@
 
 #include "minishell.h"
 
-/* execute by preorder and inorder */
-void	executor(t_bintree_node	*root)
+/* execute by preorder */
+void	init_fd(int fd[])
 {
-	// if (root->type == TN_OR)
-	// 	execute_or(root);
-	// else if (root->type == TN_AND)
-	// 	execute_and(root);
-	// else if (root->type == TN_PIPE)
-	// 	execute_pipe(root);
-	// else if (root->type == TN_RDIR)
-	// 	execute_redirect(root);
-	// else if (root->type == TN_BRACKET)
-	// 	execute_bracket(root);
-	// else
-		execute_command(root);
+	fd[0] = 0;
+	fd[1] = 1;
+}
+
+void	executor(t_bintree_node	*root, int sup_fd[], int dir)
+{
+	int	fd[2];
+
+	init_fd(fd);
+	if (!root)
+		return (1);
+	if (root->type == TN_RDIR)
+		g_golbal.status = execute_redirect(root, fd);
+
+	else if (root->type == TN_BRACKET)
+		g_golbal.status = execute_bracket(root, sup_fd, dir);
+	else if (root->type == TN_AND)
+		execute_and(root, fd, dir);
+	else if (root->type == TN_OR)
+		execute_or(root, fd, dir);
+	else if (root->type == TN_PIPE)
+		g_golbal.status = execute_pipe(root, fd);
+	// return (g_golbal.status);
 }
 
 int	serve_status(char *cmd)

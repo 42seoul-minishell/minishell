@@ -16,18 +16,19 @@
 # include "struct.h"
 
 /* executor.c */
-void	executor(t_bintree_node	*root);
+void	init_fd(int fd[]);
+void	executor(t_bintree_node	*root, int sup_fd[], int dir);
 int		serve_status(char *cmd);
 
 /* and_or.c */
-void	execute_and(t_bintree_node *node);
-void	execute_or(t_bintree_node *node);
+void	execute_and(t_bintree_node *node, int sup_fd[], int dir);
+void	execute_or(t_bintree_node *node, int sup_fd[], int dir);
 
 /* bracket.c */
-int		execute_bracket(t_bintree_node *root);
+int		execute_bracket(t_bintree_node *root, int sup_fd[], int dir);
 
 /* cammand.c */
-void	execute_command(t_bintree_node *node);
+void	execute_command(t_bintree_node *node, int fd[], int sup_fd[], int dir);
 
 /* double_quotes.c */
 int		exec_word(t_bintree_node *root);
@@ -38,9 +39,9 @@ int		exec_word_child(t_bintree_node *root);
 void	heredoc_redirect(t_bintree_node *node, char *eof, int *save_fd);
 
 /* pipe.c */
-int		execute_pipe(t_bintree_node *node);
+int		execute_pipe(t_bintree_node *node, int fd[]);
 
 /* redirect.c */
-void	execute_redirect(t_bintree_node *node);
+void	execute_redirect(t_bintree_node *node, int fd[]);
 
 #endif

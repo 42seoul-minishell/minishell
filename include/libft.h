@@ -74,5 +74,6 @@ t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
 
 /* functions implemented later */
 int		ft_strcmp(const char *s1, const char *s2);
+void	*ft_malloc(size_t size);
 
 #endif

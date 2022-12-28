@@ -12,7 +12,7 @@
 
 #include "minishell.h"
 
-void	sig_handler(int signal)
+static void	_sig_handler(int signal)
 {
 	char	*prompt;
 
@@ -28,8 +28,22 @@ void	sig_handler(int signal)
 	rl_redisplay();
 }
 
-void	setting_signal(void)
+void	set_signal(void)
 {
-	signal(SIGINT, sig_handler);
+	signal(SIGINT, _sig_handler);
 	signal(SIGQUIT, SIG_IGN);
+}
+
+static void	_sig_execute(int siganl)
+{
+	if (siganl == SIGINT)
+		ft_putstr_fd("\n", 1);
+	else if (siganl == SIGQUIT)
+		ft_putstr_fd("Quit: 3\n", 1);
+}
+
+void	set_execute_signal(void)
+{
+	signal(SIGINT, _sig_execute);
+	signal(SIGQUIT, _sig_execute);
 }

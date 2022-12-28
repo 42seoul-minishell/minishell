@@ -37,8 +37,8 @@ typedef enum e_node_type
 	TN_NONE,
 	TN_OR,
 	TN_AND,
-	TN_PIPE,
 	TN_RDIR,
+	TN_PIPE,
 	TN_WORD,
 	TN_BRACKET,
 }	t_tnType;

@@ -16,9 +16,7 @@ static char	*deal_except(void)
 {
 	char	*ptr;
 
-	ptr = (char *)malloc(1 * sizeof(char));
-	if (!ptr)
-		return (0);
+	ptr = (char *)ft_malloc(1 * sizeof(char));
 	*ptr = '\0';
 	return (ptr);
 }
@@ -40,9 +38,7 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	}
 	if (len > s_size)
 		len = s_size;
-	res = (char *)malloc((len + 1) * sizeof(char));
-	if (!res)
-		return (0);
+	res = (char *)ft_malloc((len + 1) * sizeof(char));
 	i = start;
 	j = 0;
 	while (j < len)

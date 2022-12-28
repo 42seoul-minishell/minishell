@@ -40,7 +40,8 @@ void	delete_table(t_hashtable *table)
 	free(table);
 }
 
-static void	_set_new_hashtable(t_hashtable *table, t_ht_item *item, t_ht_item *prev, size_t idx)
+static void	_set_new_hashtable(t_hashtable *table, t_ht_item *item, \
+									t_ht_item *prev, size_t idx)
 {
 	t_ht_item	*tmp;
 
@@ -71,7 +72,7 @@ void	delete_item_by_key(t_hashtable *table, char *key)
 		if (ft_strncmp(item->key, key, ft_strlen(key) + 1) == 0)
 		{
 			_set_new_hashtable(table, item, prev, idx);
-			break;
+			break ;
 		}
 		prev = item;
 		item = item->next;

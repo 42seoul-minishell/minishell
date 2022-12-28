@@ -19,8 +19,6 @@ int	builtin_echo(const char *str, int fd, int flag)
 	if (!flag)
 		return (write(fd, str, ft_strlen(str)) == -1);
 	newline_str = ft_strjoin(str, "\n");
-	if (!newline_str)
-		return (FALSE);
 	write(fd, newline_str, ft_strlen(newline_str));
 	free(newline_str);
 	return (TRUE);

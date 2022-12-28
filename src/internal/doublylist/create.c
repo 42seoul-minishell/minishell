@@ -16,7 +16,7 @@ t_token	*create_token(t_tType type, char *value)
 {
 	t_token	*new;
 
-	new = (t_token *)sp_malloc(sizeof(t_token));
+	new = (t_token *)ft_malloc(sizeof(t_token));
 	new->type = type;
 	new->value = value;
 	return (new);
@@ -26,7 +26,7 @@ t_doubly_list	*create_doubly_list(void)
 {
 	t_doubly_list	*lst;
 
-	lst = (t_doubly_list *)sp_malloc(sizeof(t_doubly_list));
+	lst = (t_doubly_list *)ft_malloc(sizeof(t_doubly_list));
 	lst->len = 0;
 	return (lst);
 }
@@ -35,7 +35,7 @@ t_doubly_node	*create_doubly_node(t_token *token)
 {
 	t_doubly_node	*new;
 
-	new = (t_doubly_node *)sp_malloc(sizeof(t_doubly_node));
+	new = (t_doubly_node *)ft_malloc(sizeof(t_doubly_node));
 	new->token = token;
 	new->next = NULL;
 	new->prev = NULL;

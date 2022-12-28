@@ -11,7 +11,7 @@
 # **************************************************************************** #
 
 # Project File
-NAME		= libutils.a
+NAME			= libutils.a
 UNAME			= $(shell uname -s)
 
 ifeq ($(UNAME), Linux)
@@ -23,21 +23,20 @@ endif
 # Compiler Flag and Command
 CC				=	cc
 CFLAGS			=	-Wall -Wextra -Werror -I$(INC) -I$(READLINE_INC)
-AR			= ar rcsuv
+AR				= ar rcsuv
 
-INC			= ../../include
-LIB_DIR		= ../../lib/
+INC				= ../../include
+LIB_DIR			= ../../lib/
 
-FILES		= utils \
-				verify_utils \
-				tokenizer_utils \
-				malloc_utils \
+FILES			=	utils \
+					verify_utils \
+					tokenizer_utils \
 
-SRCS_DIR	= ./
-SRCS		= $(addprefix $(SRCS_DIR), $(addsuffix .c, $(FILES)))
+SRCS_DIR		= ./
+SRCS			= $(addprefix $(SRCS_DIR), $(addsuffix .c, $(FILES)))
 
-OBJS_DIR	= ./
-OBJS		= $(addprefix $(OBJS_DIR), $(addsuffix .o, $(FILES)))
+OBJS_DIR		= ./
+OBJS			= $(addprefix $(OBJS_DIR), $(addsuffix .o, $(FILES)))
 
 %.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@

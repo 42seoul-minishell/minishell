@@ -56,3 +56,16 @@ int	check_status(int status)
 		return (WEXITSTATUS(status));
 	return (WCOREFLAG | WTERMSIG(status));
 }
+
+void	free_dp(void **dp)
+{
+	int	i;
+
+	i = 0;
+	while (dp[i])
+	{
+		free(dp[i]);
+		i++;
+	}
+	free(dp);
+}

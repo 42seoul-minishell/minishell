@@ -28,14 +28,13 @@ AR				=	ar rcsuv
 INC				= 	../../../include
 LIB_DIR			= 	../../../lib/
 
-FILES			=	builtin \
-					cd \
+FILES			=	cd \
 					echo \
 					env \
 					exit \
 					export \
 					pwd \
-					unset \
+					unset
 
 SRCS_DIR	=	./
 SRCS		=	$(addprefix $(SRCS_DIR), $(addsuffix .c, $(FILES)))

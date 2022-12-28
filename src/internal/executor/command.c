@@ -12,39 +12,95 @@
 
 #include "minishell.h"
 
-// static void _separate_cmd(t_bintree_node *node)
+// int	exec_last_word_child(t_tree_node *node, t_pipe p)
 // {
-// 	char **split;
-
-// 	if (!node)
-// 		return;
-// 	split = ft_split(node->token->value, ' ', 0);
-// 	if (!split)
-// 		exit(1);
-// 	if (ft_strncmp(split[0], "echo", ft_strlen(split[0])) == 0)
-// 		builtin_echo("echo", 0, 0);
-// 	else if (ft_strncmp(split[0], "cd", ft_strlen(split[0])) == 0)
-// 		builtin_cd(split[1]);
-// 	else if (ft_strncmp(split[0], "pwd", ft_strlen(split[0])) == 0)
-// 		builtin_pwd();
-// 	else if (ft_strncmp(split[0], "export", ft_strlen(split[0])) == 0)
-// 		builtin_export(split[1], split[2]);
-// 	else if (ft_strncmp(split[0], "unset", ft_strlen(split[0])) == 0)
-// 		builtin_unset(split[1]);
-// 	else if (ft_strncmp(split[0], "env", ft_strlen(split[0])) == 0)
-// 		builtin_env();
-// 	else if (ft_strncmp(split[0], "exit", ft_strlen(split[0])) == 0)
-// 		builtin_exit(1);
+// 	dup2(p.prev, STDIN_FILENO);
+// 	close(p.prev);
+// 	if (node->type == TN_PARENS)
+// 		exec_parens(node);
 // 	else
-// 		not_found_error(split[0]);
-// 	free_dp((void **) split);
+// 	{
+// 		if (check_builtin(node->command) == EXIT_SUCCESS)
+// 			p.status = run_builtin(node);
+// 		else
+// 			p.status = exec_word_child(node);
+// 	}
+// 	return (p.status);
 // }
 
-void execute_command(t_bintree_node *node)
+static char	**_token_list_to_array(t_list *token_lst)
 {
-	if (node->lc)
-		executor(node->lc);
-	// _separate_cmd(node);
-	if (node->rc)
-		executor(node->rc);
+	char 	**cmd_arr;
+	size_t	size;
+
+	while (token_lst)
+	{
+
+	}
 }
+
+int	exec_word_child(t_bintree_node *node)
+{
+	char	*path;
+	char	**env;
+	char	**cmd_list;
+
+	if (redirection(node) != EXIT_SUCCESS)
+		return (EXIT_FAILURE);
+	if (node->command)
+	{
+		token_list_to_array
+		cmd_list = exec_token_str_list(node->command);
+		env = exec_env_str_list();
+		if (ft_strchr(cmd_list[0], '/'))
+			path = cmd_list[0];
+		else
+			path = exec_find_path(ft_strjoin("/", cmd_list[0]), env);
+		if (execve(path, cmd_list, env) == -1)
+		{
+			ft_perror(*cmd_list, ": command not found");
+			return (127);
+		}
+	}
+	return (EXIT_SUCCESS);
+}
+
+static void	_wait_word_child(t_bintree_node *node, int fd[])
+{
+	int	status;
+
+	close(fd[1]);
+	waitpid(NULL, &status, WNOHANG);
+}
+
+void	execute_command(t_bintree_node *node, int fd[], int sup_fd[], int dir)
+{
+	pid_t	pid;
+	int		status;
+	int		p_status;
+
+	set_execute_signal();
+	p_status = 0;
+	if (check_builtin(node->lst) == TRUE)
+		return (execute_builtin(node->lst));
+	else
+	{
+		pid = fork();
+		if (pid == -1)
+			exit(1);
+		else if (pid == 0)
+		{
+			status = exec_word_child(node);
+			exit(status);
+		}
+		else
+			wait_word_child(node);
+		waitpid(pid, &p_status, 0);
+		return (check_status(p_status));
+	}
+}
+
+// if (node->lc)
+// 	executor(node->lc);
+// if (node->rc)
+// 	executor(node->rc);

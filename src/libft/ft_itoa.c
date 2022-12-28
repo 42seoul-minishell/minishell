@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
+#include "libft.h"
 
 static long long	find_size(long long n)
 {
@@ -69,9 +69,7 @@ char	*ft_itoa(int n)
 	{
 		num = (long long) n * -1;
 		size = find_size(num);
-		res = (char *)malloc((size + 2) * sizeof(char));
-		if (!res)
-			return (0);
+		res = (char *)ft_malloc((size + 2) * sizeof(char));
 		res[0] = '-';
 		res[size + 1] = '\0';
 		put_in_res(res + 1, num);
@@ -79,9 +77,7 @@ char	*ft_itoa(int n)
 	else
 	{
 		size = find_size((long long) n);
-		res = (char *)malloc((size + 1) * sizeof(char));
-		if (!res)
-			return (0);
+		res = (char *)ft_malloc((size + 1) * sizeof(char));
 		res[size] = '\0';
 		put_in_res(res, (long long) n);
 	}

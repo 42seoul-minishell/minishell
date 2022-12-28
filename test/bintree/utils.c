@@ -51,9 +51,7 @@ t_token *create_token(t_tnType type, char *value)
 {
 	t_token *new;
 
-	new = malloc(sizeof(t_token));
-	if (!new)
-		exit(1);
+	new = ft_malloc(sizeof(t_token));
 	if (check_type(type) == FALSE)
 		exit(1);
 	new->type = type;

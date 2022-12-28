@@ -59,7 +59,7 @@ char	*wildcard_join(t_wildcard *wc)
 		node = node->next;
 	}
 	total_len += wc->lst_size;
-	res = (char *)sp_malloc(total_len + 1);
+	res = (char *)ft_malloc(total_len + 1);
 	if (!res || total_len == 0)
 		return (wc->token_value);
 	ft_memset((void *)res, 0, total_len + 1);

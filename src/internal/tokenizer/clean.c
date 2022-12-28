@@ -63,7 +63,7 @@ char	*make_clean_sentence(char *str)
 	int		len;
 
 	len = ft_strlen(str) + (_count_operator(str) * 2) + 1;
-	cleaned = (char *)sp_malloc(sizeof(char) * len);
+	cleaned = (char *)ft_malloc(sizeof(char) * len);
 	_space_around_operator(cleaned, str, len);
 	return (cleaned);
 }

@@ -42,7 +42,7 @@ static void	_insert_helper(t_doubly_list *lst, char *str, \
 
 	if (*current - *before >= 0)
 	{
-		before_op = (char *)sp_malloc(sizeof(char) * \
+		before_op = (char *)ft_malloc(sizeof(char) * \
 								(*current - *before + 1));
 		ft_strlcpy(before_op, str + *before, *current - *before + 1);
 		trimmed = ft_strtrim(before_op, " ");
@@ -51,7 +51,7 @@ static void	_insert_helper(t_doubly_list *lst, char *str, \
 			safe_insert(lst, verify_token(trimmed), trimmed);
 	}
 	op_len = _get_operator_length(str + *current);
-	after_op = (char *)sp_malloc(sizeof(char) * (op_len + 1));
+	after_op = (char *)ft_malloc(sizeof(char) * (op_len + 1));
 	ft_strlcpy(after_op, str + *current, op_len + 1);
 	trimmed = ft_strtrim(after_op, " ");
 	free(after_op);
@@ -70,16 +70,14 @@ static void	_insert_helper_quote_case(t_doubly_list *lst, char *str, \
 	char	*trimmed;
 	ssize_t	op_len;
 
-	before_op = (char *)sp_malloc(sizeof(char) * (*current - *before + 2));
+	before_op = (char *)ft_malloc(sizeof(char) * (*current - *before + 2));
 	ft_strlcpy(before_op, str + *before, *current - *before + 1);
 	trimmed = ft_strtrim(before_op, " ");
-	if (!trimmed)
-		exit_error("\033[31mError: ft_strtrim(): Failed to trim string\n\033[0m");
 	free(before_op);
 	if (is_only_space(trimmed) == FALSE)
 		safe_insert(lst, verify_token(trimmed), trimmed);
 	op_len = _get_operator_length(str + *current) + 1;
-	after_op = (char *)sp_malloc(sizeof(char) * (op_len + 1));
+	after_op = (char *)ft_malloc(sizeof(char) * (op_len + 1));
 	ft_strlcpy(after_op, str + *current, op_len + 1);
 	*current += op_len;
 	*before = *current;

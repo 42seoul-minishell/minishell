@@ -1,52 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   malloc_utils.c                                     :+:      :+:    :+:   */
+/*   ft_malloc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bolee <bolee@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/13 14:28:28 by bolee             #+#    #+#             */
-/*   Updated: 2022/12/13 14:28:29 by bolee            ###   ########.fr       */
+/*   Created: 2022/12/28 13:45:05 by bolee             #+#    #+#             */
+/*   Updated: 2022/12/28 13:45:05 by bolee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "libft.h"
 
-void	*sp_malloc(size_t size)
+void	*ft_malloc(size_t size)
 {
 	void	*tmp;
 
 	tmp = (void *)malloc(size);
 	if (!tmp)
 	{
-		ft_putstr_fd(strerror(errno), 2);
+		ft_putstr_fd("\033[31mError: malloc(): Failed to allocate memory\n\033[0m", 2);
 		exit(1);
 	}
 	return (tmp);
-}
-
-void	**dp_malloc(size_t size)
-{
-	void	**tmp;
-
-	tmp = (void **)malloc(size);
-	if (!tmp)
-	{
-		ft_putstr_fd(strerror(errno), 2);
-		exit(1);
-	}
-	return (tmp);
-}
-
-void	free_dp(void **dp)
-{
-	int	i;
-
-	i = 0;
-	while (dp[i])
-	{
-		free(dp[i]);
-		i++;
-	}
-	free(dp);
 }

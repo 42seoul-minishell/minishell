@@ -9,13 +9,9 @@ int test_find_delete_and_release_list(char *str)
 	char **tmp_str;
 	int tmp;
 
-	tmp_str = (char **)malloc(sizeof(char *) * 3);
+	tmp_str = (char **)ft_malloc(sizeof(char *) * 3);
 	for (int i = 0; i < 3; i++)
-	{
-		tmp_str[i] = (char *)malloc(sizeof(char) * 10);
-		if (!tmp_str[i])
-			return (FALSE);
-	}
+		tmp_str[i] = (char *)ft_malloc(sizeof(char) * 10);
 
 	strcpy(tmp_str[0], "TEST00");
 	strcpy(tmp_str[1], "TEST01");

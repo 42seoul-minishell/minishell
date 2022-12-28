@@ -42,4 +42,7 @@ void			delete_item_by_key(t_hashtable *table, char *key);
 /* search.c */
 char			*search(t_hashtable *table, char *key);
 
+/* update.c */
+void			update_value(t_hashtable *table, char *key, char *value);
+
 #endif

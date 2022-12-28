@@ -44,16 +44,6 @@ int	builtin_export(char *key, char *value)
 		hash_insert(item, g_global.envp);
 		return (TRUE);
 	}
-	idx = hash_index(key, g_global.envp->size);
-	item = g_global.envp->items[idx];
-	while (item)
-	{
-		if (ft_strncmp(item->key, key, ft_strlen(key) + 1) == 0)
-		{
-			item->value = value;
-			break ;
-		}
-		item = item->next;
-	}
+	update_value(g_global.envp, key, ft_strdup(value));
 	return (TRUE);
 }

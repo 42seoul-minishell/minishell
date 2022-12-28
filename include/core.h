@@ -17,10 +17,10 @@
 
 /* in ../src/internal/core/ */
 /* prompt.c */
-char			*create_prompt(void);
+char	*create_prompt(void);
 
 /* signal.c */
-void			sig_handler(int signal);
-void			setting_signal(void);
+void	set_signal(void);
+void	set_execute_signal(void);
 
 #endif

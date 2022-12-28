@@ -32,6 +32,7 @@ FILES			=	create \
 					delete \
 					hashtable \
 					insert \
+					update \
 					search \
 					utils \
 

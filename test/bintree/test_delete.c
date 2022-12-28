@@ -38,12 +38,8 @@ int test_delete_bintree_node_lc(void)
 	t_bintree_node *node[2];
 	t_bintree_node *tmp;
 
-	str[0] = (char *)malloc(sizeof(char) * 10);
-	if (!str[0])
-		return FALSE;
-	str[1] = (char *)malloc(sizeof(char) * 10);
-	if (!str[1])
-		return FALSE;
+	str[0] = (char *)ft_malloc(sizeof(char) * 10);
+	str[1] = (char *)ft_malloc(sizeof(char) * 10);
 
 	strcpy(str[0], "TEST00");
 	strcpy(str[1], "TEST01");
@@ -97,12 +93,8 @@ int test_delete_bintree_node_rc(void)
 	t_bintree_node *node[2];
 	t_bintree_node *tmp;
 
-	str[0] = (char *)malloc(sizeof(char) * 10);
-	if (!str[0])
-		return FALSE;
-	str[1] = (char *)malloc(sizeof(char) * 10);
-	if (!str[1])
-		return FALSE;
+	str[0] = (char *)ft_malloc(sizeof(char) * 10);
+	str[1] = (char *)ft_malloc(sizeof(char) * 10);
 
 	strcpy(str[0], "TEST00");
 	strcpy(str[1], "TEST01");
@@ -135,9 +127,9 @@ void test_delete_bintree_node_chlid(void)
 	t_token *token[3];
 	t_bintree_node *node[3];
 
-	str[0] = (char *)malloc(sizeof(char) * 10);
-	str[1] = (char *)malloc(sizeof(char) * 10);
-	str[2] = (char *)malloc(sizeof(char) * 10);
+	str[0] = (char *)ft_malloc(sizeof(char) * 10);
+	str[1] = (char *)ft_malloc(sizeof(char) * 10);
+	str[2] = (char *)ft_malloc(sizeof(char) * 10);
 
 	strcpy(str[0], "TEST00");
 	strcpy(str[1], "TEST01");

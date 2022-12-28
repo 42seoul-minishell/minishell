@@ -13,18 +13,6 @@
 #include <stdlib.h>
 #include "libft.h"
 
-static char	**free_all(char ***res)
-{
-	while (**res)
-	{
-		free(**res);
-		(*res)++;
-	}
-	free(*res);
-	*res = 0;
-	return (0);
-}
-
 static int	cnt_words(char const *s, char c, int include)
 {
 	int	i;
@@ -75,9 +63,7 @@ char	**ft_split(char const *s, char c, int include)
 	if (!s)
 		return (0);
 	words = cnt_words(s, c, include);
-	res = (char **)malloc((words + 1) * sizeof(char *));
-	if (!res)
-		return (0);
+	res = (char **)ft_malloc((words + 1) * sizeof(char *));
 	res[words] = 0;
 	i = -1;
 	start = 0;
@@ -88,9 +74,7 @@ char	**ft_split(char const *s, char c, int include)
 		sep_off = find_len(s, start, c);
 		if (include && s[start] == c)
 			sep_off++;
-		res[i] = malloc(sep_off + 1);
-		if (!(res[i]))
-			return (free_all(&res));
+		res[i] = ft_malloc(sep_off + 1);
 		ft_strlcpy(res[i], (s + start), sep_off + 1);
 		start += sep_off;
 	}

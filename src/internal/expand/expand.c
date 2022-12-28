@@ -31,9 +31,6 @@ static char	*_get_env(const char *str, int idx)
 
 	end = _get_expand_end_idx(&str[idx + 1]);
 	env_key = ft_substr(str, idx + 1, end);
-	if (!env_key)
-		exit_error("\033[31mError: ft_substr(): \
-			Failed to subtract string\n\033[0m");
 	env_value = search(g_global.envp, env_key);
 	if (!env_value)
 		return (ft_strdup(""));
@@ -47,9 +44,6 @@ static void	_replace_expand(char **str, int *idx)
 	if ((*str)[*idx + 1] && (*str)[*idx + 1] == '?')
 	{
 		tmp = ft_itoa(g_global.status);
-		if (!tmp)
-			exit_error("\033[31mError: ft_itoa(): \
-				Failed to convert integer to string\n\033[0m");
 		if (*idx)
 			idx_is_not_zero(str, idx, tmp);
 		else
@@ -60,9 +54,6 @@ static void	_replace_expand(char **str, int *idx)
 	else
 	{
 		tmp = _get_env(*str, *idx);
-		if (!tmp)
-			exit_error("\033[31mError: ft_strdup(): \
-				Failed to duplicate string\n\033[0m");
 		if (*idx)
 			idx_is_not_zero(str, idx, tmp);
 		else
