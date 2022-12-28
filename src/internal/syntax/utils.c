@@ -1,29 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pwd.c                                              :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bolee <bolee@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/13 14:03:39 by bolee             #+#    #+#             */
-/*   Updated: 2022/12/13 14:18:09 by bolee            ###   ########.fr       */
+/*   Created: 2022/12/28 19:23:58 by bolee             #+#    #+#             */
+/*   Updated: 2022/12/28 19:23:59 by bolee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
-
-int	builtin_pwd(void)
+int	set_bintree_type(int type)
 {
-	char	*path;
-
-	path = getcwd(NULL, 0);
-	if (!path)
-	{
-		ft_putstr_fd("\033[31mError: getcwd(): \
-			Failed to get current working directory\n\033[0m", STDERR_FILENO);
-		return (1);
-	}
-	ft_putstr_fd(path, STDIN_FILENO);
-	free(path);
-	return (0);
+	if (type == OR)
+		return (TN_OR);
+	else if (type == AND)
+		return (TN_AND);
+	else if (type == PIPE)
+		return (TN_PIPE);
+	else if (type >= INP_RDIR && type <= HERE_DOC)
+		return (TN_RDIR);
+	else if (type == BRACKET)
+		return (TN_BRACKET);
+	else
+		return (TN_WORD);
 }

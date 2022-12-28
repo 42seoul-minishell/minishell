@@ -22,6 +22,7 @@ void	print_token_lst(t_list *token_lst)
 		printf("%s ", content->value);
 		token_lst = token_lst->next;
 	}
+	printf("$\n");
 }
 
 void	display_bintree_node_child(t_bintree_node *node)
@@ -53,7 +54,6 @@ void	display_bintree_node_by_inorder(t_bintree_node *node)
 		return ;
 	display_bintree_node_by_inorder(node->lc);
 	print_token_lst(node->token_lst);
-	printf("$\n");
 	display_bintree_node_by_inorder(node->rc);
 }
 
