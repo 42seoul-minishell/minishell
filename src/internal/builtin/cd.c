@@ -26,7 +26,7 @@ static int	_cd_home(char *pwd)
 		hash_insert(item, g_global.envp);
 	}
 	chdir(getenv("HOME"));
-	free(path);
+	free(pwd);
 	pwd = getcwd(NULL, 0);
 	if (!pwd)
 	{
@@ -35,7 +35,7 @@ static int	_cd_home(char *pwd)
 		return (1);
 	}
 	update_value(g_global.envp, "PWD", ft_strdup(pwd));
-	free(path);
+	free(pwd);
 	return (0);
 }
 
