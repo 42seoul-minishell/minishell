@@ -21,7 +21,7 @@ static void	_echo_print_quote(char *str, int fd)
 	i = 0;
 	while (str[i])
 	{
-		write(fd, str, STDOUT_FILENO);
+		write(fd, &str[i], 1);
 		i++;
 	}
 }
