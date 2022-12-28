@@ -29,7 +29,8 @@ INC				= 	../../../include
 LIB_DIR			= 	../../../lib/
 
 FILES			=	syntax \
-					set_bintree
+					set_bintree \
+					utils
 
 SRCS_DIR		=	./
 SRCS			=	$(addprefix $(SRCS_DIR), $(addsuffix .c, $(FILES)))

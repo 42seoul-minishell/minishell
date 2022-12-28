@@ -1,27 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   syntax.h                                           :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bolee <bolee@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/13 13:35:35 by bolee             #+#    #+#             */
-/*   Updated: 2022/12/13 13:35:36 by bolee            ###   ########.fr       */
+/*   Created: 2022/12/28 19:23:58 by bolee             #+#    #+#             */
+/*   Updated: 2022/12/28 19:23:59 by bolee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SYNTAX_H
-# define SYNTAX_H
-
-# include "struct.h"
-
-/* syntax.c */
-void	syntax(t_doubly_list *lst);
-
-/* set_bintree.c */
-void	set_bintree(t_doubly_list *lst, t_doubly_node *node);
-
-/* utils.c*/
-int		set_bintree_type(int type)
-
-#endif
+int	set_bintree_type(int type)
+{
+	if (type == OR)
+		return (TN_OR);
+	else if (type == AND)
+		return (TN_AND);
+	else if (type == PIPE)
+		return (TN_PIPE);
+	else if (type >= INP_RDIR && type <= HERE_DOC)
+		return (TN_RDIR);
+	else if (type == BRACKET)
+		return (TN_BRACKET);
+	else
+		return (TN_WORD);
+}
