@@ -68,7 +68,7 @@ static int	_is_valid_tokens(t_doubly_list *lst)
 // 	g_var.hd_cnt = 0;
 // 	while (here_doc)
 // 	{
-// 		if (here_doc->type == AND || here_doc->type == OR \
+// 		if (here_doc->type == AND || here_doc->type == OR 
 // 			|| here_doc->type == PIPE)
 // 			g_var.hd_cnt++;
 // 		if (here_doc->type == HERE_DOC)

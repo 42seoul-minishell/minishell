@@ -12,21 +12,6 @@
 
 #include "minishell.h"
 
-// int	exec_last_word_child(t_tree_node *node, t_pipe p)
-// {
-// 	dup2(p.prev, STDIN_FILENO);
-// 	close(p.prev);
-// 	if (node->type == TN_PARENS)
-// 		exec_parens(node);
-// 	else
-// 	{
-// 		if (check_builtin(node->command) == EXIT_SUCCESS)
-// 			p.status = run_builtin(node);
-// 		else
-// 			p.status = exec_word_child(node);
-// 	}
-// 	return (p.status);
-// }
 static char	**_token_list_to_array(t_list *token_lst)
 {
 	char 	**cmd_arr;
@@ -101,21 +86,19 @@ static int	_exec_word_child(t_bintree_node *node, int fd[], int sup_fd[], int di
 	char	*path;
 	char	**cmd_arr;
 
-	fprintf(g_global.fp, "node: %s\n",((t_token *) node->token_lst->content)->value);
-	fprintf(g_global.fp, "fd[0]: %i, fd[1]: %i\n", fd[0], fd[1]);
-	fprintf(g_global.fp, "sup_fd[0]: %i, sup_fd[1]: %i\n", sup_fd[0], sup_fd[1]);
-	fprintf(g_global.fp, "Hello History\n");
-	if (dir == 0 && fd[1] != 1)
+	if (dir == 0)
+	{
+		dup2(fd[0], 0);
 		dup2(fd[1], 1);
+	}
 	if (dir == 1)
 	{
-		if (sup_fd[1] != 1)
-			dup2(sup_fd[1], 1);
+		dup2(fd[0], 0);
+		dup2(sup_fd[1], 1);
 		if (fd[0] != 0)
-		{
-			dup2(fd[0], 0);
 			close(fd[0]);
-		}
+		if (fd[1] != 1)
+			close(fd[1]);
 	}
 	if (node->token_lst)
 	{
@@ -130,40 +113,22 @@ static void	_wait_word_child(int pid, int fd[], int *status)
 {
 	if (fd[1] != 1)
 		close(fd[1]);
-	if (fd[0] != 0)
-		close(fd[0]);
-	printf("pid, status%i%i", pid, *status);
 	waitpid(pid, status, 0);
 }
 
 int	execute_command(t_bintree_node *node, int fd[], int sup_fd[], int dir)
 {
 	pid_t	pid;
-	int		status;
 	int		p_status;
 
-	fprintf(g_global.fp, "node: %s\n",((t_token *) node->token_lst->content)->value);
-	fprintf(g_global.fp, "fd[0]: %i, fd[1]: %i\n", fd[0], fd[1]);
-	fprintf(g_global.fp, "sup_fd[0]: %i, sup_fd[1]: %i\n", sup_fd[0], sup_fd[1]);
-	fprintf(g_global.fp, "Hello tistory\n");
-
-	// set_execute_signal();
+	set_execute_signal();
 	p_status = 0;
-
 	pid = fork();
 	if (pid == -1)
 		exit(1);
-	else if (pid == 0)
-	{
-		status = _exec_word_child(node, fd, sup_fd, dir);
-		// exit(status);
-	}
+	if (pid == 0)
+		_exec_word_child(node, fd, sup_fd, dir);
 	else
 		_wait_word_child(pid, fd, &p_status);
 	return (check_status(p_status));
 }
-
-// if (node->lc)
-// 	executor(node->lc);
-// if (node->rc)
-// 	executor(node->rc);
