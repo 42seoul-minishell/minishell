@@ -37,7 +37,7 @@ static int  _is_numeric_string(char *str)
 		i++;
 	while (str[i])
 	{
-		if (!ft_isdigit(str[i])
+		if (!ft_isdigit(str[i]))
 			return (FALSE);
 		i++;
 	}

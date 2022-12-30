@@ -60,8 +60,9 @@
 // 	return (g_global.status);
 // }
 
-void	execute_pipe(t_bintree_node	*node, int *fd[])
+void	execute_pipe(t_bintree_node	*node, int fd[])
 {
+	printf("node->type %i\n", node->type);
 	if (pipe(fd) == -1)
 		exit_error("pipe error\n");
 }

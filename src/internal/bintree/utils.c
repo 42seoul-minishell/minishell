@@ -52,14 +52,14 @@ void	display_bintree_node_by_inorder(t_bintree_node *node)
 {
 	if (node == NULL)
 		return ;
-	display_bintree_node_by_inorder(node->lc);
 	print_token_lst(node->token_lst);
+	display_bintree_node_by_inorder(node->lc);
 	display_bintree_node_by_inorder(node->rc);
 }
 
 void	display_bintree_by_inorder(t_bintree *bintree)
 {
-	printf("\ninorder start\n");
+	printf("\npreorder start\n");
 	display_bintree_node_by_inorder(bintree->root);
-	printf("\ninorder end\n");
+	printf("\npreorder end\n");
 }

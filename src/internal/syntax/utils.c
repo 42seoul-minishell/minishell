@@ -10,6 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "minishell.h"
+
 int	set_bintree_type(int type)
 {
 	if (type == OR)

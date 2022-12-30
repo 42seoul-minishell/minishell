@@ -30,6 +30,7 @@ static void	_lower_priority_sub(t_doubly_node *node, t_tnType bt_type)
 	t_token			*token;
 
 	tmp = g_global.tree->root;
+	flag = 0;
 	while (tmp->rc)
 	{
 		tmp = tmp->rc;
@@ -61,7 +62,7 @@ static void	_lower_priority(t_doubly_node *node, t_tnType bt_type)
 		g_global.tree->root->rc = tmp;
 	}
 	else
-		_lower_priority(node, bt_type);
+		_lower_priority_sub(node, bt_type);
 }
 
 static void	_set_bintree_case(t_doubly_node *node, t_tnType bt_type)

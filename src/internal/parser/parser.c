@@ -27,5 +27,5 @@ void parser(char *str)
 	display_list(lst);
 	syntax(lst);
 	display_bintree_by_inorder(g_global.tree);
-	release_doubly_list(lst);
+	// release_doubly_list(lst);
 }

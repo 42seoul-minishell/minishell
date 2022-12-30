@@ -110,6 +110,8 @@ typedef struct s_pipe
 typedef struct s_global
 {
 	t_hashtable		*envp;
+	char			**envp_arr;
+	FILE			*fp;
 	t_bintree		*tree;
 	int				heredoc_cnt;
 	int				status;
