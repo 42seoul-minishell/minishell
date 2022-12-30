@@ -38,7 +38,7 @@ void	executor(t_bintree_node	*root, int sup_fd[], int dir)
 		execute_or(root, fd);
 	else if (root->type == TN_PIPE)
 	{
-		execute_pipe(root, fd);
+		execute_pipe(fd);
 		execute_command(root->lc, fd, sup_fd, 0);
 		execute_command(root->rc, fd, sup_fd, 1);
 	}
