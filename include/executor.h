@@ -39,7 +39,7 @@ int		exec_word_child(t_bintree_node *node, int fd[], int sup_fd[], int dir);
 void	heredoc_redirect(t_bintree_node *node, char *eof, int *save_fd);
 
 /* pipe.c */
-void	execute_pipe(t_bintree_node *node, int fd[]);
+void	execute_pipe(int fd[]);
 
 /* redirect.c */
 void	execute_redirect(t_bintree_node *node, int fd[]);

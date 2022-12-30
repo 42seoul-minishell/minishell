@@ -37,12 +37,24 @@ static void	_sys_stdin(char **input_ptr)
 	free(prompt);
 }
 
+static void	_clear_tree(t_bintree_node **node)
+{
+	if (!*node)
+		return ;
+	if ((*node)->lc)
+		_clear_tree(&(*node)->lc);
+	if ((*node)->rc)
+		_clear_tree(&(*node)->rc);
+	if (*node)
+		free(*node);
+	*node = NULL;
+}
+
 static void	_run(void)
 {
 	char	*input;
 	int		fd[2];
 
-	g_global.fp = fopen("./result.txt", "w");
 	while (1)
 	{
 		init_fd(fd);
@@ -54,7 +66,7 @@ static void	_run(void)
 		parser(input);
 		executor(g_global.tree->root, fd, 0);
 		free(input);
-		break ;
+		_clear_tree(&g_global.tree->root);
 	}
 }
 

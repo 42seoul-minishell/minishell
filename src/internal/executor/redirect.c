@@ -37,7 +37,7 @@
 // {
 // 	int	fd;
 
-// 	fd = open(node->rc->token->value, \
+// 	fd = open(node->rc->token->value, 
 // 		O_CREAT | O_WRONLY | O_TRUNC, 0644);
 // 	if (fd < 0)
 // 		exit_error(strerror(errno));
@@ -49,7 +49,7 @@
 // {
 // 	int fd;
 
-// 	fd = open(node->rc->token->value, \
+// 	fd = open(node->rc->token->value, 
 // 		O_CREAT | O_WRONLY | O_APPEND, 0644);
 // 	if (fd < 0)
 // 		exit_error(strerror(errno));
