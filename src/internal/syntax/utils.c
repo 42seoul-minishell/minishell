@@ -12,7 +12,7 @@
 
 #include "minishell.h"
 
-int	set_bintree_type(int type)
+int set_bintree_type(int type)
 {
 	if (type == OR)
 		return (TN_OR);
@@ -20,7 +20,9 @@ int	set_bintree_type(int type)
 		return (TN_AND);
 	else if (type == PIPE)
 		return (TN_PIPE);
-	else if (type >= INP_RDIR && type <= HERE_DOC)
+	else if (type == HERE_DOC)
+		return (TN_HEREDOC);
+	else if (type >= INP_RDIR && type < HERE_DOC)
 		return (TN_RDIR);
 	else if (type == BRACKET)
 		return (TN_BRACKET);

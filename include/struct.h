@@ -35,6 +35,7 @@ typedef enum e_token_type
 typedef enum e_node_type
 {
 	TN_NONE,
+	TN_HEREDOC,
 	TN_OR,
 	TN_AND,
 	TN_RDIR,
