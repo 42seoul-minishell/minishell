@@ -13,14 +13,15 @@ void relocate_token_list(t_list **token_list)
 	{
 		token = (t_token *)(*token_list)->content;
 		tmp = *token_list;
-		*token_list = (*token_list)->next->next;
 		if (token->type >= INP_RDIR && token->type <= HERE_DOC)
 		{
+			*token_list = (*token_list)->next->next;
 			tmp->next->next = NULL;
 			ft_lstadd_back(&redir_lst, tmp);
 		}
 		else
 		{
+			*token_list = (*token_list)->next;
 			tmp->next = NULL;
 			ft_lstadd_back(&cmd_lst, tmp);
 		}
