@@ -29,7 +29,7 @@ static void _lower_priority(t_list *token_list, t_tnType bt_type)
 
 	flag = 0;
 	bt_node = create_bintree_node(token_list, bt_type);
-	if (bt_type >= TN_OR && bt_type <= TN_RDIR)
+	if (bt_type >= TN_OR && bt_type <= TN_PIPE)
 		flag = 1;
 	if (g_global.tree->root->type < bt_type && flag)
 	{
