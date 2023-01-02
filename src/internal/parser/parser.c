@@ -24,8 +24,8 @@ void parser(char *str)
 	// display_list(lst);
 	wildcard(lst);
 	relocation_doubly_lst(lst);
-	display_list(lst);
+	// display_list(lst);
 	syntax(lst);
-	display_bintree_by_inorder(g_global.tree);
-	// release_doubly_list(lst);
+	display_bintree_by_2D(g_global.tree);
+	release_doubly_list(lst);
 }

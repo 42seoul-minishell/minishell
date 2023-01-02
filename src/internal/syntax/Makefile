@@ -30,7 +30,8 @@ LIB_DIR			= 	../../../lib/
 
 FILES			=	syntax \
 					set_bintree \
-					utils
+					utils \
+					token_list
 
 SRCS_DIR		=	./
 SRCS			=	$(addprefix $(SRCS_DIR), $(addsuffix .c, $(FILES)))

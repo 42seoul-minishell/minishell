@@ -12,9 +12,9 @@
 
 #include "minishell.h"
 
-void	print_token_lst(t_list *token_lst)
+void print_token_lst(t_list *token_lst)
 {
-	t_token	*content;
+	t_token *content;
 
 	while (token_lst)
 	{
@@ -22,10 +22,9 @@ void	print_token_lst(t_list *token_lst)
 		printf("%s ", content->value);
 		token_lst = token_lst->next;
 	}
-	printf("$\n");
 }
 
-void	display_bintree_node_child(t_bintree_node *node)
+void display_bintree_node_child(t_bintree_node *node)
 {
 	if (node == NULL)
 		printf("There is no NODE\n");
@@ -48,18 +47,23 @@ void	display_bintree_node_child(t_bintree_node *node)
 	}
 }
 
-void	display_bintree_node_by_inorder(t_bintree_node *node)
+static void _display_bintree_node_by_2D(t_bintree_node *root, int space, int count)
 {
-	if (node == NULL)
-		return ;
-	print_token_lst(node->token_lst);
-	display_bintree_node_by_inorder(node->lc);
-	display_bintree_node_by_inorder(node->rc);
+	if (root == NULL)
+		return;
+	space += count;
+	_display_bintree_node_by_2D(root->rc, space, count);
+	printf("\n");
+	for (int i = count; i < space; i++)
+		printf(" ");
+	printf("%d ", root->type);
+	print_token_lst(root->token_lst);
+	_display_bintree_node_by_2D(root->lc, space, count);
 }
 
-void	display_bintree_by_inorder(t_bintree *bintree)
+void display_bintree_by_2D(t_bintree *bintree)
 {
-	printf("\npreorder start\n");
-	display_bintree_node_by_inorder(bintree->root);
-	printf("\npreorder end\n");
+	printf("\nStart print bintree\n");
+	_display_bintree_node_by_2D(bintree->root, 0, 10);
+	printf("\n\nEnd print bintree\n");
 }

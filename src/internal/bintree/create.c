@@ -12,23 +12,22 @@
 
 #include "minishell.h"
 
-t_bintree	*create_bintree(void)
+t_bintree *create_bintree(void)
 {
-	t_bintree	*bintree;
+	t_bintree *bintree;
 
 	bintree = (t_bintree *)ft_malloc(sizeof(t_bintree));
 	bintree->root = NULL;
 	return (bintree);
 }
 
-t_bintree_node	*create_bintree_node(t_token *token, t_tnType type)
+t_bintree_node *create_bintree_node(t_list *token_list, t_tnType type)
 {
-	t_bintree_node	*node;
+	t_bintree_node *node;
 
 	node = (t_bintree_node *)ft_malloc(sizeof(t_bintree_node));
 	node->type = type;
-	node->token_lst = NULL;
-	ft_lstadd_back(&node->token_lst, ft_lstnew((void *) token));
+	node->token_lst = token_list;
 	node->lc = NULL;
 	node->rc = NULL;
 	return (node);
