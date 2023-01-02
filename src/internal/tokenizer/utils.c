@@ -22,7 +22,7 @@ int	is_quote(char *str)
 int	is_operator(char *str)
 {
 	if (*str == '|' || *str == '>' || *str == '<' \
-			|| *str == '(' || *str == ')')
+		|| *str == '(' || *str == ')' || *str == '&')
 		return (TRUE);
 	return (FALSE);
 }
