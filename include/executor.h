@@ -17,31 +17,32 @@
 
 /* executor.c */
 void	init_fd(int fd[]);
-void	executor(t_bintree_node	*root, int sup_fd[], int dir);
+void	executor(t_bintree_node	*root, int in_fd, int out_fd, int dir);
 int		serve_status(char *cmd);
 
 /* and_or.c */
-void	execute_and(t_bintree_node *node, int sup_fd[]);
-void	execute_or(t_bintree_node *node, int sup_fd[]);
+void	execute_and(t_bintree_node *node);
+void	execute_or(t_bintree_node *node);
 
 /* bracket.c */
 int		execute_bracket(t_bintree_node *root, int sup_fd[], int dir);
 
 /* cammand.c */
-int	execute_command(t_bintree_node *node, int fd[], int sup_fd[], int dir);
+int	    execute_command(t_bintree_node *node, int in_fd, int out_fd);
 
 /* double_quotes.c */
 int		exec_word(t_bintree_node *root);
 int		exec_last_word_child(t_bintree_node *root, t_pipe p);
-int		exec_word_child(t_bintree_node *node, int fd[], int sup_fd[], int dir);
+int		exec_word_child(t_bintree_node *node, int in_fd, int out_fd, int dir);
 
 /* heredoc_redirect.c */
 void	heredoc_redirect(t_bintree_node *node, char *eof, int *save_fd);
 
 /* pipe.c */
-void	execute_pipe(int fd[]);
+void	execute_pipe(t_bintree_node *node, int in_fd, int out_fd);
+void	set_heredoc(t_bintree_node *node);
 
 /* redirect.c */
-void	execute_redirect(t_bintree_node *node, int fd[]);
+void	execute_redirect(t_bintree_node *node);
 
 #endif

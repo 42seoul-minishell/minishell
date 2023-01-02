@@ -25,6 +25,9 @@ static char	**_token_list_to_array(t_list *token_lst)
 	idx = 0;
 	while (node)
 	{
+		token = node->content;
+		if (token->type != CMD)
+			break;
 		size++;
 		node = node->next;
 	}
@@ -43,7 +46,6 @@ static char	**_token_list_to_array(t_list *token_lst)
 
 static void	_run_cmd(char *abs_path, char *argv[])
 {
-
 	if (access(abs_path, X_OK) == -1)
 	{
 		perror(": permission denied");
@@ -63,6 +65,7 @@ char	*get_abs_path(char *cmd)
 	char	**paths;
 
 	i = 0;
+	check = NULL;
 	paths = ft_split(search(g_global.envp, "PATH"), ':', 0);
 	if (access(cmd, X_OK) == 0)
 		return (ft_strdup(cmd));
@@ -81,25 +84,17 @@ char	*get_abs_path(char *cmd)
 	return (NULL);
 }
 
-static int	_exec_word_child(t_bintree_node *node, int fd[], int sup_fd[], int dir)
+static int	_exec_word_child(t_bintree_node *node, int in_fd, int out_fd)
 {
 	char	*path;
 	char	**cmd_arr;
 
-	if (dir == 0)
-	{
-		dup2(fd[0], 0);
-		dup2(fd[1], 1);
-	}
-	if (dir == 1)
-	{
-		dup2(fd[0], 0);
-		dup2(sup_fd[1], 1);
-		if (fd[0] != 0)
-			close(fd[0]);
-		if (fd[1] != 1)
-			close(fd[1]);
-	}
+	dup2(in_fd, 0);
+	dup2(out_fd, 1);
+	if (in_fd != 0)
+		close(in_fd);
+	if (out_fd != 1)
+		close(out_fd);
 	if (node->token_lst)
 	{
 		cmd_arr = _token_list_to_array(node->token_lst);
@@ -109,26 +104,94 @@ static int	_exec_word_child(t_bintree_node *node, int fd[], int sup_fd[], int di
 	return (EXIT_SUCCESS);
 }
 
-static void	_wait_word_child(int pid, int fd[], int *status)
+static void	_wait_word_child(int pid, int out_fd, int *status)
 {
-	if (fd[1] != 1)
-		close(fd[1]);
+	if (out_fd != 1)
+		close(out_fd);
 	waitpid(pid, status, 0);
 }
 
-int	execute_command(t_bintree_node *node, int fd[], int sup_fd[], int dir)
+static	int	_set_in(t_bintree_node *node, int in_fd)
+{
+	t_token	*token;
+	t_token	*file_token;
+	t_list	*lst;
+
+	lst = node->token_lst;
+	while (lst && lst->next)
+	{
+		token = lst->content;
+		if (token->type == INP_RDIR)
+		{
+			if (in_fd != 0)
+				close(in_fd);
+			file_token = lst->next->content;
+			in_fd = open(file_token->value, O_RDONLY);
+			lst = lst->next;
+		}
+		else if (token->type == HERE_DOC)
+		{
+			if (in_fd != 0)
+				close(in_fd);
+			in_fd = node->fd[0];
+			lst = lst->next;
+		}
+		lst = lst->next;
+	}
+	
+	return (in_fd);
+}
+
+static int	_set_out(t_bintree_node *node, int out_fd)
+{
+	t_token	*token;
+	t_token	*file_token;
+	t_list	*lst;
+
+	lst = node->token_lst;
+	while (lst && lst->next)
+	{
+		token = lst->content;
+		if (token->type == OUT_RDIR)
+		{
+			file_token = lst->next->content;
+			if (out_fd != 1)
+				close(out_fd);
+			out_fd = open(file_token->value, O_CREAT | O_WRONLY | O_TRUNC | __O_CLOEXEC, 0644);
+			lst = lst->next;
+		}
+		else if (token->type == APP_RDIR)
+		{
+			file_token = lst->next->content;
+			if (out_fd != 1)
+				close(out_fd);
+			out_fd = open(file_token->value, O_APPEND | O_CREAT | O_WRONLY | O_TRUNC | __O_CLOEXEC, 0644);
+			lst = lst->next;
+		}
+		lst = lst->next;
+	}
+	return (out_fd);
+}
+
+int	execute_command(t_bintree_node *node, int in_fd, int out_fd)
 {
 	pid_t	pid;
 	int		p_status;
 
 	set_execute_signal();
+	if (node->type == TN_HEREDOC || node->type == TN_RDIR)
+	{
+		in_fd = _set_in(node, in_fd);
+		out_fd = _set_out(node, out_fd);
+	}
+	printf("in fd: %i\n", in_fd);
 	p_status = 0;
 	pid = fork();
 	if (pid == -1)
 		exit(1);
 	if (pid == 0)
-		_exec_word_child(node, fd, sup_fd, dir);
+		_exec_word_child(node, in_fd, out_fd);
 	else
-		_wait_word_child(pid, fd, &p_status);
+		_wait_word_child(pid, out_fd, &p_status);
 	return (check_status(p_status));
 }

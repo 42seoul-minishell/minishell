@@ -12,20 +12,20 @@
 
 #include "minishell.h"
 
-void	execute_and(t_bintree_node *node, int sup_fd[])
+void	execute_and(t_bintree_node *node)
 {
 	if (!node->lc)
 		syntax_error("&&");
-	executor(node->lc, sup_fd, 0);
+	executor(node->lc, 0, 1, 0);
 	if (!g_global.status)
-		executor(node->rc, sup_fd, 1);
+		executor(node->rc, 0, 1, 1);
 }
 
-void	execute_or(t_bintree_node *node, int sup_fd[])
+void	execute_or(t_bintree_node *node)
 {
 	if (!node->lc)
 		syntax_error("||");
-	executor(node->lc, sup_fd, 0);
+	executor(node->lc, 0, 1, 0);
 	if (g_global.status)
-		executor(node->rc, sup_fd, 1);
+		executor(node->rc, 0, 1, 1);
 }
