@@ -19,29 +19,27 @@ void	init_fd(int fd[])
 	fd[1] = 1;
 }
 
-void	executor(t_bintree_node	*root, int sup_fd[], int dir)
+void	executor(t_bintree_node	*root, int in_fd, int out_fd, int dir)
 {
-	int	fd[2];
-
-	init_fd(fd);
 	if (!root)
 		return ;
 	// if (root->type == TN_RDIR)
 	// 	execute_redirect(root, fd);
-	if (root->type == TN_WORD)
-		execute_command(root, fd, sup_fd, dir);
+	if (root->type >= TN_HEREDOC && root->type <= TN_WORD)
+	{
+		if (dir == 0)
+			execute_command(root, in_fd, out_fd);
+		else if (dir == 1)
+			execute_command(root, in_fd, out_fd);
+	}
 	// else if (root->type == TN_BRACKET)
 	// 	g_global.status = execute_bracket(root, sup_fd, dir);
 	else if (root->type == TN_AND)
-		execute_and(root, fd);
+		execute_and(root);
 	else if (root->type == TN_OR)
-		execute_or(root, fd);
+		execute_or(root);
 	else if (root->type == TN_PIPE)
-	{
-		execute_pipe(fd);
-		execute_command(root->lc, fd, sup_fd, 0);
-		execute_command(root->rc, fd, sup_fd, 1);
-	}
+		execute_pipe(root, in_fd, out_fd);
 	// return (g_golbal.status);
 }
 

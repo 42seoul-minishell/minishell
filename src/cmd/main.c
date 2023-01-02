@@ -53,18 +53,17 @@ static void	_clear_tree(t_bintree_node **node)
 static void	_run(void)
 {
 	char	*input;
-	int		fd[2];
 
 	while (1)
 	{
-		init_fd(fd);
-		// dup2(g_global.fd_stdin, STDIN_FILENO);
-		// dup2(g_global.fd_stdout, STDOUT_FILENO);
+		dup2(g_global.fd_stdin, STDIN_FILENO);
+		dup2(g_global.fd_stdout, STDOUT_FILENO);
 		input = NULL;
 		_sys_stdin(&input);
 		_save_history(input);
 		parser(input);
-		executor(g_global.tree->root, fd, 0);
+		set_heredoc(g_global.tree->root);
+		executor(g_global.tree->root, 0, 1, 0);
 		free(input);
 		_clear_tree(&g_global.tree->root);
 	}
