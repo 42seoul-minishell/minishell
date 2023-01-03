@@ -29,24 +29,17 @@ int	check_ctrl_oper(t_list *token_list)
 int	set_bintree_type(t_list *token_list)
 {
 	t_token	*token;
-	int		flag;
 
-	flag = 0;
 	while (token_list)
 	{
 		token = (t_token *)token_list->content;
 		if (token->type == BRACKET)
-		{
-			flag++;
-			continue ;
-		}
-		if (flag % 2 == 0 && token->type >= INP_RDIR && token->type < HERE_DOC)
+			return (TN_BRACKET);
+		else if (token->type >= INP_RDIR && token->type < HERE_DOC)
 			return (TN_RDIR);
-		else if (flag % 2 == 0 && token->type == HERE_DOC)
+		else if (token->type == HERE_DOC)
 			return (TN_HEREDOC);
 		token_list = token_list->next;
 	}
-	if (flag != 0)
-		return (TN_BRACKET);
 	return (TN_WORD);
 }

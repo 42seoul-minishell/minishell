@@ -18,7 +18,7 @@
 /* in ../src/error/ */
 /* error.c */
 void	exit_error(const char *str);
-void	syntax_error(const char *str);
+void	syntax_error(const char *str, int flag);
 void	not_found_error(const char *str);
 void	no_file_direct_error(const char *str1, const char *str2);
 

@@ -49,12 +49,14 @@ static void	_run(void)
 		input = NULL;
 		_sys_stdin(&input);
 		_save_history(input);
-		parser(input);
-		set_heredoc(g_global.tree->root);
-		executor(g_global.tree->root, 0, 1);
-		free(input);
-		clear_bintree(g_global.tree->root);
-		g_global.tree->root = NULL;
+		if (parser(input) == TRUE)
+		{
+			set_heredoc(g_global.tree->root);
+			executor(g_global.tree->root, 0, 1);
+			free(input);
+			clear_bintree(g_global.tree->root);
+			g_global.tree->root = NULL;
+		}
 	}
 }
 

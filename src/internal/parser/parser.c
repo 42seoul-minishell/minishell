@@ -12,11 +12,10 @@
 
 #include "minishell.h"
 
-void	parser(char *str)
+int	parser(char *str)
 {
 	t_doubly_list	*lst;
 
-	printf("parser start tree %p\n", g_global.tree->root);
 	lst = create_doubly_list();
 	tokenizer(lst, str);
 	expand(lst);
@@ -24,7 +23,12 @@ void	parser(char *str)
 	wildcard(lst);
 	relocation_doubly_lst(lst);
 	display_list(lst);
-	syntax(lst);
+	if (syntax(lst) == FALSE)
+	{
+		release_doubly_list(lst);
+		return (FALSE);
+	}
 	display_bintree_by_2d(g_global.tree);
 	release_doubly_list(lst);
+	return (TRUE);
 }

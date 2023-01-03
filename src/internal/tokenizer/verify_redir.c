@@ -16,18 +16,12 @@ t_tType	verify_input_redir(char *str)
 {
 	if (str[0] == '<' && str[1] && str[1] == str[0])
 		return (HERE_DOC);
-	if (str[0] == '<')
-		return (INP_RDIR);
-	syntax_error("<");
-	return (NONE);
+	return (INP_RDIR);
 }
 
 t_tType	verify_output_redir(char *str)
 {
 	if (str[0] == '>' && str[1] && str[1] == str[0])
 		return (APP_RDIR);
-	if (str[0] == '>')
-		return (OUT_RDIR);
-	syntax_error(">");
-	return (NONE);
+	return (OUT_RDIR);
 }

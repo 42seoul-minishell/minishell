@@ -15,7 +15,7 @@
 void	execute_and(t_bintree_node *node)
 {
 	if (!node->lc)
-		syntax_error("&&");
+		syntax_error("&&", 0);
 	executor(node->lc, 0, 1);
 	if (!g_global.status)
 		executor(node->rc, 0, 1);
@@ -24,7 +24,7 @@ void	execute_and(t_bintree_node *node)
 void	execute_or(t_bintree_node *node)
 {
 	if (!node->lc)
-		syntax_error("||");
+		syntax_error("||", 0);
 	executor(node->lc, 0, 1);
 	if (g_global.status)
 		executor(node->rc, 0, 1);

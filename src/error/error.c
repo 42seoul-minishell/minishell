@@ -18,9 +18,12 @@ void	exit_error(const char *str)
 	exit(1);
 }
 
-void	syntax_error(const char *str)
+void	syntax_error(const char *str, int flag)
 {
-	printf("MINISHELL: syntax error near unexpected token `%s'\n", str);
+	if (flag)
+		printf("MINISHELL: syntax error near unexpected token `%c'\n", *str);
+	else
+		printf("MINISHELL: syntax error near unexpected token `%s'\n", str);
 }
 
 void	not_found_error(const char *str)

@@ -33,7 +33,6 @@ FILES			=	check \
 					extract \
 					tokenizer \
 					utils \
-					verify_brackets \
 					verify_pipes \
 					verify_quotes \
 					verify_redir \

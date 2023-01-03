@@ -34,7 +34,7 @@ static void	_echo_print(t_list *lst, int out_fd)
 	while (lst)
 	{
 		token = (t_token *) lst->content;
-		if  (token->type <= HERE_DOC && token->type >= INP_RDIR)
+		if (token->type <= HERE_DOC && token->type >= INP_RDIR)
 			break ;
 		value = token->value;
 		if (token->type == D_QUOTE || token->type == S_QUOTE)

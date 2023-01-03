@@ -14,6 +14,7 @@
 
 static ssize_t	_get_operator_length(char *str)
 {
+	ssize_t	i;
 	ssize_t	len;
 	char	c;
 
@@ -22,7 +23,16 @@ static ssize_t	_get_operator_length(char *str)
 	if (is_quote(str))
 		while (*(str + len) != c)
 			len++;
-	else if (*str == '(' || *str == ')')
+	else if (*str == '(')
+	{
+		i = 0;
+		while (*(str + i + 1) != ')')
+			i++;
+		if (*(str + i + 1) == ')')
+			return (len + i + 1);
+		return (len);
+	}
+	else if (*str == ')')
 		return (1);
 	else if (is_double_operator(str))
 		return (2);

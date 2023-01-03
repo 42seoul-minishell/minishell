@@ -16,7 +16,7 @@
 # include "struct.h"
 
 /* syntax.c */
-void	syntax(t_doubly_list *lst);
+int		syntax(t_doubly_list *lst);
 
 /* set_bintree.c */
 void	set_bintree(t_doubly_list *lst, t_doubly_node *node);
