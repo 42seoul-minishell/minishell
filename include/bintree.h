@@ -27,10 +27,7 @@ t_bintree		*create_bintree(void);
 t_bintree_node	*create_bintree_node(t_list *token_list, t_tnType type);
 
 /* delete.c */
-void			delete_bintree_node_child(t_bintree_node *parent);
-int				delete_bintree_node_lc(t_bintree_node *parent);
-int				delete_bintree_node_rc(t_bintree_node *parent);
-int				clear_bintree_node(t_bintree_node *root);
+void			clear_bintree(t_bintree_node *root);
 
 /* utils.c */
 void			print_token_lst(t_list *token_lst);

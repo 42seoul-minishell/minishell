@@ -16,6 +16,7 @@ void	parser(char *str)
 {
 	t_doubly_list	*lst;
 
+	printf("parser start tree %p\n", g_global.tree->root);
 	lst = create_doubly_list();
 	tokenizer(lst, str);
 	expand(lst);
