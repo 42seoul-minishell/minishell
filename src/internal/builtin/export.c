@@ -60,7 +60,7 @@ static int	_is_valid_identifier(char *str, int *exit_code)
 	return (FALSE);
 }
 
-int	builtin_export(t_list *lst)
+int	builtin_export(t_list *lst, int out_fd)
 {
 	int		exit_code;
 	char	*data;
@@ -70,7 +70,7 @@ int	builtin_export(t_list *lst)
 	exit_code = 0;
 	if (lst == NULL || ((t_token *) lst->content)->value[0] == '#')
 	{
-		display_hashtable(g_global.envp);
+		display_hashtable(g_global.envp, out_fd);
 		return (0);
 	}
 	while (lst)

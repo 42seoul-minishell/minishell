@@ -66,9 +66,9 @@ void	execute_pipe(t_bintree_node	*node, int in_fd, int out_fd)
 	if (pipe(node->fd) == -1)
 		exit_error("pipe error\n");
 	if (node->lc)
-		executor(node->lc, in_fd, node->fd[1], 0);
+		executor(node->lc, in_fd, node->fd[1]);
 	if (node->rc)
-		executor(node->rc, node->fd[0], out_fd, 1);
+		executor(node->rc, node->fd[0], out_fd);
 }
 
 static void	_here_doc(t_bintree_node *node)

@@ -26,7 +26,7 @@ void			hash_insert(t_ht_item *new_item, t_hashtable *table);
 /* utils.c */
 char			*get_key_from_env(char *str);
 char			*get_value_from_env(char *env);
-void			display_hashtable(t_hashtable *table);
+void			display_hashtable(t_hashtable *table, int out_fd);
 void			prevent_collision(t_hashtable *table, size_t hash, \
 							t_ht_item *new_item);
 

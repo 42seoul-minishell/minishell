@@ -26,7 +26,7 @@ static void	_echo_print_quote(char *str, int fd)
 	}
 }
 
-static void	_echo_print(t_list *lst)
+static void	_echo_print(t_list *lst, int out_fd)
 {
 	t_token	*token;
 	char	*value;
@@ -34,16 +34,18 @@ static void	_echo_print(t_list *lst)
 	while (lst)
 	{
 		token = (t_token *) lst->content;
+		if  (token->type <= HERE_DOC && token->type >= INP_RDIR)
+			break ;
 		value = token->value;
 		if (token->type == D_QUOTE || token->type == S_QUOTE)
 		{
-			_echo_print_quote(value, STDOUT_FILENO);
-			ft_putstr_fd(" ", STDOUT_FILENO);
+			_echo_print_quote(value, out_fd);
+			ft_putstr_fd(" ", out_fd);
 		}
 		else
 		{
-			ft_putstr_fd(value, STDOUT_FILENO);
-			ft_putstr_fd(" ", STDOUT_FILENO);
+			ft_putstr_fd(value, out_fd);
+			ft_putstr_fd(" ", out_fd);
 		}
 		lst = lst->next;
 	}
@@ -51,13 +53,13 @@ static void	_echo_print(t_list *lst)
 
 // return 0 -> 잘 동작
 // return 1 -> 에러 발생
-int	builtin_echo(t_list *lst)
+int	builtin_echo(t_list *lst, int out_fd)
 {
 	int		option;
 
 	if (!lst)
 	{
-		ft_putstr_fd("\n", STDIN_FILENO);
+		ft_putstr_fd("\n", out_fd);
 		return (0);
 	}
 	option = 0;
@@ -66,8 +68,8 @@ int	builtin_echo(t_list *lst)
 		option = 1;
 		lst = lst->next;
 	}
-	_echo_print(lst);
+	_echo_print(lst, out_fd);
 	if (!option)
-		ft_putstr_fd("\n", 1);
+		ft_putstr_fd("\n", out_fd);
 	return (0);
 }

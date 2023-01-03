@@ -63,7 +63,7 @@ static void	_run(void)
 		_save_history(input);
 		parser(input);
 		set_heredoc(g_global.tree->root);
-		executor(g_global.tree->root, 0, 1, 0);
+		executor(g_global.tree->root, 0, 1);
 		free(input);
 		_clear_tree(&g_global.tree->root);
 	}
