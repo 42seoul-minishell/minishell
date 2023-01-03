@@ -32,9 +32,7 @@ FILES			=	executor \
 					and_or \
 					command \
 					pipe \
-					redirect \
-					builtin \
-					# heredoc_redirect \0
+					builtin
 
 
 SRCS_DIR		=	./

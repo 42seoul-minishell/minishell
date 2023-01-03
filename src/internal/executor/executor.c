@@ -20,7 +20,7 @@ void	executor(t_bintree_node	*root, int in_fd, int out_fd)
 	if (root->type >= TN_HEREDOC && root->type <= TN_WORD)
 		execute_command(root, in_fd, out_fd);
 	// else if (root->type == TN_BRACKET)
-	// 	g_global.status = execute_bracket(root, sup_fd, dir);
+	// 	g_global.status = execute_bracket(root, in_fd, out_fd);
 	else if (root->type == TN_AND)
 		execute_and(root);
 	else if (root->type == TN_OR)

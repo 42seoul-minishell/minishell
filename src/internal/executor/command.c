@@ -14,7 +14,7 @@
 
 static char	**_token_list_to_array(t_list *token_lst)
 {
-	char 	**cmd_arr;
+	char	**cmd_arr;
 	size_t	size;
 	size_t	idx;
 	t_token	*token;
@@ -27,7 +27,7 @@ static char	**_token_list_to_array(t_list *token_lst)
 	{
 		token = node->content;
 		if (token->type != CMD)
-			break;
+			break ;
 		size++;
 		node = node->next;
 	}
@@ -111,7 +111,7 @@ static void	_wait_word_child(int pid, int out_fd, int *status)
 	waitpid(pid, status, WNOHANG);
 }
 
-static	int	_set_in(t_bintree_node *node, int in_fd)
+static int	_set_in(t_bintree_node *node, int in_fd)
 {
 	t_token	*token;
 	t_token	*file_token;
@@ -138,7 +138,6 @@ static	int	_set_in(t_bintree_node *node, int in_fd)
 		}
 		lst = lst->next;
 	}
-	
 	return (in_fd);
 }
 

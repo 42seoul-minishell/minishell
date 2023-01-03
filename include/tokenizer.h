@@ -46,9 +46,6 @@ t_tType	verify_output_redir(char *str);
 /* verify_pipes.c */
 t_tType	verify_pipe(char *str);
 
-/* verify_brackets.c */
-t_tType	verify_bracket(char *str);
-
 /* relocation_doulby_lst.c */
 void	relocation_doubly_lst(t_doubly_list *lst);
 

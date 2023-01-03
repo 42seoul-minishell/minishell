@@ -15,6 +15,6 @@
 
 # include "struct.h"
 
-void	parser(char *str);
+int	parser(char *str);
 
 #endif

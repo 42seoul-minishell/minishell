@@ -12,7 +12,7 @@
 
 #include "minishell.h"
 
-// int	execute_bracket(t_bintree_node *root, int sup_fd[], int dir)
+// int	execute_bracket(t_bintree_node *root, int in_fd, int out_fd)
 // {
 // 	pid_t	pid;
 // 	int		status;
