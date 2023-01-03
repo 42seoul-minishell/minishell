@@ -12,7 +12,7 @@
 
 #include "minishell.h"
 
-void	builtin_env(void)
+void	builtin_env(int out_fd)
 {
-	display_hashtable(g_global.envp);
+	display_hashtable(g_global.envp, out_fd);
 }

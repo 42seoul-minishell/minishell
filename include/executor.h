@@ -17,7 +17,7 @@
 
 /* executor.c */
 void	init_fd(int fd[]);
-void	executor(t_bintree_node	*root, int in_fd, int out_fd, int dir);
+void	executor(t_bintree_node	*root, int in_fd, int out_fd);
 int		serve_status(char *cmd);
 
 /* and_or.c */
@@ -26,6 +26,10 @@ void	execute_or(t_bintree_node *node);
 
 /* bracket.c */
 int		execute_bracket(t_bintree_node *root, int sup_fd[], int dir);
+
+/* builtin.c */
+int	    check_builtin(t_list *lst);
+int	    execute_builtin(t_list *lst, int out_fd);
 
 /* cammand.c */
 int	    execute_command(t_bintree_node *node, int in_fd, int out_fd);
