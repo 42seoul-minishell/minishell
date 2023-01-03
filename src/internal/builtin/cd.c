@@ -39,7 +39,7 @@ static int	_cd_home(char *pwd)
 	return (0);
 }
 
-static int	_cd_prev(char *pwd)
+static int	_cd_prev(char *pwd, int out_fd)
 {
 	char	*oldpwd;
 
@@ -53,7 +53,9 @@ static int	_cd_prev(char *pwd)
 	if (chdir(oldpwd) == 0)
 	{
 		update_value(g_global.envp, "PWD", ft_strdup(oldpwd));
-		update_value(g_global.envp, "OLD", ft_strdup(pwd));
+		update_value(g_global.envp, "OLDPWD", ft_strdup(pwd));
+		ft_putstr_fd(oldpwd, out_fd);
+		ft_putstr_fd("\n", out_fd);
 		free(pwd);
 		return (0);
 	}
@@ -66,7 +68,7 @@ static int	_cd_chdir(char *pwd, char *path)
 	if (chdir(path) == 0)
 	{
 		update_value(g_global.envp, "PWD", ft_strdup(path));
-		update_value(g_global.envp, "OLD", ft_strdup(pwd));
+		update_value(g_global.envp, "OLDPWD", ft_strdup(pwd));
 		free(pwd);
 		return (0);
 	}
@@ -88,7 +90,7 @@ static int	_cd_chdir(char *pwd, char *path)
 
 // return 0 -> 잘 동작
 // return 1 -> 에러 발생
-int	builtin_cd(t_list *lst)
+int	builtin_cd(t_list *lst, int out_fd)
 {
 	char	*path;
 	char	*pwd;
@@ -106,7 +108,7 @@ int	builtin_cd(t_list *lst)
 	if (ft_strcmp(path, "~") == 0)
 		return (_cd_home(pwd));
 	else if (ft_strcmp(path, "-") == 0)
-		return (_cd_prev(pwd));
+		return (_cd_prev(pwd, out_fd));
 	else
 		return (_cd_chdir(pwd, path));
 }

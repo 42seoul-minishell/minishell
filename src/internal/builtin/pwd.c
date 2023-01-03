@@ -12,7 +12,7 @@
 
 #include "minishell.h"
 
-int	builtin_pwd(void)
+int	builtin_pwd(int out_fd)
 {
 	char	*path;
 
@@ -23,7 +23,7 @@ int	builtin_pwd(void)
 			Failed to get current working directory\n\033[0m", STDERR_FILENO);
 		return (1);
 	}
-	ft_putstr_fd(path, STDIN_FILENO);
+	ft_putstr_fd(path, out_fd);
 	free(path);
 	return (0);
 }

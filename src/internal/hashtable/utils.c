@@ -62,7 +62,7 @@ void	prevent_collision(t_hashtable *table, size_t hash, \
 	table->count++;
 }
 
-void	display_hashtable(t_hashtable *table)
+void	display_hashtable(t_hashtable *table, int out_fd)
 {
 	size_t			idx;
 	t_ht_item		*item;
@@ -73,10 +73,10 @@ void	display_hashtable(t_hashtable *table)
 		item = table->items[idx];
 		while (item != NULL)
 		{
-			ft_putstr_fd(item->key, STDOUT_FILENO);
-			ft_putstr_fd("=", STDOUT_FILENO);
-			ft_putstr_fd(item->value, STDOUT_FILENO);
-			ft_putstr_fd("\n", STDOUT_FILENO);
+			ft_putstr_fd(item->key, out_fd);
+			ft_putstr_fd("=", out_fd);
+			ft_putstr_fd(item->value, out_fd);
+			ft_putstr_fd("\n", out_fd);
 			item = item->next;
 		}
 		idx++;

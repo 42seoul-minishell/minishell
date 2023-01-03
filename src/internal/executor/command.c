@@ -108,7 +108,7 @@ static void	_wait_word_child(int pid, int out_fd, int *status)
 {
 	if (out_fd != 1)
 		close(out_fd);
-	waitpid(pid, status, 0);
+	waitpid(pid, status, WNOHANG);
 }
 
 static	int	_set_in(t_bintree_node *node, int in_fd)
@@ -184,7 +184,13 @@ int	execute_command(t_bintree_node *node, int in_fd, int out_fd)
 		in_fd = _set_in(node, in_fd);
 		out_fd = _set_out(node, out_fd);
 	}
-	printf("in fd: %i\n", in_fd);
+	if (check_builtin(node->token_lst))
+	{
+		p_status = execute_builtin(node->token_lst, out_fd);
+		if (out_fd != 1)
+			close(out_fd);
+		return (p_status);
+	}
 	p_status = 0;
 	pid = fork();
 	if (pid == -1)
