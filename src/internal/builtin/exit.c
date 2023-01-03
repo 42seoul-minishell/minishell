@@ -12,23 +12,7 @@
 
 #include "minishell.h"
 
-/*
-   - input -
-   exit hello
-
-   - result -
-   exit
-   bash: exit: hello: numeric argument required
-
-
-   - input -
-   exit hello world
-
-   - result -
-   exit
-   bash: exit: hello: numeric argument required
-*/
-static int  _is_numeric_string(char *str)
+static int	_is_numeric_string(char *str)
 {
 	int	i;
 

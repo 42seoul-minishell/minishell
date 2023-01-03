@@ -29,6 +29,7 @@ void	delete_doubly_node(t_doubly_list *lst, t_doubly_node *node)
 		node->prev->next = node->next;
 		node->next->prev = node->prev;
 	}
+	free(node->token->value);
 	free(node->token);
 	free(node);
 	lst->len--;

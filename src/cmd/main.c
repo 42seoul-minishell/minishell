@@ -31,23 +31,11 @@ static void	_sys_stdin(char **input_ptr)
 		printf("\033[1A");
 		printf("\033[%tdC", ft_strlen(prompt));
 		printf("exit\n");
+		free(prompt);
 		display_ctrlx_set(DISPLAY);
 		exit(g_global.status);
 	}
 	free(prompt);
-}
-
-static void	_clear_tree(t_bintree_node **node)
-{
-	if (!*node)
-		return ;
-	if ((*node)->lc)
-		_clear_tree(&(*node)->lc);
-	if ((*node)->rc)
-		_clear_tree(&(*node)->rc);
-	if (*node)
-		free(*node);
-	*node = NULL;
 }
 
 static void	_run(void)
@@ -65,7 +53,8 @@ static void	_run(void)
 		set_heredoc(g_global.tree->root);
 		executor(g_global.tree->root, 0, 1);
 		free(input);
-		_clear_tree(&g_global.tree->root);
+		clear_bintree(g_global.tree->root);
+		g_global.tree->root = NULL;
 	}
 }
 

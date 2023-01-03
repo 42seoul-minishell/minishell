@@ -12,9 +12,9 @@
 
 #include "minishell.h"
 
-int insert_lc_node(t_bintree_node *parent, t_list *token_list, t_tnType type)
+int	insert_lc_node(t_bintree_node *parent, t_list *token_list, t_tnType type)
 {
-	t_bintree_node *node;
+	t_bintree_node	*node;
 
 	if (parent == NULL || token_list == NULL)
 		return (FALSE);
@@ -25,9 +25,9 @@ int insert_lc_node(t_bintree_node *parent, t_list *token_list, t_tnType type)
 	return (TRUE);
 }
 
-int insert_rc_node(t_bintree_node *parent, t_list *token_list, t_tnType type)
+int	insert_rc_node(t_bintree_node *parent, t_list *token_list, t_tnType type)
 {
-	t_bintree_node *node;
+	t_bintree_node	*node;
 
 	if (parent == NULL || token_list == NULL)
 		return (FALSE);

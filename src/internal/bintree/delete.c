@@ -12,55 +12,30 @@
 
 #include "minishell.h"
 
-void	delete_bintree_node_child(t_bintree_node *parent)
+void	_delete_bintree_node(t_bintree_node *node)
 {
+	t_list	*lst;
 	t_list	*tmp;
-	t_token	*content;
+	t_token	*token;
 
-	if (parent == NULL)
-		return ;
-	delete_bintree_node_child(parent->lc);
-	delete_bintree_node_child(parent->rc);
-	while (parent->token_lst)
+	lst = node->token_lst;
+	while (lst)
 	{
-		tmp = parent->token_lst;
-		content = parent->token_lst->content;
-		free(content->value);
-		free(content);
-		parent->token_lst = parent->token_lst->next;
+		tmp = lst;
+		lst = lst->next;
+		token = (t_token *)tmp->content;
+		free(token->value);
+		free(token);
 		free(tmp);
 	}
-	free(parent);
+	free(node);
 }
 
-int	delete_bintree_node_lc(t_bintree_node *parent)
+void	clear_bintree(t_bintree_node *root)
 {
-	if (parent == NULL)
-		return (FALSE);
-	if (parent->lc == NULL)
-		return (FALSE);
-	delete_bintree_node_child(parent->lc);
-	parent->lc = NULL;
-	return (TRUE);
-}
-
-int	delete_bintree_node_rc(t_bintree_node *parent)
-{
-	if (parent == NULL)
-		return (FALSE);
-	if (parent->rc == NULL)
-		return (FALSE);
-	delete_bintree_node_child(parent->rc);
-	parent->rc = NULL;
-	return (TRUE);
-}
-
-int	clear_bintree_node(t_bintree_node *root)
-{
-	if (root->lc)
-		clear_bintree_node(root->lc);
-	if (root->rc)
-		clear_bintree_node(root->rc);
-	free(root);
-	return (TRUE);
+	if (root == NULL)
+		return ;
+	clear_bintree(root->lc);
+	clear_bintree(root->lc);
+	_delete_bintree_node(root);
 }

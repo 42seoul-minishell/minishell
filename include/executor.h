@@ -32,7 +32,7 @@ int	    check_builtin(t_list *lst);
 int	    execute_builtin(t_list *lst, int out_fd);
 
 /* cammand.c */
-int	    execute_command(t_bintree_node *node, int in_fd, int out_fd);
+int		execute_command(t_bintree_node *node, int in_fd, int out_fd);
 
 /* double_quotes.c */
 int		exec_word(t_bintree_node *root);
