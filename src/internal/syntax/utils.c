@@ -12,9 +12,9 @@
 
 #include "minishell.h"
 
-int check_ctrl_oper(t_list *token_list)
+int	check_ctrl_oper(t_list *token_list)
 {
-	t_token *token;
+	t_token	*token;
 
 	token = (t_token *)token_list->content;
 	if (token->type == OR)
@@ -26,10 +26,10 @@ int check_ctrl_oper(t_list *token_list)
 	return (TN_NONE);
 }
 
-int set_bintree_type(t_list *token_list)
+int	set_bintree_type(t_list *token_list)
 {
-	t_token *token;
-	int flag;
+	t_token	*token;
+	int		flag;
 
 	flag = 0;
 	while (token_list)
@@ -38,7 +38,7 @@ int set_bintree_type(t_list *token_list)
 		if (token->type == BRACKET)
 		{
 			flag++;
-			continue;
+			continue ;
 		}
 		if (flag % 2 == 0 && token->type >= INP_RDIR && token->type < HERE_DOC)
 			return (TN_RDIR);

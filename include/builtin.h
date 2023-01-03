@@ -13,23 +13,23 @@
 #ifndef BUILTIN_H
 # define BUILTIN_H
 
-#include "struct.h"
+# include "struct.h"
 
 /* in ../src/internal/builtin/ */
 /* cd.c */
 int		builtin_cd(t_list *lst);
 
 /* echo.c */
-int     builtin_echo(t_list *lst);
+int		builtin_echo(t_list *lst);
 
 /* env.c */
 void	builtin_env(void);
 
 /* exit.c */
-void    builtin_exit(t_list *lst);
+void	builtin_exit(t_list *lst);
 
 /* export.c */
-int     builtin_export(t_list *lst);
+int		builtin_export(t_list *lst);
 
 /* pwd.c */
 int		builtin_pwd(void);

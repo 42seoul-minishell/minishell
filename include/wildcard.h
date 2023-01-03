@@ -20,8 +20,9 @@
 void	wildcard(t_doubly_list *lst);
 
 /* util.c */
-void	lstinsort(t_list *lst, t_list *new_lst, int (*cmp)(const char *p1, const char *p2));
-int	    check_matched(char *wildcard, char dirent[]);
+void	lstinsort(t_list *lst, t_list *new_lst, \
+					int (*cmp)(const char *p1, const char *p2));
+int		check_matched(char *wildcard, char dirent[]);
 char	*wildcard_join(t_wildcard *wc);
 
 #endif

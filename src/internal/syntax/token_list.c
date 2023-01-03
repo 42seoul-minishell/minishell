@@ -1,19 +1,30 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   token_list.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: bolee <bolee@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/01/03 14:29:30 by bolee             #+#    #+#             */
+/*   Updated: 2023/01/03 14:29:31 by bolee            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
-void relocate_token_list(t_list **token_list)
+void	relocate_token_list(t_list **token_list)
 {
-	t_list *tmp;
-	t_list *cmd_lst;
-	t_list *redir_lst;
-	t_token *token;
+	t_list	*tmp;
+	t_list	*cmd_lst;
+	t_list	*redir_lst;
 
 	cmd_lst = NULL;
 	redir_lst = NULL;
 	while (*token_list)
 	{
-		token = (t_token *)(*token_list)->content;
 		tmp = *token_list;
-		if (token->type >= INP_RDIR && token->type <= HERE_DOC)
+		if (((t_token *)(*token_list)->content)->type >= INP_RDIR && \
+				((t_token *)(*token_list)->content)->type <= HERE_DOC)
 		{
 			*token_list = (*token_list)->next->next;
 			tmp->next->next = NULL;
@@ -30,20 +41,21 @@ void relocate_token_list(t_list **token_list)
 	*token_list = cmd_lst;
 }
 
-static void _append_token_list(t_list **token_list, t_doubly_node **node)
+static void	_append_token_list(t_list **token_list, t_doubly_node **node)
 {
-	t_token *token;
+	t_token	*token;
 
-	token = create_token((*node)->token->type, ft_strdup((*node)->token->value));
+	token = create_token((*node)->token->type, \
+							ft_strdup((*node)->token->value));
 	ft_lstadd_back(token_list, ft_lstnew((void *)token));
 	*node = (*node)->next;
 }
 
-t_list *set_token_list(t_doubly_list *lst, t_doubly_node **node)
+t_list	*set_token_list(t_doubly_list *lst, t_doubly_node **node)
 {
-	int flag;
-	t_list *token_list;
-	t_tType token_type;
+	int		flag;
+	t_list	*token_list;
+	t_tType	token_type;
 
 	token_list = NULL;
 	flag = 0;
@@ -58,10 +70,10 @@ t_list *set_token_list(t_doubly_list *lst, t_doubly_node **node)
 		if (token_type == BRACKET)
 			flag++;
 		if (flag % 2 == 0 && token_type >= OR && token_type <= PIPE)
-			break;
+			break ;
 		_append_token_list(&token_list, node);
 		if (*node == lst->header.next)
-			break;
+			break ;
 	}
 	return (token_list);
 }

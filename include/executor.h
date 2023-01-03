@@ -28,7 +28,7 @@ void	execute_or(t_bintree_node *node);
 int		execute_bracket(t_bintree_node *root, int sup_fd[], int dir);
 
 /* cammand.c */
-int	    execute_command(t_bintree_node *node, int in_fd, int out_fd);
+int		execute_command(t_bintree_node *node, int in_fd, int out_fd);
 
 /* double_quotes.c */
 int		exec_word(t_bintree_node *root);
