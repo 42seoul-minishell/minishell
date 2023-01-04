@@ -45,12 +45,12 @@ static void	_lower_priority(t_list *token_list, t_tnType bt_type)
 	}
 }
 
-static void	_check_priority(t_doubly_list *lst, t_doubly_node *node)
+static void	_check_priority(t_doubly_list *lst, t_doubly_node **node)
 {
 	t_tnType	bt_type;
 	t_list		*token_list;
 
-	token_list = set_token_list(lst, &node);
+	token_list = set_token_list(lst, node);
 	relocate_token_list(&token_list);
 	bt_type = check_ctrl_oper(token_list);
 	if (bt_type == TN_NONE)
@@ -79,6 +79,6 @@ void	set_bintree(t_doubly_list *lst, t_doubly_node *node)
 		set_bintree(lst, node);
 		return ;
 	}
-	_check_priority(lst, node);
+	_check_priority(lst, &node);
 	set_bintree(lst, node);
 }

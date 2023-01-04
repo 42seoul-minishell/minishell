@@ -36,6 +36,6 @@ void	clear_bintree(t_bintree_node *root)
 	if (root == NULL)
 		return ;
 	clear_bintree(root->lc);
-	clear_bintree(root->lc);
+	clear_bintree(root->rc);
 	_delete_bintree_node(root);
 }
