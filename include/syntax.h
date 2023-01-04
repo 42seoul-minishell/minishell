@@ -22,7 +22,6 @@ int		syntax(t_doubly_list *lst);
 void	set_bintree(t_doubly_list *lst, t_doubly_node *node);
 
 /* utils.c*/
-int		check_ctrl_oper(t_list *token_list);
 int		set_bintree_type(t_list *token_list);
 
 /* token_list.c */

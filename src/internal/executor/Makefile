@@ -32,7 +32,8 @@ FILES			=	executor \
 					and_or \
 					command \
 					pipe \
-					builtin
+					builtin \
+					bracket
 
 
 SRCS_DIR		=	./

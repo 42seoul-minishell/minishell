@@ -41,7 +41,6 @@ typedef enum e_node_type
 	TN_HEREDOC,
 	TN_RDIR,
 	TN_WORD,
-	TN_BRACKET,
 }	t_tnType;
 
 /* token structure */
