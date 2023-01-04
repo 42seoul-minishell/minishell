@@ -172,7 +172,7 @@ static int	_set_out(t_bintree_node *node, int out_fd)
 			file_token = lst->next->content;
 			if (out_fd != 1)
 				close(out_fd);
-			out_fd = open(file_token->value, O_APPEND | O_CREAT | O_WRONLY | O_TRUNC | O_CLOEXEC, 0644);
+			out_fd = open(file_token->value, O_APPEND | O_CREAT | O_WRONLY | O_CLOEXEC, 0644);
 			lst = lst->next;
 		}
 		lst = lst->next;
