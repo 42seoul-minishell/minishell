@@ -97,6 +97,14 @@ static int	_exec_word_child(t_bintree_node *node, int in_fd, int out_fd)
 		close(out_fd);
 	if (node->token_lst)
 	{
+		if (((t_token *)node->token_lst->content)->type == BRACKET)
+			execute_bracket(node);
+		else
+		{
+			cmd_arr = _token_list_to_array(node->token_lst);
+			path = get_abs_path(cmd_arr[0]);
+			_run_cmd(path, cmd_arr);
+		}
 		cmd_arr = _token_list_to_array(node->token_lst);
 		path = get_abs_path(cmd_arr[0]);
 		_run_cmd(path, cmd_arr);
@@ -164,7 +172,7 @@ static int	_set_out(t_bintree_node *node, int out_fd)
 			file_token = lst->next->content;
 			if (out_fd != 1)
 				close(out_fd);
-			out_fd = open(file_token->value, O_APPEND | O_CREAT | O_WRONLY | O_TRUNC | O_CLOEXEC, 0644);
+			out_fd = open(file_token->value, O_APPEND | O_CREAT | O_WRONLY | O_CLOEXEC, 0644);
 			lst = lst->next;
 		}
 		lst = lst->next;

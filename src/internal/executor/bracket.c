@@ -12,23 +12,34 @@
 
 #include "minishell.h"
 
-// int	execute_bracket(t_bintree_node *root, int in_fd, int out_fd)
-// {
-// 	pid_t	pid;
-// 	int		status;
-// 	char	*cmd_line;
+static char	**_set_argv(t_list *node)
+{
+	char	**argv;
+	char	*cmd;
 
-// 	status = EXIT_SUCCESS;
-// 	cmd_line = exec_rm_char(root->token);
-// 	pid = fork();
-// 	if (pid == -1)
-// 		exit(0);
-// 	if (pid == 0)
-// 	{
-// 		if (cmd_line)
-// 			executor(cmd_line);
-// 		exit(EXIT_SUCCESS);
-// 	}
-// 	waitpid(pid, &status, 0);
-// 	return (check_status(status));
-// }
+	argv = (char **)ft_malloc(sizeof(char *) * 3);
+	cmd = ft_strtrim(((t_token *)node->content)->value, "()");
+	argv[0] = ft_strdup("./minishell");
+	argv[1] = cmd;
+	argv[2] = NULL;
+	return (argv);
+}
+
+void	execute_bracket(t_bintree_node *node)
+{
+	char	*path;
+	char	**argv;
+
+	path = ft_strdup("/home/octo/minishell/minishell");
+	argv = _set_argv(node->token_lst);
+	if (access(path, X_OK) == -1)
+	{
+		perror(": permission denied");
+		exit(127);
+	}
+	if (execve(path, argv, g_global.envp_arr) == -1)
+	{
+		perror(": command not found");
+		exit(127);
+	}
+}

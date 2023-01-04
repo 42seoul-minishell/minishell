@@ -52,9 +52,7 @@ static void	_check_priority(t_doubly_list *lst, t_doubly_node **node)
 
 	token_list = set_token_list(lst, node);
 	relocate_token_list(&token_list);
-	bt_type = check_ctrl_oper(token_list);
-	if (bt_type == TN_NONE)
-		bt_type = set_bintree_type(token_list);
+	bt_type = set_bintree_type(token_list);
 	if (g_global.tree->root->type >= bt_type)
 		_upper_priority(token_list, bt_type);
 	else
@@ -72,9 +70,7 @@ void	set_bintree(t_doubly_list *lst, t_doubly_node *node)
 	{
 		token_list = set_token_list(lst, &node);
 		relocate_token_list(&token_list);
-		bt_type = check_ctrl_oper(token_list);
-		if (bt_type == TN_NONE)
-			bt_type = set_bintree_type(token_list);
+		bt_type = set_bintree_type(token_list);
 		g_global.tree->root = create_bintree_node(token_list, bt_type);
 		set_bintree(lst, node);
 		return ;
