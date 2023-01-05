@@ -12,13 +12,36 @@
 
 #include "minishell.h"
 
+static char	*custom_strtrim(char const *str)
+{
+	int		start;
+	int		end;
+	char	*res;
+	char	*tmp;
+	int		i;
+
+	start = 1;
+	end = ft_strlen(str) - 1;
+	tmp = (char *)ft_malloc((end - start + 1) * sizeof(char));
+	i = 0;
+	while (start + i < end)
+	{
+		tmp[i] = str[start + i];
+		i++;
+	}
+	tmp[i] = '\0';
+	res = ft_strtrim(tmp, " ");
+	free(tmp);
+	return (res);
+}
+
 static char	**_set_argv(t_list *node)
 {
 	char	**argv;
 	char	*cmd;
 
 	argv = (char **)ft_malloc(sizeof(char *) * 3);
-	cmd = ft_strtrim(((t_token *)node->content)->value, "()");
+	cmd = custom_strtrim(((t_token *)node->content)->value);
 	argv[0] = ft_strdup("./minishell");
 	argv[1] = cmd;
 	argv[2] = NULL;
