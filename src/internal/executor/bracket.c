@@ -30,7 +30,7 @@ void	execute_bracket(t_bintree_node *node)
 	char	*path;
 	char	**argv;
 
-	path = ft_strdup("/home/octo/minishell/minishell");
+	path = ft_strjoin(g_global.origin_path, "/minishell");
 	argv = _set_argv(node->token_lst);
 	if (access(path, X_OK) == -1)
 	{
@@ -42,4 +42,5 @@ void	execute_bracket(t_bintree_node *node)
 		perror(": command not found");
 		exit(127);
 	}
+	printf("\n");
 }

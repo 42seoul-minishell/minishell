@@ -24,6 +24,7 @@ int	builtin_pwd(int out_fd)
 		return (1);
 	}
 	ft_putstr_fd(path, out_fd);
+	ft_putchar_fd('\n', out_fd);
 	free(path);
 	return (0);
 }
