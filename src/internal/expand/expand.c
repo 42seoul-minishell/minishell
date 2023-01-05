@@ -65,20 +65,24 @@ void	expand(t_doubly_list *lst)
 {
 	int				i;
 	t_doubly_node	*node;
+	char			*tmp;
 
 	node = lst->header.next;
 	while (node)
 	{
+		if (node->token->type == S_QUOTE || node->token->type == D_QUOTE)
+		{
+			tmp = ft_strtrim(node->token->value, "\'\"");
+			free(node->token->value);
+			node->token->value = tmp;
+		}
 		if (node->token->type >= CMD \
 			&& node->token->type <= D_QUOTE)
 		{
-			i = 0;
-			while (node->token->value[i])
-			{
+			i = -1;
+			while (node->token->value[++i])
 				if (node->token->value[i] == '$')
 					_replace_expand(&(node->token->value), &i);
-				i++;
-			}
 		}
 		node = node->next;
 		if (node == lst->header.next)

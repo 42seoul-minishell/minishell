@@ -30,7 +30,7 @@ static ssize_t	_get_bracket_length(char *str)
 		i++;
 	}
 	if (cnt == 0)
-		return (i + 2);
+		return (i + 1);
 	return (1);
 }
 

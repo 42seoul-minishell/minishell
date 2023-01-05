@@ -12,8 +12,6 @@
 
 #include "minishell.h"
 
-t_global	g_global;
-
 static void	_save_history(char *input)
 {
 	if (input && *input)
@@ -24,6 +22,7 @@ static void	_sys_stdin(char **input_ptr)
 {
 	char	*prompt;
 
+	set_signal();
 	prompt = create_prompt();
 	*input_ptr = readline(prompt);
 	if (!*input_ptr)
@@ -48,18 +47,28 @@ static void	_run(void)
 		dup2(g_global.fd_stdout, STDOUT_FILENO);
 		input = NULL;
 		_sys_stdin(&input);
+		if (input[0] == '\0')
+		{
+			free(input);
+			continue ;
+		}
 		_save_history(input);
 		if (parser(input) == TRUE)
 		{
 			set_heredoc(g_global.tree->root);
-			executor(g_global.tree->root, 0, 1);
+			executor(g_global.tree->root, 0, 1, 0);
+			wait_child();
 			free(input);
 			clear_bintree(g_global.tree->root);
 			g_global.tree->root = NULL;
+			g_global.status = get_pipe_status();
+			ft_lstclear(&g_global.pipe_status, free);
+			g_global.pipe_status = NULL;
 		}
 	}
 }
 
+/* 삭제 예정 */
 void	check_leak(void)
 {
 	system("leaks minishell");
@@ -71,7 +80,6 @@ int	main(int argc, char **argv, char **envp)
 	t_bintree	*tree;
 
 	// atexit(check_leak);
-	set_signal();
 	g_global.envp_arr = envp;
 	table = parse_env_to_hashtable(envp);
 	tree = create_bintree();
@@ -81,12 +89,12 @@ int	main(int argc, char **argv, char **envp)
 		if (parser(argv[1]) == TRUE)
 		{
 			set_heredoc(g_global.tree->root);
-			executor(g_global.tree->root, 0, 1);
+			executor(g_global.tree->root, 0, 1, 0);
 			clear_bintree(g_global.tree->root);
 			g_global.tree->root = NULL;
-			return(g_global.status);
+			return (g_global.status);
 		}
-		return(-1);
+		return (-1);
 	}
 	_run();
 	return (0);

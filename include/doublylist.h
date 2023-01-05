@@ -19,7 +19,6 @@
 /* utils.c */
 int				is_list_empty(t_doubly_list *lst);
 void			display_list(t_doubly_list *lst);
-t_tType			check_type(t_tType type);
 t_doubly_node	*find_doubly_node(t_doubly_list *lst, char *str);
 
 /* delete.c */

@@ -15,12 +15,11 @@
 
 # include "struct.h"
 
-/* extract.c */
-char	*extract_double_quotes(char **str);
-char	*extract_brackets(char **str, char open, char close);
-char	*extract_pipe(char **str);
+/* check.c */
+size_t	is_pair_double_quotes(char *str);
+size_t	is_pair_single_quotes(char *str);
 
-/* token.c */
+/* tokenizer.c */
 void	tokenizer(t_doubly_list *lst, char *str);
 
 /* utils.c */
@@ -28,10 +27,6 @@ ssize_t	get_operator_length(char *str);
 int		is_operator(char *str);
 int		is_quote(char *str);
 int		is_double_operator(char *str);
-
-/* clean.c */
-int		check_space_around(char *str, char *start);
-char	*make_clean_sentence(char *str);
 
 /* verify_quotes.c */
 t_tType	verify_double_quote(char *str);

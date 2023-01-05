@@ -12,7 +12,6 @@
 
 #include "minishell.h"
 
-/* operator에 도달 시 호출. operator만 따로 담아서 넣는다 */
 static void	_insert_helper(t_doubly_list *lst, char *str, \
 								ssize_t *current, ssize_t *before)
 {
@@ -42,7 +41,6 @@ static void	_insert_helper(t_doubly_list *lst, char *str, \
 	*before = *current;
 }
 
-/* operator(', ")에 도달 시 호출. 현재 기준 이전과 그 다음 블록까지 lst에 넣는다 */
 static void	_insert_helper_quote_case(t_doubly_list *lst, char *str, \
 								ssize_t *current, ssize_t *before)
 {
@@ -67,7 +65,7 @@ static void	_insert_helper_quote_case(t_doubly_list *lst, char *str, \
 }
 
 static void	_make_token_list(t_doubly_list *lst, char *str)
-{	
+{
 	ssize_t	current;
 	ssize_t	before;
 	ssize_t	len;
@@ -77,10 +75,12 @@ static void	_make_token_list(t_doubly_list *lst, char *str)
 	len = ft_strlen(str);
 	while (str[current] && current < len && before < len)
 	{
-		while (str[current] && !is_operator(str + current) \
-			&& !is_quote(str + current))
+		while (str[current] && !is_operator(str + current) && \
+		!is_pair_double_quotes(str + current) && \
+		!is_pair_single_quotes(str + current))
 			current++;
-		if (is_quote(str + current))
+		if (is_pair_double_quotes(str + current) || \
+			is_pair_single_quotes(str + current))
 			_insert_helper_quote_case(lst, str, &current, &before);
 		else if (is_operator(str + current))
 			_insert_helper(lst, str, &current, &before);
