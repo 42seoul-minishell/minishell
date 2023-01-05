@@ -21,9 +21,9 @@ void	create_global(t_bintree *tree, t_hashtable *envp)
 	g_global.fd_stdout = dup(STDOUT_FILENO);
 	g_global.tree = tree;
 	if (tcgetattr(STDIN_FILENO, &(g_global.display_set)) == ERROR)
-		exit_error("\033[31mError: tcgetattr(): Falied to get attribute\n\033[0m");
+		exit_error("Error: tcgetattr()");
 	if (tcgetattr(STDIN_FILENO, &(g_global.nodisplay_set)) == ERROR)
-		exit_error("\033[31mError: tcgetattr(): Falied to get attribute\n\033[0m");
+		exit_error("Error: tcgetattr()");
 	g_global.nodisplay_set.c_lflag &= ~ECHOCTL;
 	display_ctrlx_set(NODISPLAY);
 }

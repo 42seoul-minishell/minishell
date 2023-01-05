@@ -19,6 +19,10 @@ void	_delete_bintree_node(t_bintree_node *node)
 	t_token	*token;
 
 	lst = node->token_lst;
+	if (node->fd[0] != 0)
+		close(node->fd[0]);
+	if (node->fd[1] != 1)
+		close(node->fd[1]);
 	while (lst)
 	{
 		tmp = lst;

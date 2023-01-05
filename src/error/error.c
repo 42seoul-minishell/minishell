@@ -14,24 +14,40 @@
 
 void	exit_error(const char *str)
 {
-	ft_putstr_fd(str, 2);
-	exit(1);
+	perror(str);
+	exit(137);
 }
 
 void	syntax_error(const char *str, int flag)
 {
+	char	chr[2];
+	char	*err_msg;
+	char	*tmp;
+
 	if (flag)
-		printf("MINISHELL: syntax error near unexpected token `%c'\n", *str);
+	{
+		chr[0] = *str;
+		chr[1] = '\0';
+		tmp = ft_strjoin(\
+			"MINISHELL: syntax error near unexpected token `", chr);
+	}
 	else
-		printf("MINISHELL: syntax error near unexpected token `%s'\n", str);
+		tmp = ft_strjoin(\
+			"MINISHELL: syntax error near unexpected token `", str);
+	err_msg = ft_strjoin(tmp, "'\n");
+	ft_putstr_fd(err_msg, STDERR_FILENO);
+	free(tmp);
+	free(err_msg);
 }
 
 void	not_found_error(const char *str)
 {
-	printf("MINISHELL: %s: command not found\n", str);
-}
+	char	*err_msg;
+	char	*tmp;
 
-void	no_file_direct_error(const char *str1, const char *str2)
-{
-	printf("%s: %s: No such file or directory\n", str1, str2);
+	tmp = ft_strjoin("MINISHELL: ", str);
+	err_msg = ft_strjoin(tmp, ": command not found\n");
+	ft_putstr_fd(err_msg, STDERR_FILENO);
+	free(tmp);
+	free(err_msg);
 }

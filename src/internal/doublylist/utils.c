@@ -32,37 +32,8 @@ void	display_list(t_doubly_list *lst)
 	{
 		printf("token value = %s\n", node->token->value);
 		printf("token type = %d\n", node->token->type);
-		check_type(node->token->type);
 		node = node->next;
 	}
-}
-
-t_tType	check_type(t_tType type)
-{
-	if (type == OR)
-		return (OR);
-	else if (type == AND)
-		return (AND);
-	else if (type == PIPE)
-		return (PIPE);
-	else if (type == CMD)
-		return (CMD);
-	else if (type == OPTION)
-		return (OPTION);
-	else if (type == D_QUOTE)
-		return (D_QUOTE);
-	else if (type == S_QUOTE)
-		return (S_QUOTE);
-	else if (type == INP_RDIR)
-		return (INP_RDIR);
-	else if (type == OUT_RDIR)
-		return (OUT_RDIR);
-	else if (type == APP_RDIR)
-		return (APP_RDIR);
-	else if (type == HERE_DOC)
-		return (HERE_DOC);
-	else
-		return (BRACKET);
 }
 
 t_doubly_node	*find_doubly_node(t_doubly_list *lst, char *str)

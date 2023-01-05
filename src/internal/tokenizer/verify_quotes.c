@@ -20,7 +20,7 @@ t_tType	verify_double_quote(char *str)
 	while (str[++idx])
 		if (str[idx] == '\"')
 			return (D_QUOTE);
-	return (NONE);
+	return (CMD);
 }
 
 t_tType	verify_single_quote(char *str)
@@ -31,5 +31,5 @@ t_tType	verify_single_quote(char *str)
 	while (str[++idx])
 		if (str[idx] == '\'')
 			return (S_QUOTE);
-	return (NONE);
+	return (CMD);
 }

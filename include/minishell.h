@@ -31,6 +31,6 @@
 # include "wildcard.h"
 # include "libft.h"
 
-extern t_global	g_global;
+t_global	g_global;
 
 #endif

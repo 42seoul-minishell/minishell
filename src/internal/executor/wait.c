@@ -1,20 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   verify_pipes.c                                     :+:      :+:    :+:   */
+/*   wait.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bolee <bolee@student.42.fr>                +#+  +:+       +#+        */
+/*   By: junsoh <junsoh@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/13 14:27:24 by bolee             #+#    #+#             */
-/*   Updated: 2022/12/13 14:27:24 by bolee            ###   ########.fr       */
+/*   Created: 2023/01/05 18:49:38 by junsoh            #+#    #+#             */
+/*   Updated: 2023/01/05 18:49:39 by junsoh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_tType	verify_pipe(char *str)
+void	wait_child(void)
 {
-	if (str[0] == '|' && str[1] && str[1] == str[0])
-		return (OR);
-	return (PIPE);
+	while (waitpid(0, NULL, 0) != -1)
+		;
+}
+
+int	get_pipe_status(void)
+{
+	t_list		*lst;
+	t_children	*child;
+
+	lst = g_global.pipe_status;
+	child = (t_children *)ft_lstlast(g_global.pipe_status)->content;
+	return (child->status >> 8 & 0x000000ff);
 }

@@ -117,6 +117,7 @@ typedef struct s_global
 	t_bintree		*tree;
 	int				heredoc_cnt;
 	int				status;
+	t_list			*pipe_status;
 	int				fd_stdin;
 	int				fd_stdout;
 	struct termios	nodisplay_set;
@@ -131,5 +132,12 @@ typedef struct s_wildcard
 	t_list	lst;
 	size_t	lst_size;
 }	t_wildcard;
+
+/* children process info */
+typedef struct s_children
+{
+	int	pid;
+	int	status;
+}	t_children;
 
 #endif

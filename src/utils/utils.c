@@ -23,7 +23,7 @@ void	display_ctrlx_set(int flag)
 		return_val = tcsetattr(STDIN_FILENO, TCSANOW, \
 			&(g_global.nodisplay_set));
 	if (return_val == ERROR)
-		exit_error("\033[31mError: tcsetattr(): Falied to set attribute\n\033[0m");
+		exit_error("Error: tcsetattr()");
 }
 
 void	sig_exec(int sig)
@@ -32,29 +32,6 @@ void	sig_exec(int sig)
 		ft_putstr_fd("\n", STDOUT_FILENO);
 	else if (sig == SIGQUIT)
 		ft_putstr_fd("Quit: 3\n", STDOUT_FILENO);
-}
-
-void	redir_unlink(void)
-{
-	int		hd_cnt;
-	char	*filename;
-
-	hd_cnt = 0;
-	while (hd_cnt <= g_global.heredoc_cnt)
-	{
-		filename = ft_strjoin(".here_doc", ft_itoa(hd_cnt));
-		if (access(filename, F_OK) == 0)
-			unlink(filename);
-		free(filename);
-		hd_cnt++;
-	}
-}
-
-int	check_status(int status)
-{
-	if (WIFEXITED(status))
-		return (WEXITSTATUS(status));
-	return (WCOREFLAG | WTERMSIG(status));
 }
 
 void	free_dp(void **dp)

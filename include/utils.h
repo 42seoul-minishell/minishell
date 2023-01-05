@@ -18,8 +18,6 @@
 /* in src/utils/ */
 /* utils.c */
 void	display_ctrlx_set(int flag);
-void	sig_exec(int sig);
-int		check_status(int status);
 void	free_dp(void **dp);
 
 /* verify_utils.c */

@@ -57,13 +57,12 @@ void	execute_bracket(t_bintree_node *node)
 	argv = _set_argv(node->token_lst);
 	if (access(path, X_OK) == -1)
 	{
-		perror(": permission denied");
+		perror("MINISHELL: permission denied");
 		exit(127);
 	}
 	if (execve(path, argv, g_global.envp_arr) == -1)
 	{
-		perror(": command not found");
+		perror("MINISHELL: command not found");
 		exit(127);
 	}
-	printf("\n");
 }

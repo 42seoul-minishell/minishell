@@ -16,9 +16,7 @@
 # include "struct.h"
 
 /* executor.c */
-void	init_fd(int fd[]);
-void	executor(t_bintree_node *root, int in_fd, int out_fd);
-int		serve_status(char *cmd);
+void	executor(t_bintree_node *root, int in_fd, int out_fd, int is_pipe);
 
 /* and_or.c */
 void	execute_and(t_bintree_node *node);
@@ -32,10 +30,15 @@ int		check_builtin(t_list *lst);
 int		execute_builtin(t_list *lst, int out_fd);
 
 /* cammand.c */
-int		execute_command(t_bintree_node *node, int in_fd, int out_fd);
+void	execute_command(t_bintree_node *node, \
+						int in_fd, int out_fd, int is_pipe);
 
 /* pipe.c */
 void	execute_pipe(t_bintree_node *node, int in_fd, int out_fd);
 void	set_heredoc(t_bintree_node *node);
+
+/* wait.c */
+void	wait_child(void);
+int		get_pipe_status(void);
 
 #endif
