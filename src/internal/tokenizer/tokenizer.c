@@ -12,35 +12,6 @@
 
 #include "minishell.h"
 
-static ssize_t	_get_operator_length(char *str)
-{
-	ssize_t	i;
-	ssize_t	len;
-	char	c;
-
-	len = 1;
-	c = *str;
-	if (is_quote(str))
-		while (*(str + len) != c)
-			len++;
-	else if (*str == '(')
-	{
-		i = 0;
-		while (*(str + i + 1) != ')')
-			i++;
-		if (*(str + i + 1) == ')')
-			return (len + i + 1);
-		return (len);
-	}
-	else if (*str == ')')
-		return (1);
-	else if (is_double_operator(str))
-		return (2);
-	else if (is_operator(str))
-		return (1);
-	return (len);
-}
-
 /* operator에 도달 시 호출. operator만 따로 담아서 넣는다 */
 static void	_insert_helper(t_doubly_list *lst, char *str, \
 								ssize_t *current, ssize_t *before)
@@ -60,7 +31,7 @@ static void	_insert_helper(t_doubly_list *lst, char *str, \
 		if (is_only_space(trimmed) == FALSE)
 			safe_insert(lst, verify_token(trimmed), trimmed);
 	}
-	op_len = _get_operator_length(str + *current);
+	op_len = get_operator_length(str + *current);
 	after_op = (char *)ft_malloc(sizeof(char) * (op_len + 1));
 	ft_strlcpy(after_op, str + *current, op_len + 1);
 	trimmed = ft_strtrim(after_op, " ");
@@ -86,7 +57,7 @@ static void	_insert_helper_quote_case(t_doubly_list *lst, char *str, \
 	free(before_op);
 	if (is_only_space(trimmed) == FALSE)
 		safe_insert(lst, verify_token(trimmed), trimmed);
-	op_len = _get_operator_length(str + *current) + 1;
+	op_len = get_operator_length(str + *current) + 1;
 	after_op = (char *)ft_malloc(sizeof(char) * (op_len + 1));
 	ft_strlcpy(after_op, str + *current, op_len + 1);
 	*current += op_len;

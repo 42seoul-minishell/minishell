@@ -65,32 +65,25 @@ void	check_leak(void)
 	system("leaks minishell");
 }
 
-int	main(int ac, char **av, char **envp)
+int	main(int argc, char **argv, char **envp)
 {
 	t_hashtable	*table;
 	t_bintree	*tree;
 
 	// atexit(check_leak);
-	printf("ac = %d\n", ac);
-	for (int i = 0; i < ac; i++)
-		printf("av[%d]: %s\n", i, av[i]);
 	set_signal();
 	g_global.envp_arr = envp;
 	table = parse_env_to_hashtable(envp);
 	tree = create_bintree();
 	create_global(tree, table);
-	if (ac == 2)
+	if (argc == 2)
 	{
-		printf("ac = %d\n", ac);
-		for (int i = 0; i < ac; i++)
-			printf("av[%d]: %s\n", i, av[i]);
-		if (parser(av[1]) == TRUE)
+		if (parser(argv[1]) == TRUE)
 		{
 			set_heredoc(g_global.tree->root);
 			executor(g_global.tree->root, 0, 1);
 			clear_bintree(g_global.tree->root);
 			g_global.tree->root = NULL;
-			printf("g_global.status: %d\n", g_global.status);
 			return(g_global.status);
 		}
 		return(-1);

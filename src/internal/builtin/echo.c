@@ -38,16 +38,12 @@ static void	_echo_print(t_list *lst, int out_fd)
 			break ;
 		value = token->value;
 		if (token->type == D_QUOTE || token->type == S_QUOTE)
-		{
 			_echo_print_quote(value, out_fd);
-			ft_putstr_fd(" ", out_fd);
-		}
 		else
-		{
 			ft_putstr_fd(value, out_fd);
-			ft_putstr_fd(" ", out_fd);
-		}
 		lst = lst->next;
+		if (lst)
+			ft_putstr_fd(" ", out_fd);
 	}
 }
 

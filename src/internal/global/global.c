@@ -15,6 +15,7 @@
 void	create_global(t_bintree *tree, t_hashtable *envp)
 {
 	g_global.envp = envp;
+	g_global.origin_path = search(g_global.envp, "PWD");
 	g_global.status = 0;
 	g_global.fd_stdin = dup(STDIN_FILENO);
 	g_global.fd_stdout = dup(STDOUT_FILENO);

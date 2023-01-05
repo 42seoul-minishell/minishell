@@ -24,6 +24,7 @@ char	*extract_pipe(char **str);
 void	tokenizer(t_doubly_list *lst, char *str);
 
 /* utils.c */
+ssize_t	get_operator_length(char *str);
 int		is_operator(char *str);
 int		is_quote(char *str);
 int		is_double_operator(char *str);

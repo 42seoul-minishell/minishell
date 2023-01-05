@@ -112,6 +112,7 @@ typedef struct s_global
 {
 	t_hashtable		*envp;
 	char			**envp_arr;
+	char			*origin_path;
 	FILE			*fp;
 	t_bintree		*tree;
 	int				heredoc_cnt;
