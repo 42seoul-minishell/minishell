@@ -15,7 +15,7 @@
 void	exit_error(const char *str)
 {
 	perror(str);
-	exit(137);
+	exit(errno);
 }
 
 void	syntax_error(const char *str, int flag)

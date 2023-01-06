@@ -17,5 +17,6 @@
 # include "struct.h"
 
 void	create_global(t_bintree *tree, t_hashtable *envp);
+void	reset_global(void);
 
 #endif

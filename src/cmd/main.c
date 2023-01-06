@@ -47,23 +47,29 @@ static void	_run(void)
 		dup2(g_global.fd_stdout, STDOUT_FILENO);
 		input = NULL;
 		_sys_stdin(&input);
-		if (input[0] == '\0')
-		{
-			free(input);
+		if (is_only_space(input))
 			continue ;
-		}
 		_save_history(input);
 		if (parser(input) == TRUE)
 		{
+			g_global.status = 0;
+			set_heredoc_signal();
 			set_heredoc(g_global.tree->root);
-			executor(g_global.tree->root, 0, 1, 0);
-			wait_child();
-			free(input);
-			clear_bintree(g_global.tree->root);
-			g_global.tree->root = NULL;
-			g_global.status = get_pipe_status();
-			ft_lstclear(&g_global.pipe_status, free);
-			g_global.pipe_status = NULL;
+			if (g_global.status == 0)
+			{
+				set_execute_signal();
+				display_ctrlx_set(DISPLAY);
+				executor(g_global.tree->root, 0, 1, 0);
+				wait_child();
+				free(input);
+				reset_global();
+				display_ctrlx_set(NODISPLAY);
+			}
+			else
+			{
+				clear_bintree(g_global.tree->root);
+				g_global.tree->root = NULL;
+			}
 		}
 	}
 }
@@ -88,14 +94,19 @@ int	main(int argc, char **argv, char **envp)
 	{
 		if (parser(argv[1]) == TRUE)
 		{
+			set_execute_signal();
+			display_ctrlx_set(NODISPLAY);
 			set_heredoc(g_global.tree->root);
+			display_ctrlx_set(DISPLAY);
 			executor(g_global.tree->root, 0, 1, 0);
-			clear_bintree(g_global.tree->root);
-			g_global.tree->root = NULL;
+			wait_child();
+			reset_global();
+			delete_table(g_global.envp);
 			return (g_global.status);
 		}
-		return (-1);
+		return (1);
 	}
+	display_ctrlx_set(NODISPLAY);
 	_run();
 	return (0);
 }

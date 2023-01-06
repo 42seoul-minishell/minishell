@@ -21,7 +21,7 @@ int	builtin_pwd(int out_fd)
 	{
 		ft_putstr_fd("\033[31mError: getcwd(): \
 			Failed to get current working directory\n\033[0m", STDERR_FILENO);
-		return (1);
+		exit(1);
 	}
 	ft_putstr_fd(path, out_fd);
 	ft_putchar_fd('\n', out_fd);

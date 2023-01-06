@@ -40,5 +40,6 @@ void	set_heredoc(t_bintree_node *node);
 /* wait.c */
 void	wait_child(void);
 int		get_pipe_status(void);
+int		check_status(int status);
 
 #endif

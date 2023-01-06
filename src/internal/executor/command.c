@@ -161,9 +161,11 @@ static int	_set_out(t_bintree_node *node, int out_fd)
 	while (lst && lst->next)
 	{
 		token = lst->content;
-		file_token = lst->next->content;
 		if (token->type == OUT_RDIR || token->type == APP_RDIR)
 		{
+			file_token = lst->next->content;
+			if (out_fd != 1)
+				close(out_fd);
 			if (token->type == OUT_RDIR)
 				out_fd = open(file_token->value, O_CREAT | O_WRONLY | O_TRUNC | O_CLOEXEC, 0644);
 			else
@@ -173,8 +175,6 @@ static int	_set_out(t_bintree_node *node, int out_fd)
 				perror(file_token->value);
 				break ;
 			}
-			if (out_fd != 1)
-				close(out_fd);
 			lst = lst->next;
 		}
 		lst = lst->next;
@@ -187,14 +187,14 @@ void	execute_command(t_bintree_node *node, int in_fd, int out_fd, int is_pipe)
 	pid_t	pid;
 	int		is_builtin;
 
-	set_execute_signal();
 	if (node->type == TN_HEREDOC || node->type == TN_RDIR)
 	{
 		in_fd = _set_in(node, in_fd);
 		out_fd = _set_out(node, out_fd);
 	}
-	if (((t_token *)node->token_lst->content)->type != CMD)
-		return (_set_child_info(0, out_fd, 1));
+	if (((t_token *)node->token_lst->content)->type != CMD \
+		&& ((t_token *)node->token_lst->content)->type != BRACKET)
+		return (_set_child_info(0, out_fd, 0));
 	is_builtin = check_builtin(node->token_lst);
 	if (is_pipe || !is_builtin)
 	{
@@ -203,6 +203,7 @@ void	execute_command(t_bintree_node *node, int in_fd, int out_fd, int is_pipe)
 			exit_error("Error: fork()");
 		if (pid == 0)
 		{
+			set_fork_signal();
 			if (is_builtin)
 				exit(execute_builtin(node->token_lst, out_fd));
 			else

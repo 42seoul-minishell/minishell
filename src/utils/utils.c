@@ -20,7 +20,7 @@ void	display_ctrlx_set(int flag)
 	if (flag == DISPLAY)
 		return_val = tcsetattr(STDIN_FILENO, TCSANOW, &(g_global.display_set));
 	else if (flag == NODISPLAY)
-		return_val = tcsetattr(STDIN_FILENO, TCSANOW, \
+		return_val = tcsetattr(STDOUT_FILENO, TCSANOW, \
 			&(g_global.nodisplay_set));
 	if (return_val == ERROR)
 		exit_error("Error: tcsetattr()");

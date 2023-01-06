@@ -29,7 +29,8 @@ INC				= 	../../../include
 LIB_DIR			= 	../../../lib/
 
 FILES			=	prompt \
-					signal
+					signal \
+					heredoc_signal
 
 SRCS_DIR		=	./
 SRCS			=	$(addprefix $(SRCS_DIR), $(addsuffix .c, $(FILES)))
@@ -41,7 +42,7 @@ OBJS			=	$(addprefix $(OBJS_DIR), $(addsuffix .o, $(FILES)))
 	$(CC) $(CFLAGS) -c $< -o $@
 
 # Main rule
-all: 
+all:
 	@echo "\033[92mBuild core...\033[0m"
 	@make $(NAME)
 
