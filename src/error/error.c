@@ -50,4 +50,5 @@ void	not_found_error(const char *str)
 	ft_putstr_fd(err_msg, STDERR_FILENO);
 	free(tmp);
 	free(err_msg);
+	exit(127);
 }

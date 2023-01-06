@@ -22,13 +22,11 @@ int	parser(char *str)
 	relocation_doubly_lst(lst);
 	wildcard(lst);
 	relocation_doubly_lst(lst);
-	// display_list(lst);
 	if (syntax(lst) == FALSE)
 	{
 		release_doubly_list(lst);
 		return (FALSE);
 	}
-	// display_bintree_by_2d(g_global.tree);
 	release_doubly_list(lst);
 	return (TRUE);
 }

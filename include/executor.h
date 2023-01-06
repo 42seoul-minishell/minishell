@@ -42,4 +42,14 @@ void	wait_child(void);
 int		get_pipe_status(void);
 int		check_status(int status);
 
+/* utils.c */
+size_t	get_token_size(t_list *token_lst);
+char	**token_list_to_array(t_list *token_lst);
+char	*get_abs_path(char *cmd);
+
+/* command_utils.c */
+void	run_cmd(char *abs_path, char *argv[]);
+int		set_in(t_bintree_node *node, int in_fd);
+int		set_out(t_bintree_node *node, int out_fd);
+
 #endif

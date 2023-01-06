@@ -12,7 +12,6 @@
 
 #include "minishell.h"
 
-
 static void	_sig_handler(int sig)
 {
 	char	*prompt;
@@ -64,8 +63,8 @@ void	sig_child_exit(int sig)
 
 static void	_sig_execute(int sig)
 {
-	t_list *lst;
-	t_children *child;
+	t_list		*lst;
+	t_children	*child;
 
 	lst = g_global.pipe_status;
 	while (lst)

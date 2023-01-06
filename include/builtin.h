@@ -35,6 +35,6 @@ int		builtin_export(t_list *lst, int out_fd);
 int		builtin_pwd(int out_fd);
 
 /* unset.c */
-void	builtin_unset(char *key);
+void	builtin_unset(t_list *lst);
 
 #endif

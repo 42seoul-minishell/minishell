@@ -33,4 +33,7 @@
 
 t_global	g_global;
 
+void		execution_main(void);
+void		execution_sub(void);
+
 #endif

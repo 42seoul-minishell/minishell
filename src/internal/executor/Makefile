@@ -34,7 +34,9 @@ FILES			=	executor \
 					pipe \
 					builtin \
 					bracket \
-					wait
+					wait \
+					utils \
+					command_utils
 
 SRCS_DIR		=	./
 SRCS			=	$(addprefix $(SRCS_DIR), $(addsuffix .c, $(FILES)))

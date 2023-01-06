@@ -25,7 +25,7 @@ void	set_heredoc_signal(void)
 	signal(SIGCHLD, sig_child_exit);
 }
 
-void _sig_fork_exit(int sig)
+static void	_sig_fork_exit(int sig)
 {
 	(void) sig;
 	exit(1);

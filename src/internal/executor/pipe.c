@@ -40,45 +40,49 @@ static void	_fork_heredoc(int fd[], char *limiter)
 	exit(0);
 }
 
+static int	_fork_here_doc(t_bintree_node *node, char *limiter)
+{
+	int	pid;
+	int	status;
+
+	pid = fork();
+	status = 0;
+	if (pid == -1)
+		exit_error("Error: fork()");
+	if (pid == 0)
+	{
+		set_fork_signal();
+		_fork_heredoc(node->fd, limiter);
+	}
+	else
+	{
+		close(node->fd[1]);
+		pid = wait(&status);
+		if (check_status(status) != 0)
+			return (1);
+	}
+	return (0);
+}
+
 static void	_here_doc(t_bintree_node *node)
 {
 	t_list	*lst;
 	char	*line;
 	char	*limiter;
-	int		pid;
-	int		status;
 
 	lst = node->token_lst;
 	line = NULL;
-	status = 0;
 	while (lst && lst->next)
 	{
 		if (((t_token *)lst->content)->type == HERE_DOC)
 		{
 			limiter = ((t_token *)lst->next->content)->value;
-			pid = fork();
-			if (pid == -1)
-				exit_error("Error: fork()");
-			if (pid == 0)
-			{
-				set_fork_signal();
-				_fork_heredoc(node->fd, limiter);
-			}
-			else
-			{
-				// char	test[10000];
-				close(node->fd[1]);
-				pid = wait(&status);
-				// read(node->fd[0], test, 10000);
-				// printf("read heredoc %s\n", test);
-				if (check_status(status) != 0)
-					break ;
-			}
+			if (_fork_here_doc(node, limiter))
+				break ;
 			lst = lst->next;
 		}
 		lst = lst->next;
 	}
-
 }
 
 void	set_heredoc(t_bintree_node *node)

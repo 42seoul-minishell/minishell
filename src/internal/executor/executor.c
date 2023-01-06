@@ -12,7 +12,6 @@
 
 #include "minishell.h"
 
-/* execute by preorder */
 void	executor(t_bintree_node	*root, int in_fd, int out_fd, int is_pipe)
 {
 	if (!root)

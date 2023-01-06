@@ -12,29 +12,6 @@
 
 #include "minishell.h"
 
-/*
-	- input -
-	export h = 1
-
-	- result -
-	h에 대한 value가 없어 정상 작동 되지 않음
-	+
-	bash: export: `=': not a valid identifier
-	bash: export: `1': not a valid identifier
-
-
-	- input -
-	export a=1 b=2
-
-	- result -
-	둘 다 정상적으로 저장됨
-
-	not a valid identifier -> exit code 1
-	첫글자가 대부분의 특수문자 + 숫자 => not a valid indentifier
-	#, non => declar -x (env list)
-	export # a=b => 출력 후 뒤에 무시
-	export a=b # => env 저장 후 # 무시
-*/
 static void	set_env(char *key, char *value)
 {
 	t_ht_item		*item;

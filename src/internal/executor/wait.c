@@ -18,7 +18,7 @@ void	wait_child(void)
 		;
 }
 
-int check_status(int status)
+int	check_status(int status)
 {
 	if (WIFEXITED(status))
 		return (WEXITSTATUS(status));

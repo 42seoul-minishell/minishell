@@ -46,7 +46,7 @@ int	execute_builtin(t_list *lst, int out_fd)
 	else if (ft_strcmp(cmd, "export") == 0)
 		return (builtin_export(lst->next, out_fd));
 	else if (ft_strcmp(cmd, "unset") == 0)
-		builtin_unset(((t_token *)lst->next->content)->value);
+		builtin_unset(lst->next);
 	else if (ft_strcmp(cmd, "env") == 0)
 		builtin_env(out_fd);
 	else if (ft_strcmp(cmd, "exit") == 0)

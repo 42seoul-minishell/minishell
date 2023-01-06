@@ -88,8 +88,6 @@ static int	_cd_chdir(char *pwd, char *path)
 	return (1);
 }
 
-// return 0 -> 잘 동작
-// return 1 -> 에러 발생
 int	builtin_cd(t_list *lst, int out_fd)
 {
 	char	*path;

@@ -47,8 +47,6 @@ static void	_echo_print(t_list *lst, int out_fd)
 	}
 }
 
-// return 0 -> 잘 동작
-// return 1 -> 에러 발생
 int	builtin_echo(t_list *lst, int out_fd)
 {
 	int		option;
