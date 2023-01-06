@@ -14,16 +14,10 @@
 
 void	display_ctrlx_set(int flag)
 {
-	int	return_val;
-
-	return_val = 0;
 	if (flag == DISPLAY)
-		return_val = tcsetattr(STDIN_FILENO, TCSANOW, &(g_global.display_set));
+		tcsetattr(g_global.fd_stdout, TCSANOW, &(g_global.display_set));
 	else if (flag == NODISPLAY)
-		return_val = tcsetattr(STDIN_FILENO, TCSANOW, \
-			&(g_global.nodisplay_set));
-	if (return_val == ERROR)
-		exit_error("Error: tcsetattr()");
+		tcsetattr(g_global.fd_stdout, TCSANOW, &(g_global.nodisplay_set));
 }
 
 void	sig_exec(int sig)

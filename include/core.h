@@ -22,5 +22,10 @@ char	*create_prompt(void);
 /* signal.c */
 void	set_signal(void);
 void	set_execute_signal(void);
+void	sig_child_exit(int sig);
+
+/* heredoc_signal.c */
+void	set_heredoc_signal(void);
+void	set_fork_signal(void);
 
 #endif

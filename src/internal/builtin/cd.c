@@ -88,8 +88,6 @@ static int	_cd_chdir(char *pwd, char *path)
 	return (1);
 }
 
-// return 0 -> 잘 동작
-// return 1 -> 에러 발생
 int	builtin_cd(t_list *lst, int out_fd)
 {
 	char	*path;
@@ -100,7 +98,7 @@ int	builtin_cd(t_list *lst, int out_fd)
 	{
 		ft_putstr_fd("\033[31mError: getcwd(): \
 			Failed to get current working directory\n\033[0m", STDERR_FILENO);
-		return (1);
+		exit(1);
 	}
 	if (!lst)
 		return (_cd_home(pwd));

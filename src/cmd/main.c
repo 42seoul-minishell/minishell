@@ -43,35 +43,15 @@ static void	_run(void)
 
 	while (1)
 	{
-		dup2(g_global.fd_stdin, STDIN_FILENO);
-		dup2(g_global.fd_stdout, STDOUT_FILENO);
 		input = NULL;
 		_sys_stdin(&input);
-		if (input[0] == '\0')
-		{
-			free(input);
+		if (is_only_space(input))
 			continue ;
-		}
 		_save_history(input);
 		if (parser(input) == TRUE)
-		{
-			set_heredoc(g_global.tree->root);
-			executor(g_global.tree->root, 0, 1, 0);
-			wait_child();
-			free(input);
-			clear_bintree(g_global.tree->root);
-			g_global.tree->root = NULL;
-			g_global.status = get_pipe_status();
-			ft_lstclear(&g_global.pipe_status, free);
-			g_global.pipe_status = NULL;
-		}
+			execution_main();
+		free(input);
 	}
-}
-
-/* 삭제 예정 */
-void	check_leak(void)
-{
-	system("leaks minishell");
 }
 
 int	main(int argc, char **argv, char **envp)
@@ -79,7 +59,6 @@ int	main(int argc, char **argv, char **envp)
 	t_hashtable	*table;
 	t_bintree	*tree;
 
-	// atexit(check_leak);
 	g_global.envp_arr = envp;
 	table = parse_env_to_hashtable(envp);
 	tree = create_bintree();
@@ -88,13 +67,10 @@ int	main(int argc, char **argv, char **envp)
 	{
 		if (parser(argv[1]) == TRUE)
 		{
-			set_heredoc(g_global.tree->root);
-			executor(g_global.tree->root, 0, 1, 0);
-			clear_bintree(g_global.tree->root);
-			g_global.tree->root = NULL;
+			execution_sub();
 			return (g_global.status);
 		}
-		return (-1);
+		return (1);
 	}
 	_run();
 	return (0);

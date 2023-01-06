@@ -1,36 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   wait.c                                             :+:      :+:    :+:   */
+/*   heredoc_signal.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: junsoh <junsoh@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/05 18:49:38 by junsoh            #+#    #+#             */
-/*   Updated: 2023/01/05 18:49:39 by junsoh           ###   ########.fr       */
+/*   Created: 2023/01/06 18:43:50 by junsoh            #+#    #+#             */
+/*   Updated: 2023/01/06 18:43:52 by junsoh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	wait_child(void)
+static void	_sig_heredoc(int sig)
 {
-	while (waitpid(0, NULL, 0) != -1)
-		;
+	(void) sig;
+	ft_putstr_fd("\n", 1);
 }
 
-int	check_status(int status)
+void	set_heredoc_signal(void)
 {
-	if (WIFEXITED(status))
-		return (WEXITSTATUS(status));
-	return (WCOREFLAG | WTERMSIG(status));
+	signal(SIGINT, _sig_heredoc);
+	signal(SIGQUIT, SIG_IGN);
+	signal(SIGCHLD, sig_child_exit);
 }
 
-int	get_pipe_status(void)
+static void	_sig_fork_exit(int sig)
 {
-	t_list		*lst;
-	t_children	*child;
+	(void) sig;
+	exit(1);
+}
 
-	lst = g_global.pipe_status;
-	child = (t_children *)ft_lstlast(g_global.pipe_status)->content;
-	return (check_status(child->status));
+void	set_fork_signal(void)
+{
+	signal(SIGINT, _sig_fork_exit);
+	signal(SIGQUIT, SIG_IGN);
+	signal(SIGCHLD, SIG_IGN);
 }

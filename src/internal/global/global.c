@@ -20,10 +20,19 @@ void	create_global(t_bintree *tree, t_hashtable *envp)
 	g_global.fd_stdin = dup(STDIN_FILENO);
 	g_global.fd_stdout = dup(STDOUT_FILENO);
 	g_global.tree = tree;
-	if (tcgetattr(STDIN_FILENO, &(g_global.display_set)) == ERROR)
+	if (tcgetattr(STDOUT_FILENO, &(g_global.display_set)) == ERROR)
 		exit_error("Error: tcgetattr()");
-	if (tcgetattr(STDIN_FILENO, &(g_global.nodisplay_set)) == ERROR)
+	if (tcgetattr(STDOUT_FILENO, &(g_global.nodisplay_set)) == ERROR)
 		exit_error("Error: tcgetattr()");
 	g_global.nodisplay_set.c_lflag &= ~ECHOCTL;
 	display_ctrlx_set(NODISPLAY);
+}
+
+void	reset_global(void)
+{
+	clear_bintree(g_global.tree->root);
+	g_global.tree->root = NULL;
+	g_global.status = get_pipe_status();
+	ft_lstclear(&g_global.pipe_status, free);
+	g_global.pipe_status = NULL;
 }

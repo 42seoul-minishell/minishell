@@ -14,8 +14,9 @@
 
 static void	_sig_handler(int sig)
 {
-	char		*prompt;
+	char	*prompt;
 
+	(void) sig;
 	if (sig == SIGINT)
 	{
 		prompt = create_prompt();
@@ -29,7 +30,14 @@ static void	_sig_handler(int sig)
 	rl_redisplay();
 }
 
-static void	_sig_child_exit(int sig)
+void	set_signal(void)
+{
+	signal(SIGINT, _sig_handler);
+	signal(SIGQUIT, SIG_IGN);
+	signal(SIGCHLD, SIG_IGN);
+}
+
+void	sig_child_exit(int sig)
 {
 	int			pid;
 	t_list		*lst;
@@ -37,10 +45,10 @@ static void	_sig_child_exit(int sig)
 	int			status;
 
 	(void) sig;
-	usleep(100);
 	pid = wait(&status);
-	printf("%d\n", pid);
 	lst = g_global.pipe_status;
+	if (!lst)
+		g_global.status = check_status(status);
 	while (lst)
 	{
 		child = lst->content;
@@ -51,34 +59,21 @@ static void	_sig_child_exit(int sig)
 		}
 		lst = lst->next;
 	}
-	ft_putnbr_fd(pid, 1);
-	ft_putstr_fd(" is finished\n", 1);
-}
-
-void	set_signal(void)
-{
-	signal(SIGINT, _sig_handler);
-	signal(SIGQUIT, SIG_IGN);
-	signal(SIGCHLD, _sig_child_exit);
 }
 
 static void	_sig_execute(int sig)
 {
-	// int	tmp;
-	// t_list *lst;
-	// t_children *child;
+	t_list		*lst;
+	t_children	*child;
 
-	// lst = g_global.pipe_status;
-	// while (lst)
-	// {
-	// 	child = lst->content;
-	// 	printf("child pid: %i\n", child->pid);
-	// 	tmp = kill(child->pid, SIGUSR1);
-	// 	usleep(100);
-	// 	printf("kill return: %d\n", tmp);
-	// 	perror(NULL);
-	// 	lst = lst->next;
-	// }
+	lst = g_global.pipe_status;
+	while (lst)
+	{
+		child = lst->content;
+		if (child->pid > 0)
+			kill(child->pid, SIGKILL);
+		lst = lst->next;
+	}
 	if (sig == SIGINT)
 		ft_putstr_fd("\n", 1);
 	else if (sig == SIGQUIT)
@@ -89,4 +84,5 @@ void	set_execute_signal(void)
 {
 	signal(SIGINT, _sig_execute);
 	signal(SIGQUIT, _sig_execute);
+	signal(SIGCHLD, sig_child_exit);
 }

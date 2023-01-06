@@ -12,11 +12,14 @@
 
 #include "minishell.h"
 
-/*
-	key가 없는 key일 경우
-	=> 아무 작동도 하지 않음
-*/
-void	builtin_unset(char *key)
+void	builtin_unset(t_list *lst)
 {
-	delete_item_by_key(g_global.envp, key);
+	t_token	*token;
+
+	while (lst)
+	{
+		token = (t_token *)lst->content;
+		delete_item_by_key(g_global.envp, token->value);
+		lst = lst->next;
+	}
 }

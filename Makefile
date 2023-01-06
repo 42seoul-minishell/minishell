@@ -55,7 +55,8 @@ BUILTIN			= $(LIB_DIR)/libbuiltin.a
 # Includ directory
 INC				= ./include
 LIB_DIR			= ./lib
-FILES			= main
+FILES			= main \
+				  execution
 
 SRCS_DIR		= $(CMD_DIR)
 SRCS			= $(addprefix $(SRCS_DIR), $(addsuffix .c, $(FILES)))
