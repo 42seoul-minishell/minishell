@@ -23,6 +23,7 @@ void	update_value(t_hashtable *table, char *key, char *value)
 	{
 		if (ft_strcmp(item->key, key) == 0)
 		{
+			free(item->value);
 			item->value = value;
 			break ;
 		}

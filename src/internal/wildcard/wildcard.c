@@ -16,8 +16,12 @@ static void	_next(t_wildcard *wc, t_list *lst, int curr_depth);
 
 static void	_destroy_wildcard(t_wildcard *wc)
 {
-	free_dp((void **)wc->path_token);
-	ft_lstclear(&wc->lst.next, free);
+	if (wc->path_token)
+		free_dp((void **)wc->path_token);
+	if (wc->lst.next)
+		ft_lstclear(&wc->lst.next, free);
+	if (wc->token_value)
+		free(wc->token_value);
 }
 
 static int	_check_recur(t_wildcard *wc, int curr_depth, \
@@ -40,8 +44,11 @@ static void	_find_matched(t_wildcard *wc, char *path, \
 	t_list			lst;
 
 	ft_memset(&lst, 0, sizeof(t_list));
-	if (!wc->path_token[curr_depth] && ++wc->lst_size)
+	if (!wc->path_token[curr_depth])
+	{
 		ft_lstadd_back(&wc->lst.next, ft_lstnew((void *)ft_strdup(path)));
+		wc->lst_size++;
+	}
 	else if (*wc->path_token[curr_depth] == '/')
 		lstinsort(&lst, ft_lstnew(ft_strjoin(path, "/")), ft_strcmp);
 	else
@@ -89,13 +96,12 @@ void	wildcard(t_doubly_list *lst)
 			ft_memset(&wc, 0, sizeof(t_wildcard));
 			wc.token_value = ft_strdup(node->token->value);
 			wc.path_token = ft_split(node->token->value, '/', 1);
-			if (wc.path_token[0][0] == '/')
+			if (wc.path_token && wc.path_token[0][0] == '/')
 				dir = opendir("/");
 			else
 				dir = opendir(".");
 			_find_matched(&wc, "", 0, dir);
-			free(node->token->value);
-			node->token->value = wildcard_join(&wc);
+			wildcard_join(&wc, &node->token->value);
 			_destroy_wildcard(&wc);
 		}
 		node = node->next;

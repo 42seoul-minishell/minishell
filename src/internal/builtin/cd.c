@@ -12,6 +12,18 @@
 
 #include "minishell.h"
 
+static char	*_convert_home(char *path)
+{
+	char	*new_path;
+	char	*tmp;
+
+	tmp = ft_substr(path, 1, ft_strlen(path) - 1);
+	new_path = ft_strjoin(getenv("HOME"), tmp);
+	free(tmp);
+	free(path);
+	return (new_path);
+}
+
 static int	_cd_home(char *pwd)
 {
 	char		*oldpwd;
@@ -25,7 +37,8 @@ static int	_cd_home(char *pwd)
 		item = create_ht_item("OLDPWD", "");
 		hash_insert(item, g_global.envp);
 	}
-	chdir(getenv("HOME"));
+	if (chdir(getenv("HOME")) != 0)
+		return (1);
 	free(pwd);
 	pwd = getcwd(NULL, 0);
 	if (!pwd)
@@ -103,7 +116,12 @@ int	builtin_cd(t_list *lst, int out_fd)
 	if (!lst)
 		return (_cd_home(pwd));
 	path = ((t_token *)lst->content)->value;
-	if (ft_strcmp(path, "~") == 0)
+	if (ft_strncmp(path, "~/", 2) == 0)
+	{
+		((t_token *)lst->content)->value = _convert_home(path);
+		return (_cd_chdir(pwd, ((t_token *)lst->content)->value));
+	}
+	else if (ft_strcmp(path, "~") == 0)
 		return (_cd_home(pwd));
 	else if (ft_strcmp(path, "-") == 0)
 		return (_cd_prev(pwd, out_fd));

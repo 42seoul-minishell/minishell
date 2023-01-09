@@ -97,23 +97,12 @@ typedef struct s_bintree
 	t_bintree_node	*root;
 }	t_bintree;
 
-/* pipe structure */
-typedef struct s_pipe
-{
-	pid_t	pid;
-	int		cnt;
-	int		fd[2];
-	int		prev;
-	int		status;
-}	t_pipe;
-
 /* structure includes all other structures */
 typedef struct s_global
 {
 	t_hashtable		*envp;
 	char			**envp_arr;
 	char			*origin_path;
-	FILE			*fp;
 	t_bintree		*tree;
 	int				heredoc_cnt;
 	int				status;

@@ -18,7 +18,7 @@ static int	_get_expand_end_idx(const char *str)
 
 	i = 0;
 	while (str[i] && str[i] != '$' && str[i] != '\"' \
-		&& str[i] != '\'')
+		&& str[i] != '\'' && str[i] != ' ')
 		i++;
 	return (i);
 }
@@ -32,6 +32,7 @@ static char	*_get_env(const char *str, int idx)
 	end = _get_expand_end_idx(&str[idx + 1]);
 	env_key = ft_substr(str, idx + 1, end);
 	env_value = search(g_global.envp, env_key);
+	free(env_key);
 	if (!env_value)
 		return (ft_strdup(""));
 	return (ft_strdup(env_value));

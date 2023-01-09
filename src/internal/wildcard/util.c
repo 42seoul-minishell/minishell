@@ -45,11 +45,10 @@ int	check_matched(char *wildcard, char dirent[])
 	return (0);
 }
 
-char	*wildcard_join(t_wildcard *wc)
+void	wildcard_join(t_wildcard *wc, char **token_value)
 {
 	size_t	total_len;
 	t_list	*node;
-	char	*res;
 
 	total_len = 0;
 	node = wc->lst.next;
@@ -58,18 +57,19 @@ char	*wildcard_join(t_wildcard *wc)
 		total_len += ft_strlen((char *)node->content);
 		node = node->next;
 	}
-	total_len += wc->lst_size;
-	res = (char *)ft_malloc(total_len + 1);
-	if (!res || total_len == 0)
-		return (wc->token_value);
-	ft_memset((void *)res, 0, total_len + 1);
+	if (total_len == 0)
+		return ;
+	total_len += wc->lst_size - 1;
+	if (*token_value)
+		free(*token_value);
+	*token_value = (char *)ft_malloc(total_len + 1);
+	ft_memset((void *)*token_value, 0, total_len + 1);
 	node = wc->lst.next;
 	while (node)
 	{
-		ft_strlcat(res, node->content, total_len + 1);
+		ft_strlcat(*token_value, node->content, total_len + 1);
 		if (node->next)
-			ft_strlcat(res, " ", total_len + 1);
+			ft_strlcat(*token_value, " ", total_len + 1);
 		node = node->next;
 	}
-	return (res);
 }
