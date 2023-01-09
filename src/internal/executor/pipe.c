@@ -29,8 +29,8 @@ static void	_fork_heredoc(int fd[], char *limiter)
 	line = readline("> ");
 	while (line && ft_strcmp(limiter, line) != 0)
 	{
-		write(fd[1], line, ft_strlen(line));
-		write(fd[1], "\n", 1);
+		ft_putstr_fd(line, fd[1]);
+		ft_putstr_fd("\n", fd[1]);
 		free(line);
 		line = readline("> ");
 	}
@@ -67,11 +67,9 @@ static int	_fork_here_doc(t_bintree_node *node, char *limiter)
 static void	_here_doc(t_bintree_node *node)
 {
 	t_list	*lst;
-	char	*line;
 	char	*limiter;
 
 	lst = node->token_lst;
-	line = NULL;
 	while (lst && lst->next)
 	{
 		if (((t_token *)lst->content)->type == HERE_DOC)

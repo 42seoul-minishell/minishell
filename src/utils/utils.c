@@ -15,9 +15,9 @@
 void	display_ctrlx_set(int flag)
 {
 	if (flag == DISPLAY)
-		tcsetattr(g_global.fd_stdout, TCSANOW, &(g_global.display_set));
+		tcsetattr(g_global.fd_stdin, TCSANOW, &(g_global.display_set));
 	else if (flag == NODISPLAY)
-		tcsetattr(g_global.fd_stdout, TCSANOW, &(g_global.nodisplay_set));
+		tcsetattr(g_global.fd_stdin, TCSANOW, &(g_global.nodisplay_set));
 }
 
 void	sig_exec(int sig)

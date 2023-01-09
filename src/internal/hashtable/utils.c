@@ -27,16 +27,16 @@ char	*get_key_from_env(char *str)
 char	*get_value_from_env(char *env)
 {
 	int		idx;
-	int		len_of_env;
+	int		len_value;
 	char	*value;
 
 	idx = 0;
 	while (env[idx] != '=')
 		idx++;
-	len_of_env = idx;
-	while (env[len_of_env])
-		len_of_env++;
-	value = ft_substr(env, idx + 1, len_of_env);
+	len_value = 0;
+	while (env[len_value + idx + 1])
+		len_value++;
+	value = ft_substr(env, idx + 1, len_value);
 	return (value);
 }
 

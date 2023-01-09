@@ -12,7 +12,7 @@
 
 #include "minishell.h"
 
-static void	set_env(char *key, char *value)
+static void	_set_env(char *key, char *value)
 {
 	t_ht_item		*item;
 	char			*tmp;
@@ -23,7 +23,10 @@ static void	set_env(char *key, char *value)
 		item = create_ht_item(key, value);
 		hash_insert(item, g_global.envp);
 	}
-	update_value(g_global.envp, key, ft_strdup(value));
+	else
+		update_value(g_global.envp, key, ft_strdup(value));
+	free(key);
+	free(value);
 }
 
 static int	_is_valid_identifier(char *str, int *exit_code)
@@ -53,12 +56,12 @@ int	builtin_export(t_list *lst, int out_fd)
 	while (lst)
 	{
 		data = ((t_token *) lst->content)->value;
-		if (_is_valid_identifier(value, &exit_code) == TRUE && \
+		if (_is_valid_identifier(data, &exit_code) == TRUE && \
 			ft_strchr(data, '='))
 		{
 			key = get_key_from_env(data);
-			value = get_key_from_env(data);
-			set_env(key, value);
+			value = get_value_from_env(data);
+			_set_env(key, value);
 		}
 		lst = lst->next;
 	}
