@@ -94,6 +94,8 @@ void	execute_command(t_bintree_node *node, int in_fd, \
 	{
 		in_fd = set_in(node, in_fd);
 		out_fd = set_out(node, out_fd);
+		if (in_fd == -1 || out_fd == -1)
+			return (_set_child_info(0, in_fd, out_fd, 1));
 	}
 	if (((t_token *)node->token_lst->content)->type != CMD \
 		&& ((t_token *)node->token_lst->content)->type != BRACKET)

@@ -28,5 +28,6 @@ int	parser(char *str)
 		return (FALSE);
 	}
 	release_doubly_list(lst);
+	display_bintree_by_2d(g_global.tree);
 	return (TRUE);
 }

@@ -47,6 +47,7 @@ int	set_in(t_bintree_node *node, int in_fd)
 			_set_in_fd(node, file_token, token, &in_fd);
 			if (in_fd == -1)
 			{
+				ft_putstr_fd("MINISHELL: ", STDERR_FILENO);
 				perror(file_token->value);
 				break ;
 			}
@@ -85,6 +86,7 @@ int	set_out(t_bintree_node *node, int out_fd)
 			_set_out_fd(token, file_token, &out_fd);
 			if (out_fd == -1)
 			{
+				ft_putstr_fd("MINISHELL: ", STDERR_FILENO);
 				perror(file_token->value);
 				break ;
 			}
