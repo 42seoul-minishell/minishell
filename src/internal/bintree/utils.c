@@ -40,7 +40,6 @@ static void	_display_bintree_node_by_2d(t_bintree_node *root, \
 		printf(" ");
 		i++;
 	}
-	printf("%d ", root->type);
 	print_token_lst(root->token_lst);
 	_display_bintree_node_by_2d(root->lc, space, count);
 }
@@ -49,5 +48,5 @@ void	display_bintree_by_2d(t_bintree *bintree)
 {
 	printf("\nStart print bintree\n");
 	_display_bintree_node_by_2d(bintree->root, 0, 10);
-	printf("\n\nEnd print bintree\n");
+	printf("\n\nEnd print bintree\n\n");
 }

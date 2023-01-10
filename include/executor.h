@@ -27,7 +27,7 @@ void	execute_bracket(t_bintree_node *node);
 
 /* builtin.c */
 int		check_builtin(t_list *lst);
-int		execute_builtin(t_list *lst, int out_fd);
+int		execute_builtin(t_list *lst, int out_fd, int is_pipe);
 
 /* cammand.c */
 void	execute_command(t_bintree_node *node, \

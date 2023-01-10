@@ -69,6 +69,8 @@ static void	_here_doc(t_bintree_node *node)
 	t_list	*lst;
 	char	*limiter;
 
+	if (pipe(node->fd) == -1)
+		exit_error("Error: pipe()");
 	lst = node->token_lst;
 	while (lst && lst->next)
 	{
@@ -85,8 +87,6 @@ static void	_here_doc(t_bintree_node *node)
 
 void	set_heredoc(t_bintree_node *node)
 {
-	if (pipe(node->fd) == -1)
-		exit_error("Error: pipe()");
 	if (node->type == TN_HEREDOC)
 		_here_doc(node);
 	if (node->lc)

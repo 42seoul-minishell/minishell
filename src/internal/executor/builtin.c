@@ -30,7 +30,7 @@ int	check_builtin(t_list *lst)
 	return (FALSE);
 }
 
-int	execute_builtin(t_list *lst, int out_fd)
+int	execute_builtin(t_list *lst, int out_fd, int is_pipe)
 {
 	t_token	*token;
 	char	*cmd;
@@ -50,6 +50,6 @@ int	execute_builtin(t_list *lst, int out_fd)
 	else if (ft_strcmp(cmd, "env") == 0)
 		builtin_env(out_fd);
 	else if (ft_strcmp(cmd, "exit") == 0)
-		builtin_exit(lst->next);
+		builtin_exit(lst->next, is_pipe);
 	return (0);
 }

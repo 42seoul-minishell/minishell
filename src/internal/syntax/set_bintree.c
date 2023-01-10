@@ -17,7 +17,7 @@ static void	_upper_priority(t_list *token_list, t_tnType bt_type)
 	t_bintree_node	*bt_node;
 
 	bt_node = create_bintree_node(token_list, bt_type);
-	bt_node->lc = g_global.tree->root;
+	bt_node->rc = g_global.tree->root;
 	g_global.tree->root = bt_node;
 }
 
@@ -33,15 +33,15 @@ static void	_lower_priority(t_list *token_list, t_tnType bt_type)
 		flag = 1;
 	if (g_global.tree->root->type < bt_type && flag)
 	{
-		bt_node->lc = g_global.tree->root->rc;
-		g_global.tree->root->rc = bt_node;
+		bt_node->rc = g_global.tree->root->lc;
+		g_global.tree->root->lc = bt_node;
 	}
 	else if (g_global.tree->root->type < bt_type)
 	{
 		tmp = g_global.tree->root;
-		while (tmp->rc)
-			tmp = tmp->rc;
-		tmp->rc = bt_node;
+		while (tmp->lc)
+			tmp = tmp->lc;
+		tmp->lc = bt_node;
 	}
 }
 
@@ -64,7 +64,7 @@ void	set_bintree(t_doubly_list *lst, t_doubly_node *node)
 	t_tnType	bt_type;
 	t_list		*token_list;
 
-	if (g_global.tree->root && node == lst->header.next)
+	if (g_global.tree->root && node == lst->header.prev)
 		return ;
 	if (g_global.tree->root == NULL)
 	{

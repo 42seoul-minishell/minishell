@@ -47,8 +47,8 @@ static void	_append_token_list(t_list **token_list, t_doubly_node **node)
 
 	token = create_token((*node)->token->type, \
 							ft_strdup((*node)->token->value));
-	ft_lstadd_back(token_list, ft_lstnew((void *)token));
-	*node = (*node)->next;
+	ft_lstadd_front(token_list, ft_lstnew((void *)token));
+	*node = (*node)->prev;
 }
 
 t_list	*set_token_list(t_doubly_list *lst, t_doubly_node **node)
@@ -68,7 +68,7 @@ t_list	*set_token_list(t_doubly_list *lst, t_doubly_node **node)
 		if (token_type >= OR && token_type <= PIPE)
 			break ;
 		_append_token_list(&token_list, node);
-		if (*node == lst->header.next)
+		if (*node == lst->header.prev)
 			break ;
 	}
 	return (token_list);

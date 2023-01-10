@@ -28,7 +28,7 @@ static int	_is_numeric_string(char *str)
 	return (TRUE);
 }
 
-void	builtin_exit(t_list *lst)
+void	builtin_exit(t_list *lst, int is_pipe)
 {
 	int		exit_code;
 	char	*value;
@@ -48,6 +48,7 @@ void	builtin_exit(t_list *lst)
 		}
 		exit_code = ft_atoi(((t_token *) lst->content)->value);
 	}
-	ft_putstr_fd("exit\n", STDOUT_FILENO);
+	if (!is_pipe)
+		ft_putstr_fd("exit\n", STDOUT_FILENO);
 	exit(exit_code);
 }

@@ -73,6 +73,6 @@ int	syntax(t_doubly_list *lst)
 		return (_set_syntax_error(node));
 	if (!_is_valid_tokens(lst))
 		return (FALSE);
-	set_bintree(lst, lst->header.next);
+	set_bintree(lst, lst->header.prev);
 	return (TRUE);
 }
